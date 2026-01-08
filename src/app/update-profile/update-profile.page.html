@@ -1,0 +1,130 @@
+<ion-content [fullscreen]="true">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <img class="ftel-logo" src="assets/img/L2-logo.png" alt="">
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-buttons slot="end">
+          <ion-button fill="clear" (click)="gotoBack()">
+            <ion-icon name="arrow-back-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar class="titlebar">
+      <ion-title>
+        <h3>{{ 'UPDATE_PROFILE' | translate }}</h3>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding" *ngIf="!isData">
+
+    <ion-list>
+
+      <div class="profileupdate">
+        <ion-item lines="none" (click)="gotoUpload()">
+          <ion-avatar slot="start">
+            <img [src]="profileObj.profile_image" />
+            <ion-icon name="add-outline"></ion-icon>
+          </ion-avatar>
+           <ion-label>{{'update_profile_image_limit' | translate}}</ion-label>
+        </ion-item>
+        <ion-button *ngIf="!isDeletedImg" fill="clear" (click)="gotoDeletepic()">
+          <img src="assets/img/cross-dark.png" alt="">
+        </ion-button>
+      </div>
+      
+
+      <ion-item lines="none">
+        <ion-input type="text" (ionInput)="validateName($event, 'first')" autocapitalize="on"
+          [(ngModel)]="profileObj.first_name" placeholder="{{ 'FIRST_NAME' | translate }}"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-input type="text" (ionInput)="validateName($event, 'last')" autocapitalize="on"
+          [(ngModel)]="profileObj.last_name" placeholder="{{ 'SURNAME' | translate }}"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-input readonly type="text" [(ngModel)]="profileObj.email"
+          placeholder="{{ 'EMAIL_ADDRESS' | translate }}"></ion-input>
+      </ion-item>
+
+          <ion-item lines="none" *ngIf="profileObj.country_name != null && profileObj.country_name != ''">
+        <ion-input readonly type="text" [(ngModel)]="profileObj.country_name"
+          placeholder="{{ 'Country_residence' | translate }}"></ion-input>
+      </ion-item>
+
+
+      <!--<ion-item lines="none">
+        <ion-input placeholder="{{ 'SELECT_DOB' | translate }}" [(ngModel)]="profileObj.date_of_birth"
+          (click)="presentPopover($event)"></ion-input>
+      </ion-item> -->
+
+      <div class="countryselectrow">
+        <div class="countryselect" (click)="chooseCountry()">
+          <img class="countryimg" *ngIf="countryCodeObj.iso == 'LATAM'" src="assets/flags/la.svg" alt="">
+          <img class="countryimg" *ngIf="countryCodeObj.iso == 'Europe+'" src="assets/flags/eur.svg" alt="">
+          <img class="countryimg" *ngIf="countryCodeObj.iso == 'North America'" src="assets/flags/northam.svg" alt="">
+          <img class="countryimg" *ngIf="countryCodeObj.iso == 'Middle East'" src="assets/flags/middleast.svg" alt="">
+          <img class="countryimg"
+            *ngIf="countryCodeObj.iso != 'Middle East' && countryCodeObj.iso != 'North America' && countryCodeObj.iso != 'Europe+' && countryCodeObj.iso != 'LATAM'"
+            src="assets/flags/{{countryCodeObj.flag | lowercase}}.svg">
+
+          <span class="countrycode">{{countryCodeObj.code}}</span>
+        </div>
+        <div class="phoneno">
+          <ion-item lines="none">
+            <ion-input type="tel" (keyup)="onSearch($event)" [(ngModel)]="temp_mobile_number" maxLength="13"
+              placeholder="{{ 'MOBILE_NUMBER' | translate }}"></ion-input>
+          </ion-item>
+        </div>
+      </div>
+
+      <ion-row class="checkrow">
+        <ion-col>
+          <ion-checkbox labelPlacement="end" [(ngModel)]="isSavedDetails">{{ 'SAVE_DETAILS' | translate
+            }}</ion-checkbox>
+        </ion-col>
+      </ion-row>
+
+    </ion-list>
+
+    <ion-button expand="block" class="btn-green add-card" (click)="submit()">{{ 'UPDATE' | translate }}</ion-button>
+
+    <ion-button expand="block" class="button-outline btn-delete" routerLink="/del-account">{{ 'DELETE_ACCOUNT' |
+      translate }}</ion-button>
+
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button (click)="gotoHomeSearch()">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()" class="selected">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>
+    </div>
+
+  </ion-toolbar>
+</ion-footer>

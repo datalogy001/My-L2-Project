@@ -1,0 +1,20 @@
+<ion-content class="ion-padding">
+  <div class="ion-text-right">
+    <ion-button fill="clear" class="close" (click)="closePopover(false)"><ion-icon name="close-outline"></ion-icon></ion-button>
+  </div>
+  <h2>
+    {{ value  | currency: currencyCode }}
+  </h2> 
+  <p>
+    <strong>
+      {{referralMessage}}
+    </strong>
+  </p>
+  <p>
+    {{'Share_with_friend_code'  | translate}}
+  </p>
+  <div class="sharereferral" (click)="sharewithall()">
+    <ion-button >{{'SHARE_TITLE'  | translate}}</ion-button>
+  </div>
+
+</ion-content>

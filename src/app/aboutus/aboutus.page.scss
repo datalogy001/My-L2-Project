@@ -1,0 +1,58 @@
+ion-header{
+  ion-toolbar{
+      height: 95px;
+      ion-title{
+          .ftel-logo{
+              width: 160px;
+              margin:7px 0px 0px;
+          }
+      }
+      [slot="end"]{
+          margin-inline-end: 5px; 
+      }      
+      
+      &.titlebar{
+          --min-height: 40px; 
+          height: 50px;
+          height: auto;
+      }  
+  }
+}
+
+ion-content {
+  --background: #fff;
+}
+
+p{
+    font-size: 13px; line-height: 20px; color: var(--theme-color-2); margin: 0px 0 10px; font-family: 'Inter'; font-weight: 400;
+}
+.about-img{
+    margin: 15px 0; 
+    img{
+        width: 100%; 
+    }
+}
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+    ion-header ion-toolbar {height: 110px;}
+    ion-header ion-toolbar ion-title .ftel-logo{ width: 260px;}
+    ion-header ion-toolbar.titlebar { --min-height: 60px; height: 80px; height: auto; }
+ 
+    p{ font-size: 21px; line-height: 30px; margin: 10px 0 0; }
+
+
+
+
+}

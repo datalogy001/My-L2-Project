@@ -1,0 +1,149 @@
+<ion-content [fullscreen]="true" forceOverscroll="false">
+  <div class="topbox">
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>
+          <img class="ftel-logo" src="assets/img/L2-logo.png" alt="">
+        </ion-title>
+
+        <ion-buttons class="filter" slot="end" *ngIf="tokenValue != 0">
+          <ion-button fill="clear" (click)="gotoTab5()">
+            <img src="assets/img/icons/filter-yellow.png" alt="">
+          </ion-button>
+        </ion-buttons>
+
+        <ion-buttons slot="end">
+          <ion-button fill="clear" *ngIf="notiCount == 0" (click)="gotoNoti()">
+            <img src="assets/img/icons/bell-dark.png" alt="">
+          </ion-button>
+          
+          <ion-button fill="clear" *ngIf="notiCount > 0" (click)="gotoNoti()">
+            <img src="assets/img/icons/bell-dark.png" alt="">
+            <span>{{notiCount}}</span>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+
+      <!-- <ion-toolbar class="titlebar">
+        <ion-title>
+          <h3>
+            {{ 'HEY' | translate }} {{ tempDetails.first_name == '' || tempDetails.first_name == null ? ('TRVELLER' | translate) : tempDetails.first_name }},<br>{{ 'HOW_CAN_WE_HELP' | translate }}
+          </h3>
+        </ion-title>
+      </ion-toolbar> -->
+    </ion-header>
+
+    <ion-item>
+      <ion-avatar slot="start" *ngIf="tokenValue != 0">
+        <img  [src]="tempDetails.profile_image" />
+      </ion-avatar>
+
+      <ion-avatar slot="start" *ngIf="tokenValue == 0">
+        <img  [src]="tokenValue == 0 ? 'assets/img/no-user.png' : ''" />
+      </ion-avatar>
+
+      <ion-label>
+        <h2>{{ 'HEY' | translate }} {{ tempDetails.first_name == '' || tempDetails.first_name == null ? ('TRVELLER' | translate) : tempDetails.first_name+'!' }}</h2>
+      </ion-label>
+    </ion-item>
+
+  </div>
+
+  <div class="container">
+
+    <div class="pagecontent">
+
+      <ion-list>
+        <ion-item *ngIf="tokenValue != 0" lines="none" routerLink="/update-profile">
+          <ion-label>{{ 'YOUR_PROFILE' | translate }}</ion-label>
+        </ion-item>
+        <ion-item *ngIf="tokenValue != 0" lines="none" routerLink="/saved-cards">
+          <ion-label>{{ 'PAYMENT_METHODS' | translate }}</ion-label>
+        </ion-item>
+        <ion-item lines="none" routerLink="/tab4">
+          <ion-label>{{ 'PAYMENT_HISTORY' | translate }}</ion-label>
+        </ion-item>
+        <ion-item lines="none" (click)="gotoFAQ()">
+          <ion-label>{{ 'FAQS' | translate }}</ion-label>
+        </ion-item>
+        <ion-item lines="none" (click)="gotoCustomerSupport()">
+          <ion-label>{{ 'CHAT_WITH_US_NOW' | translate }}</ion-label>
+        </ion-item>
+        <ion-item lines="none" *ngIf="tokenValue != 0" (click)="gotoNotiSettings()">
+          <ion-label>{{ 'NOTIFICATION_SETTINGS' | translate }}</ion-label>
+        </ion-item>
+        <ion-item lines="none" (click)="gotoCurrencySettings()">
+          <ion-label>{{ 'CHOOSE_CURRENCY' | translate }}</ion-label>
+        </ion-item>
+        <ion-item lines="none" (click)="gotoLanguageSettings()">
+          <ion-label>{{ 'CHOOSE_LANGUAGE' | translate }}</ion-label>
+        </ion-item> 
+   <ion-item lines="none" (click)="gotoeSIMcompatiability()">
+          <ion-label>{{ 'esim_check_compatibility' | translate }}</ion-label>
+        </ion-item>
+        <ion-item lines="none" (click)="gotoPrivacy()">
+          <ion-label>{{ 'PRIVACY_POLICY' | translate }}</ion-label>
+        </ion-item>
+        <ion-item lines="none" (click)="gotoTerms()">
+          <ion-label>{{ 'TERMS_CONDITIONS' | translate }}</ion-label>
+        </ion-item>
+        <ion-item lines="none" (click)="gotoAboutus()">
+          <ion-label>{{ 'ABOUT_US' | translate }}</ion-label>
+        </ion-item>
+
+        <ion-item lines="none" >
+          <ion-label (click)="errorMSGModal()">{{ 'App_info' | translate }} </ion-label>
+        </ion-item>
+        
+      </ion-list>
+
+    </div>
+
+    <div class="btn-log">
+      <ion-button expand="block" class="btn-green btn-chat"  *ngIf="tokenValue == 0" lines="none" (click)="login()">
+        {{ 'SIGN_IN_TO_YOUR_ACCOUNT' | translate }}
+      </ion-button>
+      <ion-button expand="block" class="btn-green btn-chat"  lines="none" (click)="openZendeskChat()">
+        {{ 'CHAT_WITH_SUPPORT' | translate }}
+      </ion-button> 
+      <ion-button expand="block" fill="outline" class="btn-chat" *ngIf="tokenValue == 0"  (click)="createAccount()">
+        {{ 'SIGN_UP_WITH_CODE' | translate }}
+      </ion-button>
+      <ion-button expand="block" fill="outline" class="btn-chat" *ngIf="tokenValue != 0"  (click)="logout()">
+        {{ 'LOGOUT_OF_YOUR_ACCOUNT' | translate }}
+      </ion-button>    
+    </div>
+
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+
+    <div class="tabmenu">
+      <ion-button  routerLink="/home-search">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button class="selected" (click)="gotoTab5()">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>      
+    </div>
+
+    
+  </ion-toolbar>
+</ion-footer>

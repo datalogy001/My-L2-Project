@@ -1,0 +1,14 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="user-img">
+    <img src="assets/img/icons/user-theme.png" alt="">
+  </div>  
+  <p> {{'Remove profile picture' | translate}}</p>
+  <div class="btn-div">
+    <ion-button fill="outline"  (click)="deletPhoto()">
+      {{'Delete photo' | translate}}
+    </ion-button> 
+    <ion-button class="btn-green" (click)="goBack()">
+      {{'Go back' | translate}}
+    </ion-button>   
+  </div>
+</ion-content>

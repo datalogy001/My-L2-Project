@@ -1,0 +1,34 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>topup-success</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-padding">
+
+    <div class="page-content">
+      <div class="tr-logo-1">
+        <img src="assets/img/tr-logo-1.png" alt="">
+      </div>
+      <div class="graphic1">
+        <img src="assets/img/order-completed.png" alt="">
+      </div>
+      <h2>
+        Success! Your <br>
+        Top-Up has now <br>
+        been completed.
+      </h2>
+      <h5>
+        This Top-Up has now been applied to your ICCID:
+      </h5>
+      <H2 class="iccid">
+        {{iccid}}
+      </H2>
+      <div class="btn-view-bundle">
+        <ion-button expand="block"  (click)="gotoHome()">
+          Continue
+        </ion-button>
+      </div>
+    </div>
+
+</ion-content>

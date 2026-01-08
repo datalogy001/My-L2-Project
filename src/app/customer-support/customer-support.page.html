@@ -1,0 +1,86 @@
+<ion-content [fullscreen]="true">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <img class="ftel-logo" src="assets/img/L2-logo.png" alt="">
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-buttons slot="end">
+          <ion-button fill="clear" (click)="gotoBack()">
+            <ion-icon name="arrow-back-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar class="titlebar">
+      <ion-title>
+        <h3>
+          {{ 'CHAT_WITH_US_NOW' | translate }}
+        </h3>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+    <ion-list>
+
+      <ion-item>
+        <ion-input (ionInput)="validateName($event, 'first')" type="text" autocapitalize="on" [(ngModel)]="custSupport.name" 
+                   [placeholder]="'FIRST_NAME' | translate">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input  (ionInput)="validateName($event, 'last')" type="text" autocapitalize="on" [(ngModel)]="custSupport.last_name" 
+                   [placeholder]="'SURNAME' | translate">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="custSupport.email" 
+                   [placeholder]="'EMAIL_ADDRESS' | translate">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" autocapitalize="on" [(ngModel)]="custSupport.subject" 
+                   [placeholder]="'SUBJECT' | translate">
+        </ion-input>
+      </ion-item>
+      <ion-item class="textarea">
+        <ion-textarea autocapitalize="on" [(ngModel)]="custSupport.support_description" 
+                      [placeholder]="'MESSAGE' | translate">
+        </ion-textarea>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" class="btn-green ben-send" (click)="submit()">
+      {{ 'START_CHAT' | translate }}
+    </ion-button>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button (click)="gotoHomeSearch()">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()" class="selected">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>      
+    </div>
+
+  </ion-toolbar>
+</ion-footer>

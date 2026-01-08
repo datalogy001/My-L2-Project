@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <img class="tr-logo" src="assets/img/tr-logo-1.png" alt="">
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="gotoBack()"><i class="far fa-times"></i></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="content-top">
+
+    <!-- <ion-row>
+      <ion-col size="8">
+        <div class="tr-logo-1">
+          <img src="assets/img/tr-logo-1.png" alt="">
+        </div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="close" (click)="gotoBack()">
+          <ion-button><i class="far fa-times"></i></ion-button>
+        </div>
+      </ion-col>
+    </ion-row> -->
+
+    <h3>Choose Destination</h3>
+    <p>Select the country or zone where you want to use your Travel Roam bundle.</p>
+
+  </div>
+
+  <div class="contentmiddle">
+
+    <div class="searchcountry">
+      <ion-searchbar [(ngModel)]="searchTerm" (keyup)="onSearch($event)" (ionClear)="onClear()"
+        placeholder="Search by Country or Zone"></ion-searchbar>
+    </div>
+
+    <ion-segment value="country" [(ngModel)]="selectedSegment">
+      <ion-segment-button value="country">
+        <ion-label>Country</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="zone">
+        <ion-label>Zone</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+
+    <div class="segment-panel" [ngSwitch]="selectedSegment">
+      
+      <div *ngSwitchCase="'country'">
+
+        <h6>Popular Destinations</h6>
+
+        <ion-list class="country-zone" *ngIf="bundles.length > 0">
+          <ion-item lines="none" (click)="gotoPlan('countries',bundleItem.countries[0]['iso'] ,bundleItem.countries[0]['iso'] )"
+            *ngFor="let bundleItem of bundles">
+            <span slot="start">
+              <img *ngIf="bundleItem.countries[0]['iso'] =='LATAM'" src="assets/flags/la.svg" alt="">
+              <img *ngIf="bundleItem.countries[0]['iso'] !='LATAM'"
+                src="assets/flags/{{bundleItem.countries[0]['iso'] | lowercase}}.svg" alt="">
+            </span>
+            <ion-label>{{bundleItem.countries[0].name}}</ion-label>
+            <span slot="end">
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+            </span>
+          </ion-item>
+        </ion-list>
+
+        <div class="no-record country-zone" *ngIf="bundles.length == 0">
+            <h3>No results found</h3>
+        </div>
+      </div>
+
+      <!-- Zone start -->
+      <div *ngSwitchCase="'zone'">
+
+        <ion-list class="country-zone">
+          <ion-item lines="none" *ngFor="let zoneItem of zoneList; let index = index">
+            <ion-label>
+              <h3 (click)="gotoBundlePlan(index, zoneItem)"> {{zoneItem}} </h3>
+              <p (click)="gotoCountryList(zoneItem, index)"> <a>View all Countries <ion-icon
+                    name="chevron-forward-outline"></ion-icon></a></p>
+            </ion-label>
+            <span slot="end" (click)="gotoBundlePlan(index, zoneItem)">
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+            </span>
+          </ion-item>
+        </ion-list>
+
+      </div>
+      <!-- Zone end -->
+
+    </div>
+
+  </div>
+
+</ion-content>

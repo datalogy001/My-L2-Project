@@ -1,0 +1,176 @@
+<ion-content>
+
+    <div class="top-box" [ngStyle]="{'background': getBackgroundUrl()}">
+      <div class="top-inner">  
+        <!--
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>
+              <h3 *ngIf="isDestination == false">
+                {{bundleName}}  <br>
+                <div>{{ 'CHOOSE_BEST_DEALS_DESCRIPTION' | translate }}</div>
+              </h3>
+              
+              <h3 *ngIf="isDestination == true">
+                {{name}} ({{countryName}})  <br>
+                <div>{{ 'CHOOSE_BEST_DEALS_DESCRIPTION' | translate }}</div>
+              </h3>
+            </ion-title>
+            <ion-buttons slot="end">
+              <ion-button fill="clear" (click)="gotoBack()">
+                <ion-icon name="arrow-back-circle-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        -->
+
+        <div class="header">
+          <div class="title">
+            <h3 *ngIf="isDestination == false">
+              {{bundleName}}  <br>
+              <div>{{ 'CHOOSE_BEST_DEALS_DESCRIPTION' | translate }}</div>
+            </h3>            
+            <h3 *ngIf="isDestination == true">
+              {{name}} ({{countryName}})  <br>
+              <div>{{ 'CHOOSE_BEST_DEALS_DESCRIPTION' | translate }}</div>
+            </h3>
+            <p (click)="gotoPlancountry()" *ngIf="zoneCountries.length>0">{{ 'WORKS_IN_COUNTRIES' | translate: {
+              zoneCountries: zoneCountries } }} <span>[+]</span></p>
+          </div>
+          <ion-button fill="clear" (click)="gotoBack()">
+            <ion-icon name="arrow-back-circle-outline"></ion-icon>
+          </ion-button>
+        </div>
+
+        <p class="denote-cashback">
+          <img src="assets/img/icons/cashback-white.png" alt=""> {{'CASHBACK_ELIGIBLE' | translate}}
+        </p>
+
+      </div>
+    </div>
+  
+    <div class="container">
+      <div class="datacontainer">
+  
+        <h6 class="bestdeal" *ngIf="resultArray.length > 0">
+          <img src="assets/img/icons/cup.png" alt=""> {{ 'OUR_BEST_DEAL' | translate }}
+        </h6>
+  
+        <ion-card class="mega-data" *ngIf="isDataPlan && resultArray.length > 0" (click)="gotoSummary(resultArray[0], true)">
+          <h3>{{ 'UNLIMITED_DAILY_PASS' | translate }}</h3>
+          <ion-row>
+            <ion-col size="7">
+              <p class="day">{{ resultArray[0].duration }} {{ 'DAYS' | translate }}</p>
+            </ion-col>
+            <ion-col size="5">
+              <p class="price text-right">
+                <ng-container *ngIf="resultArray[0].is_cashback_applicable == 1">
+                  <img src="assets/img/cashback.png" alt="Cashback">
+                </ng-container>
+               {{ resultArray[0].price | currency:currencyCode }}
+              </p>
+            </ion-col>
+          </ion-row>
+        <ion-row>
+            <ion-col size="10">
+            <p class="info">{{ 'UNLIMITED_INTERNET_ACCESS_DESCRIPTION' | translate }}</p> 
+            </ion-col>
+            <ion-col size="2">
+              <p class="arrow text-right"><ion-icon name="arrow-forward-circle-outline"></ion-icon></p>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <h4 class="" *ngIf="isDataPlan && nonUnlimitedBundles.length > 0">{{ 'VALUE_INTERNET_PLANS_TITLE' | translate }}</h4>
+  
+        <ion-card class="value-data" *ngFor="let bundleItem of nonUnlimitedBundles" >
+          <ion-row (click)="gotoSummary(bundleItem, false)">
+            <ion-col size="8">
+              <p class="data"> {{ 'DATA_PLAN' | translate:{ size: bundleItem.dataAmount / 1000 } }}</p>
+            </ion-col>
+            <ion-col size="4">
+              <p class="price text-right">
+                <ng-container *ngIf="bundleItem.is_cashback_applicable == 1">
+                  <img src="assets/img/cashback.png" alt="Cashback">
+                </ng-container>
+{{ bundleItem.price | currency:currencyCode  }}
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="10">
+              <p class="info">
+                {{ 'VALID_FOR_DAYS_DESCRIPTION' | translate:{ duration: bundleItem.duration } }}
+                
+              </p>
+            </ion-col>
+            <ion-col size="2" (click)="gotoSummary(bundleItem, false)">
+              <p class="arrow text-right"><ion-icon name="arrow-forward-circle-outline"></ion-icon></p>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+  
+        <div *ngIf="isDataPlan && restArray.length > 0">
+           <h4 class="" *ngIf="isDataPlan && restArray.length > 0">{{ 'UNLIMITED_DAILY_PASS' | translate }}</h4>
+          
+          <ion-card class="value-data" *ngFor="let bundleItem of restArray" (click)="gotoSummary(bundleItem, true)">
+            <ion-row>
+              <ion-col size="8">
+                <p class="data">{{ 'UNLIMITED_DAY_PASS' | translate:{ duration: bundleItem.duration } }}</p>
+              </ion-col>
+              <ion-col size="4" >
+                <p class="price text-right">
+                  <ng-container *ngIf="bundleItem.is_cashback_applicable == 1">
+                    <img src="assets/img/cashback.png" alt="Cashback">
+                  </ng-container>
+                  {{ bundleItem.price | currency:currencyCode  }}
+                </p>
+              </ion-col>
+    
+          
+            </ion-row>
+            <ion-row>
+              <ion-col size="10">
+                <p class="info">{{ 'UNLIMITED_INTERNET_ACCESS_DESCRIPTION' | translate }}</p>
+              </ion-col>
+              <ion-col size="2">
+                <p class="arrow text-right"><ion-icon name="arrow-forward-circle-outline"></ion-icon></p>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+        </div>
+  
+   
+      </div>
+    </div>
+  
+  </ion-content>
+  
+  <ion-footer>
+    <ion-toolbar>
+      <div class="tabmenu">
+        <ion-button (click)="gotoHomeSearch()"  class="selected">
+          <img class="normal" src="assets/img/icons/location.png" alt="">
+          <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+        </ion-button>
+  
+        <ion-button (click)="gotoTab1()">
+          <img class="normal" src="assets/img/icons/scan.png" alt="">
+          <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+        </ion-button>
+  
+        <ion-button (click)="gotoMarketPlace()">
+          <img class="normal" src="assets/img/icons/shop.png" alt="">
+          <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+        </ion-button>
+  
+        <ion-button (click)="gotoTab5()">
+          <img class="normal" src="assets/img/icons/user.png" alt="">
+          <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+        </ion-button>      
+      </div>
+  
+    </ion-toolbar>
+  </ion-footer>
+  

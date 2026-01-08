@@ -1,0 +1,185 @@
+ion-header{
+  ion-toolbar{      
+    --min-height:150px;
+    height: 120px;
+
+    ion-title{
+      text-align: left;   
+    }
+    [slot="end"]{
+      margin-inline-end: 15px;
+    }
+    ion-buttons{
+      ion-button{              
+        display: inline-block;
+        margin-inline-start:0;
+        margin-inline-end: 0;
+        margin-top: -20px;
+
+        &::part(native){
+            padding-inline-start: 10px;
+            padding-inline-end: 0px;
+        }
+        &.ios{ margin-top:-5px; }
+      }
+    }
+  }
+}
+
+ion-content {
+  --background: #fff;
+}
+
+.loungepassbox{
+  position: relative;
+  width: 100%; 
+  height: 175px;
+  padding: 20px;
+  background: rgba(17,32,66,0.5);
+  color: #fff;
+  border-radius: 12px;    
+  overflow: hidden;
+
+  &::before{
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      content: "";
+  background-image:
+    url("../../assets/img/market-lounge.png"),
+    linear-gradient(rgba(239, 65, 61, 0.5), rgba(239, 65, 61, 0.5));
+  background-repeat: no-repeat;
+  background-position: center bottom, center;
+  background-size: 100%, cover;
+  background-blend-mode: overlay;
+  }
+
+  &::after{
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 1;
+      content: "";
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+
+  }
+
+  .airport{
+      margin: 0 0 0; 
+      text-align: left;
+      img{
+          width: 55px; display: inline-block;
+      }
+  }
+
+  h3{
+      margin: 10px 0 0;
+      font-size: 24px;
+      font-weight: 400;
+      color: #fff;
+  }
+
+  p{
+      margin: 5px 0 0;
+      font-weight: 400;
+      text-transform: uppercase;
+      font-size: 14px;
+      color: #fff;
+  }
+
+}
+
+.datacontainer{
+  grid-template-columns: repeat(2, 1fr);
+  display: grid;
+  grid-gap: 20px;
+  padding: 20px 0;
+}
+.datablock{
+  // width: calc(50% - 20px);
+  padding:20px 15px;
+  background: var(--input-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+
+  img{
+      display: inline-block;
+      width: 55px;
+      border-radius: 10px;
+  }
+  h4{
+      margin: 15px 0 0;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--theme-color-2);
+  }
+  p{
+      margin: 5px 0 0;
+      font-weight: 400;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--theme-color-2);
+  }
+}
+
+
+
+
+
+
+
+
+  /**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px)  
+and (-webkit-min-device-pixel-ratio: 2){
+
+  ion-header ion-toolbar{ height: auto;  }
+  
+  .datacontainer { grid-gap: 25px;  }
+  .loungepassbox{
+    height: 210px;
+    padding: 20px;
+
+    .airport{
+      img{
+        width: 75px;
+      }
+    }
+    h3{
+      font-size: 36px;
+    }
+    p{
+      font-size: 20px;
+    }
+
+  }
+
+  .datablock{
+    padding: 20px 20px;
+
+    img{
+      width: 75px;
+    }
+    h4{
+      font-size: 26px;
+    }
+    p{
+      font-size: 20px;
+    }
+  }
+  
+
+}

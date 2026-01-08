@@ -1,0 +1,169 @@
+<ion-content>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <h3>{{ 'CREATE_ACCOUNT_TITLE' | translate }}</h3>
+        <p>{{ 'CREATE_ACCOUNT_SUBTITLE' | translate }}</p>
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="gotoBack()">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+          <!-- <img src="assets/img/cross.png" alt=""> -->
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+
+    <ion-list> 
+
+      <ion-item>
+        <ion-input type="text" autocapitalize="on" (ionInput)="validateName($event, 'first')"
+          [(ngModel)]="registerObj.first_name"
+          placeholder="{{ 'CREATE_ACCOUNT_FIRST_NAME_PLACEHOLDER' | translate }}"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input (ionInput)="validateName($event, 'last')" type="text" autocapitalize="on"
+          [(ngModel)]="registerObj.last_name"
+          placeholder="{{ 'CREATE_ACCOUNT_SURNAME_PLACEHOLDER' | translate }}"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="registerObj.email"
+          placeholder="{{ 'CREATE_ACCOUNT_EMAIL_PLACEHOLDER' | translate }}"></ion-input>
+        <ion-icon name="close-circle" slot="end" *ngIf="registerObj.email" (click)="clearInput()"></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-input [type]="passwordType" [(ngModel)]="registerObj.password"
+          placeholder="{{ 'CREATE_ACCOUNT_PASSWORD_PLACEHOLDER' | translate }}"></ion-input>
+        <ion-icon [name]="passwordIcon" slot="end" (click)="hideShowPassword()"></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-input [type]="passwordType1" [(ngModel)]="registerObj.confirmPass"
+          placeholder="{{ 'CREATE_ACCOUNT_CONFIRM_PASSWORD_PLACEHOLDER' | translate }}"></ion-input>
+        <ion-icon [name]="passwordIcon1" slot="end" (click)="hideShowPassword1()"></ion-icon>
+      </ion-item>
+
+      <!-- SEARCH BAR-->
+      <div class="searchdiv countrySearch" #searchDiv>
+        <!-- Flag for main search -->
+        <div class="flagicon" *ngIf="isearchIMg">
+          <img *ngIf="isearchIMg.toLowerCase() === 'latam'" src="assets/flags/la.svg" alt="LATAM flag">
+          <img *ngIf="isearchIMg.toLowerCase() === 'europe+'" src="assets/flags/eur.svg" alt="Europe+ flag">
+          <img *ngIf="isearchIMg.toLowerCase() === 'north america'" src="assets/flags/northam.svg" alt="North America flag">
+          <img *ngIf="isearchIMg.toLowerCase() === 'middle east'" src="assets/flags/middleast.svg" alt="Middle East flag">
+          <img *ngIf="isearchIMg.toLowerCase() !== 'latam' && isearchIMg.toLowerCase() !== 'europe+' && isearchIMg.toLowerCase() !== 'north america' && isearchIMg.toLowerCase() !== 'middle east'" 
+              src="assets/flags/{{ isearchIMg | lowercase }}.svg" alt="{{ isearchIMg }} flag">
+        </div>
+
+        <ion-searchbar 
+  (ionFocus)="onFocusSearch()"  
+  (keyup)="onSearch($event)" 
+  (ionClear)="onClearSearch()" 
+  class="homesearch"
+  [placeholder]="'Country_residence' | translate" 
+  [(ngModel)]="searchTerm">
+</ion-searchbar>
+
+      <!-- Search results -->
+<div class="searchlist" *ngIf="isSearch && searchData.length > 0">
+  <ion-list>
+    <ion-item *ngFor="let item of searchData" (click)="gotoSelect(item)">
+      <ion-avatar slot="start" *ngIf="item.short_name?.toLowerCase() === 'latam'">
+        <img src="assets/flags/la.svg" alt="LATAM flag">
+      </ion-avatar>
+      <ion-avatar slot="start" *ngIf="item.short_name?.toLowerCase() === 'europe+'">
+        <img src="assets/flags/eur.svg" alt="Europe+ flag">
+      </ion-avatar>
+      <ion-avatar slot="start" *ngIf="item.short_name?.toLowerCase() === 'north america'">
+        <img src="assets/flags/northam.svg" alt="North America flag">
+      </ion-avatar>
+      <ion-avatar slot="start" *ngIf="item.short_name?.toLowerCase() === 'middle east'">
+        <img src="assets/flags/middleast.svg" alt="Middle East flag">
+      </ion-avatar>
+      <ion-avatar slot="start"
+        *ngIf="item.short_name?.toLowerCase() !== 'latam' && item.short_name?.toLowerCase() !== 'europe+' && item.short_name?.toLowerCase() !== 'north america' && item.short_name?.toLowerCase() !== 'middle east'">
+        <img src="assets/flags/{{ item.short_name | lowercase }}.svg" alt="{{ item.short_name }} flag">
+      </ion-avatar>
+      
+      <ion-label>{{ item.country_name }}</ion-label>
+    </ion-item>
+  </ion-list>
+</div>
+<!-- Search list end -->
+</div>
+  <div class="countryselectrow">
+  <!-- Country selector -->
+  <div class="countryselect" *ngIf="isCountrySelected" (click)="chooseCountry()">
+    <img class="countryimg"
+      *ngIf="countryCodeObj?.flag"
+      src="assets/flags/{{countryCodeObj.flag | lowercase}}.svg">
+    <span class="countrycode">{{ countryCodeObj?.code }}</span>
+  </div>
+
+  <!-- Mobile number input -->
+  <div class="phoneno" [ngClass]="{ 'fullwidth': !isCountrySelected }">
+    <ion-item lines="none">
+      <ion-input type="tel"
+        (ionInput)="onSearchMobile($event)" 
+        [(ngModel)]="temp_mobile_number"
+        maxlength="11"
+        placeholder="{{ 'MOBILE_NUMBER' | translate }}">
+      </ion-input>
+    </ion-item>
+  </div>
+</div>
+
+<!-- Referral code input -->
+<div class="reffercode">
+  <ion-item lines="none" class="reffercode">
+    <ion-input type="text"
+      [(ngModel)]="registerObj.referal_code"
+      placeholder="{{ 'Referral_code' | translate }}">
+    </ion-input>
+  </ion-item>
+</div>
+
+     </ion-list> 
+
+    <p class="text">
+      {{ 'CREATE_ACCOUNT_AGREE_TEXT' | translate }}
+    </p>
+
+    <ion-row class="checkrow">
+      <ion-col size="6">
+        <div class="checkdiv">
+          <ion-checkbox [(ngModel)]="registerObj.isPrivacySelected"></ion-checkbox> <span (click)="gotoPrivacy()">{{
+            'CREATE_ACCOUNT_PRIVACY_POLICY' | translate }}</span>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="checkdiv">
+          <ion-checkbox [(ngModel)]="registerObj.isTermsSelected"></ion-checkbox> <span (click)="gotoTerms()">{{
+            'CREATE_ACCOUNT_TERMS' | translate }}</span>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-button expand="block" class="btn-green btn-signup" (click)="submit()">
+      {{ 'CREATE_ACCOUNT_SIGN_UP_BUTTON' | translate }}
+    </ion-button>
+
+    <div class="orbox">
+      <span>{{ 'CREATE_ACCOUNT_OR_SIGN_IN' | translate }}</span>
+    </div>
+
+    <div class="social">
+      <ion-button (click)="loginWithGoogle()" fill="outline"><ion-icon name="logo-google"></ion-icon></ion-button>
+      <!--<ion-button (click)="loginWithFacebook()" fill="outline"><ion-icon name="logo-facebook"></ion-icon></ion-button> -->
+    </div>
+
+  </div>
+
+</ion-content>
+

@@ -1,0 +1,202 @@
+<ion-content [fullscreen]="true" class="">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <h3>{{ 'GLOBAL_INTERNET_PLANS_TITLE' | translate }}</h3>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="searchdiv">
+    <ion-searchbar (keyup)="onSearch($event)" (ionClear)="onClearSearch()" class="homesearch"
+      placeholder="{{ 'WHERE_TO_TRAVELER_PLACEHOLDER' | translate }}" [(ngModel)]="searchTerm">
+    </ion-searchbar>
+
+    <!-- Search list start -->
+    <div class="searchlist" *ngIf="isSearch == true && searchData.length > 0">
+      <ion-list>
+        <ion-item *ngFor="let item of searchData" (click)="gotoBundlesSearch(item.name || item.cityName, item.iso, 'country', '', item.is_destination, item.country_name)">
+          <!-- Flags -->
+          <ion-avatar slot="start" *ngIf="item.iso?.toLowerCase() === 'latam'">
+            <img src="assets/flags/la.svg" alt="LATAM flag">
+          </ion-avatar>
+          <ion-avatar slot="start" *ngIf="item.iso?.toLowerCase() === 'europe+'">
+            <img src="assets/flags/eur.svg" alt="Europe+ flag">
+          </ion-avatar>
+          <ion-avatar slot="start" *ngIf="item.iso?.toLowerCase() === 'north america'">
+            <img src="assets/flags/northam.svg" alt="North America flag">
+          </ion-avatar>
+          <ion-avatar slot="start" *ngIf="item.iso?.toLowerCase() === 'middle east'">
+            <img src="assets/flags/middleast.svg" alt="Middle East flag">
+          </ion-avatar>
+          <ion-avatar slot="start"
+            *ngIf="item.iso?.toLowerCase() !== 'latam' && item.iso?.toLowerCase() !== 'europe+' && item.iso?.toLowerCase() !== 'north america' && item.iso?.toLowerCase() !== 'middle east'">
+            <img src="assets/flags/{{ item.iso | lowercase }}.svg" alt="{{ item.iso }} flag">
+          </ion-avatar>
+          
+          <!-- Dynamic name display -->
+          <ion-label>{{ item.name || item.cityName }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    <!-- Search list end -->
+
+  </div>
+
+  <div class="segmentbar">
+    <ion-segment value="singlecountry" [(ngModel)]="selectedSegment">
+      <ion-segment-button value="singlecountry">
+        <ion-label>
+          <img class="normal" src="assets/img/icons/pin.png"><img class="active" src="assets/img/icons/pin-dark.png">
+          {{ 'LOCAL_SEGMENT_LABEL' | translate }}
+        </ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="multicountry">
+        <ion-label>
+          <img class="normal" src="assets/img/icons/region.png"><img class="active"
+            src="assets/img/icons/region-dark.png"> {{ 'REGIONAL_SEGMENT_LABEL' | translate }}
+        </ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div class="container">
+
+    <div class="segment-panel" [ngSwitch]="selectedSegment">
+
+      <div *ngSwitchCase="'singlecountry'">
+
+        <ion-row>
+          <ion-col>
+            <h3>{{ 'POPULAR_DESTINATIONS_TITLE' | translate }}</h3>
+          </ion-col>
+        </ion-row>
+
+        <div class="swiper-panel">
+          <swiper-container [slidesPerView]="2.3" [freeMode]="true" [loop]="false" pagination="false">
+
+            <swiper-slide *ngFor="let popularItems of popularCountriesList">
+              <div class="countrybox" (click)="gotoBundles(popularItems.name, popularItems.iso, 'country','', false, popularItems.name)">
+                <img src="assets/countryBanners/{{ popularItems.iso }}.jpg" alt="">
+                <span class="country">{{ popularItems.name }}</span>
+                <span class="arrow"><ion-icon name="arrow-forward-circle-outline"></ion-icon></span>
+              </div>
+            </swiper-slide>
+
+          </swiper-container>
+        </div>
+
+        <div class="select-country">
+
+          <ion-row>
+            <ion-col>
+              <h3>{{ 'SELECT_A_COUNTRY_TITLE' | translate }}</h3>
+            </ion-col>
+          </ion-row>
+          <ion-row class="country-row">
+            <ion-col size="6" *ngFor="let bundleItem of mainObj">
+              <div class="selcountrybox" (click)="gotoBundles(bundleItem.name, bundleItem.iso, 'country','', false, bundleItem.name)">
+                <span class="country" *ngIf="bundleItem.iso == 'LATAM'">
+                  <img src="assets/flags/la.svg" alt="">
+                </span>
+
+                <span class="country" *ngIf="bundleItem.iso == 'Europe+'">
+                  <img src="assets/flags/eur.svg" alt="">
+                </span>
+
+                <span class="country" *ngIf="bundleItem.iso == 'North America'">
+                  <img src="assets/flags/northam.svg" alt="">
+                </span>
+
+                <span class="country" *ngIf="bundleItem.iso == 'Middle East'">
+                  <img src="assets/flags/middleast.svg" alt="">
+                </span>
+
+                <span class="country"
+                  *ngIf="bundleItem.iso != 'Middle East' && bundleItem.iso != 'North America' && bundleItem.iso != 'Europe+' && bundleItem.iso != 'LATAM'">
+                  <img src="assets/flags/{{ bundleItem.iso | lowercase }}.svg" alt="">
+                </span>
+
+                <span> {{ bundleItem.name.length <= 25 ? bundleItem.name : bundleItem.name.slice(0, 25) + '...' }}</span>
+              </div>
+            </ion-col>
+
+          </ion-row>
+
+        </div>
+
+      </div>
+
+      <!-- ALl Zone List -->
+      <div *ngSwitchCase="'multicountry'">
+        <div class="regional-esim">
+
+          <ion-list>
+
+            <ion-item class="region-row" lines="none" *ngFor="let zoneItem of zoneList"
+              (click)="gotoBundles(zoneItem.region, zoneItem.region, 'region', zoneItem.countries, false, zoneItem.region )">
+              <ion-thumbnail>
+                <img src="assets/img/{{ zoneItem.region }}.png" alt="">
+              </ion-thumbnail>
+              <div class="detail">
+                <ion-row>
+                  <ion-col>
+                    <p class="countryname">{{ zoneItem.name }}</p>
+                  </ion-col>
+                  <ion-col>
+                    <p class="day">{{ 'FROM_LABEL' | translate }} {{ zoneItem.perDay | currency:currencyCode }}
+                      {{ 'DAY_LABEL' | translate }}</p>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <p class="info">{{ 'VIEW_INFO_LABEL' | translate }}</p>
+                  </ion-col>
+                  <ion-col>
+                    <p class="arrow"><ion-icon name="arrow-forward-circle-outline"></ion-icon></p>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-item>
+
+          </ion-list>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+
+    <div class="tabmenu">
+      <ion-button class="selected" (click)="gotoHomeSearch()">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gototab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>      
+    </div>
+
+    
+  </ion-toolbar>
+</ion-footer>

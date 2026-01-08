@@ -1,0 +1,249 @@
+<ion-content [fullscreen]="true">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <h3 [innerHTML]="'ACTIVATE_TITLE' | translate">
+        </h3>
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="gotoBack()">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <ion-toolbar class="textbar">
+      <p>
+        {{ 'ACTIVATE_INFO_MESSAGE' | translate }}
+      </p>
+    </ion-toolbar>
+
+    <ion-toolbar class="segmentbar">
+      <ion-segment value="install" [(ngModel)]="selectedSegment">
+        <!--<ion-segment-button value="install">
+        <ion-label> Install </ion-label>
+      </ion-segment-button> -->
+        <ion-segment-button value="qrcode">
+          <ion-label> {{ 'QR_CODE' | translate }} </ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="manual">
+          <ion-label> {{ 'MANUAL' | translate }} </ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <div class="ion-padding">
+    <div class="segment-panel" [ngSwitch]="selectedSegment">
+
+      <!--
+    <div *ngSwitchCase="'install'">
+
+        <h4>
+          Step 1/2: Install eSIM
+        </h4>
+        <p>
+          *Note that the eSIM installation process must not be interrupted and make sure your device has a stable internet connection before installing.
+        </p>
+        <p>
+          1. Tap "Install eSIM" and wait for a while. Please do not close the app, this may take a few minutes.<br>
+          2. Tap "OK".
+        </p>
+
+        <h4>
+          Step 2/2: Access Data
+        </h4>
+      
+        <ion-card class="create-apn">
+          <h4>
+            <ion-icon name="information-circle-outline"></ion-icon> Create new APN
+          </h4>
+          <p>
+            To connect between a cellular network and the internet, 
+            you must manually add the APN in your device settings. 
+            Copy the code listed under "APN" below. 
+            Open the APN settings and paste the code to add the APN.
+          </p>
+        </ion-card>
+
+        <ion-card>
+          <ion-row>
+            <ion-col size="8">
+              <span>NETWORK</span> <br>
+              02-UK LTE / Three UK LTE
+            </ion-col>
+            <ion-col size="4" class="text-right">
+              <ion-icon name="information-circle-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="8">
+              <span>APN</span> <br>
+              internet
+            </ion-col>
+            <ion-col size="4" class="text-right">
+              <ion-icon name="copy-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="8">
+              <span>DATA ROAMING</span> <br>
+              on
+            </ion-col>
+            <ion-col size="4" class="text-right">
+              <ion-icon name="information-circle-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <ion-button expand="block" class="btn-green add-apn">
+          Open APN Settings
+        </ion-button>
+      
+        <ion-button expand="block" class="btn-apnstep">
+          I've completed this APN step
+        </ion-button>
+
+        <h4>
+          APN settings step by step
+        </h4>
+        <p>
+          1. Go to "SIMs", then select the recently downloaded eSIM on your device.
+        </p>
+        <p>
+          2. Enable the "Use SIM" toggle, then tap "Yes". 
+        </p>
+        <p>
+          3. Enable the "Mobile data" toggle.
+        </p>
+        <p>
+          4. Enable the "Roaming" toggle, then tap “OK”. 
+        </p>
+        <p>
+          5. Tap the "Automatically select network" toggle then choose the supported network manually if your eSIM has connected to the wrong network.
+        </p>
+        <p>
+          6. Tap "Access Point Names", then tap "(+)". 
+        </p>
+        <p>
+          7. Enter the APN by copying it into the Name and APN fields.
+        </p>
+        <p>
+          8. Tap the three dots on the right top of the screen, tap "Save", then select the APN you have saved by clicking the radio button.
+        </p>        
+
+    </div> -->
+
+      <div *ngSwitchCase="'qrcode'">
+
+        <p class="qrlink">
+          <a> {{ 'CLICK_TO_SHARE_QR' | translate }} </a>
+        </p>
+        <div class="qrcode" (click)="sharewithall()">
+          <img [src]="qrCodeImage" alt="eSIM QR Code">
+        </div>
+
+        <h4>
+          {{ 'INSTALL_ESIM_QRCODE_TITLE' | translate }}
+        </h4>
+        <p>
+          {{ 'INSTALL_ESIM_QRCODE_DESCRIPTION' | translate }}
+        </p>
+
+        <h6>
+          {{ 'SHARE_QR_CODE_TITLE' | translate }}
+        </h6>
+        <p>
+          1. {{ 'QR_CODE_INSTRUCTIONS_1' | translate }}
+        </p>
+        <p>
+          2. {{ 'QR_CODE_INSTRUCTIONS_2' | translate }}
+        </p>
+        <p>
+          3. {{ 'QR_CODE_INSTRUCTIONS_3' | translate }}
+        </p>
+        <p>
+          4. {{ 'QR_CODE_INSTRUCTIONS_4' | translate }}
+        </p>
+        <p>
+          5. {{ 'QR_CODE_INSTRUCTIONS_5' | translate }}
+        </p>
+
+      </div>
+
+      <div *ngSwitchCase="'manual'">
+
+        <h4>
+          {{ 'INSTALL_ESIM_MANUAL_TITLE' | translate }}
+        </h4>
+
+        <ion-card class="card-manual">
+          <ion-row>
+            <ion-col size="9">
+              <span>{{ 'SM_DP_ADDRESS_ACTIVATION_CODE' | translate }}</span> <br>
+              LPA:1${{sharingData.smdpAddress}}${{sharingData.matchingId}}
+            </ion-col>
+            <ion-col size="3" class="text-right" (click)="copyAddress()">
+              <ion-icon name="copy-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="text-center information">
+              <p>
+                {{ 'INSTALL_ESIM_MANUAL_DESCRIPTION' | translate }}
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <p>
+          1. {{ 'MANUAL_INSTALL_STEP_1' | translate }}
+        </p>
+        <p>
+          2. {{ 'MANUAL_INSTALL_STEP_2' | translate }}
+        </p>
+        <p>
+          3. {{ 'MANUAL_INSTALL_STEP_3' | translate }}
+        </p>
+        <p>
+          4. {{ 'MANUAL_INSTALL_STEP_4' | translate }}
+        </p>
+        <p>
+          5. {{ 'MANUAL_INSTALL_STEP_5' | translate }}
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button (click)="gotoHomeSearch()">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()" class="selected">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>      
+    </div>
+
+  </ion-toolbar>
+</ion-footer>

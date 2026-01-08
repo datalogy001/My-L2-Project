@@ -1,0 +1,192 @@
+<ion-content [fullscreen]="true">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <img class="ftel-logo" src="assets/img/L2-logo.png" alt="">
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="gotoBack()">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+          <!-- <img src="assets/img/cross.png" alt=""> -->
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar class="titlebar">
+      <ion-title>
+        <h3>
+          {{ 'COMPATIBLE_DEVICES_TITLE' | translate }}
+        </h3>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+
+    <p class="note">
+      <span>{{ 'PLEASE_NOTE' | translate }}</span> {{ 'PLEASE_NOTE_CONTENT' | translate }}
+    </p>
+
+    <ion-accordion-group>
+      <ion-accordion value="first">
+        <ion-item slot="header">
+          <ion-label>{{ 'SAMSUNG_DEVICES' | translate }}</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ul>
+            <li>Samsung Galaxy S20</li>
+            <li>Samsung Galaxy S20+</li>
+            <li>Samsung Galaxy S20 Ultra</li>
+            <li>Samsung Galaxy S21</li>
+            <li>Samsung Galaxy S21+ 5G</li>
+            <li>Samsung Galaxy S21+ Ultra 5G</li>
+            <li>Samsung Galaxy S22</li>
+            <li>Samsung Galaxy S22+</li>
+            <li>Samsung Galaxy S22 Ultra</li>
+            <li>Samsung Galaxy Note 20</li>
+            <li>Samsung Galaxy Note 20 Ultra 5G&nbsp;</li>
+            <li>Samsung Galaxy Fold</li>
+            <li>Samsung Galaxy Z Fold2 5G</li>
+            <li>Samsung Galaxy Z Fold3 5G</li>
+            <li>Samsung Galaxy Z Fold4</li>
+            <li>Samsung Galaxy Z Flip</li>
+            <li>Samsung Galaxy Z Flip3 5G</li>
+            <li>Samsung Galaxy Z Flip4</li>
+            <li>Samsung S24</li>
+            
+          </ul>
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="second">
+        <ion-item slot="header">
+          <ion-label>{{ 'GOOGLE_DEVICES' | translate }}</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ul>
+            <li>Google Pixel 2</li>
+            <li>Google Pixel 2 XL</li>
+            <li>Google Pixel 3 </li>
+            <li>Google Pixel 3 XL</li>
+            <li>Google Pixel 3a </li>
+            <li>Google Pixel 3a XL</li>
+            <li>Google Pixel 4</li>
+            <li>Google Pixel 4a</li>
+            <li>Google Pixel 4 XL</li>
+            <li>Google Pixel 5</li>
+            <li>Google Pixel 5a</li>
+            <li>Google Pixel 6</li>
+            <li>Google Pixel 6 Pro</li>
+            <li>Google Pixel 7</li>
+            <li>Google Pixel 7 Pro</li>
+            <li>Google Pixel 8</li>
+            <li>Google Pixel 8 Pro</li>
+            <li>Google Pixel 9</li>
+            <li>Google Pixel 9 Pro</li>
+          </ul>
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="third">
+        <ion-item slot="header">
+          <ion-label>{{ 'HUAWEI_DEVICES' | translate }}</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ul>
+            <li>Huawei P40</li>
+            <li>Huawei P40 Pro</li>
+            <li>Huawei Mate 40 Pro</li>
+          </ul>
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="fourth">
+        <ion-item slot="header">
+          <ion-label>{{ 'OPPO_DEVICES' | translate }}</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ul>
+            <li>Oppo Find X3</li>
+            <li>Oppo Find X3 Pro</li>
+            <li>Oppo Find X5</li>
+            <li>Oppo Find X Pro</li>
+            <li>Oppo Reno 5A</li>
+            <li>Oppo Reno 9A</li>
+            <li>Oppo Reno 6 Pro 5G</li>
+            <li>Oppo A55s 5G</li>
+          </ul>
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="fifth">
+        <ion-item slot="header">
+          <ion-label>{{ 'OTHERS_DEVICES' | translate }}</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ul>
+            <li>Motorola Razr 2019</li>
+              <li>Motorola Razr 5G</li>
+          <li>Motorola Razr 40 </li>
+          <li>Motorola Razr 40 Ultra</li>
+          <li>Motorola Edge+ Series</li>
+          <li>Motorola Edge 40 </li>
+          <li>Motorola Edge 40 Pro</li>
+          <li>Motorola G Series 34</li>
+          <li>Motorola G Series 52</li>
+          <li>Motorola G Series 53</li>
+          <li>Motorola G Series 54</li>
+          <li>Motorola G Series 84</li>
+            <li>Gemini PDA</li>
+            <li>Rakuten Mini</li>
+            <li>Rakuten Big-S</li>
+            <li>Rakuten Big</li>
+            <li>Rakuten Hand</li>
+            <li>Rakuten Hand 5G</li>
+            <li>Sony Xperia 10 III Lite</li>
+            <li>Sony Xperia 10 IV</li>
+            <li>Xperia 1 IV</li>
+            <li>Honor Magic 4 Pro</li>
+            <li>Fairphone 4</li>
+            <li>Sharp Aquos Sense6s</li>
+            <li>Sharp Aquos Wish</li>
+            <li>Xiaomi 12T Pro</li>
+            <li>DOOGEE V30</li>
+            <li>Vito Y33S</li>
+            <li>Nokia G60 5G</li>
+          </ul>
+        </div>
+      </ion-accordion>
+
+    </ion-accordion-group>
+
+  </div>
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button (click)="gotoHomeSearch()">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()" class="selected">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>      
+    </div>
+
+  </ion-toolbar>
+</ion-footer>

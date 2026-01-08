@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Payment <br> Method</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <i class="far fa-times"></i>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-padding">
+    
+    <ion-list>
+      <ion-radio-group [(ngModel)]="selectedInput">
+        <ion-item lines="none" *ngFor="let paymentItem of paymentList">
+          <span slot="start">
+            <img src="assets/img/paypal.png" alt="">
+          </span>
+          <ion-label>{{paymentItem.text}}</ion-label>
+          <span slot="end">
+            <ion-radio [value]="paymentItem.value"  (click)="optionFocus(paymentItem.value)"></ion-radio>
+          </span>
+        </ion-item>
+      </ion-radio-group>
+
+      <ion-item lines="none" class="addpayment">
+        <span slot="start">
+          <img src="assets/img/wallet.png" alt="">
+        </span>
+        <ion-label>Add payment card</ion-label>
+        <span slot="end">
+          <ion-button>
+            <ion-icon name="add-outline"></ion-icon>
+          </ion-button>
+        </span>
+      </ion-item>
+
+    </ion-list>
+
+    
+  </div>
+</ion-content>

@@ -1,0 +1,239 @@
+ion-header{
+    ion-toolbar{
+        height: 95px;
+        ion-title{
+            .ftel-logo{
+                width: 160px;
+                margin:7px 0px 0px;
+            }
+        }
+        [slot="end"]{
+            margin-inline-end: 5px; 
+        }      
+        
+        &.titlebar{
+            --min-height: 40px; 
+            height: 60px;       //language
+        }  
+    }
+}
+
+ion-content {
+  --background: #fff;
+}
+
+.list-md{ 
+    background: transparent;
+}
+ion-list{
+    margin:10px 0px 0; padding: 0;
+    ion-item{
+        --inner-border-width:0 0 0 0;
+        margin: 0 0 12px;
+        --background:var(--input-bg);
+        border: 1px solid var(--border-color) !important;
+
+        &:last-child{
+          margin: 0 0 0px;
+        }
+        ion-input{
+            color: var(--theme-color-2); 
+        }
+        ion-icon{
+            color:var(--theme-color-2);
+            font-size: 20px;
+            cursor: pointer;
+        }
+    }
+}
+
+ion-row{
+    &.checkrow{
+        margin: 12px 0 0px;
+
+        ion-col{
+            // padding: 0; width: 100%;
+            border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; 
+  
+            ion-checkbox{
+                //  width: 100%;
+                padding:10px 10px;
+            } 
+        }
+    }
+}
+
+ion-row{
+    margin: 0 -7px 10px;
+    ion-col{
+        padding: 0 7px;
+    }
+}
+
+.rememberpassword{
+    margin: 25px 0px 0; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding:10px 10px 10px 50px;
+    position: relative; min-height: 50px; color: var(--theme-gray); font-size: 15px;
+}
+
+ion-checkbox{
+    color: var(--theme-color-2); 
+    font-size: 15px;
+  
+    --border-width:1px;
+    --border-color:var(--theme-color-2);
+    --checkbox-background:transparent;
+    --checkbox-background-checked:var(--theme-color-2);
+    --border-color-checked:var(--theme-color-2);
+  
+    --checkmark-color:var(--theme-color-3);
+    --checkmark-width: 4;
+    --checkbox-background-checked: transparent;
+    --border-color-checked: transparent;
+  
+    &::part(label){
+      margin-inline: 15px 0; white-space: normal;
+    }
+    &::part(container){
+        width: 22px; height: 22px;
+    }
+
+}
+
+
+ion-button{
+    &.add-card{
+        margin: 25px 0px 0px;
+    }
+    &.btn-delete{
+        margin: 12px 0px 0px;
+    }
+}
+
+.profileupdate{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 12px;
+
+    ion-item{
+        margin: 0 0 0 0;
+        // width: calc(100% - 40px);
+        width: 100%;
+        --inner-padding-end:10px;
+        --padding-start:14px;
+        --background:var(--input-bg);
+        border: 1px solid var(--border-color) !important;
+
+        ion-label{
+            font-size: 13px;
+            color: var(--theme-color-2);
+        }
+
+        ion-avatar{
+            margin-inline-end: 10px;
+            background-color: rgba(17,32,66,0.4);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 6px;
+            margin-bottom: 6px;
+
+          /*  &::before{
+                position: absolute; z-index: -1; left: 0; right: 0; top: 0px; bottom: 0; content: ""; 
+                background: url("../../assets/img/profile-pic.png") no-repeat center center / cover;
+            } */
+
+            ion-icon{
+                font-size: 36px;
+                position: absolute;
+                z-index: 11;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 100%;
+                height: 100%;
+                background-color: rgba(17,32,66,0.5);
+                color: #fff;
+            }
+        }
+    }
+    ion-button{
+        margin-inline-start: 20px;
+        height: 50px;
+
+        &::part(native){
+            padding-inline-start: 0px;
+            padding-inline-end: 0px;
+        }
+        img{
+            width: 32px;
+        }
+    }
+}
+
+
+
+
+
+/*********************/
+.countryselectrow{
+    display: flex; flex-direction: row; align-content: center;
+    .countryselect{
+     width: 88px; background: var(--input-bg); border-radius: 10px; margin-inline-end: 10px; color: #fff; display: flex; align-items: center; padding: 12px;
+     border: 1px solid var(--border-color) !important;
+
+     .countryimg{ width: 25px; margin-right: 5px; border-radius: 2px;}
+     .countrycode{ color: var(--theme-color-2); }
+    }
+    .phoneno{
+     flex: 1 0 0;
+    }
+}
+   
+  
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+    ion-header ion-toolbar {height: 110px;}
+    ion-header ion-toolbar ion-title .ftel-logo{ width: 260px;}
+    ion-header ion-toolbar.titlebar { --min-height: 60px; height: 80px; }
+    ion-checkbox { font-size: 23px;}
+    ion-row.checkrow ion-col ion-checkbox { padding: 24px 20px; }
+
+    .profileupdate{
+        ion-item{
+            --inner-padding-end: 18px;
+            --padding-start: 18px;
+            ion-avatar{
+                width: 70px;
+                height: 70px;
+                ion-icon{
+                    font-size: 56px;
+                }
+            }
+            ion-label{
+                font-size: 20px;
+            }
+        }
+        ion-button{
+            img{ width: 40px;}
+        }
+    }
+
+    .countryselectrow .countryselect{  width: 110px; }
+    .countryselectrow .countryselect .countryimg{ width: 46px; border-radius: 4px; }
+    .countryselectrow .countryselect .countrycode{ font-size: 23px; }
+
+}

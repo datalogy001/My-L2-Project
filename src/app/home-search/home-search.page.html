@@ -1,0 +1,138 @@
+<ion-content>
+  <div class="topbox">
+    <!-- <img src="assets/img/home.png"> -->
+    <ion-header>
+      <ion-toolbar>
+        <!-- <ion-title>
+        </ion-title> -->
+ <ion-title>
+          <img class="ftel-logo" src="assets/img/L2-logo.png" alt="">
+        </ion-title>
+       <ion-chip (click)="gotoTOpup()" slot="end" [ngClass]="getWalletClass()">{{ walletBalance | currency:currencyCode }}</ion-chip>
+
+        <ion-buttons slot="end">
+          <ion-button fill="clear" *ngIf="notiCount == 0" (click)="gotoNoti()">
+            <img src="assets/img/icons/bell-white.png" alt="">
+          </ion-button>
+          <ion-button fill="clear" *ngIf="notiCount > 0" (click)="gotoNoti()">
+            <img src="assets/img/icons/bell-white.png" alt="">
+            <span>{{notiCount}}</span>
+          </ion-button>
+        </ion-buttons>
+
+      </ion-toolbar>
+    </ion-header>
+  </div>
+
+  <div class="container">
+    <h3 class="text-center">{{ 'WHERE_TO_TRAVELLER' | translate }}</h3>
+   <p class="text-center">
+      {{ 'STEP_AWAY_RATES' | translate }}
+    </p> 
+
+    <div class="searchdiv" #searchDiv>
+      <!-- Flag for main search -->
+      <div class="flagicon" *ngIf="isearchIMg">
+        <img *ngIf="isearchIMg.toLowerCase() === 'latam'" src="assets/flags/la.svg" alt="LATAM flag">
+        <img *ngIf="isearchIMg.toLowerCase() === 'europe+'" src="assets/flags/eur.svg" alt="Europe+ flag">
+        <img *ngIf="isearchIMg.toLowerCase() === 'north america'" src="assets/flags/northam.svg" alt="North America flag">
+        <img *ngIf="isearchIMg.toLowerCase() === 'middle east'" src="assets/flags/middleast.svg" alt="Middle East flag">
+        <img *ngIf="isearchIMg.toLowerCase() !== 'latam' && isearchIMg.toLowerCase() !== 'europe+' && isearchIMg.toLowerCase() !== 'north america' && isearchIMg.toLowerCase() !== 'middle east'" 
+             src="assets/flags/{{ isearchIMg | lowercase }}.svg" alt="{{ isearchIMg }} flag">
+      </div>
+    
+      <!-- Search bar -->
+      <ion-searchbar  (ionFocus)="onFocusSearch()" 
+        (keyup)="onSearch($event)" 
+        (ionClear)="onClearSearch()" 
+        class="homesearch"
+        [placeholder]="'DESTINATION_PLACEHOLDER' | translate" 
+        [(ngModel)]="searchTerm">
+      </ion-searchbar>
+    
+      <!-- Search results -->
+      <div class="searchlist" *ngIf="isSearch && searchData.length > 0">
+        <ion-list>
+          <ion-item *ngFor="let item of searchData" (click)="gotoSelect(item.name || item.cityName, item.iso, 'country', item.is_destination, item.country_name)">
+            <!-- Flags -->
+            <ion-avatar slot="start" *ngIf="item.iso?.toLowerCase() === 'latam'">
+              <img src="assets/flags/la.svg" alt="LATAM flag">
+            </ion-avatar>
+            <ion-avatar slot="start" *ngIf="item.iso?.toLowerCase() === 'europe+'">
+              <img src="assets/flags/eur.svg" alt="Europe+ flag">
+            </ion-avatar>
+            <ion-avatar slot="start" *ngIf="item.iso?.toLowerCase() === 'north america'">
+              <img src="assets/flags/northam.svg" alt="North America flag">
+            </ion-avatar>
+            <ion-avatar slot="start" *ngIf="item.iso?.toLowerCase() === 'middle east'">
+              <img src="assets/flags/middleast.svg" alt="Middle East flag">
+            </ion-avatar>
+            <ion-avatar slot="start"
+              *ngIf="item.iso?.toLowerCase() !== 'latam' && item.iso?.toLowerCase() !== 'europe+' && item.iso?.toLowerCase() !== 'north america' && item.iso?.toLowerCase() !== 'middle east'">
+              <img src="assets/flags/{{ item.iso | lowercase }}.svg" alt="{{ item.iso }} flag">
+            </ion-avatar>
+            
+            <!-- Dynamic name display -->
+            <ion-label>{{ item.name || item.cityName }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+      <!-- Search list end -->
+    </div>
+    
+    <ion-item lines="none">
+      <ion-select  (click)="onSelectClick()" interface="popover" [(ngModel)]="selectedDays"
+        label-placement="floating">
+        <ion-select-option *ngIf="langDefault !='ar'" value="7plusdays">7+ days</ion-select-option>
+        <ion-select-option *ngIf="langDefault !='ar'" value="3to6days">3-6 days</ion-select-option>
+        <ion-select-option *ngIf="langDefault !='ar'"  value="1to2days">1-2 days</ion-select-option>
+     <ion-select-option *ngIf="langDefault == 'ar'" value="7plusdays">
+  ٧ أيام أو أكثر
+</ion-select-option>
+
+<ion-select-option *ngIf="langDefault == 'ar'" value="3to6days">
+  ٣–٦ أيام
+</ion-select-option>
+
+<ion-select-option *ngIf="langDefault == 'ar'" value="1to2days">
+  ١–٢ يوم
+</ion-select-option>
+      </ion-select>
+    </ion-item> 
+
+    <ion-button expand="block" class="btn-green btn-deal" (click)="gotoFindDeails()">
+      {{ 'FIND_DEALS_BUTTON' | translate }}
+    </ion-button>
+
+    <div class="link text-center">
+      <a routerLink="/tab2">{{ 'BROWSE_ALL_DESTINATIONS' | translate }}</a>
+    </div>
+
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button class="selected">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gototab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button  (click)="gototab5()">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>      
+    </div>
+  </ion-toolbar>
+</ion-footer>
