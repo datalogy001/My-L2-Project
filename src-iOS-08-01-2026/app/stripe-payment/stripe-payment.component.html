@@ -1,0 +1,17 @@
+<!-- stripe-payment.component.html -->
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Card Number</ion-label>
+    <ion-input [(ngModel)]="cardNumber" placeholder="Card Number" type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Expiration (MM/YY)</ion-label>
+    <ion-input [(ngModel)]="cardExpiry" placeholder="MM/YY" type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">CVC</ion-label>
+    <ion-input [(ngModel)]="cardCvc" placeholder="CVC" type="text"></ion-input>
+  </ion-item>
+
+  <ion-button (click)="onSubmit()">Pay Now</ion-button>
+</ion-content>

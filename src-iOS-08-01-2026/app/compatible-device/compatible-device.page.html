@@ -1,0 +1,94 @@
+<ion-content [fullscreen]="true">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <img class="ftel-logo" src="assets/img/L2-logobranded.png" alt="">
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="gotoBack()">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+          <!-- <img src="assets/img/cross.png" alt=""> -->
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar class="titlebar">
+      <ion-title>
+        <h3>
+          {{ 'COMPATIBLE_DEVICES_TITLE' | translate }}
+        </h3>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+
+    <p class="note">
+      <span>{{ 'PLEASE_NOTE' | translate }}</span> {{ 'PLEASE_NOTE_CONTENT' | translate }}
+    </p>
+
+  <ion-accordion-group>
+    <ion-accordion value="first">
+      <ion-item slot="header">
+        <ion-label>{{ 'APPLE' | translate }}</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ul>
+          <li>iPhone XR</li>
+          <li>iPhone XS</li>
+          <li>iPhone XS Max</li>
+          <li>iPhone 11</li>
+          <li>iPhone 11 pro</li>
+          <li>iPhone 11 pro Max</li>
+          <li>iPhone 12</li>
+          <li>iPhone 12 pro</li>
+          <li>iPhone 12 pro Max</li>
+          <li>iPhone 13</li>
+          <li>iPhone 13 pro</li>
+          <li>iPhone 13 pro Max</li>
+          <li>iPhone 14</li>
+          <li>iPhone 14 pro</li>
+          <li>iPhone 14 pro Max</li>
+          <li>iPhone 15 pro</li>
+          <li>iPhone 15 pro Max</li>
+          <li>iPhone 16</li>
+          <li>iPhone 16 Plus</li>
+          <li>iPhone 16 Pro</li>
+          <li>iPhone 16 Pro Max</li>
+      </ul>
+    </div>
+    </ion-accordion>
+ 
+  </ion-accordion-group>
+
+  </div>
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button (click)="gotoHomeSearch()">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()" class="selected">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>      
+    </div>
+
+  </ion-toolbar>
+</ion-footer>

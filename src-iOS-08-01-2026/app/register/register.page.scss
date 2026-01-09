@@ -1,0 +1,132 @@
+/*This is old travel roam page*/
+ion-header{
+    ion-toolbar{
+        --background:#2d3e50;  border-radius: 0 0 50px 0; padding: 20px; text-align: center; color: #fff; height: 170px;
+        &::part(open){
+            .toolbar-background{
+                opacity: 1;
+            }
+        } 
+        ion-radio-group{
+            ion-radio{
+                --color: #fff;
+                --color-checked:#fff;
+                background: #607285;
+                margin: 5px;
+                padding: 12px 15px;
+                border-radius: 30px;
+                
+                &.radio-checked{
+                    background: #ff7c22;
+                }
+                &.radio-label-placement-start{
+                    .label-text-wrapper {
+                        margin-inline: 0px 10px;
+                    }
+                }
+                .native-wrapper{
+                    opacity: 0;
+                }
+            }
+        }              
+    }
+    &.ios{
+        .header-background{
+            backdrop-filter:inherit;
+        }
+    }
+    h2{
+        margin:0 0 10px;
+        color: #fff;
+    }
+    h5{
+        margin: 0 0 10px;
+        color: #fff;
+    }
+}
+ion-content{
+    --background:#fff;
+    .topcorner{
+        position: fixed; z-index: 11;  left: 0; top: 170px; width: 50px; height: 50px; /*background: #2d3e50;*/
+        div{
+            display: flex; height: 100%; width: 100%; border-radius: 50px 0 0 0; background: #fff;
+            
+        }
+    }
+}
+ion-list{
+    margin: 25px 30px 20px;
+    padding:0px 0px;
+    ion-item{
+        margin:0 0 15px; border-radius: 30px;  font-size: 16px; border: 1px solid #ccc; 
+        ion-input{
+            color: #444;
+        }
+        [slot="start"]{
+            margin-inline-end:15px;
+        }
+        span{
+            img{ 
+                width: 22px; opacity: 0.3; display: inline-block; vertical-align: middle;
+            }
+        }
+        &:last-child{ margin:0 0 0px; }
+    }
+}
+
+.sc-ion-input-md-h:not(.legacy-input){
+    min-height: 48px;
+}
+.sc-ion-input-ios-h:not(.legacy-input) {
+    min-height: 48px;
+}
+.terms{
+    margin: 10px 30px; position: relative; padding-left: 30px;
+    ion-checkbox{
+        position: absolute; left: 0; top: 2px;
+    }
+    a{
+        color: #ff7c22;
+    }
+}
+.ios .terms{
+    padding-left: 40px;
+}
+.signup{
+    text-align: center; margin: 5px 30px 20px;
+    ion-button{
+        margin: 0px auto; --box-shadow: none; --background:#ff7c22; --color:#fff; text-transform: inherit; font-size: 18px;
+        letter-spacing: 0; height: 48px; display: inline-block; min-width: 140px;
+        --background-activated:#ff7c22;
+        --background-hover:#ff7c22;
+        &.ios{
+            height: 46px;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px) 
+and (min-device-height: 1024px) 
+and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+ 
+
+
+
+
+}

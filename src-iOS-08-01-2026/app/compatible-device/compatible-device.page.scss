@@ -1,0 +1,214 @@
+ion-header{
+  ion-toolbar{
+      height:160px;
+      ion-title{
+          .ftel-logo{
+              width: 160px;
+              margin:12px 0px 0px;
+          }
+      }
+      [slot="end"]{
+          margin-inline-end: 15px; 
+      }      
+      
+      &.titlebar{
+          --min-height: 40px; height: 70px;
+      }  
+      ion-buttons{
+        ion-button{              
+            display: inline-block;
+            margin-inline-start:0;
+            margin-inline-end: 0;
+            --box-shadow:none;
+            margin-top: -10px;
+    
+            &::part(native){
+                padding-inline-start: 10px;
+                padding-inline-end: 0px;
+            }
+            &.ios{ margin-top:-5px; }
+            img{
+                width: 28px;
+              }
+        }
+    }
+  }
+}
+
+ion-content {
+  --background: #fff;
+}
+
+.ion-padding{
+  --padding-top:10px;
+}
+
+h5 {
+  margin: 0 0 10px;
+  font-size: 15px;
+  color: #d8322b;
+  font-weight: bold;
+  position: relative;
+  padding-left: 40px;
+
+  img {
+    display: inline-block;
+    width: 27px;
+    vertical-align: middle;
+    position: absolute;
+    z-index: 11;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+ion-accordion-group{
+  margin: 0px 0;
+  ion-accordion{
+      margin-bottom: 15px;
+      // background-color: var(--theme-color-1);
+      background-color: transparent;
+      color:#fff; 
+      font-size: 16px;
+      ion-item{
+          --border-width: 0px 0px 0px 0px;
+          --background:var(--item-bg);
+          --min-height:60px;
+       border: 1px solid var(--border-color-check) !important;
+          ion-label{
+              font-size: 15px; white-space: normal; color: var(--theme-color-2);
+          }
+          ion-icon{
+              font-size: 18px;
+          }
+          &::part(native){ background: var(--input-bg); /*border: 1px solid var(--item-border);*/ color: #fff; border-radius: 10px; }
+      }
+      &.accordion-expanded{
+          ion-item{
+              &::part(native){ background: var(--input-bg); /*border: 1px solid var(--theme-color-2);*/ }
+              ion-label{ color: var(--theme-color-2); }
+          }
+      }
+      .ion-padding{
+        font-family: 'Inter'; font-weight: 400; font-size: 14px; line-height: 20px;
+          p {
+            margin: 0 0 5px; font-family:'Inter'; font-weight: 400; font-size: 14px; line-height: 20px;  color: var(--theme-color-2);
+          }
+    
+          ul {
+            margin: 0 0 0 25px;
+            padding: 0;
+    
+            li {
+              font-size: 15px;
+              margin: 0 0 2px;
+              color: var(--theme-color-2);
+            }
+          }
+      }
+  }
+}
+.note{
+  margin: 0 0 28px;
+  font-size: 14px;
+  color: var(--theme-color-2); line-height: 26px;
+  span{
+    font-weight: 700;
+  }
+}
+
+.checkrow {
+  padding: 8px 13px;
+  position: relative;
+  line-height: 18px;
+  font-size: 15px;
+
+  ion-item{
+    --padding-start: 10px;
+    --inner-padding-end: 0px;
+    --background-hover-opacity:0;
+    ion-label{
+      white-space: normal; margin: 0px 0px 0 12px; font-size: 15px; line-height: 16px;
+    }
+    ion-checkbox{
+      margin: 5px 0px;
+    }
+  }  
+}
+
+ion-checkbox{
+  font-weight: 100; 
+  color: var(--theme-gray); 
+  font-size: 15px;
+
+  --border-width:1px;
+  --border-color:var(--theme-color-2);
+  --checkbox-background:transparent;
+  --checkbox-background-checked:var(--theme-color-2);
+  --border-color-checked:var(--theme-color-2);
+
+  --checkmark-color:var(--theme-color-2);
+  --checkmark-width: 4;
+  --checkbox-background-checked: transparent;
+  --border-color-checked: transparent;
+
+  &::part(label){
+    margin-inline: 8px 0; white-space: normal;
+  }
+  &::part(container){
+    width: 22px; height: 22px;
+}
+
+}
+
+.btnrow {
+  margin: 5px 13px 15px; text-align: center;  
+}
+
+.device-detail{
+  margin:0px 0 0px; padding-top:10px;
+}
+.device-title{
+  min-height: 44px; color: var(--theme-color-2); font-size: 16px; padding: 10px;
+}
+.device-names{
+  padding: 10px;
+  p{
+    margin: 0 0 5px; font-size: 14px;
+  }
+  ul{
+    margin: 0 0 0 25px; padding: 0;
+    li{
+      font-size: 15px; margin: 0 0 2px;
+    }
+  }
+}
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+  ion-header ion-toolbar {height: 110px;}
+  ion-header ion-toolbar ion-title .ftel-logo{ width: 260px;}
+  ion-header ion-toolbar.titlebar { --min-height: 60px; height: 80px; }
+
+  .note{ font-size: 21px;  line-height: 32px; }
+
+  ion-accordion-group ion-accordion{  margin-bottom: 20px;  }
+  ion-accordion-group ion-accordion ion-item{ --min-height: 72px; }
+  ion-accordion-group ion-accordion ion-item ion-label{  font-size: 22px; }
+  ion-accordion-group ion-accordion .ion-padding{ font-size: 21px; line-height: 30px; padding-inline-start: 25px;  padding-inline-end: 25px;  }
+  ion-accordion-group ion-accordion .ion-padding ul li{ font-size: 22px; margin: 0 0 5px; }
+
+}

@@ -1,0 +1,76 @@
+ion-header {
+    ion-toolbar {
+      --min-height: 50px;
+      height: 50px;
+    }
+  }
+
+ion-content{
+    color: var(--theme-content-bg);
+}
+p{
+  text-align: center; margin: 10px 0 20px; font-size: 15px; line-height: 1.6;
+}
+
+.btn-div {
+  display: flex;
+  justify-content: center;
+  gap: 12px; /* space between buttons */
+  text-align: center;
+}
+
+.btn-div ion-button {
+  width: 200px;
+  height: 48px;
+  font-size: 17px;
+  --border-radius: 8px;
+}
+
+/* Back Button */
+.btn-div .btn-back {
+  font-weight: 300;
+  --background: var( --button-primary-bg);
+        --color:#fff;
+}
+
+/* Delete / Buy Button */
+.btn-div .btn-delete {
+  font-weight: 500;
+--background: var( --button-primary-bg);   
+        --color: #fff;
+}
+
+/* If button-outline variant is used */
+.btn-div ion-button.btn-delete.button-outline {
+   --color: #fff;
+ --background: var( --button-primary-bg);
+}
+
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+
+p{ margin: 15px 0 30px; font-size: 21px;  }
+
+  .btn-div ion-button {
+      width: 350px;
+      height: 58px;
+      font-size: 24px;
+  }
+
+
+
+}

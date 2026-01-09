@@ -1,0 +1,13 @@
+<ion-content>
+  <section class="svg-container">
+    <svg class="radial-progress" viewBox="0 0 80 80" [ngClass]="{'error': resValue === 'Error', 'success': resValue === 'DONE'}"[class.completed]="isCompleted">
+      <circle class="bar-static" cx="40" cy="40" r="35"></circle>
+      <circle class="bar--animated" cx="40" cy="40" r="35" [attr.style]="'stroke-dashoffset: ' + strokeDashOffset"></circle>
+      <text class="countervalue" x="50%" y="57%" transform="matrix(0, 1, -1, 0, 80, 0)">{{ isFlipped == true? resValue : counterValue + '%'}}</text>
+    </svg>
+  </section>
+  <!-- Message Section -->
+  <section class="message-container">
+    <p>{{ message }}</p>
+  </section>
+</ion-content>

@@ -21,7 +21,8 @@
     <ion-row class="top-row">
       <ion-col size="7">
         <h2 *ngIf="checkoutObj.isUnlimited">{{ checkoutObj.bundleData.duration }} {{'DAYS_TEXT' | translate }}</h2>
-        <h2 *ngIf="!checkoutObj.isUnlimited">{{ checkoutObj.bundleData.dataAmount / 1000 }} GB</h2>
+        <h2 *ngIf="!checkoutObj.isUnlimited">
+           {{ 'DATA_PLAN' | translate:{ size: checkoutObj.bundleData.dataAmount / 1000 } }}</h2>
       </ion-col>
       <ion-col size="5"  >
         <p class="price cross" *ngIf="coupencodeRes?.is_couped_applied == 1"><span>{{ checkoutObj.extraAmount | currency:  checkoutObj.currency }}</span></p>
@@ -195,7 +196,7 @@
       {{ 'HOW_MUCH_DATA' | translate }}
     </h5>
     <p class="text-center datatext" *ngIf="checkoutObj.isUnlimited ==false">
-      {{ browsing_amt }} GB {{ 'GIVES_YOU_AROUND' | translate }}:
+      {{ browsing_amt }} {{'GB' | translate }} {{ 'GIVES_YOU_AROUND' | translate }}:
     </p>
 
     <ion-row class="dataneed" *ngIf="checkoutObj.isUnlimited ==false">

@@ -1,0 +1,16 @@
+<ion-content class="ion-padding">
+  <h2>
+    {{ value | currency: currencyCode }}
+  </h2>
+  <p>
+    <strong>
+      {{'COUPON_ADDED' | translate}}
+    </strong>
+  </p>
+  <p>
+    {{value1}}
+  </p>
+  <div class="sharereferral">
+    <ion-button (click)="gotoClose()">{{'VERIFICATION_CONTINUE_BUTTON' | translate }}</ion-button>
+  </div>
+</ion-content>

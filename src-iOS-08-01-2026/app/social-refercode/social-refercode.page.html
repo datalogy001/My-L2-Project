@@ -1,0 +1,45 @@
+<ion-content [fullscreen]="true">
+
+  <div class="topbox">
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>
+        </ion-title>
+        <ion-buttons slot="end">
+          <ion-button fill="clear" (click)="gotoBack()">
+            <ion-icon name="close-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+  </div>
+
+
+  <div class="content-wrapper ion-padding">
+
+    <h3 class="text-center">
+      {{'Referral_code' | translate}}
+    </h3>
+    <p>
+      {{'sharing_is_caring_text' | translate}}
+    </p>
+
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="referObj.referer_code"
+        placeholder="{{ 'enter_code' | translate }}"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" class="button-outline btn-go" (click)="submit()">
+      {{'confirm' | translate}}
+    </ion-button>
+
+
+    <!--<ion-button expand="block" class="skip" fill="outline" (click)="skip()">
+      {{'SKIP' | translate}}
+    </ion-button> -->
+
+  </div>
+
+</ion-content>

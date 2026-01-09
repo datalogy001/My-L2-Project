@@ -1,0 +1,64 @@
+.plan-circle{
+    width: 280px;
+    height: 280px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: 110px auto;
+    position: relative;
+    color: #000;
+    text-align: center;
+    padding-top: 30px;
+    img{
+        position: absolute;
+        z-index: 11;
+        top: -50px;
+        left: 20px;
+        width: 220px;
+
+    }
+}
+h1{
+    font-size: 3.2rem;
+    font-family: 'camptonbold';
+    margin: 10px 0;
+}
+h2{
+    font-size: 1.9rem;
+    margin: 10px 0;
+}
+.airport{
+    position: absolute;
+    left: 0; 
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    img{
+        width: 140px;
+    }
+}
+
+
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px) 
+and (min-device-height: 1024px) 
+and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+ 
+
+
+
+
+}

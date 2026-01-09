@@ -1,0 +1,27 @@
+<ion-content [fullscreen]="true">
+
+  <!-- <div class="videobackground">
+    <video muted loop autoplay>
+      <source src="assets/video/start-bg.mp4" type="video/mp4">
+    </video>
+  </div> -->
+
+  <div class="content-wrapper ion-padding">
+
+    <div class="topbox">&nbsp;</div>
+
+    <!-- <ion-img class="ftel-logo" src="assets/img/L2-logo.png"></ion-img>  -->
+
+    <h3 class="text-center" [innerHTML]="'START_HEADING' | translate"></h3>
+
+    <ion-button expand="block" class="btn-secondary btn-go" (click)="gotoOnBoard()"><!--(click)="checkDeviceCompt()"-->
+      {{ 'START_BUTTON_TEXT' | translate }}
+    </ion-button>
+
+    <p class="text-center signin">
+      <a (click)="gotoLogin()">{{ 'SIGNIN_TEXT' | translate }}</a>
+    </p>
+
+  </div>
+
+</ion-content>

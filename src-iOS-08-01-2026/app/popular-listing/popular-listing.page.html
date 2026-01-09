@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <img class="tr-logo" src="assets/img/tr-logo-1.png" alt="">
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="gotoBack()"><i class="far fa-times"></i></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="contentmiddle">
+    <div class="list-scroll-box" >
+      <ion-card *ngFor="let popularItems of popularCountryList">
+        <ion-row>
+          <ion-col>
+            <span class="country">
+              <img 
+                src="assets/flags/{{popularItems['iso'] | lowercase}}.svg" alt=""></span>
+          </ion-col>
+          <ion-col class="right">
+            <span class="introductory">Standard</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <h5>{{popularItems.name}}</h5>
+          </ion-col>
+  
+        </ion-row>
+      </ion-card>
+    </div>
+
+
+
+  </div>
+
+</ion-content>

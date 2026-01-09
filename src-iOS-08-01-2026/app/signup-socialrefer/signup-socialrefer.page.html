@@ -1,0 +1,21 @@
+<ion-content [fullscreen]="true">
+
+  <div class="topbox">    
+  </div>
+
+  <div class="container">
+    <h3 class="text-center">
+      {{'one_last_thing' | translate }}
+    </h3>
+    <p class="text-center">
+      {{'did_somebody_give_you_refereal_code' | translate }}
+    </p>
+    <ion-button expand="block" class="btn-green btn-deal" (click)="gotoRefereCode()" >
+     {{'enter_code' | translate }}
+    </ion-button>
+    <ion-button expand="block" class="btn-secondary" (click)="skipButton()">
+      {{'SKIP' | translate }}
+    </ion-button>
+  </div>
+
+</ion-content>
