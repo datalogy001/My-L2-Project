@@ -147,7 +147,7 @@ export class YourPackagePage implements OnInit {
           this.loadingScreen.dismissLoading();
           this.topupArray = this.bundleDatas.topups;
           if (this.bundleDatas.isUnlimited == false) {
-            this.dataamountField = this.bundleDatas.dataamount + "GB";
+            this.dataamountField = this.bundleDatas.dataamount +  this.translate.instant('GB')
             this.fromBundlesAPI.initAmount = this.removeDecimalFromString(this.bundleDatas.initial_quantity);
             this.totalGB = this.fromBundlesAPI.initAmount * 1000000000;
             // Step 1: Extract numerical value and remove non-numeric characters
@@ -231,7 +231,7 @@ export class YourPackagePage implements OnInit {
         this.loadingScreen.dismissLoading();
       
         if (this.bundleDatas.isUnlimited == false) {
-            this.dataamountField = this.bundleDatas.dataamount + "GB";
+            this.dataamountField = this.bundleDatas.dataamount +  this.translate.instant('GB')
             this.fromBundlesAPI.initAmount = this.removeDecimalFromString(this.bundleDatas.initial_quantity);
             this.totalGB = this.fromBundlesAPI.initAmount * 1000000000;
             // Step 1: Extract numerical value and remove non-numeric characters
@@ -476,7 +476,7 @@ export class YourPackagePage implements OnInit {
                 if (this.bundleDatas.isUnlimited == false) {
                     const totalGB = 0;
                     const remainingGB = 0;
-                    this.dataamountField = this.bundleDatas.dataamount + "GB"; 
+                    this.dataamountField = this.bundleDatas.dataamount + this.translate.instant('GB');
                     setTimeout(() => {
                         this.updateProgressValueData(totalGB, remainingGB);    
                     }, 100);
@@ -504,7 +504,7 @@ export class YourPackagePage implements OnInit {
             if (this.bundleDatas.isUnlimited == false) {
                 const totalGB = 0;
                 const remainingGB = 0;
-                this.dataamountField = this.bundleDatas.dataamount + "GB"; 
+                this.dataamountField = this.bundleDatas.dataamount + this.translate.instant('GB');
                 setTimeout(() => {
                     this.updateProgressValueData(totalGB, remainingGB);    
                 }, 100);
@@ -641,7 +641,7 @@ export class YourPackagePage implements OnInit {
                             this.dataDaysField = this.topupArray[i]['days'];
                         else
                             this.dataamountField = this.topupArray[i]['dataAmount'];
-
+                        console.log("I m Here" + this.dataamountField);
                         this.bundleDatas.short_name_country = this.topupArray[i]['shortname'];
                         this.bundleDatas.country = this.topupArray[i]['country'];
                         this.countryBanner = this.bundleDatas.short_name_country + '.jpg';

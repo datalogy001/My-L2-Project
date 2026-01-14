@@ -49,8 +49,134 @@ export class AppComponent {
     , { 'name': 'North America', 'perDay': '' }, { 'name': 'Oceania', 'perDay': '' }];
   currencyList: any = ['USD', 'GBP', 'EUR','LYD'];
 
+  // Code started Country as per CURRENCIES  
+
+SUPPORTED_CURRENCIES = ['USD', 'LYD', 'EUR', 'GBP'];
+
+EU_COUNTRIES = [
+  'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR',
+  'HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK',
+  'SI','ES','SE'
+];
+
+resolveCurrency(countryCode: string): string {
+
+  console.log("countrycide" +  JSON.stringify(countryCode));
+  if (countryCode === 'LY') {
+    return 'LYD';
+  }
+
+  if (countryCode == 'GB') {
+    return 'GBP';
+  }
+
+  if (this.EU_COUNTRIES.includes(countryCode)) {
+    return 'EUR';
+  }
+
+  return 'USD';
+}
+
+
+// Get currency and launage country wise 
+
+isUserLoggedIn(): boolean {
+  return !!localStorage.getItem('L2TraveleSIM_auth_token');
+}
+
+applyCurrencyForLoggedInUser() {
+  const dbCountryCode = localStorage.getItem('L2TraveleSIM_user_country'); 
+  if (!dbCountryCode) {
+    // fallback if DB country missing
+     this.http.get('https://ipinfo.io?token=83012227ee283b').subscribe((data: any) => {
+      window.localStorage.setItem("L2TraveleSIM_IP", data.ip);
+      window.localStorage.setItem('L2TraveleSIM_city', data.city);
+      window.localStorage.setItem('L2TraveleSIM_country_code', data.country);
+      this.setCurrencyAndLanguage(data.country);
+    }, error => {
+      this.setDefaultCurrencyAndLanguage();
+    });
+    return;
+  }
+
+  const isSaved = localStorage.getItem('L2TraveleSIM_Saved_Currency') === 'Yes';
+  const savedCurrency = localStorage.getItem('L2TraveleSIM_currency');
+
+  // Respect user-selected currency
+  if (isSaved && savedCurrency) {
+    this.currencyCode = savedCurrency;
+  } else {
+    this.currencyCode = this.resolveCurrency(dbCountryCode);
+    localStorage.setItem('L2TraveleSIM_currency', this.currencyCode);
+  }
  
-  countryListWithCodes =[
+  // Phone code
+  const country = this.countryListWithCodes.find(c => c.code === dbCountryCode);
+  if (country?.phone_code_country) {
+    localStorage.setItem('L2TraveleSIM_phone_code', country.phone_code_country);
+  }
+}
+
+
+  getIPAddress() {
+
+     if (this.isUserLoggedIn()) {
+    this.applyCurrencyForLoggedInUser();
+  } else {
+      this.http.get('https://ipinfo.io?token=83012227ee283b').subscribe((data: any) => {
+      window.localStorage.setItem("L2TraveleSIM_IP", data.ip);
+      window.localStorage.setItem('L2TraveleSIM_city', data.city);
+      window.localStorage.setItem('L2TraveleSIM_country_code', data.country);
+       this.setCurrencyAndLanguage(data.country);
+    }, error => {
+      this.setDefaultCurrencyAndLanguage();
+    });
+  }
+
+  }
+
+ setCurrencyAndLanguage(countryCode: string) {
+  const country = this.countryListWithCodes.find(c => c.code === countryCode);
+
+  // Set phone code if country exists
+  if (country && country.phone_code_country) {
+    localStorage.setItem('L2TraveleSIM_phone_code', country.phone_code_country);
+  }
+
+  const isSaved = localStorage.getItem('L2TraveleSIM_Saved_Currency') === 'Yes';
+  const savedCurrency = localStorage.getItem('L2TraveleSIM_currency');
+
+  // Respect user-selected currency
+  if (isSaved && savedCurrency) {
+    this.currencyCode = savedCurrency;
+  } else {
+    this.currencyCode = this.resolveCurrency(countryCode);
+    localStorage.setItem('L2TraveleSIM_currency', this.currencyCode);
+  }
+   
+}
+
+
+setDefaultCurrencyAndLanguage() {
+  const isSaved = localStorage.getItem('L2TraveleSIM_Saved_Currency') === 'Yes';
+  const savedCurrency = localStorage.getItem('L2TraveleSIM_currency');
+
+  if (isSaved && savedCurrency) {
+    this.currencyCode = savedCurrency;
+  } else {
+    this.currencyCode = 'USD';
+    localStorage.setItem('L2TraveleSIM_currency', 'USD');
+  }
+
+  // Default phone code fallback
+  if (!localStorage.getItem('L2TraveleSIM_phone_code')) {
+    localStorage.setItem('L2TraveleSIM_phone_code', '+44');
+  }
+}
+
+//Code Ended
+
+  countryListWithCodes = [
     { "country": "Afghanistan", "code": "AF", "currency": "AFN", "language": "en", "phone_code_country": "+93" },
     { "country": "Albania", "code": "AL", "currency": "ALL", "language": "en", "phone_code_country": "+355" },
     { "country": "Algeria", "code": "DZ", "currency": "DZD", "language": "en", "phone_code_country": "+213" },
@@ -434,98 +560,7 @@ export class AppComponent {
   
     return await modal.present();
   }
-  // Get currency and launage country wise 
-
-  getIPAddress() {
-    this.http.get('https://ipinfo.io?token=83012227ee283b').subscribe((data: any) => {
-      window.localStorage.setItem("L2TraveleSIM_IP", data.ip);
-      window.localStorage.setItem('L2TraveleSIM_city', data.city);
-      window.localStorage.setItem('L2TraveleSIM_country_code', data.country);
-      console.log("Datas" + JSON.stringify(data));
-      this.setCurrencyAndLanguage(data.country);
-    }, error => {
-      console.log("hiiiiiiiiiiiii");
-      this.setDefaultCurrencyAndLanguage();
-    });
-  }
-
-  setDefaultCurrencyAndLanguage() {
-
-  //If no country 
-  if(window.localStorage.getItem("L2TraveleSIM_Saved_Currency") == "Yes" || window.localStorage.getItem("L2TraveleSIM_Saved_Currency") != null)
-    this.currencyCode = window.localStorage.getItem("L2TraveleSIM_currency");
-  else
-  this.currencyCode = 'USD';
-
-
-
-  if( window.localStorage.getItem("L2TraveleSIM_countryCode") != null)
-    this.countryCode = window.localStorage.getItem("L2TraveleSIM_countryCode");
-    else
-    this.countryCode = 'US';
-
-    if( window.localStorage.getItem("L2TraveleSIM_phone_code") != null)
-      this.phoneCode = window.localStorage.getItem("L2TraveleSIM_phone_code");
-      else
-      this.phoneCode = '+44';
-
-
-    window.localStorage.setItem('L2TraveleSIM_currency', this.currencyCode);
-    window.localStorage.setItem('L2TraveleSIM_phone_code',  this.phoneCode );
-    window.localStorage.setItem('L2TraveleSIM_countryCode',  this.countryCode );
-  }
-
- phoneCode:any;
-  countryCode:any;
-
-  setCurrencyAndLanguage(countryCode: string) {
-  const country = this.countryListWithCodes.find((c) => c.code == countryCode);
-console.log("Here" + JSON.stringify(country))
-
-  if (country) {
-
-    if(window.localStorage.getItem('L2TraveleSIM_phone_code') ==null)
-    window.localStorage.setItem('L2TraveleSIM_phone_code',  country.phone_code_country);
-
-    if(window.localStorage.getItem('L2TraveleSIM_countryCode') ==null)
-    window.localStorage.setItem('L2TraveleSIM_countryCode',  country.code);
-
-
-    if(window.localStorage.getItem("L2TraveleSIM_Saved_Currency") == "Yes" || window.localStorage.getItem("L2TraveleSIM_Saved_Currency") != null)
-      this.currencyCode = window.localStorage.getItem("L2TraveleSIM_currency");
-    else
-    this.currencyCode ='USD';
-
-  
-
-  }else {
-    //If no country 
-    if(window.localStorage.getItem("L2TraveleSIM_Saved_Currency") == "Yes" || window.localStorage.getItem("L2TraveleSIM_Saved_Currency") != null)
-      this.currencyCode = window.localStorage.getItem("L2TraveleSIM_currency");
-    else
-    this.currencyCode = 'USD';
-
-
-
-    if( window.localStorage.getItem("L2TraveleSIM_countryCode") != null)
-      this.countryCode = window.localStorage.getItem("L2TraveleSIM_countryCode");
-      else
-      this.countryCode = 'US';
-
-      if( window.localStorage.getItem("L2TraveleSIM_phone_code") != null)
-        this.phoneCode = window.localStorage.getItem("L2TraveleSIM_phone_code");
-        else
-        this.phoneCode = '+44';
  
-
-   window.localStorage.setItem('L2TraveleSIM_countryCode', this.countryCode);
-   window.localStorage.setItem('L2TraveleSIM_phone_code',  this.phoneCode );
-  }
-  
-  window.localStorage.setItem('L2TraveleSIM_currency', this.currencyCode); 
-
-}
-
   //Step 4 Start
 
   initCountry() {

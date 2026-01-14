@@ -870,7 +870,7 @@
 "BUY_NOW": " اشترِ الآن",
 "t-lync" : "Tadawul",
 "TLync_CURRENCY_ERROR_TITLE": "العملة غير مدعومة",
-"TLync_CURRENCY_ERROR_DESC": "الدفع عبر T-Lync متاح فقط بعملة LD. يرجى تغيير العملة للمتابعة.",
+"TLync_CURRENCY_ERROR_DESC": "الدفع عبر Tadawul متاح فقط بعملة LD. يرجى تغيير العملة للمتابعة.",
 
 "LD_NOT_SUPPORTED_TITLE": "الدفع غير متاح",
 "LD_NOT_SUPPORTED_DESC": "عملة LD غير مدعومة لوسيلة الدفع المحددة.",
@@ -889,7 +889,8 @@
   "PLAN_15": "باقة 15 يوم",
   "PLAN_30": "باقة شهرية",
   "VALIDITY_DAYS": "صالحة {{days}} أيام من تاريخ التفعيل",
-   "GB" : "جيجا"
+  "GB" : "جيجا",
+  "receive_promotional_emails" : "أودّ أن أتلقى رسائل بريد إلكتروني ترويجية."
 
 
 }

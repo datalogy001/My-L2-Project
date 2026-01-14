@@ -39,10 +39,15 @@ export class NotificationSettingsPage implements OnInit {
     
     this.token = window.localStorage.getItem('L2TraveleSIM_auth_token');
     this.promoEmail = window.localStorage.getItem('L2TraveleSIM_emailSettings');
+
+    console.log(this.promoEmail);
+
     if (this.promoEmail == null || this.promoEmail == 0) {
       this.emailSettings.status = 0;
+      console.log(this.emailSettings.status);
     } else {
       this.emailSettings.status = window.localStorage.getItem('L2TraveleSIM_emailSettings');
+      console.log(this.emailSettings.status);
     }
 
     this.promoSettingsObj = window.localStorage.getItem('L2TraveleSIM_promoSettings');

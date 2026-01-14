@@ -38,7 +38,7 @@ import { IonInfiniteScroll, IonContent } from '@ionic/angular';
 export class CreateAccountPage implements OnInit {
   @ViewChild('searchDiv', { static: true }) searchDiv!: ElementRef;
    @ViewChild(IonContent, { static: false }) content?: IonContent;
-  registerObj: any = { 'referal_code': '', 'mobile_number' : '', 'country_name' : '',  'city':'','first_name': '', 'last_name': '', 'password': '', 'email': '', 'isPrivacySelected': false, 'isTermsSelected': false, 'confirmPass': '', 'deviceToken': '' ,'lang' : ''};
+  registerObj: any = { 'promotion_email' : false,  'referal_code': '', 'mobile_number' : '', 'country_name' : '',  'city':'','first_name': '', 'last_name': '', 'password': '', 'email': '', 'isPrivacySelected': false, 'isTermsSelected': false, 'confirmPass': '', 'deviceToken': '' ,'lang' : ''};
   terms: any = [];
   privacy: any = [];
   passwordType: string = 'password';
@@ -349,6 +349,7 @@ async googleSuccess(googleRes:any) {
       window.localStorage.setItem('L2TraveleSIM_user_wallets', resNew.data['data']['user_wallet']);
       window.localStorage.setItem('L2TraveleSIM_refer_balance', resNew.data['data']['referal_wallet']);
       window.localStorage.setItem('L2TraveleSIM_refer_code', resNew.data['data']['referal_code']);
+      window.localStorage.setItem('L2TraveleSIM_user_country', resNew.data['data']['country_iso']);
       
      //Already registered  
      if(resNew.data['is_register'] == false)
@@ -843,6 +844,7 @@ async signInWithAppleFunSuccess(appleRes: any) {
             window.localStorage.setItem('L2TraveleSIM_user_wallets', resNew.data['data']['user_wallet']);
             window.localStorage.setItem('L2TraveleSIM_refer_balance', resNew.data['data']['referal_wallet']);
             window.localStorage.setItem('L2TraveleSIM_refer_code', resNew.data['data']['referal_code']);
+          window.localStorage.setItem('L2TraveleSIM_user_country',resNew.data['data']['country_iso']);
                  //Already registered  
          if(resNew.data['is_register'] == false)
          {
@@ -911,6 +913,7 @@ async callAppleAPI(appleItem: any) {
             window.localStorage.setItem('L2TraveleSIM_user_wallets', resNew.data['data']['user_wallet']);
             window.localStorage.setItem('L2TraveleSIM_refer_balance', resNew.data['data']['referal_wallet']);
             window.localStorage.setItem('L2TraveleSIM_refer_code', resNew.data['data']['referal_code']);
+            window.localStorage.setItem('L2TraveleSIM_user_country',resNew.data['data']['country_iso']);
               //Already registered  
          if(resNew.data['is_register'] == false)
          {

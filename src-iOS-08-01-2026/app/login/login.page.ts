@@ -187,7 +187,9 @@ export class LoginPage implements OnInit {
           window.localStorage.setItem('L2TraveleSIM_user_wallets', userDetails['user_wallet']);
           window.localStorage.setItem('L2TraveleSIM_refer_balance', userDetails['referal_wallet']);
           window.localStorage.setItem('L2TraveleSIM_refer_code', userDetails['referal_code']);
-          console.log(userDetails['user_wallet']);
+          window.localStorage.setItem('L2TraveleSIM_user_country', userDetails['country_iso']);
+               
+console.log(userDetails['user_wallet']);
 
           // Show success message
           this.successMSGModal(
@@ -350,7 +352,8 @@ export class LoginPage implements OnInit {
         window.localStorage.setItem('L2TraveleSIM_user_wallets', resNew.data['data']['user_wallet']);
         window.localStorage.setItem('L2TraveleSIM_refer_balance', resNew.data['data']['referal_wallet']);
         window.localStorage.setItem('L2TraveleSIM_refer_code', resNew.data['data']['referal_code']);
-        //Already registered  
+          window.localStorage.setItem('L2TraveleSIM_user_country',resNew.data['data']['country_iso']);        
+//Already registered  
         if (resNew.data['is_register'] == false) {
           this.successMSGModal(this.translate.instant('SUCCESS_MSG_BUTTON'), this.translate.instant('SUCCESS_MSG_TEXT'), "2000");
           if (this.isLogin == true) {
@@ -421,7 +424,7 @@ export class LoginPage implements OnInit {
         window.localStorage.setItem('L2TraveleSIM_user_wallets', resNew.data['data']['user_wallet']);
         window.localStorage.setItem('L2TraveleSIM_refer_balance', resNew.data['data']['referal_wallet']);
         window.localStorage.setItem('L2TraveleSIM_refer_code', resNew.data['data']['referal_code']);
-
+        window.localStorage.setItem('L2TraveleSIM_user_country',resNew.data['data']['country_iso']);
         //Already registered  
         if (resNew.data['is_register'] == false) {
           this.successMSGModal(this.translate.instant('SUCCESS_MSG_BUTTON'), this.translate.instant('SUCCESS_MSG_TEXT'), "2000");
@@ -503,7 +506,7 @@ export class LoginPage implements OnInit {
         window.localStorage.setItem('L2TraveleSIM_user_wallets', resNew.data['data']['user_wallet']);
         window.localStorage.setItem('L2TraveleSIM_refer_balance', resNew.data['data']['referal_wallet']);
         window.localStorage.setItem('L2TraveleSIM_refer_code', resNew.data['data']['referal_code']);
-
+        window.localStorage.setItem('L2TraveleSIM_user_country',resNew.data['data']['country_iso']);         
         //Already registered  
         if (resNew.data['is_register'] == false) {
           this.successMSGModal(this.translate.instant('SUCCESS_MSG_BUTTON'), this.translate.instant('SUCCESS_MSG_TEXT'), "2000");

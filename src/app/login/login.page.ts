@@ -173,13 +173,15 @@ async submit() {
         window.localStorage.setItem('L2TraveleSIM_userDetails', JSON.stringify(userDetails));
         window.localStorage.setItem('L2TraveleSIM_auth_token', authToken);
         window.localStorage.setItem('L2TraveleSIM_loginType', "normal");
-        window.localStorage.setItem('L2TraveleSIM_emailSettings', res.data[0]['promotion_email']);
-        window.localStorage.setItem('L2TraveleSIM_promoSettings', res.data[0]['app_promotions']);
-        window.localStorage.setItem('L2TraveleSIM_paymentSettings', res.data[0]['app_payment']);
-        window.localStorage.setItem('L2TraveleSIM_serviceSettings', res.data[0]['app_service']);
+        console.log(res.data[0]['promotion_email']);
+        window.localStorage.setItem('L2TraveleSIM_emailSettings',  res.data[0]['promotion_email']);
+        window.localStorage.setItem('L2TraveleSIM_promoSettings', userDetails['app_promotions']);
+        window.localStorage.setItem('L2TraveleSIM_paymentSettings', userDetails['app_payment']);
+        window.localStorage.setItem('L2TraveleSIM_serviceSettings', userDetails['app_service']);
         window.localStorage.setItem('L2TraveleSIM_user_wallets', userDetails['user_wallet']);
         window.localStorage.setItem('L2TraveleSIM_refer_balance', userDetails['referal_wallet']);
         window.localStorage.setItem('L2TraveleSIM_refer_code', userDetails['referal_code']);
+        window.localStorage.setItem('L2TraveleSIM_user_country', userDetails['country_iso']);
         console.log(userDetails['user_wallet']);
 
         // Show success message
@@ -354,6 +356,8 @@ async submit() {
           window.localStorage.setItem('L2TraveleSIM_user_wallets', resNew.data['data']['user_wallet']);
           window.localStorage.setItem('L2TraveleSIM_refer_balance', resNew.data['data']['referal_wallet']);
           window.localStorage.setItem('L2TraveleSIM_refer_code', resNew.data['data']['referal_code']);
+          window.localStorage.setItem('L2TraveleSIM_user_country',resNew.data['data']['country_iso']);
+          
          
             //Already registered  
          if(resNew.data['is_register'] == false)

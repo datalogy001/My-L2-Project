@@ -190,8 +190,10 @@ export class VerificationPage implements OnInit {
         window.localStorage.setItem('L2TraveleSIM_user_wallets',res.data[0]['data']['user_wallet']);
         window.localStorage.setItem('L2TraveleSIM_refer_balance',res.data[0]['data']['referal_wallet']);
         window.localStorage.setItem('L2TraveleSIM_refer_code', res.data[0]['data']['referal_code']);
+        window.localStorage.setItem('L2TraveleSIM_user_country', res.data[0]['data']['country_iso']);
 
-        
+
+        console.log(JSON.stringify(res.data[0]['data'])); 
 
         this.successMSGModal(this.translate.instant('VERIFY_EMAIL_SUCCESS_TITLE'), this.translate.instant('VERIFY_EMAIL_SUCCESS_MESSAGE'), "2000");
         this.tempData.checkoutObj.id = res.data[0]['data']['id'];

@@ -62,6 +62,7 @@ export class DelAccountPage implements OnInit {
           window.localStorage.removeItem('L2TraveleSIM_types');
           window.localStorage.removeItem('L2TraveleSIM_user_wallets');
           window.localStorage.removeItem('L2TraveleSIM_refer_balance');
+          window.localStorage.removeItem('L2TraveleSIM_user_country');
           window.localStorage.removeItem('L2TraveleSIM_refer_code');
           this.successMSGModal(
             this.translate.instant('DELETE_ACCOUNT_SUCCESS'),

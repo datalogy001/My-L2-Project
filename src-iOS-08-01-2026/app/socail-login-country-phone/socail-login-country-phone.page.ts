@@ -227,6 +227,7 @@ showCountryError(msg: string) {
     if (res.code === 200) {
           console.log(JSON.stringify(res.data[0]['data']));
           window.localStorage.setItem('L2TraveleSIM_userDetails', JSON.stringify(res.data[0]['data']));
+          window.localStorage.setItem('L2TraveleSIM_user_country', res.data[0]['data']['country_iso']);
          this.modalController.dismiss({ success: true });
     } else {
       this.errorMSGModal(res.message, this.translate.instant('VALIDATION_MSG_BUTTON_TRY_AGAIN'));

@@ -132,6 +132,16 @@ ion-row{
             }
         }
     }
+&.checkrowOPT{
+      margin: 20px 0 0px;
+      ion-col{
+          border:1px solid rgba(17,32,66,0.2); border-radius: 8px; 
+
+          ion-checkbox{
+              padding:6px 10px;
+          } 
+      }
+  }
 }
 
 ion-searchbar{

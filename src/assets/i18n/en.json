@@ -863,7 +863,7 @@
 "BUY_NOW" : "Buy Now",
 "t-lync" : "Tadawul",
 "TLync_CURRENCY_ERROR_TITLE": "Currency not supported",
-"TLync_CURRENCY_ERROR_DESC": "T-Lync payments are supported only in LYD currency. Please change the currency to continue.",
+"TLync_CURRENCY_ERROR_DESC": "Tadawul payments are supported only in LYD currency. Please change the currency to continue.",
 
 "LD_NOT_SUPPORTED_TITLE": "Payment not available",
 "LD_NOT_SUPPORTED_DESC": "LYD currency is not supported for the selected payment method.",
@@ -880,6 +880,7 @@
   "PLAN_15": "15-Day Plan",
   "PLAN_30": "Monthly Plan",
   "VALIDITY_DAYS": "Valid for {{days}} days from the activation date",
-  "GB" : "GB"
+  "GB" : "GB",
+  "receive_promotional_emails" : "I would like to receive promotional emails."
 
 }
