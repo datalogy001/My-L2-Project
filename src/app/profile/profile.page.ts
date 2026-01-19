@@ -44,6 +44,7 @@ export class ProfilePage implements OnInit {
     //User Details 
       this.tempDetails = window.localStorage.getItem('L2TraveleSIM_userDetails');
       this.tempDetails = JSON.parse(this.tempDetails);
+      console.log(JSON.stringify(this.tempDetails));
       this.shareObj.user_id= this.tempDetails.id;
      // Set default language if not found in local storage
        this.lang = window.localStorage.getItem("L2TraveleSIM_language") || 'en';

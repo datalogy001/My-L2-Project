@@ -47,8 +47,7 @@ export class AppComponent {
   countryParam: any = { 'to_currency': '' };
   zoneList: any = [{ 'name': 'Africa', 'perDay': '' }, { 'name': 'Asia', 'perDay': '' }, { 'name': 'Europe', 'perDay': '' }, { 'name': 'Global', 'perDay': '' }, { 'name': 'Middle East', 'perDay': '' }
     , { 'name': 'North America', 'perDay': '' }, { 'name': 'Oceania', 'perDay': '' }];
-  currencyList: any = ['USD', 'GBP', 'EUR','LYD'];
-
+  
   // Code started Country as per CURRENCIES  
 
 SUPPORTED_CURRENCIES = ['USD', 'LYD', 'EUR', 'GBP'];

@@ -143,6 +143,35 @@ getDeviceToken() {
   }, 500);
 }  
 
+  currencyCode:any;
+
+        
+   EU_COUNTRIES = [
+  'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR',
+  'HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK',
+  'SI','ES','SE'
+];
+
+resolveCurrency(countryCode: string): string {
+
+  console.log("countrycide" +  JSON.stringify(countryCode));
+  if (countryCode === 'LY') {
+    return 'LYD';
+  }
+
+  if (countryCode == 'GB') {
+    return 'GBP';
+  }
+
+  if (this.EU_COUNTRIES.includes(countryCode)) {
+    return 'EUR';
+  }
+
+  return 'USD';
+}
+
+
+
   // Handle login submission
 async submit() {
   if (this.validate()) {
@@ -181,8 +210,9 @@ async submit() {
         window.localStorage.setItem('L2TraveleSIM_user_wallets', userDetails['user_wallet']);
         window.localStorage.setItem('L2TraveleSIM_refer_balance', userDetails['referal_wallet']);
         window.localStorage.setItem('L2TraveleSIM_refer_code', userDetails['referal_code']);
-        window.localStorage.setItem('L2TraveleSIM_user_country', userDetails['country_iso']);
-        console.log(userDetails['user_wallet']);
+         window.localStorage.setItem('L2TraveleSIM_user_country', userDetails['country_iso']);
+          this.currencyCode = this.resolveCurrency(userDetails['country_iso']);
+          window.localStorage.setItem('L2TraveleSIM_currency', this.currencyCode);
 
         // Show success message
         this.successMSGModal(
@@ -356,7 +386,9 @@ async submit() {
           window.localStorage.setItem('L2TraveleSIM_user_wallets', resNew.data['data']['user_wallet']);
           window.localStorage.setItem('L2TraveleSIM_refer_balance', resNew.data['data']['referal_wallet']);
           window.localStorage.setItem('L2TraveleSIM_refer_code', resNew.data['data']['referal_code']);
-          window.localStorage.setItem('L2TraveleSIM_user_country',resNew.data['data']['country_iso']);
+          window.localStorage.setItem('L2TraveleSIM_user_country', resNew.data['data']['country_iso']);
+         this.currencyCode = this.resolveCurrency(resNew.data['data']['country_iso']);
+         window.localStorage.setItem('L2TraveleSIM_currency', this.currencyCode);
           
          
             //Already registered  

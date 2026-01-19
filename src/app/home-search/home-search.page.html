@@ -81,24 +81,38 @@
     </div>
     
     <ion-item lines="none">
-      <ion-select  (click)="onSelectClick()" interface="popover" [(ngModel)]="selectedDays"
-        label-placement="floating">
-        <ion-select-option *ngIf="langDefault !='ar'" value="7plusdays">7+ days</ion-select-option>
-        <ion-select-option *ngIf="langDefault !='ar'" value="3to6days">3-6 days</ion-select-option>
-        <ion-select-option *ngIf="langDefault !='ar'"  value="1to2days">1-2 days</ion-select-option>
-     <ion-select-option *ngIf="langDefault == 'ar'" value="7plusdays">
-  ٧ أيام أو أكثر
-</ion-select-option>
+  <ion-select
+    (click)="onSelectClick()"
+    interface="popover"
+    [(ngModel)]="selectedDays"
+    label-placement="floating"
+  >
+    <!-- Non-Arabic -->
+    <ion-select-option *ngIf="langDefault != 'ar'" value="7plusdays">
+      7+ days
+    </ion-select-option>
+    <ion-select-option *ngIf="langDefault != 'ar'" value="3to6days">
+      3-6 days
+    </ion-select-option>
+    <ion-select-option *ngIf="langDefault != 'ar'" value="1to2days">
+      1-2 days
+    </ion-select-option>
 
-<ion-select-option *ngIf="langDefault == 'ar'" value="3to6days">
-  ٣–٦ أيام
-</ion-select-option>
+    <!-- Arabic with Latin (English) digits -->
+    <ion-select-option *ngIf="langDefault == 'ar'" value="7plusdays">
+      7 أيام أو أكثر
+    </ion-select-option>
 
-<ion-select-option *ngIf="langDefault == 'ar'" value="1to2days">
-  ١–٢ يوم
-</ion-select-option>
-      </ion-select>
-    </ion-item> 
+    <ion-select-option *ngIf="langDefault == 'ar'" value="3to6days">
+      3–6 أيام
+    </ion-select-option>
+
+    <ion-select-option *ngIf="langDefault == 'ar'" value="1to2days">
+      1–2 يوم
+    </ion-select-option>
+  </ion-select>
+</ion-item>
+
 
     <ion-button expand="block" class="btn-green btn-deal" (click)="gotoFindDeails()">
       {{ 'FIND_DEALS_BUTTON' | translate }}

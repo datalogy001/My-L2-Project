@@ -158,6 +158,8 @@ this.destinations = window.localStorage.getItem('L2TraveleSIM_destinations');
     } else {
       this.currencyCode = window.localStorage.getItem("L2TraveleSIM_currency");
     }
+    console.log(window.localStorage.getItem("L2TraveleSIM_currency"));
+    
     if (window.localStorage.getItem('L2TraveleSIM_auth_token') == null) {
       this.tokenValue = 0;
       this.walletBalance=0.00;

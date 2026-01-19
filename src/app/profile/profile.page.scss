@@ -34,6 +34,12 @@ ion-content {
   --background: #fff;
 }
 
+.phone-number {
+  direction: ltr;
+  text-align: right; /* keeps alignment correct in RTL layout */
+  unicode-bidi: embed;
+}
+
 .topbox{
     min-height:240px;
     width: 100%;

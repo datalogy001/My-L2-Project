@@ -30,7 +30,7 @@ import { IonInfiniteScroll, IonContent } from '@ionic/angular';
 export class CreateAccountPage implements OnInit {
   @ViewChild('searchDiv', { static: true }) searchDiv!: ElementRef;
    @ViewChild(IonContent, { static: false }) content?: IonContent;
-  registerObj: any = { 'promotion_email' : false, 'referal_code': '', 'mobile_number' : '', 'country_name' : '',  'city':'','first_name': '', 'last_name': '', 'password': '', 'email': '', 'isPrivacySelected': false, 'isTermsSelected': false, 'confirmPass': '', 'deviceToken': '' ,'lang' : ''};
+  registerObj: any = { 'country_iso' : '', 'promotion_email' : false, 'referal_code': '', 'mobile_number' : '', 'country_name' : '',  'city':'','first_name': '', 'last_name': '', 'password': '', 'email': '', 'isPrivacySelected': false, 'isTermsSelected': false, 'confirmPass': '', 'deviceToken': '' ,'lang' : ''};
   terms: any = [];
   privacy: any = [];
   passwordType: string = 'password';
@@ -202,7 +202,8 @@ onSearchMobile(event: any) {
   this.searchTerm = countryRES.country_name;
   this.searchDiv.nativeElement.classList.add('searching');
   this.isCountrySelected = true;
-
+  this.registerObj.country_iso = countryRES.short_name;
+  console.log(this.registerObj.country_iso);
   this.registerObj.country_name = countryRES.country_name;
   this.countryCodeObj.code = countryRES.phone_code;
   this.countryCodeObj.flag = countryRES.short_name;
@@ -233,8 +234,6 @@ onSearchMobile(event: any) {
   ngOnInit() {
     
     this.registerObj.city = window.localStorage.getItem('L2TraveleSIM_city') || '' ;
-   
-
     this.googleLoginObj.lang = window.localStorage.getItem("L2TraveleSIM_language");
     this.facebookObj.lang = window.localStorage.getItem("L2TraveleSIM_language");
     this.registerObj.lang = window.localStorage.getItem("L2TraveleSIM_language");
@@ -318,6 +317,31 @@ onSearchMobile(event: any) {
       googleAttemp:any;
       
  
+      EU_COUNTRIES = [
+  'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR',
+  'HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK',
+  'SI','ES','SE'
+];
+
+resolveCurrency(countryCode: string): string {
+
+  console.log("countrycide" +  JSON.stringify(countryCode));
+  if (countryCode === 'LY') {
+    return 'LYD';
+  }
+
+  if (countryCode == 'GB') {
+    return 'GBP';
+  }
+
+  if (this.EU_COUNTRIES.includes(countryCode)) {
+    return 'EUR';
+  }
+
+  return 'USD';
+}
+
+
     async googleSuccess(googleRes:any) {
       //API call for Login section
       await this.loadingScreen.presentLoading();
@@ -344,6 +368,10 @@ onSearchMobile(event: any) {
       window.localStorage.setItem('L2TraveleSIM_refer_balance', resNew.data['data']['referal_wallet']);
       window.localStorage.setItem('L2TraveleSIM_refer_code', resNew.data['data']['referal_code']);
       window.localStorage.setItem('L2TraveleSIM_user_country', resNew.data['data']['country_iso']);
+      console.log("1" +resNew.data['data']['country_iso'] );
+       this.currencyCode = this.resolveCurrency(resNew.data['data']['country_iso']);
+       console.log("2" +this.currencyCode );
+      window.localStorage.setItem('L2TraveleSIM_currency', this.currencyCode);
       
      //Already registered  
      if(resNew.data['is_register'] == false)

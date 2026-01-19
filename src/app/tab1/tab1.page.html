@@ -67,7 +67,10 @@
               <span class="country"> <img
                   *ngIf="activeItem.short_name_country =='LATAM' || activeItem.short_name_country =='latam'"
                   src="assets/flags/la.svg" alt="">
-                <img *ngIf="activeItem.short_name_country =='Europe+' || activeItem.short_name_country =='europe+'"
+                 <img *ngIf="activeItem.short_name_country =='Europe+' || activeItem.short_name_country =='europe+'"
+                  src="assets/flags/eur.svg" alt="">
+             
+                  <img *ngIf="activeItem.short_name_country =='Europe Lite' || activeItem.short_name_country =='europe lite'"
                   src="assets/flags/eur.svg" alt="">
 
                   <img *ngIf="activeItem.short_name_country =='Europe' || activeItem.short_name_country =='europe'"
@@ -82,8 +85,8 @@
                   *ngIf="activeItem.short_name_country =='middle east' || activeItem.short_name_country =='Middle East'"
                   src="assets/flags/middleast.svg" alt="">
 
-                <img
-                  *ngIf="activeItem.short_name_country !='Europe' && activeItem.short_name_country !='europe' && activeItem.short_name_country !='middle east' && activeItem.short_name_country !='Middle East'
+               <img
+                  *ngIf="activeItem.short_name_country !='Europe' && activeItem.short_name_country !='europe' && activeItem.short_name_country !='Europe Lite' && activeItem.short_name_country !='europe lite' && activeItem.short_name_country !='middle east' && activeItem.short_name_country !='Middle East'
                &&
               activeItem.short_name_country !='Europe+'   && activeItem.short_name_country !='North America' 
               && activeItem.short_name_country !='north america'  &&
@@ -119,6 +122,9 @@
                 <img *ngIf="topupItem.short_name_country =='Europe' || topupItem.short_name_country =='europe'"
                 src="assets/flags/eur.svg" alt="">
 
+                <img *ngIf="topupItem.short_name_country =='Europe Lite' || topupItem.short_name_country =='europe lite'"
+                src="assets/flags/eur.svg" alt="">
+
 
               <img
                 *ngIf="topupItem.short_name_country =='north america' || topupItem.short_name_country =='North America'"
@@ -130,7 +136,7 @@
 
               <img
                 *ngIf="topupItem.short_name_country !='Europe' && topupItem.short_name_country !='europe' && topupItem.short_name_country !='middle east' && topupItem.short_name_country !='Middle East'
-             &&
+             && topupItem.short_name_country !='Europe Lite' && topupItem.short_name_country !='europe lite' &&
              topupItem.short_name_country !='Europe+'   && topupItem.short_name_country !='North America' 
             && topupItem.short_name_country !='north america'  &&
             topupItem.short_name_country !='europe+' && topupItem.short_name_country !='LATAM' && topupItem.short_name_country !='latam' "
@@ -173,6 +179,9 @@
                   src="assets/flags/eur.svg" alt="">
                   <img *ngIf="inActiveItem.short_name_country =='Europe' || inActiveItem.short_name_country =='europe'"
                   src="assets/flags/eur.svg" alt="">
+           
+                     <img *ngIf="inActiveItem.short_name_country =='Europe Lite' || inActiveItem.short_name_country =='europe lite'"
+                  src="assets/flags/eur.svg" alt="">
 
                 <img
                   *ngIf="inActiveItem.short_name_country =='North America' || inActiveItem.short_name_country =='north america'"
@@ -182,7 +191,7 @@
                   *ngIf="inActiveItem.short_name_country =='Middle East' || inActiveItem.short_name_country =='middle east'"
                   src="assets/flags/middleast.svg" alt="">
 
-                <img *ngIf="inActiveItem.short_name_country !='Europe' && inActiveItem.short_name_country !='europe' && inActiveItem.short_name_country !='Middle East' &&  inActiveItem.short_name_country !='middle east' 
+                <img *ngIf="inActiveItem.short_name_country !='Europe' && inActiveItem.short_name_country !='europe' && inActiveItem.short_name_country !='Europe Lite' && inActiveItem.short_name_country !='europe lite' && inActiveItem.short_name_country !='Middle East' &&  inActiveItem.short_name_country !='middle east' 
               && inActiveItem.short_name_country !='north america' && inActiveItem.short_name_country !='North America' &&
               inActiveItem.short_name_country !='Europe+' && inActiveItem.short_name_country !='europe+' 
               && inActiveItem.short_name_country !='LATAM' &&  inActiveItem.short_name_country !='latam' "
@@ -214,6 +223,9 @@
                 <img *ngIf="expiredItem.short_name_country =='Europe' || expiredItem.short_name_country =='europe'"
                 src="assets/flags/eur.svg" alt="">
 
+                 <img *ngIf="expiredItem.short_name_country =='Europe Lite' || expiredItem.short_name_country =='europe lite'"
+                src="assets/flags/eur.svg" alt="">
+
 
               <img
                 *ngIf="expiredItem.short_name_country =='north america' || expiredItem.short_name_country =='North America'"
@@ -224,7 +236,7 @@
                 src="assets/flags/middleast.svg" alt="">
 
               <img
-                *ngIf="expiredItem.short_name_country !='Europe' && expiredItem.short_name_country !='europe' && expiredItem.short_name_country !='middle east' && expiredItem.short_name_country !='Middle East'
+                *ngIf="expiredItem.short_name_country !='Europe' && expiredItem.short_name_country !='europe' && expiredItem.short_name_country !='Europe Lite' && expiredItem.short_name_country !='europe lite' && expiredItem.short_name_country !='middle east' && expiredItem.short_name_country !='Middle East'
              &&
              expiredItem.short_name_country !='Europe+'   && expiredItem.short_name_country !='North America' 
             && expiredItem.short_name_country !='north america'  &&

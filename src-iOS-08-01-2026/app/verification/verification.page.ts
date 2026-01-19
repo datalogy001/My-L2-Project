@@ -169,7 +169,32 @@ export class VerificationPage implements OnInit {
     });
   } 
      
-  
+  currencyCode:any;
+     EU_COUNTRIES = [
+  'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR',
+  'HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK',
+  'SI','ES','SE'
+];
+
+resolveCurrency(countryCode: string): string {
+
+  console.log("countrycide" +  JSON.stringify(countryCode));
+  if (countryCode === 'LY') {
+    return 'LYD';
+  }
+
+  if (countryCode == 'GB') {
+    return 'GBP';
+  }
+
+  if (this.EU_COUNTRIES.includes(countryCode)) {
+    return 'EUR';
+  }
+
+  return 'USD';
+}
+
+
   async createSuccess() {
     //API call for Create account section
     await this.loadingScreen.presentLoading();
@@ -190,10 +215,9 @@ export class VerificationPage implements OnInit {
         window.localStorage.setItem('L2TraveleSIM_user_wallets',res.data[0]['data']['user_wallet']);
         window.localStorage.setItem('L2TraveleSIM_refer_balance',res.data[0]['data']['referal_wallet']);
         window.localStorage.setItem('L2TraveleSIM_refer_code', res.data[0]['data']['referal_code']);
-        window.localStorage.setItem('L2TraveleSIM_user_country', res.data[0]['data']['country_iso']);
-
-
-        console.log(JSON.stringify(res.data[0]['data'])); 
+       window.localStorage.setItem('L2TraveleSIM_user_country', res.data[0]['data']['country_iso']);
+       this.currencyCode = this.resolveCurrency(res.data[0]['data']['country_iso']);
+       window.localStorage.setItem('L2TraveleSIM_currency', this.currencyCode);
 
         this.successMSGModal(this.translate.instant('VERIFY_EMAIL_SUCCESS_TITLE'), this.translate.instant('VERIFY_EMAIL_SUCCESS_MESSAGE'), "2000");
         this.tempData.checkoutObj.id = res.data[0]['data']['id'];

@@ -20,7 +20,7 @@ import { PhoneNumberUtil, PhoneNumberFormat } from 'google-libphonenumber';
 export class SocailLoginCountryPhonePage implements OnInit {
   @ViewChild('searchDiv', { static: true }) searchDiv!: ElementRef;
 
-  paramObj: any = { 'mobile_number': '', 'country_name': '', 'user_id': '', 'is_complete_signup': 1, "city" :'' }
+  paramObj: any = { 'country_iso' : '', 'mobile_number': '', 'country_name': '', 'user_id': '', 'is_complete_signup': 1, "city" :'' }
   token: any;
   temp_mobile_number: any = '';
   isearchIMg: any;
@@ -161,6 +161,7 @@ showCountryError(msg: string) {
     this.paramObj.country_name = countryRES.country_name;
     this.countryCodeObj.code = countryRES.phone_code;
     this.countryCodeObj.flag = countryRES.short_name;
+    this.paramObj.country_iso = countryRES.short_name;
     console.log(JSON.stringify(countryRES));
   }
 
@@ -211,6 +212,32 @@ showCountryError(msg: string) {
     this.token = window.localStorage.getItem("L2TraveleSIM_auth_token");
   }
 
+  EU_COUNTRIES = [
+  'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR',
+  'HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK',
+  'SI','ES','SE'
+];
+
+resolveCurrency(countryCode: string): string {
+
+  console.log("countrycide" +  JSON.stringify(countryCode));
+  if (countryCode === 'LY') {
+    return 'LYD';
+  }
+
+  if (countryCode == 'GB') {
+    return 'GBP';
+  }
+
+  if (this.EU_COUNTRIES.includes(countryCode)) {
+    return 'EUR';
+  }
+
+  return 'USD';
+}
+
+
+currencyCode:any;
  async submit(): Promise<void> {
   if (!this.validate()) {
     return;
@@ -228,6 +255,8 @@ showCountryError(msg: string) {
           console.log(JSON.stringify(res.data[0]['data']));
           window.localStorage.setItem('L2TraveleSIM_userDetails', JSON.stringify(res.data[0]['data']));
           window.localStorage.setItem('L2TraveleSIM_user_country', res.data[0]['data']['country_iso']);
+           this.currencyCode = this.resolveCurrency( res.data[0]['data']['country_iso']);
+           window.localStorage.setItem('L2TraveleSIM_currency', this.currencyCode);
          this.modalController.dismiss({ success: true });
     } else {
       this.errorMSGModal(res.message, this.translate.instant('VALIDATION_MSG_BUTTON_TRY_AGAIN'));
