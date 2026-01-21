@@ -1,4 +1,4 @@
 export enum Constants {
     IOS_APP_VERSION = '1.0.1',
-    ANDROID_APP_VERSION = '1.3.8'
+    ANDROID_APP_VERSION = '1.3.9'
 }

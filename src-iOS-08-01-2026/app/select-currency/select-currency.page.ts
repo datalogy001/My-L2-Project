@@ -43,7 +43,20 @@ export class SelectCurrencyPage implements OnInit {
     await this.loadingScreen.presentLoading();
     window.localStorage.setItem("L2TraveleSIM_Saved_Currency", "Yes");
     window.localStorage.setItem("L2TraveleSIM_currency", this.currencyType);
+    this.getWalletBalance();
     this.updateCountriesAfterChanged(this.currencyType);
+  }
+
+    getWalletBalance() {
+    this.service.updatedWalletBalance().then((res: any) => {
+      if (res.code == 200) {
+        if (res.data) {
+          window.localStorage.setItem('L2TraveleSIM_user_wallets', res.data.user_wallet);
+          window.localStorage.setItem('L2TraveleSIM_refer_balance', res.data.referal_wallet);
+        }
+      }
+    }).catch(err => {
+    })
   }
 
   updateCountriesAfterChanged(currencys: any) {

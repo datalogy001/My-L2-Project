@@ -39,6 +39,7 @@ export class ProfilePage implements OnInit {
   currencyCode:any='USD';
   walletBalance:any=0.00;
   min_refer_amt:any=0.00;
+    isWalletLoading: boolean = true;
 
   ionViewDidEnter() {
     //User Details 
@@ -71,20 +72,13 @@ export class ProfilePage implements OnInit {
     } else {
       this.currencyCode = window.localStorage.getItem("L2TraveleSIM_currency");
     }
-      this.walletBalance=window.localStorage.getItem('L2TraveleSIM_user_wallets');
+     // this.walletBalance=window.localStorage.getItem('L2TraveleSIM_user_wallets');
       this.refer_balance=window.localStorage.getItem('L2TraveleSIM_refer_balance');
       this.refer_code=window.localStorage.getItem('L2TraveleSIM_refer_code');
       this.refer_code= this.capitalizeText(this.refer_code);
       this.tokenValue = window.localStorage.getItem('L2TraveleSIM_auth_token');
       console.log(this.refer_balance);
       this.getuserDetails();
-     // this.getWalletBalance();
-      //Get Referer amount
-      //this.getShareAmount();
-      //Get Credit History
-      //this.getCreditHistory();
-      //Get Refere History
-      //this.getReferHistory();
        //Notifications
        this.getNotificationList();
   }
@@ -95,84 +89,46 @@ export class ProfilePage implements OnInit {
   }
   
 
-  async getuserDetails()
-  {
- //   await this.loadingScreen.presentLoading();
-    this.service.getuserDetails().then((res: any) => {
-      if (res.code == 200) {
-       
-        if(res.data.length > 0)
-        {
-       //   this.loadingScreen.dismissLoading();
-         
-        //  console.log(res.data[0]['wallet_balance']);
-        //  console.log(res.data[0]['credit_history']);
-        //  console.log(res.data[0]['refer_history']);
+  async getuserDetails() {
 
-          this.walletBalance= res.data[0]['wallet_balance'];
-          this.tempDetails.profile_image = res.data[0]['profile_image'];
+  this.isWalletLoading = true;
 
-          let newProfileImage = res.data[0]['profile_image'];
-          let userDetailsStr = window.localStorage.getItem('L2TraveleSIM_userDetails');
-          if (userDetailsStr) {
-          let userDetails = JSON.parse(userDetailsStr);
-          userDetails.profile_image = newProfileImage;
-          window.localStorage.setItem('L2TraveleSIM_userDetails', JSON.stringify(userDetails));
-            }
-          this.refer_balance=res.data[0]['refere_balance'];
-          console.log(res.data[0]['referal_code']);
-          this.refer_code= this.capitalizeText(res.data[0]['referal_code']);
-          console.log(this.refer_code);
-          this.shareAmount=res.data[0]['refer_amount'];
-          this.min_refer_amt = res.data[0]['min_refer_code_amont'];
-        
-          if (res.data[0]['credit_history'].length > 0){
-            this.isCreditHistory =true;
-            this.creditHistory = res.data[0]['credit_history'];
-          }
-          else
-          {
-            this.isCreditHistory =false;
-            this.creditHistory = [];
-          }
-        
-          if (res.data[0]['refer_history'].length > 0) {
-            this.isReferHistory =true;
-            this.referHistory = res.data[0]['refer_history'];
-            console.log(JSON.stringify(this.referHistory ));
-          }
-          else
-          {
-            this.isReferHistory =false;
-            this.referHistory = [];
-          }
-          window.localStorage.setItem('L2TraveleSIM_user_wallets', res.data[0]['wallet_balance']);
-          window.localStorage.setItem('L2TraveleSIM_refer_balance', res.data[0]['refere_balance']);
-          window.localStorage.setItem('L2TraveleSIM_refer_code', this.refer_code);
-        }else{
-       //   this.loadingScreen.dismissLoading();
-        }
-      }
-    }).catch(err => {
-   //   this.loadingScreen.dismissLoading();
-    })
-  }
+  this.service.getuserDetails().then((res: any) => {
 
-  /*async getWalletBalance()
-  {
-    this.service.updatedWalletBalance().then((res: any) => {
-      if (res.code == 200) {
-        if(res.data)
-        {
-          this.walletBalance= res.data.user_wallet;
-          this.refer_balance=res.data.referal_wallet;
-          window.localStorage.setItem('L2TraveleSIM_user_wallets', res.data.user_wallet);
-          window.localStorage.setItem('L2TraveleSIM_refer_balance', res.data.referal_wallet);
-        }
-      }
-    }).catch(err => {
-    })
-  }*/
+    if (res.code === 200 && res.data?.length > 0) {
+
+      const data = res.data[0];
+
+      this.walletBalance = data.wallet_balance;
+      this.refer_balance = data.refere_balance;
+      this.refer_code = this.capitalizeText(data.referal_code);
+      this.shareAmount = data.refer_amount;
+      this.min_refer_amt = data.min_refer_code_amont;
+      this.tempDetails.profile_image = data.profile_image;
+      // Credit history
+      this.isCreditHistory = data.credit_history?.length > 0;
+      this.creditHistory = this.isCreditHistory ? data.credit_history : [];
+      // Refer history
+      this.isReferHistory = data.refer_history?.length > 0;
+      this.referHistory = this.isReferHistory ? data.refer_history : [];
+      // Save to localStorage
+      window.localStorage.setItem('L2TraveleSIM_user_wallets', data.wallet_balance);
+      window.localStorage.setItem('L2TraveleSIM_refer_balance', data.refere_balance);
+      window.localStorage.setItem('L2TraveleSIM_refer_code', this.refer_code);
+    }
+
+    // ✅ STOP loader after API response
+    this.isWalletLoading = false;
+
+  }).catch(err => {
+    console.error(err);
+
+    // ✅ Stop loader even if API fails
+    this.isWalletLoading = false;
+  });
+}
+
+
     getFormattedAmount(amount: number, currency: string): string {
       const currencySymbols: { [key: string]: string } = {
        'USD': '$',
