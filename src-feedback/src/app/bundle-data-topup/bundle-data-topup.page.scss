@@ -1,0 +1,317 @@
+ion-header {
+    ion-toolbar {
+        --background: transparent;
+        height: 140px;
+        height: auto;
+        ion-title {
+            padding-inline: 0;
+
+            h3 {
+                font-size: 30px;
+                margin: 0 0 0;
+                line-height: 36px;
+            }
+        }
+
+        ion-buttons {
+            margin-inline-end: 0px;
+            margin-top: -70px;
+
+            ion-button {
+                --padding-end: 0;
+                margin-inline-end: 0;
+                color: #fff;
+            }
+        }
+    }
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px 0 0px;
+
+  .title{
+      width: 100%;
+  }    
+  h3{
+      margin: 0 0 0px; font-size: 28px; color: #fff;
+      div{
+        font-weight: 400;
+      }
+  }
+  p{
+      margin: 0 0 10px; font-size: 16px; line-height: 22px; color: #fff;
+  }
+  ion-button{
+      font-size: 22px;
+      color: var(--theme-gray);
+      display: inline-block;
+      min-height: auto;
+      height: auto;
+      margin: 0 0 0 15px;
+      &::part(native){
+          padding-inline: 0px;
+          padding-top: 0;
+          padding-bottom: 0;
+      }
+  }
+}
+
+.top-box{
+  min-height:310px; 
+  width: 100%; 
+  position: relative; 
+  //background: url("../../assets/img/bundle-bg.png") no-repeat center top / cover;
+
+    &::after{
+      position: absolute; z-index: 1; top: 0; right: 0; bottom: 0; left: 0; content: "";
+        background-blend-mode: overlay;
+    background-color: rgb(0 0 0 / 40%);
+    }
+    .topboxbg{
+      position: absolute; z-index: -1; left: 0; right: 0; top: 0; bottom: 0; content: "";
+    }
+}
+.top-inner{
+  position: relative; 
+  z-index: 11;
+  color: #fff; 
+  padding: 30px 20px;
+
+  h3{
+    font-size: 30px; margin: 0  0 0; line-height: 36px;
+    div{
+      font-weight: 400;
+    }
+  }
+}
+
+.denote-cashback{
+  color: #fff; 
+  font-size: 15px; 
+  margin: 5px 0 15px; 
+
+  img{
+      width: 20px; 
+      margin-right: 5px; 
+      display: inline-block; 
+      vertical-align: middle; 
+      margin-top: -3px;
+  }
+}
+
+.buynewplan{
+  border: 1px solid #fff;
+  margin: 10px 0 0;
+  border-radius: 8px;
+  padding: 12px 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  
+  font-weight: 400;
+  div{
+    width: 50%;
+    &:first-child{ text-align: left; line-height: 14px;
+        span { font-weight: 700; }
+    }
+    &:last-child{ text-align: right; text-transform: uppercase; font-weight: 700;
+        ion-icon{ font-size: 13px; display: inline-block; vertical-align: middle;}
+    }
+  }
+}
+
+.container{
+  position: relative; 
+  color: #fff; 
+  
+    &::after{
+      position: absolute; 
+      z-index: 111; 
+      left: 0; 
+      right: 0; 
+      top: -20px; 
+      background-color: #fff; 
+      height: 20px; 
+      border-radius: 12px 12px 0 0; 
+      content: "";
+    }
+  
+    h3{
+       font-weight: bold; 
+       font-size: 23px; 
+       margin: 25px 10px 10px; 
+      //  color: var(--theme-color-2);
+       &:first-child{ margin: 0 10px 10px;}
+    }
+    h4{
+       font-weight: bold; 
+       font-size: 26px; 
+       margin: 10px  10px 10px; 
+       color: var(--theme-color-1);
+    }
+}
+.datacontainer{
+    padding:10px 10px;
+}
+
+ion-card{
+  --background:transparent;
+  --color:var(--theme-color-2);
+  border: none;
+  margin-inline: 0;
+  box-shadow: none;
+  border-radius: 0px;
+  padding: 4px 10px;
+  margin:0 0 5px;
+
+  h5{ margin: 0px 0 0; }
+  p{ margin: 0 0 0; }
+
+  .data{  font-family: 'SFProText'; font-weight: 600; font-size: 18px;
+    font-size: 17px;    
+  }
+  .price{  font-weight: 700; 
+    img{ width: 18px; display: inline-block; margin-top: -4px; vertical-align: middle;   }
+  }
+  .day{  font-weight: bold; font-size: 17px;}
+  .info{  font-size: 10px; line-height: 17px;}
+  .arrow{ text-align: right; font-size: 16px; color: var(--theme-color-2);}
+
+  ion-row{
+    ion-col{
+      padding:2px 0;    
+    }
+  }
+
+  &.mega-data{
+    .day{  color: var(--theme-color-2); }  
+    .price{ color: var(--theme-color-2); }
+    .info{ color: var(--theme-color-2); }
+    .arrow{ color: var(--theme-color-1); }
+  }
+
+  &.value-data{
+    .data{ color: var(--theme-color-2); font-weight: 600; }
+    .price{ color: var(--theme-color-2); }
+    .info{ color:var(--theme-color-2); }
+    .info span{ color: var(--theme-color-2);}
+    h4{ font-weight: 600;}
+    .arrow{ color: var(--theme-color-1); }
+  }
+  
+}
+
+.card-content-ios{
+    padding-top:0;
+}
+
+ion-row{
+    &.dataneed{
+      ion-col{
+        padding: 10px 5px;
+        img{
+          height: 17px; display: inline-block; vertical-align: middle; margin-right: 5px;
+        }
+        small{
+          font-size: 11px; color: var(--theme-color-2);  
+          font-weight: 300;
+        }
+      }
+    }
+}
+  
+.dataheading{
+    margin: 60px 0 0; 
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.datatext{ 
+    margin: 0 0 0;
+    font-size: 14px;
+}
+
+ion-footer{
+  ion-toolbar{
+    // --background:var(--theme-color-1)
+  }
+}
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+  .header {
+    h3{ 
+      margin: 0 0 10px; font-size: 45px; color: #fff; 
+    }
+    p{ 
+      margin: 0 0 15px; font-size: 24px; line-height: auto; 
+    }
+    ion-button{ font-size: 33px; margin: 5px 0 0 20px; padding: 0 0;}
+  }
+
+  .top-box{ min-height: 380px; }
+  // .container{ height: calc(100% - 380px);}
+  // header ion-toolbar{ --min-height: 140px;  height: 160px; }
+  ion-header ion-toolbar ion-title h3{ font-size: 46px;  margin: 0 0 0; line-height: 52px; }
+  ion-header ion-toolbar ion-buttons{ margin-top: -80px; }
+
+  .denote-cashback{
+    font-size: 22px; margin: 5px 0 20px; 
+  
+    img{
+        width: 30px; 
+    }
+  }
+  
+  .top-inner h3{ font-size: 46px; line-height: 46px; }
+  .buynewplan{ padding: 15px 15px; font-size: 16px;  }
+  .buynewplan div:first-child { line-height: 20px; width: 65%;  }
+  .buynewplan div:last-child { width: 35%; }
+  .buynewplan div:last-child ion-icon{ font-size: 20px; }
+
+  ion-card{ margin: 0 0 15px;}
+  ion-card .day { font-size: 27px;  }
+  ion-card .info { font-size: 16px; line-height: 18px; }
+  ion-card .arrow { font-size: 24px;  }
+  ion-card .data { font-size: 27px; }
+  ion-card .price img{ width: 26px; }
+
+  .dataheading{ font-size: 24px; margin: 25px 0 0; }
+  .datatext{ font-size: 21px;  }
+  ion-row.dataneed ion-col img { height: 25px; margin-right: 8px; }
+  ion-row.dataneed ion-col small { font-size: 15px; }
+
+
+}
+
+
+/**************************************************************/
+/***** small devices ****/
+@media only screen and (max-width : 380px) {
+  
+  ion-header ion-toolbar ion-title h3{ font-size: 27px; line-height: 36px; }
+
+  // .top-box{ height: 40%; }
+  .buynewplan{ font-size: 9.5px; padding: 10px 10px; }
+  ion-row.dataneed ion-col{ padding: 13px 2px; }
+  ion-row.dataneed ion-col small { font-size: 9.5px;  }
+  ion-row.dataneed ion-col img{ height: 16px;}
+  .dataheading { margin: 40px 0 0; }
+
+}

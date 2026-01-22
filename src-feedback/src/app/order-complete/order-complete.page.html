@@ -1,0 +1,35 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Order Complete</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+    <div class="page-content">
+  <!-- <div class="tr-logo-1">
+    <img src="assets/img/tr-logo-1.png" alt="">
+  </div> -->
+  <div class="graphic1">
+    <img src="assets/img/order-completed.png" alt="">
+  </div>
+  <h2>
+   Success! Your <br>
+    order has now <br>
+     completed.
+  </h2>
+  <h5>
+    Once you've installed and activated your eSIM for data service you're good to go, in your chosen destination.
+  </h5>
+  <div class="btn-view-bundle" >
+    <ion-button expand="block" (click)="gotoDownload()" >
+      View eSIM QR code
+    </ion-button>
+    <ion-button expand="block" (click)="shareEsim()" >
+      Share eSIM QR code
+    </ion-button>
+    <ion-button fill="clear" class="more" (click)="gotoHome()">
+      Or Install Later
+    </ion-button>
+  </div>
+        </div>
+</ion-content>

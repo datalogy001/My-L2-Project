@@ -1,0 +1,154 @@
+<ion-content>
+
+  <div class="top-box" [ngStyle]="{'background': getBackgroundUrl()}">
+    <div class="top-inner">
+      <div class="header">
+        <div class="title">
+          <h3>
+            {{bundleName}}  <br> 
+            <div>{{ 'HOW_MUCH_MORE_DATA_DESCRIPTION' | translate }}</div>
+          </h3>
+        </div>
+        <ion-button fill="clear" (click)="gotoBack()">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <p class="denote-cashback">
+        <img src="assets/img/icons/cashback-white.png" alt=""> {{'CASHBACK_ELIGIBLE' | translate}}
+      </p>
+
+      <div class="buynewplan">
+        <div>
+          <span>{{ 'IMPORTANT_LABEL' | translate }}</span> {{ 'TOPUP_ESIM_ICCID_DESCRIPTION' | translate:{ iccid: iccid } }}
+        </div>
+        <div (click)="gotoTab2()">
+          {{ 'BUY_NEW_PLAN_INSTEAD' | translate }} <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="datacontainer">
+
+      <h3 class="valueplan"  *ngIf="isDataPlan">{{ 'VALUE_INTERNET_PLANS_TITLE' | translate }}</h3>
+      <ion-card class="value-data" *ngFor="let bundleItem of nonUnlimitedBundles" >
+        <ion-row (click)="gotoSummary(bundleItem,false)">
+          <ion-col size="8">
+            <p class="data"> {{ 'DATA_PLAN' | translate:{ size: bundleItem.dataAmount / 1000 } }}</p>
+          </ion-col>
+          <ion-col size="4">
+            <p class="price text-right">
+              <ng-container *ngIf="bundleItem.is_cashback_applicable == 1">
+                <img src="assets/img/cashback.png" alt="Cashback">
+              </ng-container>
+              <!-- LYD -->
+          <span *ngIf="currencyCode === 'LYD'">
+            <ng-container *ngIf="lang === 'ar'; else lydEn">
+              {{ bundleItem.price | number:'1.0-0' }} د.ل
+            </ng-container>
+
+            <ng-template #lydEn>
+              LYD&nbsp;{{ bundleItem.price | number:'1.0-0' }}
+            </ng-template>
+          </span>
+
+          <!-- Other currencies -->
+          <span *ngIf="currencyCode !== 'LYD'">
+            {{ bundleItem.price | currency:currencyCode }}
+          </span>
+            </p>
+          </ion-col>
+
+       
+        </ion-row>
+        <ion-row>
+          <ion-col size="10">
+            <p class="info">
+              {{ 'VALID_FOR_DAYS' | translate:{ days: bundleItem.duration } }}
+              
+            </p>
+          </ion-col>
+          <ion-col size="2" (click)="gotoSummary(bundleItem,false)">
+            <p class="arrow text-right"><ion-icon name="arrow-forward-circle-outline"></ion-icon></p>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+      
+      <h3  *ngIf="isDataPlan && unlimitedBundles.length>0">{{ 'UNLIMITED_DAILY_PASSES_TITLE' | translate }}</h3>
+      <ion-card class="mega-data" *ngFor="let bundleItem of unlimitedBundles" (click)="gotoSummary(bundleItem, true)" >
+        <ion-row  >
+          <ion-col size="8">
+            <p class="day">{{ 'UNLIMITED_DAY_PASS' | translate:{ duration: bundleItem.duration } }}</p>
+          </ion-col>
+          <ion-col size="4">
+            <p class="price text-right">
+              <ng-container *ngIf="bundleItem.is_cashback_applicable == 1">
+                <img src="assets/img/cashback.png" alt="Cashback">
+              </ng-container>
+               <!-- LYD -->
+          <span *ngIf="currencyCode === 'LYD'">
+            <ng-container *ngIf="lang === 'ar'; else lydEn">
+              {{ bundleItem.price | number:'1.0-0' }} د.ل
+            </ng-container>
+
+            <ng-template #lydEn>
+              LYD&nbsp;{{ bundleItem.price | number:'1.0-0' }}
+            </ng-template>
+          </span>
+
+          <!-- Other currencies -->
+          <span *ngIf="currencyCode !== 'LYD'">
+            {{ bundleItem.price | currency:currencyCode }}
+          </span>
+            </p>
+          </ion-col>
+
+        
+        </ion-row>
+        <ion-row>
+          <ion-col size="10">
+            <p class="info">{{ 'UNLIMITED_INTERNET_ACCESS_DESCRIPTION' | translate }}</p>
+          </ion-col>
+          <ion-col size="2">
+            <p class="arrow text-right"><ion-icon name="arrow-forward-circle-outline"></ion-icon></p>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    
+
+     
+    
+    </div>
+  </div>
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button (click)="gotoHomeSearch()" class="selected">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()" >
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>      
+    </div>
+
+  </ion-toolbar>
+</ion-footer>

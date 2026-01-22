@@ -1,0 +1,68 @@
+.tr-logo-1{
+    margin: 60px auto 40px; width: 240px;
+    img{
+        width: 100%;
+    }
+}
+.graphic1{
+    margin: 0px auto 30px; width: 220px;
+    img{
+        width: 100%;
+    }
+}
+h2{ 
+   margin: 0  40px 30px; text-align: center; color: var(--theme-color-2); font-size: 28px; font-family: 'camptonbook'; font-weight: 600;
+}
+h5{ 
+   margin: 0 40px 30px; text-align: center; color: var(--theme-color-2); font-size: 16px; /*font-family: 'camptonlight';*/ line-height: 22px;
+}
+.btn-view-bundle{
+    margin: 30px 20px 10px; text-align: center;
+    ion-button{
+        --background:var(--theme-color-1);
+        --background-activated:var(--theme-color-1);
+        --color:#fff;
+        --padding-start:20px;
+        --padding-end:20px;        
+        margin: 0 0 20px;
+        font-size: 14px;
+        --box-shadow:inherit;
+        text-transform: inherit;
+        &.more{
+            --background:transparent;
+            --background-activated:transparent;
+        }
+    }
+}
+.page-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+
+
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px)
+
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+ 
+
+
+
+
+}

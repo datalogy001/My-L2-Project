@@ -1,0 +1,204 @@
+ion-header{
+  ion-toolbar{      
+      --min-height:150px;
+      height: 120px;
+      &.ios{ --min-height:150px;}
+      ion-title{
+        &.ios{ 
+          padding-inline:25px; margin-top:10px; line-height: 26px;
+        }
+      }
+      [slot="end"]{
+        margin-inline-end: 15px;
+      }
+      ion-buttons{
+          ion-button{              
+              display: inline-block;
+              margin-inline-start:0;
+              margin-inline-end: 0;
+              --box-shadow:none;
+              margin-top: -20px;
+      
+              &::part(native){
+                  padding-inline-start: 10px;
+                  padding-inline-end: 0px;
+              }
+              &.ios{ margin-top:-5px; }
+              img{
+                width: 28px;
+              }
+          }
+      }
+  }
+}
+ion-content{
+  --background:#fff;
+}
+.list-md{ 
+  background: transparent;
+}
+ion-list{
+  margin:80px 0px 0; padding: 0;
+  ion-item{
+      --inner-border-width:0 0 0 0;
+      margin: 0 0 15px;
+      --background:var(--input-bg);
+      border: 1px solid var(--border-color-check);
+      --min-height: 46px;
+
+      &:last-child{
+        margin: 0 0 0px;
+      }
+      ion-input{
+          color: var(--theme-color-2);
+      }
+      ion-icon{
+          color: var(--theme-color-3);
+          font-size: 20px;
+          cursor: pointer;
+      }
+  }
+}
+
+a{
+  color: var(--theme-color-2);
+}
+
+ion-button{  
+  &.btn-login{
+    --padding-start:20px;
+    --padding-end:20px;
+    margin: 25px 0px 10px;
+  } 
+}
+
+ion-icon.eye {
+  font-size: 18px; 
+  cursor: pointer;
+}
+ion-icon.close-circle {
+  font-size: 18px; 
+  cursor: pointer;
+}
+.rememberpassword{
+  margin: 25px 0px 0; border: 1px solid rgba(17,32,66,0.5); border-radius: 8px; padding:10px 10px 10px 50px;
+  position: relative; min-height: 50px; color: var(--theme-color-2); font-size: 15px;
+}
+
+ion-row{
+  &.checkrow{
+      margin: 20px 0 0px;
+      ion-col{
+          border:1px solid rgba(17,32,66,0.2); border-radius: 8px; 
+
+          ion-checkbox{
+              padding:6px 10px;
+          } 
+      }
+  }
+}
+
+ion-checkbox{  
+  color: var(--theme-color-2);
+  
+  font-size: 15px;
+
+  --border-width:1px;
+  --border-color:var(--theme-color-2);
+  --checkbox-background:transparent;
+  --checkbox-background-checked:var(--theme-color-2);
+  --border-color-checked:var(--theme-color-2);
+
+  --checkmark-color:var(--theme-color-3);
+  --checkmark-width: 4;
+  --checkbox-background-checked: transparent;
+  --border-color-checked: transparent;
+
+  &::part(label){
+    margin-inline: 12px 0; white-space: normal; color: var(--theme-color-2);
+  }
+  &::part(container){
+    width: 22px; height: 22px;
+  }
+
+}
+
+.orbox{
+  margin: 40px 0px 30px; border-bottom: 1px solid var(--theme-color-2); position: relative; font-family: 'Inter'; 
+  span{
+      position: absolute; z-index: 11; left: 50%; transform: translateX(-50%); padding: 10px 15px;
+      top: -18px; background: #fff; font-size: 13px; white-space: nowrap; color: var(--theme-color-2); text-transform: uppercase;
+  }
+}
+
+.social{
+  margin: 35px 0px 20px; display: flex; flex-direction: row; justify-content:center; 
+  
+  ion-button{
+    --border-radius: 8px;
+    font-size: 20px;
+    height: 54px;
+    width: 30%;
+    --border-width: 1px;
+    --border-color: rgba(17,32,66,0.2);
+    --background:#fff;
+    --color: var(--theme-color-1);
+    margin: 0 6px;
+
+    &::part(native) {
+      padding-top: 7px;
+    }
+  
+  }
+}
+
+.create-account{
+  text-align: center; margin: 25px 0 0px;
+  a{
+      color:var(--theme-color-2); 
+      // text-decoration: underline; 
+      font-size: 15px; 
+  }
+}
+
+.forgot{
+  text-align: center; margin: 5px 0 0px;
+  a{
+     color:var(--theme-color-2); 
+    //  text-decoration: underline; 
+     font-size: 15px; 
+  }
+}
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+  ion-header ion-toolbar{ height: auto; }
+  ion-header ion-toolbar ion-buttons ion-button img { width: 42px; }
+
+  ion-checkbox { font-size: 23px;}
+  ion-row.checkrow ion-col ion-checkbox { padding: 24px 20px; }
+  ion-list ion-item{ --padding-start: 24px; --inner-padding-end: 24px;}
+ 
+  .orbox{ margin: 45px 0px 45px;}
+  .orbox span{ padding: 20px 15px; top: -30px; font-size: 21px;}
+  .social{ margin: 35px 5px 35px;}
+  .social ion-button{ font-size: 32px; height: 82px; }
+  .create-account{ margin: 35px 0 0px; }
+  .create-account a{ font-size: 22px; }
+  .forgot{ margin: 10px 0 0px; }
+  .forgot a{ font-size: 22px;}
+
+
+
+}

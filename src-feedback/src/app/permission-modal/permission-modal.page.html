@@ -1,0 +1,13 @@
+<ion-content [fullscreen]="true" class="ion-padding">  
+  <p> 
+    {{'PERMISSION_POPUP_TEXT' | translate}}
+  </p>
+  <div class="btn-div">
+    <ion-button fill="outline"  class="btn-back" (click)="closePopover(false)">
+      {{'PERMISSION_SELECT_CARD' | translate}}
+    </ion-button>
+    <ion-button class="btn-add"  (click)="closePopover(true)">
+      {{'PERMISSION_ADD_CARD' | translate}}
+    </ion-button>    
+  </div>
+</ion-content>

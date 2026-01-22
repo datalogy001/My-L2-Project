@@ -1,0 +1,194 @@
+<ion-content [fullscreen]="true">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <img class="ftel-logo" src="assets/img/L2-logobranded.png" alt="">
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="gotoBack()">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar class="titlebar">
+      <ion-title>
+        <h3>
+          {{ 'PAYMENT_HISTORY' | translate }}
+        </h3>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+
+    <div class="container">
+
+
+      <div class="no-record" *ngIf="!isDataAvail">
+        <img src="assets/img/nopaymenthistory.png" alt="">
+        <!-- <h3>No Payment history</h3> -->
+        <p>{{ 'NO_PAYMENT_HISTORY' | translate }}</p>
+      </div>
+
+      <div *ngIf="isDataAvail">
+        <ion-card *ngFor="let paymentItem of paymentList ; let i = index">
+          <ion-row class="d-flex">
+            <ion-col size="7">
+              <h4 *ngIf="paymentItem.type=='country'">{{convertintoCountryLang(paymentItem.short_name_country)}}
+                <span *ngIf="paymentItem.is_coupon_applied==1"><span  class="crossprice">
+                  -{{ paymentItem.amount | currency:paymentItem.currency_symbol}} </span> 
+                  <span>{{ paymentItem.discount_amount | currency:paymentItem.currency_symbol}}</span></span>
+
+                  <span *ngIf="paymentItem.is_coupon_applied!=1"><span ></span> 
+                    <span>{{ paymentItem.amount | currency:paymentItem.currency_symbol}}</span></span>
+              </h4>
+
+              <h4 *ngIf="paymentItem.type!='country'">{{convertintoZoneLang(paymentItem.short_name_country)}} 
+                <span *ngIf="paymentItem.is_coupon_applied==1"><span  class="crossprice">
+                  -{{ paymentItem.amount | currency:paymentItem.currency_symbol}} </span> 
+                  <span>{{ paymentItem.discount_amount | currency:paymentItem.currency_symbol}}</span></span>
+
+                  <span *ngIf="paymentItem.is_coupon_applied!=1"><span ></span> 
+                    <span>{{ paymentItem.amount | currency:paymentItem.currency_symbol}}</span></span>
+              </h4>
+              <h5 *ngIf="paymentItem.isUnlimited == true">{{paymentItem.days}} {{ 'DAILY_UNLIMITED_PASS' | translate }}
+                <span *ngIf="paymentItem.recharge_type !='New' ">{{ 'TOP_UP' | translate }}</span>
+              </h5>
+              <h5 *ngIf="paymentItem.isUnlimited != true">{{paymentItem.dataamount}} {{ 'GB_DATA' | translate }} <span
+                  *ngIf="paymentItem.recharge_type !='New' ">{{ 'TOP_UP' | translate }}</span>
+              </h5>
+              <h6>
+                <span>{{datefilter(paymentItem.date) }}</span>
+                <span
+                  *ngIf="(paymentItem.is_split_payment==false) && (paymentItem.payment_method == 'Visa' || paymentItem.payment_method == 'MasterCard' || paymentItem.payment_method == 'Stripe')"><img
+                    src="assets/img/atm-card.png" alt="">{{paymentItem.payment_method}} </span>
+                <span *ngIf="paymentItem.is_split_payment==false && paymentItem.payment_method == 'Google Pay'"><img src="assets/img/googlepay-new.png"
+                    alt="">{{paymentItem.payment_method}} </span>
+                <span *ngIf="paymentItem.is_split_payment==false && paymentItem.payment_method == 'Apple Pay'"><img src="assets/img/applepay-dark.png"
+                    alt="">{{paymentItem.payment_method}} </span>
+                <span *ngIf="paymentItem.is_split_payment==false && paymentItem.payment_method == 'Paypal'"><img src="assets/img/paypal1.png"
+                    alt="">{{paymentItem.payment_method}} </span>
+                <span *ngIf="paymentItem.is_split_payment==false && paymentItem.payment_method == 'App Credit' || paymentItem.payment_method == 'Wallet Pay'"><img src="assets/img/app-credit-red.png" alt="">{{
+                  'App_credit' | translate }} </span>
+                  <span *ngIf="paymentItem.is_split_payment==false && (paymentItem.payment_method == 'T-lync' || paymentItem.payment_method == 'Tadawul')"><img src="assets/img/t-lynclogooriginal.png"
+                    alt="">{{paymentItem.payment_method}} </span>
+
+
+              </h6>
+            </ion-col>
+            <ion-col size="5" class="text-right">              
+              <span class="country">
+                <img *ngIf="paymentItem.short_name_country =='LATAM' || paymentItem.short_name_country =='latam'"
+                  src="assets/flags/la.svg" alt="">
+                <img *ngIf="paymentItem.short_name_country =='Europe+' || paymentItem.short_name_country =='europe+'"
+                  src="assets/flags/eur.svg" alt="">
+                <img *ngIf="paymentItem.short_name_country =='Europe' || paymentItem.short_name_country =='europe'"
+                  src="assets/flags/eur.svg" alt="">
+
+                <img
+                  *ngIf="paymentItem.short_name_country =='North America' || paymentItem.short_name_country =='north america'"
+                  src="assets/flags/northam.svg" alt="">
+
+                <img
+                  *ngIf="paymentItem.short_name_country =='Middle East' || paymentItem.short_name_country =='middle east'"
+                  src="assets/flags/middleast.svg" alt="">
+
+                <img *ngIf="paymentItem.short_name_country !='Europe' &&  paymentItem.short_name_country !='europe' && paymentItem.short_name_country !='Middle East' &&  paymentItem.short_name_country !='middle east'
+                  && paymentItem.short_name_country !='north america' && paymentItem.short_name_country !='North America' &&
+                  paymentItem.short_name_country !='Europe+' && paymentItem.short_name_country !='europe+'
+                  && paymentItem.short_name_country !='LATAM' && paymentItem.short_name_country !='latam' "
+                  src="assets/flags/{{paymentItem.short_name_country | lowercase}}.svg" alt="">
+                <img *ngIf="paymentItem.short_name_country !='LATAM'"
+                  src="assets/flags/{{paymentItem.short_name_country | lowercase}}.svg" alt="">
+              </span><br>
+              <span  *ngIf="paymentItem.is_coupon_applied==1" class="couponapplied">{{'COUPON_APPLIED' | translate}}</span>
+              <span  *ngIf="paymentItem.payment_method == 'Voucher'" class="couponapplied">{{'Voucher_Top_up' | translate}}</span>
+            </ion-col>
+          </ion-row>
+           <p *ngIf="paymentItem.is_split_payment==true" class="splittitle">{{ 'splitPayment' | translate }}</p>
+              <ion-row *ngIf="paymentItem.is_split_payment==true">
+                <ion-col size="12">
+                  <div class="card-div">
+                    <div  *ngIf="paymentItem.payment_method == 'Visa' || paymentItem.payment_method == 'MasterCard' || paymentItem.payment_method == 'Stripe'  ">
+                     <img
+                        src="assets/img/atm-card.png" alt="">{{paymentItem.payment_method}}
+                    </div>    
+                    
+                    <div  *ngIf="paymentItem.payment_method == 'Google Pay'">
+                      <img src="assets/img/googlepay-new.png" alt="">{{paymentItem.payment_method}}
+                     </div>    
+                     
+                     <div  *ngIf=" paymentItem.payment_method == 'Apple Pay'"><img src="assets/img/applepay-dark.png"
+                      alt="">{{paymentItem.payment_method}} 
+                     </div>    
+
+                      <div  *ngIf="(paymentItem.payment_method == 'T-lync' || paymentItem.payment_method == 'Tadawul')"><img src="assets/img/t-lynclogooriginal.png"
+                      alt="">{{paymentItem.payment_method}} 
+                     </div>
+
+                    
+                    <span class="price">{{paymentItem.amt_from_other_payment | currency:paymentItem.currency_symbol }}</span>
+                  </div>
+                </ion-col>
+                <ion-col size="12">
+                  <div class="card-div">
+                    <div>
+                      <img src="assets/img/app-credit-red.png"> <span>{{
+                        'App_credit' | translate }} </span>
+                    </div>                
+                    <span class="price">{{paymentItem.wallet_amount | currency:paymentItem.currency_symbol }}</span>
+                  </div>
+                </ion-col>
+                <ion-col size="12">
+                  <div class="card-div total">
+                    <div>
+                      <span>{{'total' | translate }}  </span>
+                    </div>                
+                    <span class="totalprice">{{paymentItem.total_amount | currency:paymentItem.currency_symbol }} </span>
+                  </div>
+                </ion-col>
+              </ion-row>
+        </ion-card>
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>
+
+
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button (click)="gotoHomeSearch()">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()" class="selected">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>
+    </div>
+
+
+  </ion-toolbar>
+</ion-footer>
