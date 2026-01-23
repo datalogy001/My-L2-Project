@@ -25,9 +25,9 @@ export class SplitPaymentPage implements OnInit {
   selectedPaymentType: string = 'google-pay'; // Set Gogole Pay as the default selected option
   isCardSelected: any = false;
   creditDebitType: any = '';
-
+lang:any;
   ngOnInit() {
-
+    this.lang = window.localStorage.getItem("L2TraveleSIM_language") || 'en';
     this.accessToken = window.localStorage.getItem('L2TraveleSIM_auth_token');
     this.getCreditCards();
     if (window.localStorage.getItem('L2TraveleSIM_currency') == null) {

@@ -15,10 +15,12 @@ export class TopupsuccessPage implements OnInit {
   iccid: any;
   accessToken: any = '';
   cashBackRes:any=[]; 
+    lang: any;
 
   constructor(private Router: Router,private platform: Platform, private navCtrl: NavController, private service: ServicesService) { }
   ngOnInit() {
     //Notification Permission Popup 
+    this.lang = window.localStorage.getItem("L2TraveleSIM_language") || 'en';
     this.platform.ready().then(() => {
       if (this.platform.is('android') || this.platform.is('ios')) {
         OneSignalPlugin.setAppId('fff4239f-9ac8-4b82-a715-92df7445acf6');

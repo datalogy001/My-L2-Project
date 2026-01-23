@@ -17,8 +17,10 @@ export class VoucherRevealPage implements OnInit {
     
   successDetails:any;
   voucherResult:any=[]; 
-  
+      lang: any;
+      
   ngOnInit() {
+        this.lang = window.localStorage.getItem("L2TraveleSIM_language") || 'en';
     this.successDetails = this.Router.getCurrentNavigation()?.extras.state;
     this.voucherResult = this.successDetails.voucherResult;
     console.log(JSON.stringify(this.voucherResult));

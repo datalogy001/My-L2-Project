@@ -25,8 +25,9 @@ export class ModalRefercodePage implements OnInit {
  
    constructor(private translate: TranslateService,private loadingScreen: LoadingScreenAppPage, private Router: Router, private platform: Platform, private socialSharing: SocialSharing, private modalCtrl: ModalController, private toastcntr: ToastController) { }
  
- 
+   lang:any;
    ngOnInit() {
+     this.lang = window.localStorage.getItem("L2TraveleSIM_language") || 'en';
     if (window.localStorage.getItem("L2TraveleSIM_currency") == null) {
       this.currencyCode = 'USD';
     } else {

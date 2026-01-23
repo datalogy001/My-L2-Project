@@ -40,23 +40,118 @@
         <ion-card *ngFor="let paymentItem of paymentList ; let i = index">
           <ion-row class="d-flex">
             <ion-col size="7">
-              <h4 *ngIf="paymentItem.type=='country'">{{convertintoCountryLang(paymentItem.short_name_country)}}
-                <span *ngIf="paymentItem.is_coupon_applied==1"><span  class="crossprice">
-                  -{{ paymentItem.amount | currency:paymentItem.currency_symbol}} </span> 
-                  <span>{{ paymentItem.discount_amount | currency:paymentItem.currency_symbol}}</span></span>
+              <h4 *ngIf="paymentItem.type=='country'">
+  {{ convertintoCountryLang(paymentItem.short_name_country) }}
 
-                  <span *ngIf="paymentItem.is_coupon_applied!=1"><span ></span> 
-                    <span>{{ paymentItem.amount | currency:paymentItem.currency_symbol}}</span></span>
-              </h4>
+  <!-- Coupon applied -->
+  <span *ngIf="paymentItem.is_coupon_applied==1">
+    <span class="crossprice">
+      <!-- Crossed original amount -->
+      <ng-container *ngIf="paymentItem.currency_symbol === 'LYD'; else otherCrossCurrency">
+        <ng-container *ngIf="lang === 'ar'; else lydCrossEn">
+          -{{ paymentItem.amount }} د.ل
+        </ng-container>
+        <ng-template #lydCrossEn>
+          -LYD&nbsp;{{ paymentItem.amount }}
+        </ng-template>
+      </ng-container>
+      <ng-template #otherCrossCurrency>
+        -{{ paymentItem.amount | currency:paymentItem.currency_symbol }}
+      </ng-template>
+    </span>
 
-              <h4 *ngIf="paymentItem.type!='country'">{{convertintoZoneLang(paymentItem.short_name_country)}} 
-                <span *ngIf="paymentItem.is_coupon_applied==1"><span  class="crossprice">
-                  -{{ paymentItem.amount | currency:paymentItem.currency_symbol}} </span> 
-                  <span>{{ paymentItem.discount_amount | currency:paymentItem.currency_symbol}}</span></span>
+    <span>
+      <!-- Discounted amount -->
+      <ng-container *ngIf="paymentItem.currency_symbol === 'LYD'; else otherDiscountCurrency">
+        <ng-container *ngIf="lang === 'ar'; else lydDiscountEn">
+          {{ paymentItem.discount_amount }} د.ل
+        </ng-container>
+        <ng-template #lydDiscountEn>
+          LYD&nbsp;{{ paymentItem.discount_amount }}
+        </ng-template>
+      </ng-container>
+      <ng-template #otherDiscountCurrency>
+        {{ paymentItem.discount_amount | currency:paymentItem.currency_symbol }}
+      </ng-template>
+    </span>
+  </span>
 
-                  <span *ngIf="paymentItem.is_coupon_applied!=1"><span ></span> 
-                    <span>{{ paymentItem.amount | currency:paymentItem.currency_symbol}}</span></span>
-              </h4>
+  <!-- No coupon -->
+  <span *ngIf="paymentItem.is_coupon_applied!=1">
+    <span></span>
+    <span>
+      <ng-container *ngIf="paymentItem.currency_symbol === 'LYD'; else otherAmountCurrency">
+        <ng-container *ngIf="lang === 'ar'; else lydAmountEn">
+          {{ paymentItem.amount }} د.ل
+        </ng-container>
+        <ng-template #lydAmountEn>
+          LYD&nbsp;{{ paymentItem.amount }}
+        </ng-template>
+      </ng-container>
+      <ng-template #otherAmountCurrency>
+        {{ paymentItem.amount | currency:paymentItem.currency_symbol }}
+      </ng-template>
+    </span>
+  </span>
+</h4>
+
+
+<h4 *ngIf="paymentItem.type!='country'">
+  {{ convertintoZoneLang(paymentItem.short_name_country) }}
+
+  <!-- Coupon applied -->
+  <span *ngIf="paymentItem.is_coupon_applied==1">
+    <span class="crossprice">
+      <!-- Crossed original amount -->
+      <ng-container *ngIf="paymentItem.currency_symbol === 'LYD'; else otherCrossCurrency">
+        <ng-container *ngIf="lang === 'ar'; else lydCrossEn">
+          -{{ paymentItem.amount }} د.ل
+        </ng-container>
+        <ng-template #lydCrossEn>
+          -LYD&nbsp;{{ paymentItem.amount }}
+        </ng-template>
+      </ng-container>
+      <ng-template #otherCrossCurrency>
+        -{{ paymentItem.amount | currency:paymentItem.currency_symbol }}
+      </ng-template>
+    </span>
+
+    <span>
+      <!-- Discounted amount -->
+      <ng-container *ngIf="paymentItem.currency_symbol === 'LYD'; else otherDiscountCurrency">
+        <ng-container *ngIf="lang === 'ar'; else lydDiscountEn">
+          {{ paymentItem.discount_amount }} د.ل
+        </ng-container>
+        <ng-template #lydDiscountEn>
+          LYD&nbsp;{{ paymentItem.discount_amount }}
+        </ng-template>
+      </ng-container>
+      <ng-template #otherDiscountCurrency>
+        {{ paymentItem.discount_amount | currency:paymentItem.currency_symbol }}
+      </ng-template>
+    </span>
+  </span>
+
+  <!-- No coupon -->
+  <span *ngIf="paymentItem.is_coupon_applied!=1">
+    <span></span>
+    <span>
+      <ng-container *ngIf="paymentItem.currency_symbol === 'LYD'; else otherAmountCurrency">
+        <ng-container *ngIf="lang === 'ar'; else lydAmountEn">
+          {{ paymentItem.amount }} د.ل
+        </ng-container>
+        <ng-template #lydAmountEn>
+          LYD&nbsp;{{ paymentItem.amount }}
+        </ng-template>
+      </ng-container>
+      <ng-template #otherAmountCurrency>
+        {{ paymentItem.amount | currency:paymentItem.currency_symbol }}
+      </ng-template>
+    </span>
+  </span>
+</h4>
+
+
               <h5 *ngIf="paymentItem.isUnlimited == true">{{paymentItem.days}} {{ 'DAILY_UNLIMITED_PASS' | translate }}
                 <span *ngIf="paymentItem.recharge_type !='New' ">{{ 'TOP_UP' | translate }}</span>
               </h5>
@@ -112,48 +207,87 @@
             </ion-col>
           </ion-row>
            <p *ngIf="paymentItem.is_split_payment==true" class="splittitle">{{ 'splitPayment' | translate }}</p>
-              <ion-row *ngIf="paymentItem.is_split_payment==true">
-                <ion-col size="12">
-                  <div class="card-div">
-                    <div  *ngIf="paymentItem.payment_method == 'Visa' || paymentItem.payment_method == 'MasterCard' || paymentItem.payment_method == 'Stripe'  ">
-                     <img
-                        src="assets/img/atm-card.png" alt="">{{paymentItem.payment_method}}
-                    </div>    
-                    
-                    <div  *ngIf="paymentItem.payment_method == 'Google Pay'">
-                      <img src="assets/img/googlepay-new.png" alt="">{{paymentItem.payment_method}}
-                     </div>    
-                     
-                     <div  *ngIf=" paymentItem.payment_method == 'Apple Pay'"><img src="assets/img/applepay-dark.png"
-                      alt="">{{paymentItem.payment_method}} 
-                     </div>    
+             <ion-row *ngIf="paymentItem.is_split_payment==true">
+  <ion-col size="12">
+    <div class="card-div">
+      <div *ngIf="paymentItem.payment_method == 'Visa' || paymentItem.payment_method == 'MasterCard' || paymentItem.payment_method == 'Stripe'">
+        <img src="assets/img/atm-card.png" alt="">{{paymentItem.payment_method}}
+      </div>
 
-                      <div  *ngIf="(paymentItem.payment_method == 'T-lync' || paymentItem.payment_method == 'Tadawul')"><img src="assets/img/t-lynclogooriginal.png"
-                      alt="">{{paymentItem.payment_method}} 
-                     </div>
+      <div *ngIf="paymentItem.payment_method == 'Google Pay'">
+        <img src="assets/img/googlepay-new.png" alt="">{{paymentItem.payment_method}}
+      </div>
 
-                    
-                    <span class="price">{{paymentItem.amt_from_other_payment | currency:paymentItem.currency_symbol }}</span>
-                  </div>
-                </ion-col>
-                <ion-col size="12">
-                  <div class="card-div">
-                    <div>
-                      <img src="assets/img/app-credit-red.png"> <span>{{
-                        'App_credit' | translate }} </span>
-                    </div>                
-                    <span class="price">{{paymentItem.wallet_amount | currency:paymentItem.currency_symbol }}</span>
-                  </div>
-                </ion-col>
-                <ion-col size="12">
-                  <div class="card-div total">
-                    <div>
-                      <span>{{'total' | translate }}  </span>
-                    </div>                
-                    <span class="totalprice">{{paymentItem.total_amount | currency:paymentItem.currency_symbol }} </span>
-                  </div>
-                </ion-col>
-              </ion-row>
+      <div *ngIf="paymentItem.payment_method == 'Apple Pay'">
+        <img src="assets/img/applepay-dark.png" alt="">{{paymentItem.payment_method}}
+      </div>
+
+      <div *ngIf="(paymentItem.payment_method == 'T-lync' || paymentItem.payment_method == 'Tadawul')">
+        <img src="assets/img/t-lynclogooriginal.png" alt="">{{paymentItem.payment_method}}
+      </div>
+
+      <span class="price">
+        <ng-container *ngIf="paymentItem.currency_symbol === 'LYD'; else otherPaymentCurrency">
+          <ng-container *ngIf="lang === 'ar'; else lydPaymentEn">
+            {{ paymentItem.amt_from_other_payment }} د.ل
+          </ng-container>
+          <ng-template #lydPaymentEn>
+            LYD&nbsp;{{ paymentItem.amt_from_other_payment }}
+          </ng-template>
+        </ng-container>
+        <ng-template #otherPaymentCurrency>
+          {{ paymentItem.amt_from_other_payment | currency:paymentItem.currency_symbol }}
+        </ng-template>
+      </span>
+    </div>
+  </ion-col>
+
+  <ion-col size="12">
+    <div class="card-div">
+      <div>
+        <img src="assets/img/app-credit-red.png">
+        <span>{{ 'App_credit' | translate }}</span>
+      </div>
+
+      <span class="price">
+        <ng-container *ngIf="paymentItem.currency_symbol === 'LYD'; else otherWalletCurrency">
+          <ng-container *ngIf="lang === 'ar'; else lydWalletEn">
+            {{ paymentItem.wallet_amount }} د.ل
+          </ng-container>
+          <ng-template #lydWalletEn>
+            LYD&nbsp;{{ paymentItem.wallet_amount }}
+          </ng-template>
+        </ng-container>
+        <ng-template #otherWalletCurrency>
+          {{ paymentItem.wallet_amount | currency:paymentItem.currency_symbol }}
+        </ng-template>
+      </span>
+    </div>
+  </ion-col>
+
+  <ion-col size="12">
+    <div class="card-div total">
+      <div>
+        <span>{{ 'total' | translate }}</span>
+      </div>
+
+      <span class="totalprice">
+        <ng-container *ngIf="paymentItem.currency_symbol === 'LYD'; else otherTotalCurrency">
+          <ng-container *ngIf="lang === 'ar'; else lydTotalEn">
+            {{ paymentItem.total_amount }} د.ل
+          </ng-container>
+          <ng-template #lydTotalEn>
+            LYD&nbsp;{{ paymentItem.total_amount }}
+          </ng-template>
+        </ng-container>
+        <ng-template #otherTotalCurrency>
+          {{ paymentItem.total_amount | currency:paymentItem.currency_symbol }}
+        </ng-template>
+      </span>
+    </div>
+  </ion-col>
+</ion-row>
+
         </ion-card>
       </div>
 

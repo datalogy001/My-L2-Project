@@ -21,7 +21,24 @@
         <h2>{{ 'Top_up' | translate }}</h2>
       </ion-col>
       <ion-col class="ion-text-right">
-        <h3> {{checkoutObj.amount  | currency:checkoutObj.currency }}</h3>
+        <h3> 
+          
+           <!-- LYD -->
+          <span *ngIf="checkoutObj.currency === 'LYD'">
+            <ng-container *ngIf="lang === 'ar'; else lydEn">
+              {{ checkoutObj.amount | number:'1.0-0' }} د.ل
+            </ng-container>
+
+            <ng-template #lydEn>
+              LYD&nbsp;{{ checkoutObj.amount | number:'1.0-0' }}
+            </ng-template>
+          </span>
+
+          <!-- Other currencies -->
+          <span *ngIf="checkoutObj.currency !== 'LYD'">
+            {{ checkoutObj.amount | currency:checkoutObj.currency }}
+          </span>
+         </h3>
       </ion-col>
     </ion-row>
 
@@ -104,7 +121,7 @@
 <ion-footer>
   <ion-toolbar>
     <div class="tabmenu">
-      <ion-button class="selected">
+      <ion-button class="selected" routerLink="/home-search">
         <img class="normal" src="assets/img/icons/location.png" alt="">
         <img class="active" src="assets/img/icons/location-yellow.png" alt="">
       </ion-button>

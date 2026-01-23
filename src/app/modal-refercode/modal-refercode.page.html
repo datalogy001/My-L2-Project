@@ -2,9 +2,28 @@
   <div class="ion-text-right">
     <ion-button fill="clear" class="close" (click)="closePopover(false)"><ion-icon name="close-outline"></ion-icon></ion-button>
   </div>
-  <h2>
-    {{ value  | currency: currencyCode }}
-  </h2> 
+ <h2>
+
+  <!-- LYD -->
+  <ng-container *ngIf="currencyCode === 'LYD'; else otherCurrency">
+
+    <ng-container *ngIf="lang === 'ar'; else lydEn">
+      {{ value }} د.ل
+    </ng-container>
+
+    <ng-template #lydEn>
+      LYD&nbsp;{{ value }}
+    </ng-template>
+
+  </ng-container>
+
+  <!-- Other currencies -->
+  <ng-template #otherCurrency>
+    {{ value | currency:currencyCode }}
+  </ng-template>
+
+</h2>
+ 
   <p>
     <strong>
       {{referralMessage}}

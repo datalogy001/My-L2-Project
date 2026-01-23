@@ -167,9 +167,10 @@ private validatePaymentCurrency(): boolean {
 
   return true;
 }
-
+lang:any;
 
   ngOnInit() {
+         this.lang = window.localStorage.getItem("L2TraveleSIM_language") || 'en';
      this.paymentType = '';
         this.loadPaymentMethods();
         this.initStripeFun();

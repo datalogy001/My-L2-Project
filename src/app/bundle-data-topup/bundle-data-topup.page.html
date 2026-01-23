@@ -2,25 +2,6 @@
 
   <div class="top-box" [ngStyle]="{'background': getBackgroundUrl()}">
     <div class="top-inner">
-
-      <!-- 
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>
-            <h3>
-              {{bundleName}}  <br> 
-              <div>{{ 'HOW_MUCH_MORE_DATA_DESCRIPTION' | translate }}</div>
-            </h3>
-          </ion-title> 
-          <ion-buttons slot="end">
-            <ion-button fill="clear" (click)="gotoBack()">
-              <ion-icon name="arrow-back-circle-outline"></ion-icon>
-            </ion-button>
-          </ion-buttons>   
-        </ion-toolbar>
-      </ion-header> 
-      -->
-
       <div class="header">
         <div class="title">
           <h3>
@@ -62,7 +43,21 @@
               <ng-container *ngIf="bundleItem.is_cashback_applicable == 1">
                 <img src="assets/img/cashback.png" alt="Cashback">
               </ng-container>
-              {{ bundleItem.price | currency:currencyCode }}
+              <!-- LYD -->
+          <span *ngIf="currencyCode === 'LYD'">
+            <ng-container *ngIf="lang === 'ar'; else lydEn">
+              {{ bundleItem.price | number:'1.0-0' }} د.ل
+            </ng-container>
+
+            <ng-template #lydEn>
+              LYD&nbsp;{{ bundleItem.price | number:'1.0-0' }}
+            </ng-template>
+          </span>
+
+          <!-- Other currencies -->
+          <span *ngIf="currencyCode !== 'LYD'">
+            {{ bundleItem.price | currency:currencyCode }}
+          </span>
             </p>
           </ion-col>
 
@@ -92,7 +87,21 @@
               <ng-container *ngIf="bundleItem.is_cashback_applicable == 1">
                 <img src="assets/img/cashback.png" alt="Cashback">
               </ng-container>
-              {{ bundleItem.price | currency:currencyCode }}
+               <!-- LYD -->
+          <span *ngIf="currencyCode === 'LYD'">
+            <ng-container *ngIf="lang === 'ar'; else lydEn">
+              {{ bundleItem.price | number:'1.0-0' }} د.ل
+            </ng-container>
+
+            <ng-template #lydEn>
+              LYD&nbsp;{{ bundleItem.price | number:'1.0-0' }}
+            </ng-template>
+          </span>
+
+          <!-- Other currencies -->
+          <span *ngIf="currencyCode !== 'LYD'">
+            {{ bundleItem.price | currency:currencyCode }}
+          </span>
             </p>
           </ion-col>
 

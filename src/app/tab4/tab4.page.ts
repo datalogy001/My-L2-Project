@@ -43,8 +43,9 @@ export class Tab4Page {
   {
     return this.translate.instant(`ZONES.${zones}`) 
   }
-  
+  lang: any;
   ionViewDidEnter() {
+  this.lang = window.localStorage.getItem("L2TraveleSIM_language") || 'en';
     this.paymentList = [];
     if (window.localStorage.getItem('L2TraveleSIM_auth_token') == null) {
       this.isLogin = false;

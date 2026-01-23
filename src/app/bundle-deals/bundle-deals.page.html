@@ -68,7 +68,23 @@
                 <ng-container *ngIf="resultArray[0].is_cashback_applicable == 1">
                   <img src="assets/img/cashback.png" alt="Cashback">
                 </ng-container>
-               {{ resultArray[0].price | currency:currencyCode }}
+
+                   <!-- LYD -->
+          <span *ngIf="currencyCode === 'LYD'">
+            <ng-container *ngIf="lang === 'ar'; else lydEn">
+              {{ resultArray[0].price  | number:'1.0-0' }} د.ل
+            </ng-container>
+
+            <ng-template #lydEn>
+              LYD&nbsp;{{ resultArray[0].price | number:'1.0-0' }}
+            </ng-template>
+          </span>
+
+          <!-- Other currencies -->
+          <span *ngIf="currencyCode !== 'LYD'">
+            {{ resultArray[0].price  | currency:currencyCode }}
+          </span>
+
               </p>
             </ion-col>
           </ion-row>
@@ -94,7 +110,21 @@
                 <ng-container *ngIf="bundleItem.is_cashback_applicable == 1">
                   <img src="assets/img/cashback.png" alt="Cashback">
                 </ng-container>
-{{ bundleItem.price | currency:currencyCode  }}
+   <!-- LYD -->
+          <span *ngIf="currencyCode === 'LYD'">
+            <ng-container *ngIf="lang === 'ar'; else lydEn">
+              {{ bundleItem.price | number:'1.0-0' }} د.ل
+            </ng-container>
+
+            <ng-template #lydEn>
+              LYD&nbsp;{{ bundleItem.price | number:'1.0-0' }}
+            </ng-template>
+          </span>
+
+          <!-- Other currencies -->
+          <span *ngIf="currencyCode !== 'LYD'">
+            {{ bundleItem.price | currency:currencyCode }}
+          </span>
               </p>
             </ion-col>
           </ion-row>
@@ -124,7 +154,21 @@
                   <ng-container *ngIf="bundleItem.is_cashback_applicable == 1">
                     <img src="assets/img/cashback.png" alt="Cashback">
                   </ng-container>
-                  {{ bundleItem.price | currency:currencyCode  }}
+                    <!-- LYD -->
+          <span *ngIf="currencyCode === 'LYD'">
+            <ng-container *ngIf="lang === 'ar'; else lydEn">
+              {{ bundleItem.price | number:'1.0-0' }} د.ل
+            </ng-container>
+
+            <ng-template #lydEn>
+              LYD&nbsp;{{ bundleItem.price | number:'1.0-0' }}
+            </ng-template>
+          </span>
+
+          <!-- Other currencies -->
+          <span *ngIf="currencyCode !== 'LYD'">
+            {{ bundleItem.price | currency:currencyCode }}
+          </span>
                 </p>
               </ion-col>
     

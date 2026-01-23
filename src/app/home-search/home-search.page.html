@@ -8,7 +8,25 @@
  <ion-title>
           <img class="ftel-logo" src="assets/img/L2-logowhite.png" alt="">
         </ion-title>
-       <ion-chip (click)="gotoTOpup()" slot="end" [ngClass]="getWalletClass()">{{ walletBalance | currency:currencyCode }}</ion-chip>
+       <ion-chip (click)="gotoTOpup()" slot="end" [ngClass]="getWalletClass()">
+       
+         <!-- LYD -->
+          <span *ngIf="currencyCode === 'LYD'">
+            <ng-container *ngIf="langDefault === 'ar'; else lydEn">
+              {{ walletBalance | number:'1.0-0' }} د.ل
+            </ng-container>
+
+            <ng-template #lydEn>
+              LYD&nbsp;{{ walletBalance| number:'1.0-0' }}
+            </ng-template>
+          </span>
+
+          <!-- Other currencies -->
+          <span *ngIf="currencyCode !== 'LYD'">
+            {{ walletBalance | currency:currencyCode }}
+          </span>
+
+      </ion-chip>
 
         <ion-buttons slot="end">
           <ion-button fill="clear" *ngIf="notiCount == 0" (click)="gotoNoti()">

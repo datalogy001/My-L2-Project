@@ -1,6 +1,14 @@
 <ion-content class="ion-padding">
   <h2>
-    {{ value | currency: currencyCode }}
+    <span *ngIf="currencyCode === 'LYD'">
+            <ng-container *ngIf="lang === 'ar'; else lydEn">
+              {{ value | number:'1.0-0' }} د.ل
+            </ng-container>
+
+            <ng-template #lydEn>
+              LYD&nbsp;{{ value| number:'1.0-0' }}
+            </ng-template>
+          </span>
   </h2>
   <p>
     <strong>

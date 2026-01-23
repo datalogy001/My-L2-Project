@@ -16,25 +16,62 @@
   
   <div class="ion-padding">
 
-    <div class="contentbox">
+  <div class="contentbox">
 
-      
-      <ion-radio-group [(ngModel)]="selectedAmount" (ionChange)="onRadioSelect($event)">
-        <ion-radio *ngFor="let amt of topupAMTList" [value]="amt.value">
-          {{ amt.text  | currency:currencyCode }}
-        </ion-radio>
-      </ion-radio-group>
+  <ion-radio-group [(ngModel)]="selectedAmount" (ionChange)="onRadioSelect($event)">
+    <ion-radio *ngFor="let amt of topupAMTList" [value]="amt.value">
 
-      <ion-list>
-        <ion-item>
-          <ion-select  [okText]="'OK_BUTTON' | translate"
-      [cancelText]="'CANCEL_BUTTON' | translate" label="{{'Choose_amount' | translate}}" placeholder="" [(ngModel)]="customAmount" (ionChange)="onChooseRadio()">
-            <ion-select-option *ngFor="let amt of topupAMTNewList" [value]="amt.value">{{ amt.text | currency:currencyCode}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
-      
-    </div> 
+      <!-- LYD -->
+      <ng-container *ngIf="currencyCode === 'LYD'; else otherCurrencyRadio">
+        <ng-container *ngIf="lang === 'ar'; else lydEnRadio">
+          {{ amt.text }} د.ل
+        </ng-container>
+        <ng-template #lydEnRadio>
+          LYD&nbsp;{{ amt.text }}
+        </ng-template>
+      </ng-container>
+
+      <!-- Other currencies -->
+      <ng-template #otherCurrencyRadio>
+        {{ amt.text | currency:currencyCode }}
+      </ng-template>
+
+    </ion-radio>
+  </ion-radio-group>
+
+  <ion-list>
+    <ion-item>
+      <ion-select
+        [okText]="'OK_BUTTON' | translate"
+        [cancelText]="'CANCEL_BUTTON' | translate"
+        label="{{ 'Choose_amount' | translate }}"
+        [(ngModel)]="customAmount"
+        (ionChange)="onChooseRadio()"
+      >
+        <ion-select-option *ngFor="let amt of topupAMTNewList" [value]="amt.value">
+
+          <!-- LYD -->
+          <ng-container *ngIf="currencyCode === 'LYD'; else otherCurrencySelect">
+            <ng-container *ngIf="lang === 'ar'; else lydEnSelect">
+              {{ amt.text }} د.ل
+            </ng-container>
+            <ng-template #lydEnSelect>
+              LYD&nbsp;{{ amt.text }}
+            </ng-template>
+          </ng-container>
+
+          <!-- Other currencies -->
+          <ng-template #otherCurrencySelect>
+            {{ amt.text | currency:currencyCode }}
+          </ng-template>
+
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+</div>
+ 
 
     <ion-button expand="block" class="btn-green btn-payment" (click)="submit()">
       {{ 'TOP_UP_CREDIT'  | translate}}

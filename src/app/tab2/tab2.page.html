@@ -145,7 +145,22 @@
                     <p class="countryname">{{ zoneItem.name }}</p>
                   </ion-col>
                   <ion-col>
-                    <p class="day">{{ 'FROM_LABEL' | translate }} {{ zoneItem.perDay | currency:currencyCode }}
+                    <p class="day">{{ 'FROM_LABEL' | translate }}
+                      <!-- LYD -->
+          <span *ngIf="currencyCode === 'LYD'">
+            <ng-container *ngIf="langDefault === 'ar'; else lydEn">
+              {{ zoneItem.perDay| number:'1.0-0' }} د.ل
+            </ng-container>
+
+            <ng-template #lydEn>
+              LYD&nbsp;{{ zoneItem.perDay | number:'1.0-0' }}
+            </ng-template>
+          </span>
+
+          <!-- Other currencies -->
+          <span *ngIf="currencyCode !== 'LYD'">
+            {{zoneItem.perDay | currency:currencyCode }}
+          </span>
                       {{ 'DAY_LABEL' | translate }}</p>
                   </ion-col>
                 </ion-row>

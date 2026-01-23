@@ -20,9 +20,10 @@ export class PurchaseSuccessPage implements OnInit {
   
   constructor(private platform: Platform,  private Router: Router, private modalController: ModalController,private service: ServicesService) { }
 
-
+  lang: any;
 
   ngOnInit() {
+    this.lang = window.localStorage.getItem("L2TraveleSIM_language") || 'en';
  //Notification Permission Popup 
     this.platform.ready().then(() => {
       if (this.platform.is('android') || this.platform.is('ios')) {

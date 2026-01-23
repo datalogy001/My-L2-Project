@@ -39,7 +39,23 @@
     <div class="planrow">
       <div>
         <img src="assets/img/icons/location-white.png" alt="">
-        <ion-chip> {{ voucherResult.topup_amount  | currency: voucherResult.currency }}</ion-chip>
+        <ion-chip> 
+            <!-- LYD -->
+          <ng-container *ngIf="voucherResult.currency === 'LYD'; else otherCurrencySelect">
+            <ng-container *ngIf="lang === 'ar'; else lydEnSelect">
+              {{ voucherResult.topup_amount }} د.ل
+            </ng-container>
+            <ng-template #lydEnSelect>
+              LYD&nbsp;{{ voucherResult.topup_amount }}
+            </ng-template>
+          </ng-container>
+
+          <!-- Other currencies -->
+          <ng-template #otherCurrencySelect>
+            {{ voucherResult.topup_amount | currency:voucherResult.currency }}
+          </ng-template>
+
+        </ion-chip>
       </div>
     </div>
     <ion-button expand="block" class="plans" fill="outline"  (click)="gotoProfile()">

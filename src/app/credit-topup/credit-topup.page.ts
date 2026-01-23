@@ -37,8 +37,11 @@ topupAMTNewList: any[] = [];
 
   constructor(private cdr: ChangeDetectorRef, private loadingScreen: LoadingScreenAppPage, private modalCtrl: ModalController, private translate: TranslateService, private service: ServicesService, private Router: Router, private modalController: ModalController, private navCtrl: NavController) { }
 
+    lang: any;
+
   ngOnInit() {
     
+     this.lang = window.localStorage.getItem("L2TraveleSIM_language") || 'en';
     //Current currency 
     if (window.localStorage.getItem("L2TraveleSIM_currency") == null) {
       this.currencyCode = 'USD';

@@ -78,7 +78,23 @@
 
         <!-- Wallet Balance -->
         <h2 *ngIf="!isWalletLoading">
-          {{ walletBalance | currency: currencyCode }}
+           <!-- LYD -->
+          <span *ngIf="currencyCode === 'LYD'">
+            <ng-container *ngIf="lang === 'ar'; else lydEn">
+              {{ walletBalance | number:'1.0-0' }} د.ل
+            </ng-container>
+
+            <ng-template #lydEn>
+              LYD&nbsp;{{ walletBalance| number:'1.0-0' }}
+            </ng-template>
+          </span>
+
+          <!-- Other currencies -->
+          <span *ngIf="currencyCode !== 'LYD'">
+            {{ walletBalance | currency:currencyCode }}
+          </span>
+
+   
         </h2>
         
         <div class="btn-blcok">
@@ -93,33 +109,96 @@
           <p class="title"><img src="assets/img/icons/credit-history-black.png" alt=""> <span>{{ 'Your_credit_history'  | translate}}</span> </p>
           
           <div class="autoscroll" *ngIf="isCreditHistory">
-            <p *ngFor="let creditItem of creditHistory">
-              <span *ngIf="creditItem.payment_type === 'wallet_topup'">
-                {{ creditItem.converted_amount	  | currency: creditItem.currency }}  {{ 'Top_up'  | translate}}
-              </span>
+  <p *ngFor="let creditItem of creditHistory">
 
-              <span *ngIf="creditItem.payment_type === 'voucher_topup'">
-                {{ creditItem.converted_amount	  | currency: creditItem.currency }}  {{ 'Voucher_Top_up'  | translate}}
-              </span>
+    <!-- Wallet top-up -->
+    <span *ngIf="creditItem.payment_type === 'wallet_topup'">
+      <ng-container *ngIf="creditItem.currency === 'LYD'; else walletOther">
+        <ng-container *ngIf="lang === 'ar'; else walletEn">
+          {{ creditItem.converted_amount }} د.ل
+        </ng-container>
+        <ng-template #walletEn>
+          LYD&nbsp;{{ creditItem.converted_amount }}
+        </ng-template>
+      </ng-container>
+      <ng-template #walletOther>
+        {{ creditItem.converted_amount | currency:creditItem.currency }}
+      </ng-template>
+      {{ 'Top_up' | translate }}
+    </span>
 
-              <span *ngIf="creditItem.payment_type === 'refer_friend'">
-               {{ creditItem.converted_amount	 | currency: creditItem.currency }} {{ 'Referral_Reward'  | translate}}
-              </span>
+    <!-- Voucher top-up -->
+    <span *ngIf="creditItem.payment_type === 'voucher_topup'">
+      <ng-container *ngIf="creditItem.currency === 'LYD'; else voucherOther">
+        <ng-container *ngIf="lang === 'ar'; else voucherEn">
+          {{ creditItem.converted_amount }} د.ل
+        </ng-container>
+        <ng-template #voucherEn>
+          LYD&nbsp;{{ creditItem.converted_amount }}
+        </ng-template>
+      </ng-container>
+      <ng-template #voucherOther>
+        {{ creditItem.converted_amount | currency:creditItem.currency }}
+      </ng-template>
+      {{ 'Voucher_Top_up' | translate }}
+    </span>
 
-              <span *ngIf="creditItem.payment_type === 'refer_friend_joining'">
-                {{ creditItem.converted_amount	 | currency: creditItem.currency }} {{ 'join_with_refer_code'  | translate}}
-               </span> 
+    <!-- Referral reward -->
+    <span *ngIf="creditItem.payment_type === 'refer_friend'">
+      <ng-container *ngIf="creditItem.currency === 'LYD'; else referOther">
+        <ng-container *ngIf="lang === 'ar'; else referEn">
+          {{ creditItem.converted_amount }} د.ل
+        </ng-container>
+        <ng-template #referEn>
+          LYD&nbsp;{{ creditItem.converted_amount }}
+        </ng-template>
+      </ng-container>
+      <ng-template #referOther>
+        {{ creditItem.converted_amount | currency:creditItem.currency }}
+      </ng-template>
+      {{ 'Referral_Reward' | translate }}
+    </span>
 
-               <span *ngIf="creditItem.payment_type === 'cashback'">
-                {{ creditItem.converted_amount | currency: creditItem.currency }} 
-                <ng-container *ngIf="creditItem.cashback_type =='percentage'">
-                  {{ creditItem.percentage + "%" }}
-                </ng-container>
-                {{ 'CASHBACK.TITLE' | translate }} 
-              </span>
+    <!-- Referral joining -->
+    <span *ngIf="creditItem.payment_type === 'refer_friend_joining'">
+      <ng-container *ngIf="creditItem.currency === 'LYD'; else joinOther">
+        <ng-container *ngIf="lang === 'ar'; else joinEn">
+          {{ creditItem.converted_amount }} د.ل
+        </ng-container>
+        <ng-template #joinEn>
+          LYD&nbsp;{{ creditItem.converted_amount }}
+        </ng-template>
+      </ng-container>
+      <ng-template #joinOther>
+        {{ creditItem.converted_amount | currency:creditItem.currency }}
+      </ng-template>
+      {{ 'join_with_refer_code' | translate }}
+    </span>
 
-            </p>
-          </div>
+    <!-- Cashback -->
+    <span *ngIf="creditItem.payment_type === 'cashback'">
+      <ng-container *ngIf="creditItem.currency === 'LYD'; else cashbackOther">
+        <ng-container *ngIf="lang === 'ar'; else cashbackEn">
+          {{ creditItem.converted_amount }} د.ل
+        </ng-container>
+        <ng-template #cashbackEn>
+          LYD&nbsp;{{ creditItem.converted_amount }}
+        </ng-template>
+      </ng-container>
+      <ng-template #cashbackOther>
+        {{ creditItem.converted_amount | currency:creditItem.currency }}
+      </ng-template>
+
+      <ng-container *ngIf="creditItem.cashback_type === 'percentage'">
+        {{ creditItem.percentage }}%
+      </ng-container>
+
+      {{ 'CASHBACK.TITLE' | translate }}
+    </span>
+
+  </p>
+</div>
+
 
            <div class="nohistory" *ngIf="!isCreditHistory">
             <img src="assets/img/noactive-bundle.png" alt="">
@@ -133,8 +212,52 @@
 
       <!-- referrals start -->
       <div class="referrals" *ngSwitchCase="'referrals'">
-        <h2 *ngIf="refer_balance > 0">+{{ refer_balance | currency:currencyCode }}</h2>
-        <h2 *ngIf="refer_balance <= 0">{{ refer_balance | currency:currencyCode }}</h2>
+       <!-- Positive balance -->
+<h2 *ngIf="refer_balance > 0">
+
+  <!-- LYD -->
+  <ng-container *ngIf="currencyCode === 'LYD'; else otherCurrencyPlus">
+
+    <ng-container *ngIf="lang === 'ar'; else lydEnPlus">
+      +{{ refer_balance }} د.ل
+    </ng-container>
+
+    <ng-template #lydEnPlus>
+      +LYD&nbsp;{{ refer_balance }}
+    </ng-template>
+
+  </ng-container>
+
+  <!-- Other currencies -->
+  <ng-template #otherCurrencyPlus>
+    +{{ refer_balance | currency:currencyCode }}
+  </ng-template>
+
+</h2>
+
+<!-- Zero or negative balance -->
+<h2 *ngIf="refer_balance <= 0">
+
+  <!-- LYD -->
+  <ng-container *ngIf="currencyCode === 'LYD'; else otherCurrency">
+
+    <ng-container *ngIf="lang === 'ar'; else lydEn">
+      {{ refer_balance }} د.ل
+    </ng-container>
+
+    <ng-template #lydEn>
+      LYD&nbsp;{{ refer_balance }}
+    </ng-template>
+
+  </ng-container>
+
+  <!-- Other currencies -->
+  <ng-template #otherCurrency>
+    {{ refer_balance | currency:currencyCode }}
+  </ng-template>
+
+</h2>
+
         <div class="btn-blcok">
           <ion-button expand="block" class="btn-green" (click)="shareReferralcode()">
             {{ 'share_unique_code'  | translate}}
@@ -143,23 +266,57 @@
         <div class="referral-history">
           <p class="title"><img src="assets/img/icons/referral-history-black.png" alt=""> <span>  {{ 'referral_history'  | translate}}</span>
           </p>
-          <div class="autoscroll" *ngIf="isReferHistory">
-            <p *ngFor="let referItem of referHistory">
-              <span *ngIf="referItem.get_joinee_details != null">
-                {{ 'refer_signup_msg' | translate: { amount: getFormattedAmount(referItem.converted_amount, referItem.currency), name: referItem.get_joinee_details.first_name } }}
-              </span>
-              
-              <span *ngIf="referItem.get_joinee_details == null">
-                <span *ngIf="referItem.payment_type === 'cashback'">
-                  <ng-container *ngIf="referItem.cashback_type == 'percentage'">
-                    {{ referItem.percentage +"%" }}
-                  </ng-container>
-                  {{ 'CASHBACK.TITLE' | translate }} 
-                  {{ referItem.converted_amount | currency: referItem.currency }} 
-                </span>
-             </span>
-            </p>
-          </div>
+         <div class="autoscroll" *ngIf="isReferHistory">
+  <p *ngFor="let referItem of referHistory">
+
+    <!-- Signup referral (already formatted via function – KEEP AS IS) -->
+    <span *ngIf="referItem.get_joinee_details != null">
+      {{ 
+        'refer_signup_msg' 
+          | translate: {
+              amount: getFormattedAmount(
+                referItem.converted_amount,
+                referItem.currency
+              ),
+              name: referItem.get_joinee_details.first_name
+            } 
+      }}
+    </span>
+
+    <!-- Cashback -->
+    <span *ngIf="referItem.get_joinee_details == null">
+      <span *ngIf="referItem.payment_type === 'cashback'">
+
+        <ng-container *ngIf="referItem.cashback_type === 'percentage'">
+          {{ referItem.percentage }}%
+        </ng-container>
+
+        {{ 'CASHBACK.TITLE' | translate }}
+
+        <!-- LYD -->
+        <ng-container *ngIf="referItem.currency === 'LYD'; else otherCurrency">
+
+          <ng-container *ngIf="lang === 'ar'; else lydEn">
+            {{ referItem.converted_amount }} د.ل
+          </ng-container>
+
+          <ng-template #lydEn>
+            LYD&nbsp;{{ referItem.converted_amount }}
+          </ng-template>
+
+        </ng-container>
+
+        <!-- Other currencies -->
+        <ng-template #otherCurrency>
+          {{ referItem.converted_amount | currency:referItem.currency }}
+        </ng-template>
+
+      </span>
+    </span>
+
+  </p>
+</div>
+
           <div class="nohistory" *ngIf="!isReferHistory">
             <img src="assets/img/noactive-bundle.png" alt="">
             <p>

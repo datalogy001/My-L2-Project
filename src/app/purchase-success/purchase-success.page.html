@@ -9,13 +9,26 @@
     <p  class="ion-text-center" *ngIf="cashBackRes?.amount_type === 'fixed'">
       <img src="assets/img/icons/cashback-white.png" alt="{{ 'CASHBACK.IMG_ALT' | translate }}">
       <strong>{{ 'CASHBACK.SUCCESS' | translate }}</strong><br>
-      {{ 'CASHBACK.ADDED' | translate: { amount: (cashBackRes?.amount | currency: cashBackRes?.currency) } }}
+
+        {{ 'CASHBACK.ADDED' | translate: { 
+        amount: (cashBackRes?.currency === 'LYD' 
+                  ? (lang === 'ar' ? (cashBackRes?.amount | number:'1.0-0') + ' د.ل' 
+                                   : 'LYD ' + (cashBackRes?.amount | number:'1.0-0')) 
+                  : (cashBackRes?.amount | currency: cashBackRes?.currency)) 
+      } 
+  }}
     </p>
 
     <p class="ion-text-center" *ngIf="cashBackRes?.amount_type !== 'fixed'">
       <img src="assets/img/icons/cashback-white.png" alt="{{ 'CASHBACK.IMG_ALT' | translate }}">
       <strong>{{ 'CASHBACK.PERCENTAGE_SUCCESS' | translate: { percentage: cashBackRes?.percentage } }}</strong><br>
-      {{ 'CASHBACK.ADDED' | translate: { amount: (cashBackRes?.amount | currency: cashBackRes?.currency) } }}
+      {{ 'CASHBACK.ADDED' | translate: { 
+        amount: (cashBackRes?.currency === 'LYD' 
+                  ? (lang === 'ar' ? (cashBackRes?.amount | number:'1.0-0') + ' د.ل' 
+                                   : 'LYD ' + (cashBackRes?.amount | number:'1.0-0')) 
+                  : (cashBackRes?.amount | currency: cashBackRes?.currency)) 
+      } 
+  }}
     </p>
   </div>
   <!-- Cashback Section End -->
