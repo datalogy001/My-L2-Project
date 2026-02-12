@@ -13,14 +13,7 @@ export class UpdateAppPage implements OnInit {
   }
 
   updateNow() {
-    if (this.platform.is('ios')) {
-      // Redirect to the iOS App Store
-     //  window.open('https://apps.apple.com/us/app/L2TravelSIMData', '_system');
-    } else if (this.platform.is('android')) {
-      // Redirect to the Google Play Store
       this.market.open('com.L2TravelSIMData');
-    }
-
-    // Note: Do not dismiss the modal here
   }
+  
 }

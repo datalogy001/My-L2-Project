@@ -10,7 +10,7 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingScreenAppPage } from '../loading-screen-app/loading-screen-app.page';
 import { debounceTime, Subject } from 'rxjs';
-
+import OneSignalPlugin from 'onesignal-cordova-plugin';
 
 @Component({
   selector: 'app-verification',
@@ -202,6 +202,10 @@ resolveCurrency(countryCode: string): string {
     this.service.createAccount(this.tempData.registerObj).then((res: any) => {
       this.loadingScreen.dismissLoading();
       if (res.code == 200) {
+          //  When user completes signup
+          if (this.platform.is('cordova')) {
+          OneSignalPlugin.sendTag("signed_up", "true");
+          }
       
         this.userLanguage.language = window.localStorage.getItem("L2TraveleSIM_language") || 'en';
         this.updateUserLanguage(res.data[0]['token']); 

@@ -3,7 +3,7 @@ import { NavController,ModalController, Platform } from '@ionic/angular';
 import { ServicesService } from '../api/services.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-
+import OneSignalPlugin from 'onesignal-cordova-plugin';
 
 
 @Component({
@@ -42,6 +42,10 @@ export class ProcessingBarFpayPage implements OnInit, OnDestroy {
         this.result = res.data[0];
         window.localStorage.setItem('L2TraveleSIM_user_result',  "true");
          this.managingAppLogs("From App Step 5: Card payment Success:",this.value.bundle.extraAmount,this.value.bundle.bundleData.name);
+         //Make purchase TAG
+         if (this.platform.is('cordova')) {
+            OneSignalPlugin.sendTag("made_purchase", "true");
+         }
       } else {
           this.managingAppLogs("From App Step 5: Card payment Error:" + JSON.stringify(res),this.value.bundle.extraAmount,this.value.bundle.bundleData.name);
       //  this.error = true;

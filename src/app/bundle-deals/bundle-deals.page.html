@@ -61,7 +61,12 @@
           <h3>{{ 'UNLIMITED_DAILY_PASS' | translate }}</h3>
           <ion-row>
             <ion-col size="7">
-              <p class="day">{{ resultArray[0].duration }} {{ 'DAYS' | translate }}</p>
+              <p class="day">
+                {{ resultArray[0].duration > 1 
+                    ? ('UNLIMITED_DAY_PASS_PLURAL_deals' | translate:{ duration: resultArray[0].duration }) 
+                    : ('UNLIMITED_DAY_PASS_SINGULAR_deals' | translate:{ duration: resultArray[0].duration }) 
+                }}
+              </p>
             </ion-col>
             <ion-col size="5">
               <p class="price text-right">
@@ -147,7 +152,10 @@
           <ion-card class="value-data" *ngFor="let bundleItem of restArray" (click)="gotoSummary(bundleItem, true)">
             <ion-row>
               <ion-col size="8">
-                <p class="data">{{ 'UNLIMITED_DAY_PASS' | translate:{ duration: bundleItem.duration } }}</p>
+                <p class="data">  {{ bundleItem.duration > 1 
+                      ? ('UNLIMITED_DAY_PASS_PLURAL' | translate:{ duration: bundleItem.duration }) 
+                      : ('UNLIMITED_DAY_PASS_SINGULAR' | translate:{ duration: bundleItem.duration }) 
+                  }}</p>
               </ion-col>
               <ion-col size="4" >
                 <p class="price text-right">

@@ -417,7 +417,7 @@ setDefaultCurrencyAndLanguage() {
     const savedLanguageStatus = window.localStorage.getItem("L2TraveleSIM_Saved_Language");
     const savedLanguage = window.localStorage.getItem("L2TraveleSIM_language");
 
-    if (savedLanguageStatus === "Yes" || savedLanguageStatus !== null) {
+  if (savedLanguageStatus === "Yes" && savedLanguage) {
       if (savedLanguage) {
         this.deviceLanguage = savedLanguage;
       } else {

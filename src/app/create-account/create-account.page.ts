@@ -395,6 +395,13 @@ resolveCurrency(countryCode: string): string {
      //First time -SIGNUP- Google 
       //Socail Media Country Model STARTED 
      this.modelSocailCountry( resNew.data['id'],this.Router.url );
+       // Set OneSignal tag to identify that user has completed signup
+      if (this.platform.is('cordova')) {
+        OneSignalPlugin.sendTag("signed_up", "true");
+      }
+      //End
+
+
      }
 
     } else {

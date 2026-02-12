@@ -411,6 +411,11 @@ async submit() {
           } 
          }else{
      //First time -SIGNUP- Google 
+        if (this.platform.is('cordova')) {
+        //For users who haven't signed up yet, this tag will simply not exist.
+         OneSignalPlugin.sendTag("signed_up", "true");
+          }
+          //
       //Socail Media Country Model STARTED 
      this.modelSocailCountry( resNew.data['id'],this.Router.url );
          }

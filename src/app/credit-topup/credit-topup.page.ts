@@ -58,17 +58,23 @@ topupAMTNewList: any[] = [];
 
 
   
-  generateTopupAmountList(currency: string) {
-  const startValue = currency === 'LYD' ? 5 : 1;
+generateTopupAmountList(currency: string) {
 
-  this.topupAMTNewList = Array.from({ length: 50 }, (_, i) => {
-    const value = startValue + i;
-    return {
-      text: value.toString(),
-      value: value
-    };
-  });
+  const startValue = currency === 'LYD' ? 5 : 1;
+  const endValue = 50;
+
+  this.topupAMTNewList = Array.from(
+    { length: endValue - startValue + 1 },
+    (_, i) => {
+      const value = startValue + i;
+      return {
+        text: value.toString(),
+        value: value
+      };
+    }
+  );
 }
+
 
 
   // Placeholder text dynamically updated based on selected currency
@@ -105,14 +111,6 @@ topupAMTNewList: any[] = [];
     return await modal.present();
   }
 
-
-  onInputChange() {
-    const value = Number(this.customAmount); // Convert input to number
-    this.selectedAmount = null;
-    if (isNaN(value) || value < 1 || value > 50) {
-      this.customAmount = ''; // Clear input if invalid
-    }
-  }
 
   submit() {
     if (!this.selectedAmount && !this.customAmount) {

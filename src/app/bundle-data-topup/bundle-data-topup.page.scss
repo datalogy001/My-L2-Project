@@ -125,6 +125,17 @@ ion-header {
   }
 }
 
+.valueplan
+{
+    color: var(--theme-color-1) !important;
+       
+}
+
+.unlimted
+{
+   color: #ef413d !important;
+}
+
 .container{
   position: relative; 
   color: #fff; 
@@ -145,7 +156,7 @@ ion-header {
        font-weight: bold; 
        font-size: 23px; 
        margin: 25px 10px 10px; 
-      //  color: var(--theme-color-2);
+       //color: #ef413d;
        &:first-child{ margin: 0 10px 10px;}
     }
     h4{
