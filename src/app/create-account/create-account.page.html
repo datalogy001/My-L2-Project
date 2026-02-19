@@ -142,20 +142,28 @@
       {{ 'CREATE_ACCOUNT_AGREE_TEXT' | translate }}
     </p>
 
-    <ion-row class="checkrow">
-      <ion-col size="6">
-        <div class="checkdiv">
-          <ion-checkbox [(ngModel)]="registerObj.isPrivacySelected"></ion-checkbox> <span (click)="gotoPrivacy()">{{
-            'CREATE_ACCOUNT_PRIVACY_POLICY' | translate }}</span>
-        </div>
-      </ion-col>
-      <ion-col size="6">
-        <div class="checkdiv">
-          <ion-checkbox [(ngModel)]="registerObj.isTermsSelected"></ion-checkbox> <span (click)="gotoTerms()">{{
-            'CREATE_ACCOUNT_TERMS' | translate }}</span>
-        </div>
-      </ion-col>
-    </ion-row>
+ <ion-row class="checkrow">
+  <ion-col size="6">
+    <div class="checkdiv">
+      <ion-checkbox [(ngModel)]="registerObj.isPrivacySelected"></ion-checkbox>
+
+      <span class="legal-link" (click)="gotoPrivacy()">
+        {{ 'CREATE_ACCOUNT_PRIVACY_POLICY' | translate }}
+      </span>
+    </div>
+  </ion-col>
+
+  <ion-col size="6">
+    <div class="checkdiv">
+      <ion-checkbox [(ngModel)]="registerObj.isTermsSelected"></ion-checkbox>
+
+      <span class="legal-link" (click)="gotoTerms()">
+        {{ 'CREATE_ACCOUNT_TERMS' | translate }}
+      </span>
+    </div>
+  </ion-col>
+</ion-row>
+
 
     <ion-button expand="block" class="btn-green btn-signup" (click)="submit()">
       {{ 'CREATE_ACCOUNT_SIGN_UP_BUTTON' | translate }}
@@ -165,10 +173,12 @@
       <span>{{ 'CREATE_ACCOUNT_OR_SIGN_IN' | translate }}</span>
     </div>
 
-    <div class="social">
-      <ion-button (click)="loginWithGoogle()" fill="outline"><ion-icon name="logo-google"></ion-icon></ion-button>
-      <!--<ion-button (click)="loginWithFacebook()" fill="outline"><ion-icon name="logo-facebook"></ion-icon></ion-button> -->
-    </div>
+   <div class="social">
+  <ion-button (click)="loginWithGoogle()" fill="outline">
+    <img src="assets/img/google1.png" alt="Google Login" />
+  </ion-button>
+</div>
+
 
   </div>
 

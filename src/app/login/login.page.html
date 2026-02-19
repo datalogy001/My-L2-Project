@@ -41,11 +41,13 @@
   <div class="orbox">
     <span>{{ 'LOGIN_OR_SIGN_IN_WITH' | translate }}</span>
   </div>
+  
+<div class="social">
+  <ion-button (click)="loginWithGoogle()" fill="outline">
+    <img src="assets/img/google1.png" alt="Google Login" />
+  </ion-button>
+</div>
 
-  <div class="social">
-    <ion-button (click)="loginWithGoogle()" fill="outline"><ion-icon name="logo-google"></ion-icon></ion-button>
-   <!-- <ion-button fill="outline" (click)="loginWithFacebook()"><ion-icon name="logo-facebook"></ion-icon></ion-button> -->
-  </div>
 
   <p class="create-account">
     <a (click)="gotoRegister()">{{ 'LOGIN_CREATE_ACCOUNT' | translate }}</a>

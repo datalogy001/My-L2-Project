@@ -130,27 +130,40 @@ ion-checkbox{
       top: -18px; background: #fff; font-size: 13px; white-space: nowrap; color: var(--theme-color-2); text-transform: uppercase;
   }
 }
+.social {
+  margin: 35px 0px 20px;
+  display: flex;
+  justify-content: center;
 
-.social{
-  margin: 35px 0px 20px; display: flex; flex-direction: row; justify-content:center; 
-  
-  ion-button{
+  ion-button {
     --border-radius: 8px;
-    font-size: 20px;
     height: 54px;
-    width: 30%;
+    width: 140px; // fixed width looks better than %
     --border-width: 1px;
-    --border-color: rgba(17,32,66,0.2);
-    --background:#fff;
-    --color: var(--theme-color-1);
+    --border-color: rgba(17, 32, 66, 0.2);
+    --background: #fff;
     margin: 0 6px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     &::part(native) {
-      padding-top: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;  // remove top padding
     }
-  
+
+    img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
   }
 }
+
+
 
 .create-account{
   text-align: center; margin: 25px 0 0px;
