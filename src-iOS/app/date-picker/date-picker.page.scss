@@ -1,0 +1,28 @@
+ion-header{
+    ion-toolbar{
+        ion-title{
+            color: var(--theme-color-2);
+            h3{ color: var(--theme-color-2);}
+        }
+    }
+}
+ion-content{
+    --background:#fff;
+}
+
+.brnrow{
+    text-align: center;
+    ion-button{
+        display: inline-block; width: 45%; width: 43%; margin: 0 5px;
+        &.button-outline {
+            --color: var(--theme-color-2);
+            --border-color: var(--theme-color-2);
+            --background:#fff;
+            }
+        &.btn-green{
+            --background:var(--button-main-bg);
+            --background-activated:var(--button-main-bg);
+            --color:var(--button-main-text);
+        }
+    }
+}

@@ -1,0 +1,87 @@
+ion-header {
+  ion-toolbar {
+    --min-height: 40px; height: 40px;
+
+    ion-title{
+      padding-inline: 10px;
+      font-size:20px;
+    }
+
+    ion-buttons{
+      ion-button{
+        color: var(--theme-color-2);
+      }
+    }
+  }
+}
+
+
+.sharebox{
+    display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; padding:0 10px 10px;
+    .barcode{
+        width: 180px; margin-left: 15px; border-radius: 8px; overflow: hidden;
+        img{
+            width: 100%; border-radius: 8px;
+        }
+    }
+    .sharedetail{
+      width: 100%;
+      p{color: var(--theme-color-2); font-weight: 300; margin: -5px 0 10px; font-size: 14px;
+        line-height: 16px;
+      }    
+    }
+}
+
+ion-button{
+  &.btn-share{
+   --background: var( --button-primary-bg);
+--background-activated: var(--button-primary-bg);
+  --color: #fff;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  margin: 0;
+  --box-shadow: none;
+  height: 46px;
+  --border-radius: 8px; 
+  font-weight: 400;
+  font-size: 17px;
+  }    
+}
+
+
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+  ion-header ion-toolbar { --min-height: 60px;  height: 60px;  }
+  ion-header ion-toolbar ion-title{ padding-inline: 20px; font-size:30px; }
+  .sharebox .barcode{  width: 250px; margin-left: 20px;  }
+  .sharebox .sharedetail p { font-size: 21px; line-height: 30px; }
+  ion-button.btn-share{ height: 60px;  font-size: 24px; }
+  .sharebox{ padding: 0 0 10px;}
+ 
+
+
+
+
+}
+
+
+/**************************************************************/
+/***** small devices ****/
+@media only screen and (max-width : 380px) {
+
+  .sharebox { padding: 0 0px 10px; }
+
+}

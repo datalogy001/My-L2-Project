@@ -1,0 +1,16 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <p [innerHTML] ="'topup_not_allowed' | translate">
+  </p>
+
+  <div class="btn-div">
+    <ion-button  fill="outline"   (click)="closePopover(0)">
+      {{ 'CLOSE_BUTTON' | translate }}
+    </ion-button>
+    <ion-button class="btn-green"  (click)="closePopover(1)">
+      {{ 'BUY_NOW' | translate }}
+    </ion-button>
+    
+  </div>
+
+</ion-content>

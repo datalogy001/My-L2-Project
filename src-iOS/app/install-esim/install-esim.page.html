@@ -1,0 +1,254 @@
+<ion-content [fullscreen]="true">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <h3 [innerHTML]="'ACTIVATE_PLAN_TITLE' | translate">
+        </h3>
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="gotoBack()">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <ion-toolbar class="textbar">
+      <p>
+        {{ 'ACTIVATE_INFO_MESSAGE' | translate }}
+      </p>
+    </ion-toolbar>
+
+    <ion-toolbar class="segmentbar">
+      <ion-segment value="install" [(ngModel)]="selectedSegment">
+        <ion-segment-button value="install">
+          <ion-label>{{ 'DIRECT_INSTALL_LABEL' | translate }}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="qrcode">
+          <ion-label> {{ 'QR_CODE' | translate }} </ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="manual">
+          <ion-label> {{ 'MANUAL' | translate }} </ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <div class="ion-padding">
+
+    <div class="segment-panel" [ngSwitch]="selectedSegment">
+
+      <div *ngSwitchCase="'install'">
+        <ion-button (click)="directInstall()" expand="block" class="btn-green">
+          {{ 'INSTALL_ESIM_BUTTON' | translate }}
+        </ion-button>
+        <ion-card class="create-apn">
+          <p>
+            <strong>{{ 'WARNING' | translate }}</strong> {{ 'ESIM_INSTALL_WARNING' | translate }}
+          </p>
+        </ion-card>
+
+        <h2>{{ 'IOS_17_4_ABOVE' | translate }}</h2>
+
+        <p>{{ 'INSTALL_NOTE' | translate }}</p>
+
+        <h4>{{ 'STEP_1' | translate }}</h4>
+        <p>
+          <span *ngFor="let step of translations['INSTALL_STEPS']">{{ step }}<br></span>
+        </p>
+
+        <!--<ion-button (click)="directInstall()" expand="block" fill="outline" class="btn-apnstep">
+          {{ 'INSTALL_ESIM_BUTTON' | translate }}
+        </ion-button> -->
+
+        <h2>{{ 'IOS_17_3_BELOW' | translate }}</h2>
+
+        <h4>{{ 'STEP_1' | translate }}</h4>
+        <p>{{ 'QR_STEP_1' | translate }}</p>
+
+        <h4>{{ 'STEP_2' | translate }}</h4>
+        <p>{{ 'QR_STEP_2' | translate }}</p>
+
+        <h4>{{ 'STEP_3' | translate }}</h4>
+        <p>{{ 'QR_STEP_3' | translate }}</p>
+
+        <h4>{{ 'STEP_4' | translate }}</h4>
+        <p>{{ 'QR_STEP_4' | translate }}</p>
+
+        <p class="qrlink">
+          <a>{{ 'QR_CODE_CLICK' | translate }}</a>
+        </p>
+        <div class="qrcode" (click)="gotoInstallDownload()">
+          <img [src]="qrCodeImage" alt="{{ 'ESIM_QR_CODE_ALT' | translate }}">
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'qrcode'">
+        <ion-card class="create-apn">
+          <p>
+            <strong>{{ 'WARNING' | translate }}</strong> {{ 'ESIM_INSTALL_WARNING' | translate }}
+          </p>
+        </ion-card>
+
+        <p class="qrlink">
+          <a>{{ 'QR_CODE_CLICK' | translate }}</a>
+        </p>
+        <div class="qrcode" (click)="gotoInstallDownload()">
+          <img [src]="qrCodeImage" alt="{{ 'ESIM_QR_CODE_ALT' | translate }}">
+        </div>
+
+        <h4>{{ 'STEP_1_2_INSTALL_ESIM' | translate }}</h4>
+        <p>{{ 'QR_SCAN_INSTRUCTION' | translate }}</p>
+
+        <p>
+          <span *ngFor="let step of translations['QR_SCAN_STEPS']">{{ step }}<br></span>
+        </p>
+
+        <h4>{{ 'STEP_2_2_ACCESS_DATA' | translate }}</h4>
+
+        <ion-card>
+          <ion-row>
+            <ion-col size="8">
+              <span>{{ 'NETWORK' | translate }}</span> <br>
+              {{ 'NETWORK_NAME' | translate }}
+            </ion-col>
+            <ion-col size="4" class="text-right">
+              <ion-icon name="information-circle-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="8">
+              <span>{{ 'APN' | translate }}</span> <br>
+              {{ 'APN_AUTOMATIC' | translate }}
+            </ion-col>
+            <ion-col size="4" class="text-right">
+              <!-- <ion-icon name="copy-outline"></ion-icon> -->
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="8">
+              <span>{{ 'DATA_ROAMING' | translate }}</span> <br>
+              {{ 'DATA_ROAMING_STATUS' | translate }}
+            </ion-col>
+            <ion-col size="4" class="text-right">
+              <ion-icon name="information-circle-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <p>
+          <span *ngFor="let step of translations['NETWORK_STEPS']">{{ step }}<br></span>
+        </p>
+
+      </div>
+
+      <div *ngSwitchCase="'manual'">
+        <ion-card class="create-apn">
+          <p>
+            <strong>{{ 'WARNING' | translate }}</strong> {{ 'ESIM_INSTALL_WARNING' | translate }}
+          </p>
+        </ion-card>
+
+        <ion-card class="card-manual">
+          <ion-row>
+            <ion-col size="9">
+              <span>{{ 'SM_DP_ADDRESS' | translate }}</span> <br>
+              {{sharingData.smdpAddress}}
+            </ion-col>
+            <ion-col size="3" class="text-right" (click)="copyAddress(sharingData.smdpAddress,1)">
+              <ion-icon name="copy-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="9">
+              <span>{{ 'ACTIVATION_CODE' | translate }}</span> <br>
+              {{sharingData.matchingId}}
+            </ion-col>
+            <ion-col size="3" class="text-right" (click)="copyAddress(sharingData.matchingId,2)">
+              <ion-icon name="copy-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="text-center information">
+              <p>
+                {{ 'MANUAL_INSTALL_INSTRUCTION' | translate }}
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <h4>{{ 'STEP_1_2_MANUAL_INSTALL' | translate }}</h4>
+
+        <p>
+          <span *ngFor="let step of translations['MANUAL_INSTALL_STEPS']">{{ step }}<br></span>
+        </p>
+
+        <h4>{{ 'STEP_2_2_ACCESS_DATA' | translate }}</h4>
+
+        <ion-card>
+          <ion-row>
+            <ion-col size="8">
+              <span>{{ 'NETWORK' | translate }}</span> <br>
+              {{ 'NETWORK_NAME' | translate }}
+            </ion-col>
+            <ion-col size="4" class="text-right">
+              <ion-icon name="information-circle-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="8">
+              <span>{{ 'APN' | translate }}</span> <br>
+              {{ 'APN_AUTOMATIC' | translate }}
+            </ion-col>
+            <ion-col size="4" class="text-right">
+              <!-- <ion-icon name="copy-outline"></ion-icon> -->
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="8">
+              <span>{{ 'DATA_ROAMING' | translate }}</span> <br>
+              {{ 'DATA_ROAMING_STATUS' | translate }}
+            </ion-col>
+            <ion-col size="4" class="text-right">
+              <ion-icon name="information-circle-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <p>
+          <span *ngFor="let step of translations.NETWORK_STEPS">{{ step }}<br></span>
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button (click)="gotoHomeSearch()">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()" class="selected">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>      
+    </div>
+  </ion-toolbar>
+</ion-footer>

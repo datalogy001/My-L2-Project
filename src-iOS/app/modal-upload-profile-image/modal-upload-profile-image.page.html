@@ -1,0 +1,17 @@
+<ion-content class="ion-padding">
+  <div class="ion-text-right">
+    <ion-button fill="clear" class="close" (click)="closePopover()"><ion-icon name="close-outline"></ion-icon></ion-button>
+  </div>
+  <div class="user-img">
+    <img src="assets/img/icons/user-theme.png" alt="">
+  </div>  
+  <p>{{'add_new_profile_picture' | translate}}</p>
+  <div class="btn-div">
+    <ion-button class="btn-secondary" (click)="selectPhoto()">
+      {{'Choose a photo' | translate}}
+    </ion-button> 
+    <ion-button fill="outline" (click)="takePhoto()">
+      {{'Take a photo' | translate}}
+    </ion-button>   
+  </div>
+</ion-content>

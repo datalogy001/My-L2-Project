@@ -1,0 +1,198 @@
+<ion-content [fullscreen]="true">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <h3>Payment</h3>
+        <p>
+          Choose how to pay
+        </p>
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="gotoBack()">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+
+    <ion-row class="top-row">
+      <ion-col>
+        <h2>7 DAYS</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <P class="megapass">Mega Daily Pass</P>
+      </ion-col>
+      <ion-col>
+        <p class="price">USD 14</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p class="countryname">
+          <span><img src="assets/flags/us.svg" alt=""></span> UNITED STATES
+        </p>
+      </ion-col>
+    </ion-row>
+
+
+    <div>
+      <!--       
+      <div>
+        <swiper-container (slidechange)="swiperSlideChanged($event)" [freeMode]="true" [loop]="false"
+          [pagination]="true">
+          <swiper-slide *ngFor="let cardItem of cardList ; let i = index">
+            <ion-card>
+              <ion-row>
+                <ion-col size="5"><img src="assets/img/visa.png" style="width: 50px;" alt=""></ion-col>
+                <ion-col size="5" class="right selected"><small *ngIf="selectedCards[i]">SELECTED</small> </ion-col>
+                <ion-col size="2" class="right">
+                  <ion-radio-group [ngClass]="selectedCards[i] ==true ? 'selectedRadioCard' : ''"
+                    [(ngModel)]="selectedCards[i]">
+                    <ion-radio [value]="true" (click)="cartOpt(i,cardItem)"></ion-radio>
+                  </ion-radio-group>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="7"><small>CARD NUMBER</small></ion-col>
+                <ion-col size="5" class="right"><small>CVV</small></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="7" class="star"><span>****</span> &nbsp; <span>****</span>
+                  &nbsp;{{cardItem.last_four}}</ion-col>
+                <ion-col size="5" class="right"><span>***</span></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5"><small>VALID THRU</small></ion-col>
+                <ion-col size="4"><span>**</span>/<span>**</span></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="9">{{cardItem.first_name}} {{cardItem.last_name}}</ion-col>
+                <ion-col size="3" class="right"> <img src="assets/img/chip.png" style="width: 30px;" alt=""></ion-col>
+              </ion-row>
+            </ion-card>
+          </swiper-slide>
+        </swiper-container>
+      </div> 
+    -->
+
+      <div class="cardoption">
+        <ion-radio-group [(ngModel)]="paymentType" *ngFor="let paymentItems of paymentMethod">
+          <ion-radio [value]="paymentItems.type"> <img src="{{paymentItems.img}}"
+              alt="">{{paymentItems.text}}</ion-radio>
+        </ion-radio-group>
+      </div>
+    </div>
+
+
+    <!-- <div class="cardoption">
+      <ion-radio-group>
+        <ion-radio [value]="">
+          <img src="assets/img/credit-card.png" alt="">Credit/Debit
+        </ion-radio>
+        <ion-radio [value]="">
+          <img src="assets/img/applepay.png" alt="">Apple Pay
+        </ion-radio>
+        <ion-radio [value]="">
+          <img src="assets/img/paypal1.png" alt="">PayPal
+        </ion-radio>
+      </ion-radio-group>
+    </div> -->
+
+    <ion-button expand="block" class="btn-green btn-payment" (click)="proceedForPayment()">
+      PAY NOW
+    </ion-button>
+
+    <h5 class="text-center dataheading">
+      How much data will I get?
+    </h5>
+    <p class="text-center datatext">
+      1 GB gives you around this much internet use:
+    </p>
+    <ion-row class="dataneed">
+      <ion-col>
+        <img src="assets/img/icons/browsing.png"><small>6 hours browsing</small>
+      </ion-col>
+      <ion-col class="text-center">
+        <img src="assets/img/icons/music.png"><small>3 hours music</small>
+      </ion-col>
+      <ion-col class="text-right">
+        <img src="assets/img/icons/video.png"><small>2 hours video</small>
+      </ion-col>
+    </ion-row>
+
+    <P class="speedtext">
+      *In case of exceeding daily 1 GB high-speed allowance, speed will be limited to 512 Kbps for the remainder of the
+      day, which may impact your experience with video streaming and other data-intensive applications.
+    </P>
+
+    <!-- 
+    <div *ngIf="!isDataAvail">
+      <div class="bundle-summary">Bundle Summary</div>
+      <ion-card class="summary">
+        <ion-row>
+          <ion-col class="d-flex" size="8">
+            <span class="country" *ngIf="types !='zone'"> <img
+                *ngIf="checkoutObj.bundleData.countries[0]['iso'] =='LATAM'" src="assets/flags/la.svg" alt="">
+              <img *ngIf="checkoutObj.bundleData.countries[0]['iso'] =='Europe+'" src="assets/flags/eur.svg" alt="">
+              <img *ngIf="checkoutObj.bundleData.countries[0]['iso'] =='North America'" src="assets/flags/northam.svg"
+                alt="">
+              <img *ngIf="checkoutObj.bundleData.countries[0]['iso'] =='Middle East'" src="assets/flags/middleast.svg"
+                alt="">
+              <img
+                *ngIf="checkoutObj.bundleData.countries[0]['iso'] !='Middle East' && checkoutObj.bundleData.countries[0]['iso'] !='North America' &&
+          checkoutObj.bundleData.countries[0]['iso'] !='Europe+' && checkoutObj.bundleData.countries[0]['iso'] !='LATAM' "
+                src="assets/flags/{{checkoutObj.bundleData.countries[0]['iso'] | lowercase}}.svg" alt=""></span>
+            <span class="country" *ngIf="types =='zone'"> <img
+                src="assets/img/{{checkoutObj.bundleData.countries[0]['iso']}}.png" alt=""></span>
+          </ion-col>
+          <ion-col size="4" class="right">
+            <span class="price">{{ roundNumber(checkoutObj.bundleData.price) | currency:currencyCode}}</span>
+          </ion-col>
+        </ion-row>        
+        <ion-row>
+          <ion-col size="7" class="left">
+            <h5>{{checkoutObj.bundleData.countries[0].name}}</h5>
+            <p>{{checkoutObj.bundleData.dataAmount / 1000}} GB • {{checkoutObj.bundleData.duration}} Days</p>
+          </ion-col>
+          <ion-col size="5" class="right">
+            <p class="network">
+              <img *ngFor="let imageName of checkoutObj.networkLogos" [src]="imageName">
+              <img *ngIf="types !='zone'" src="assets/img/info.png" (click)="gotoNetworkLogos($event)">
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+    -->
+
+  </div>
+
+</ion-content>
+
+
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/home.png" alt="">
+        <img class="active" src="assets/img/icons/home-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button class="middle">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()">
+        <img class="normal" src="assets/img/icons/filter.png" alt="">
+        <img class="active" src="assets/img/icons/filter-yellow.png" alt="">
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,378 @@
+<ion-content [fullscreen]="true">
+
+  <div class="topbox">
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>
+          <img class="ftel-logo" src="assets/img/L2-logowhite.png" alt="">
+        </ion-title>
+        <ion-buttons class="filter" slot="end" (click)="gototab5()">
+          <ion-button fill="clear">
+            <img src="assets/img/icons/filter.png" alt="">
+          </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button fill="clear" *ngIf="notiCount == 0" (click)="gotoNoti()">
+            <img src="assets/img/icons/bell-white.png" alt="">
+          </ion-button>
+          <ion-button fill="clear" *ngIf="notiCount > 0" (click)="gotoNoti()">
+            <img src="assets/img/icons/bell-white.png" alt="">
+            <span>{{notiCount}}</span>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-item>
+      <ion-avatar slot="start" *ngIf="tokenValue != 0">
+        <img  [src]="tempDetails.profile_image == null ? 'assets/img/no-user.png' : tempDetails.profile_image" />
+      </ion-avatar>
+
+      <ion-avatar slot="start" *ngIf="tokenValue == 0">
+        <img  [src]="tokenValue == 0 ? 'assets/img/no-user.png' : ''" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ 'HEY' | translate }} {{ tempDetails.first_name == '' || tempDetails.first_name == null ? ('TRVELLER' | translate) : tempDetails.first_name+'!' }}</h2>
+      </ion-label>
+    </ion-item>
+    <div class="profile-details">
+      <p><strong> {{ 'Referral_code'  | translate}}</strong></p>
+      <p *ngIf="refer_code!= null || refer_code!= ''">{{refer_code}} <img (click)="copyRefereCode()" src="assets/img/icons/copy-white.png" /></p>
+<p
+  *ngIf="tempDetails?.mobile_number"
+  [class.phone-number]="lang === 'ar'">
+  {{ tempDetails.mobile_number }}
+</p>
+    </div>
+
+  </div>
+
+  <div class="container">
+
+    <ion-segment value="active" [(ngModel)]="selectedSegment">
+      <ion-segment-button value="credit">
+        <ion-label>
+          {{ 'credit'  | translate}}
+        </ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="referrals">
+        <ion-label>
+          {{ 'Referrals'  | translate}}
+        </ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="help">
+        <ion-label>
+          {{ 'Help'  | translate}}
+        </ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="segment-panel" [ngSwitch]="selectedSegment">
+
+      <!-- credit start -->
+      <div class="credit" *ngSwitchCase="'credit'">
+          <!-- Loader -->
+      <div class="wallet-loader" *ngIf="isWalletLoading">
+        <ion-spinner name="crescent"></ion-spinner>
+      </div>
+
+        <!-- Wallet Balance -->
+        <h2 *ngIf="!isWalletLoading">
+           <!-- LYD -->
+          <span *ngIf="currencyCode === 'LYD'">
+            <ng-container *ngIf="lang === 'ar'; else lydEn">
+              {{ walletBalance | number:'1.0-0' }} د.ل
+            </ng-container>
+
+            <ng-template #lydEn>
+              LYD&nbsp;{{ walletBalance| number:'1.0-0' }}
+            </ng-template>
+          </span>
+
+          <!-- Other currencies -->
+          <span *ngIf="currencyCode !== 'LYD'">
+            {{ walletBalance | currency:currencyCode }}
+          </span>
+
+   
+        </h2>
+        
+        <div class="btn-blcok">
+          <ion-button expand="block" class="btn-green" (click)="gotoTopup()">
+            {{ 'Top_up'  | translate}}
+          </ion-button>
+         <ion-button expand="block" class="button-outline" lines="none"  (click)="gotoRedeemVoucher()">
+          {{ 'Redeem_voucher'  | translate}}  
+          </ion-button>
+        </div>
+        <div class="credit-history">
+          <p class="title"><img src="assets/img/icons/credit-history-black.png" alt=""> <span>{{ 'Your_credit_history'  | translate}}</span> </p>
+          
+          <div class="autoscroll" *ngIf="isCreditHistory">
+  <p *ngFor="let creditItem of creditHistory">
+
+    <!-- Wallet top-up -->
+    <span *ngIf="creditItem.payment_type === 'wallet_topup'">
+      <ng-container *ngIf="creditItem.currency === 'LYD'; else walletOther">
+        <ng-container *ngIf="lang === 'ar'; else walletEn">
+          {{ creditItem.converted_amount }} د.ل
+        </ng-container>
+        <ng-template #walletEn>
+          LYD&nbsp;{{ creditItem.converted_amount }}
+        </ng-template>
+      </ng-container>
+      <ng-template #walletOther>
+        {{ creditItem.converted_amount | currency:creditItem.currency }}
+      </ng-template>
+      {{ 'Top_up' | translate }}
+    </span>
+
+    <!-- Voucher top-up -->
+    <span *ngIf="creditItem.payment_type === 'voucher_topup'">
+      <ng-container *ngIf="creditItem.currency === 'LYD'; else voucherOther">
+        <ng-container *ngIf="lang === 'ar'; else voucherEn">
+          {{ creditItem.converted_amount }} د.ل
+        </ng-container>
+        <ng-template #voucherEn>
+          LYD&nbsp;{{ creditItem.converted_amount }}
+        </ng-template>
+      </ng-container>
+      <ng-template #voucherOther>
+        {{ creditItem.converted_amount | currency:creditItem.currency }}
+      </ng-template>
+      {{ 'Voucher_Top_up' | translate }}
+    </span>
+
+    <!-- Referral reward -->
+    <span *ngIf="creditItem.payment_type === 'refer_friend'">
+      <ng-container *ngIf="creditItem.currency === 'LYD'; else referOther">
+        <ng-container *ngIf="lang === 'ar'; else referEn">
+          {{ creditItem.converted_amount }} د.ل
+        </ng-container>
+        <ng-template #referEn>
+          LYD&nbsp;{{ creditItem.converted_amount }}
+        </ng-template>
+      </ng-container>
+      <ng-template #referOther>
+        {{ creditItem.converted_amount | currency:creditItem.currency }}
+      </ng-template>
+      {{ 'Referral_Reward' | translate }}
+    </span>
+
+    <!-- Referral joining -->
+    <span *ngIf="creditItem.payment_type === 'refer_friend_joining'">
+      <ng-container *ngIf="creditItem.currency === 'LYD'; else joinOther">
+        <ng-container *ngIf="lang === 'ar'; else joinEn">
+          {{ creditItem.converted_amount }} د.ل
+        </ng-container>
+        <ng-template #joinEn>
+          LYD&nbsp;{{ creditItem.converted_amount }}
+        </ng-template>
+      </ng-container>
+      <ng-template #joinOther>
+        {{ creditItem.converted_amount | currency:creditItem.currency }}
+      </ng-template>
+      {{ 'join_with_refer_code' | translate }}
+    </span>
+
+    <!-- Cashback -->
+    <span *ngIf="creditItem.payment_type === 'cashback'">
+      <ng-container *ngIf="creditItem.currency === 'LYD'; else cashbackOther">
+        <ng-container *ngIf="lang === 'ar'; else cashbackEn">
+          {{ creditItem.converted_amount }} د.ل
+        </ng-container>
+        <ng-template #cashbackEn>
+          LYD&nbsp;{{ creditItem.converted_amount }}
+        </ng-template>
+      </ng-container>
+      <ng-template #cashbackOther>
+        {{ creditItem.converted_amount | currency:creditItem.currency }}
+      </ng-template>
+
+      <ng-container *ngIf="creditItem.cashback_type === 'percentage'">
+        {{ creditItem.percentage }}%
+      </ng-container>
+
+      {{ 'CASHBACK.TITLE' | translate }}
+    </span>
+
+  </p>
+</div>
+
+
+           <div class="nohistory" *ngIf="!isCreditHistory">
+            <img src="assets/img/noactive-bundle.png" alt="">
+            <p>
+              {{ 'no_credit_history'  | translate}}
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- credit end -->
+
+      <!-- referrals start -->
+      <div class="referrals" *ngSwitchCase="'referrals'">
+       <!-- Positive balance -->
+<h2 *ngIf="refer_balance > 0">
+
+  <!-- LYD -->
+  <ng-container *ngIf="currencyCode === 'LYD'; else otherCurrencyPlus">
+
+    <ng-container *ngIf="lang === 'ar'; else lydEnPlus">
+      +{{ refer_balance }} د.ل
+    </ng-container>
+
+    <ng-template #lydEnPlus>
+      +LYD&nbsp;{{ refer_balance }}
+    </ng-template>
+
+  </ng-container>
+
+  <!-- Other currencies -->
+  <ng-template #otherCurrencyPlus>
+    +{{ refer_balance | currency:currencyCode }}
+  </ng-template>
+
+</h2>
+
+<!-- Zero or negative balance -->
+<h2 *ngIf="refer_balance <= 0">
+
+  <!-- LYD -->
+  <ng-container *ngIf="currencyCode === 'LYD'; else otherCurrency">
+
+    <ng-container *ngIf="lang === 'ar'; else lydEn">
+      {{ refer_balance }} د.ل
+    </ng-container>
+
+    <ng-template #lydEn>
+      LYD&nbsp;{{ refer_balance }}
+    </ng-template>
+
+  </ng-container>
+
+  <!-- Other currencies -->
+  <ng-template #otherCurrency>
+    {{ refer_balance | currency:currencyCode }}
+  </ng-template>
+
+</h2>
+
+        <div class="btn-blcok">
+          <ion-button expand="block" class="btn-green" (click)="shareReferralcode()">
+            {{ 'share_unique_code'  | translate}}
+          </ion-button>
+        </div>
+        <div class="referral-history">
+          <p class="title"><img src="assets/img/icons/referral-history-black.png" alt=""> <span>  {{ 'referral_history'  | translate}}</span>
+          </p>
+         <div class="autoscroll" *ngIf="isReferHistory">
+  <p *ngFor="let referItem of referHistory">
+
+    <!-- Signup referral (already formatted via function – KEEP AS IS) -->
+    <span *ngIf="referItem.get_joinee_details != null">
+      {{ 
+        'refer_signup_msg' 
+          | translate: {
+              amount: getFormattedAmount(
+                referItem.converted_amount,
+                referItem.currency
+              ),
+              name: referItem.get_joinee_details.first_name
+            } 
+      }}
+    </span>
+
+    <!-- Cashback -->
+    <span *ngIf="referItem.get_joinee_details == null">
+      <span *ngIf="referItem.payment_type === 'cashback'">
+
+        <ng-container *ngIf="referItem.cashback_type === 'percentage'">
+          {{ referItem.percentage }}%
+        </ng-container>
+
+        {{ 'CASHBACK.TITLE' | translate }}
+
+        <!-- LYD -->
+        <ng-container *ngIf="referItem.currency === 'LYD'; else otherCurrency">
+
+          <ng-container *ngIf="lang === 'ar'; else lydEn">
+            {{ referItem.converted_amount }} د.ل
+          </ng-container>
+
+          <ng-template #lydEn>
+            LYD&nbsp;{{ referItem.converted_amount }}
+          </ng-template>
+
+        </ng-container>
+
+        <!-- Other currencies -->
+        <ng-template #otherCurrency>
+          {{ referItem.converted_amount | currency:referItem.currency }}
+        </ng-template>
+
+      </span>
+    </span>
+
+  </p>
+</div>
+
+          <div class="nohistory" *ngIf="!isReferHistory">
+            <img src="assets/img/noactive-bundle.png" alt="">
+            <p>
+              {{ 'No_referral_history'  | translate}}
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- referrals start -->
+
+      <!-- help start -->
+      <div class="help" *ngSwitchCase="'help'">
+        <p class="text-center">
+          {{ 'help_desc'  | translate}}
+        </p>
+        <div class="btn-support">
+          <ion-button expand="block" class="btn-green" (click)="openZendeskChat()">
+            {{ 'CHAT_WITH_SUPPORT' | translate }}
+          </ion-button>
+          <ion-button expand="block" class="button-outline" (click)="gotoFAQ()">
+            {{ 'FAQS' | translate }}
+          </ion-button>
+        </div>
+
+      </div>
+      <!-- help start -->
+
+    </div>
+
+  </div>
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button routerLink="/home-search">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button routerLink="/profile"  class="selected">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

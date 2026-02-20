@@ -1,0 +1,108 @@
+<ion-content [fullscreen]="true">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <h3> {{ 'Top_up'  | translate}}</h3>
+        <p> {{ 'Choose_how_much_credit'  | translate}}</p>
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="gotoBack()">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <div class="ion-padding">
+
+  <div class="contentbox">
+
+  <ion-radio-group [(ngModel)]="selectedAmount" (ionChange)="onRadioSelect($event)">
+    <ion-radio *ngFor="let amt of topupAMTList" [value]="amt.value">
+
+      <!-- LYD -->
+      <ng-container *ngIf="currencyCode === 'LYD'; else otherCurrencyRadio">
+        <ng-container *ngIf="lang === 'ar'; else lydEnRadio">
+          {{ amt.text }} د.ل
+        </ng-container>
+        <ng-template #lydEnRadio>
+          LYD&nbsp;{{ amt.text }}
+        </ng-template>
+      </ng-container>
+
+      <!-- Other currencies -->
+      <ng-template #otherCurrencyRadio>
+        {{ amt.text | currency:currencyCode }}
+      </ng-template>
+
+    </ion-radio>
+  </ion-radio-group>
+
+  <ion-list>
+    <ion-item>
+      <ion-select
+        [okText]="'OK_BUTTON' | translate"
+        [cancelText]="'CANCEL_BUTTON' | translate"
+        label="{{ 'Choose_amount' | translate }}"
+        [(ngModel)]="customAmount"
+        (ionChange)="onChooseRadio()"
+      >
+        <ion-select-option *ngFor="let amt of topupAMTNewList" [value]="amt.value">
+
+          <!-- LYD -->
+          <ng-container *ngIf="currencyCode === 'LYD'; else otherCurrencySelect">
+            <ng-container *ngIf="lang === 'ar'; else lydEnSelect">
+              {{ amt.text }} د.ل
+            </ng-container>
+            <ng-template #lydEnSelect>
+              LYD&nbsp;{{ amt.text }}
+            </ng-template>
+          </ng-container>
+
+          <!-- Other currencies -->
+          <ng-template #otherCurrencySelect>
+            {{ amt.text | currency:currencyCode }}
+          </ng-template>
+
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+</div>
+ 
+
+    <ion-button expand="block" class="btn-green btn-payment" (click)="submit()">
+      {{ 'TOP_UP_CREDIT'  | translate}}
+    </ion-button>
+
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button routerLink="/home-search">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button routerLink="/profile"  class="selected">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

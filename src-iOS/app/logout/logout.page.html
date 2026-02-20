@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <h3>{{ 'TITLE_LOGOUT' | translate }}</h3>
+      <p>{{ 'MESSAGE_LOGOUT' | translate }}</p>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="gotoBack()">
+        <ion-icon name="arrow-back-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <div class="topspace">&nbsp;</div>
+
+  <ion-button expand="block" class="btn-green btn-nologout" (click)="gotoBack()">
+    {{ 'CANCEL_BUTTON' | translate }}
+  </ion-button>
+
+  <div class="orbox">
+    <span>OR</span>
+  </div>
+
+  <ion-button expand="block" class="button-outline btn-logout" (click)="closePopover(true)">
+    {{ 'LOGOUT_BUTTON' | translate }}
+  </ion-button>  
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button  routerLink="/home-search">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button class="selected" (click)="gotoTab5()" >
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>      
+    </div>
+
+  </ion-toolbar>
+</ion-footer>

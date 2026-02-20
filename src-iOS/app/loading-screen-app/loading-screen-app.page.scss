@@ -1,0 +1,45 @@
+/* src/app/components/loading-screen/loading-screen.component.scss */
+ion-content {
+  --background: transparent;
+}
+
+ion-spinner.custom-spinner {
+  --padding-start: 0;
+  --padding-end: 0;
+  --width: 40px;
+  --height: 40px;
+  --stroke-width: 3px;
+  --color: var(--ion-color-primary); /* Adjust the color as needed */
+}
+
+ion-label.custom-label {
+  font-size: 16px;
+  margin-top: 8px;
+  color: #0d0d20; /* Adjust the color as needed */
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px)
+ 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+ 
+
+
+
+
+}

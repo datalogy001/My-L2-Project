@@ -1,0 +1,38 @@
+<ion-content [fullscreen]="true">
+
+  <div class="topbox">
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>
+        </ion-title>
+        <ion-buttons slot="end">
+          <ion-button fill="clear" (click)="gotoBack()">
+            <ion-icon name="arrow-back-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+  </div>
+
+  <div class="content-wrapper ion-padding">
+
+    <h3 class="text-center">
+      {{'voucher_top_up' | translate}}
+    </h3>
+    <p>
+      {{'VOUCHER_THANK_YOU' | translate}}
+    </p>
+
+    <ion-item>
+      <ion-input class="voucher_centered_input" type="text" maxlength="16" [(ngModel)]="voucherObj.voucher_code" placeholder="00000000000000000"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" class="btn-gray btn-go" (click)="submit()">
+      {{'confirm' | translate}}
+    </ion-button>
+
+  </div>
+
+</ion-content>

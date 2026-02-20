@@ -1,0 +1,153 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <img class="tr-logo" src="assets/img/tr-logo-1.png" alt="">
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="gotoBack()"><i class="far fa-times"></i></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="content-top">
+    <h3>{{displayText}} Plans</h3>
+    <p>Choose a data bundle to use in {{displayText}}</p>
+  </div>
+
+  <div class="contentmiddle">
+
+    <div class="currency-row-height">
+      <ion-row>
+        <ion-col size="8">
+          <h4>Change Currency</h4>
+        </ion-col>
+        <ion-col size="4">
+          <div class="changcurrencybtn">
+            <ion-button id="" (click)="selectCurrency()">
+              <span>
+                {{currencyCode}} <ion-icon name="chevron-down-outline"></ion-icon>
+              </span>
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="list-scroll-box" *ngIf="!isLoading">
+      <ion-card *ngFor="let bundleItem of bundleList">
+        <ion-row>
+          <ion-col>
+            <span class="country"><img *ngIf="bundleItem.countries[0]['iso'] =='LATAM'" src="assets/flags/la.svg"
+                alt="">
+              <img *ngIf="bundleItem.countries[0]['iso'] !='LATAM'"
+                src="assets/flags/{{bundleItem.countries[0]['iso'] | lowercase}}.svg" alt=""></span>
+          </ion-col>
+          <ion-col class="right">
+            <span class="introductory">Standard</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <h5>{{bundleItem.countries[0].name}}</h5>
+          </ion-col>
+          <ion-col class="right">
+            <h5>{{ roundNumber(bundleItem.price + (bundleItem.price * 0.2)) | currency:currencyCode}}</h5>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            &nbsp;
+          </ion-col>
+          <ion-col class="right">
+            <p>{{bundleItem.dataAmount / 1000}} GB • {{bundleItem.duration}} Days</p>
+          </ion-col>
+        </ion-row>
+
+        <div class="on-toggle" *ngIf="bundleItem.expanded">
+          <p>Where can I use this bundle?</p>
+          <h5>Activation</h5>
+          <p>
+            This bundle must be activated
+            within 30 days. Your bundle will
+            activate automatically once you
+            connect to a network in a country
+            covered by the bundle.
+          </p>
+          <h5>
+            How long is my bundle valid?
+          </h5>
+          <p>
+            {{bundleItem.duration}} Days from activation
+          </p>
+        </div>
+
+        <div>
+          <ion-button class="btn-select" (click)="gotoRegister(bundleItem)">
+            Select
+          </ion-button>
+
+          <ion-button class="accordion-toggle" (click)="toggleAccordion(bundleItem)">
+            <ion-icon *ngIf="!bundleItem.expanded" name= "chevron-up-outline"></ion-icon>
+            <ion-icon *ngIf="bundleItem.expanded"name="chevron-down-outline"></ion-icon> 
+          </ion-button>
+
+        </div>
+
+      </ion-card>
+    </div>
+
+    <div class="skeleton" *ngIf="isLoading">
+      <ion-card>
+        <ion-item lines="none">
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          </ion-thumbnail>
+          <ion-label>
+            <h3> <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></h3>
+            <p> <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text> </p>
+          </ion-label>
+        </ion-item>
+        <h3> <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></h3>
+        <p> <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text> </p>
+        <h3> <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></h3>
+        <p> <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text> </p>
+      </ion-card>
+      <ion-card>
+        <ion-item lines="none">
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          </ion-thumbnail>
+          <ion-label>
+            <h3> <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></h3>
+            <p> <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text> </p>
+          </ion-label>
+        </ion-item>
+        <h3> <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></h3>
+        <p> <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text> </p>
+        <h3> <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></h3>
+        <p> <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text> </p>
+      </ion-card>
+      <ion-card>
+        <ion-item lines="none">
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          </ion-thumbnail>
+          <ion-label>
+            <h3> <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></h3>
+            <p> <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text> </p>
+          </ion-label>
+        </ion-item>
+        <h3> <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></h3>
+        <p> <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text> </p>
+        <h3> <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></h3>
+        <p> <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text> </p>
+      </ion-card>
+
+    </div>
+
+
+  </div>
+
+</ion-content>

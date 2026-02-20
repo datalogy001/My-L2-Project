@@ -1,0 +1,114 @@
+ion-header{
+    box-shadow: none;
+    ion-toolbar{
+        --background:#fff;
+        [slot="end"]{
+            margin-inline-end: 25px;
+        }
+        ion-buttons{
+            ion-button{
+                // border: 1px solid #d8322b;
+                --background: #fff;
+                --color:#000;
+                border-radius: 4px;
+                display: inline-block;
+                margin-inline-start:0;
+                margin-inline-end: 0;
+                --box-shadow:none;
+                width: 32px;
+                height: 32px;
+                position: relative;
+                overflow: hidden;
+                margin-top: -15px;
+        
+                &::part(native){
+                    padding-inline-start: 10px;
+                    padding-inline-end: 10px;
+                }
+        
+            }
+        }
+    }
+}
+h1{
+    font-size: 32px; 
+    margin: 70px 14px 10px;
+    text-align: center;
+}
+h5{
+    margin: 0 14px 10px;
+    font-size: 17px;
+    text-align: center;
+}
+p{
+    margin: 0 14px 10px; font-size: 14px;
+}
+ion-list{
+    margin:40px 40px 0; padding: 0;
+    ion-item{
+        // border: 1px solid #ccc; 
+        border-radius: 6px;
+        --inner-border-width:0 0 0 0;
+        margin: 0 0 20px;
+        --background:#e6e7e7;
+        ion-input{
+            color: #777;
+        }
+        ion-icon{
+            color: #777;
+        }
+    }
+}
+a{
+    font-family: 'camptonbold';
+    color: #d8322b;
+}
+.sc-ion-input-md-h:not(.legacy-input){
+    min-height: 44px;
+}
+
+.btn-view-bundle{
+    margin: 20px 14px 10px; text-align: center;
+    ion-button{
+        display: inline-block;
+        width: 250px;
+        --background:#000;
+        --background-activated:#000;
+        --color:#fff;
+        --padding-start:20px;
+        --padding-end:20px;
+    }
+}
+ion-row{
+    ion-col{
+        ion-input{
+            text-align: center;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px) 
+and (min-device-height: 1024px) 
+and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+ 
+
+
+
+
+}

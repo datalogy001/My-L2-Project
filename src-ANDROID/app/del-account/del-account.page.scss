@@ -1,0 +1,89 @@
+ion-header{
+  ion-toolbar{
+      height: 95px;
+      ion-title{
+          .ftel-logo{
+              width: 160px;
+              margin:7px 0px 0px;
+          }
+      }
+      [slot="end"]{
+          margin-inline-end: 5px; 
+      }      
+      
+      &.titlebar{
+          --min-height: 40px; height: 70px;
+      }  
+  }
+}
+
+ion-content {
+  --background: #fff;
+}
+
+p{
+    color: var(--theme-color-2); margin: 15px 0 0px; font-size: 18px;
+}
+  
+ion-button{
+  &.btn-delete{
+    margin: 20px 0 0;
+  }
+  &.button-outline {
+  }
+}
+
+.list-md{ 
+  background: transparent;
+}
+
+ion-list{
+  margin:25px 0px 0; padding: 0;
+  ion-item{
+      --inner-border-width:0 0 0 0;
+      margin: 0 0 20px;
+      --background: var(--input-bg);
+        border: 1px solid var(--border-color) !important;
+      &:last-child{
+        margin: 0 0 0px;
+      }
+      ion-input{
+          color: var(--theme-color-2); text-align: center; text-transform: uppercase;
+      }
+      ion-icon{
+          color: var(--theme-color-2);
+          font-size: 20px;
+          cursor: pointer;
+      }
+  }
+}
+
+  
+  
+  
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+    ion-header ion-toolbar {height: 110px;}
+    ion-header ion-toolbar ion-title .ftel-logo{ width: 260px;}
+    ion-header ion-toolbar.titlebar { --min-height: 60px; height: 80px; }
+    p{ margin: 20px 0 0px; font-size: 30px;  }
+    ion-button.btn-delete{ margin: 25px 0 0; }
+
+    ion-list ion-item ion-input {  font-size: 28px; text-align: center; text-transform: uppercase;
+    }
+
+}

@@ -1,0 +1,35 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Get Your Bundle</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content >
+
+  <div class="tr-logo-1">
+    <img src="assets/img/tr-logo-1.png" alt="">
+  </div>
+
+  <div class="graphic1">
+    <img src="assets/img/graphic1.png" alt="">
+  </div>
+
+  <h2 *ngIf="!isESIMCompatible">
+    Oh dear! It looks like your device doesn't support eSIM.
+  </h2>
+  <h2 *ngIf="isESIMCompatible">
+    It's great that your device supports eSIM.
+  </h2>
+  <h5 *ngIf="!isESIMCompatible">
+    Unfortunately, you will be unable to purchase a bundle - but feel free to browse our bundles for future
+  </h5>
+  <h2 *ngIf="isESIMCompatible">
+    You will be able to purchase a bundle and install in your device
+  </h2>
+  <div class="btn-view-bundle">
+    <ion-button expand="block" (click)="gotoBundle()">
+      View Bundle
+    </ion-button>
+  </div>
+
+</ion-content>

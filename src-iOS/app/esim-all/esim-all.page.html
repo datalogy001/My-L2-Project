@@ -1,0 +1,91 @@
+
+<ion-content style="--background: url('assets/countryBanners/{{bundleiSO+'.jpg'}}') no-repeat center top / 165%">
+<!--<ion-content style="--background: url('assets/img/paris1.png') no-repeat center top / 140%"> -->
+ 
+  <ion-header >
+    <ion-toolbar>
+      <ion-title>
+        {{bundleName}} Bundles <br>
+        <small>Choose a data bundle to use </small>
+      </ion-title>
+      <ion-buttons slot="end" (click)="gotoBack()">
+        <ion-button><i class="far fa-times"></i></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <div class="contentmiddle" >
+
+    <div class="notebox" *ngIf="iccid!=''">
+      <ion-row>
+        <ion-col size="6" class="left">
+          <Strong>Note:</Strong> This Top-Up will be applied to ICCID: <span>{{iccid}}</span>
+        </ion-col>
+        <ion-col size="6" class="right" (click)="gotoTab2()">
+          <ion-button>Buy new eSIM instead</ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="datascroll" [ngClass]="iccid =='' ? 'withoutnotebox' : ''">
+    
+      <div *ngIf="isLoading">
+    <ion-card  *ngFor="let bundleItem of bundleList" >
+      <ion-row (click)="gotoSummary(bundleItem)">
+        <ion-col>
+            <h5>{{bundleItem.dataAmount / 1000}}GB</h5>
+        </ion-col>
+        <ion-col class="right">
+          <span class="introductory">{{ roundNumber(bundleItem.price) | currency:currencyCode}}</span>
+        </ion-col>
+      </ion-row>
+      <ion-row (click)="gotoSummary(bundleItem)">
+        <ion-col class="left data">
+          <p>{{bundleItem.duration}} Days Bundle</p>
+        </ion-col>
+        <ion-col class="right data" *ngIf="bundleItem.speed!=null">
+          <p>{{ bundleItem.speed.join(' / ') }}</p>
+        </ion-col>
+      </ion-row> 
+    </ion-card>
+</div>
+
+<div class="no-record"  *ngIf="!isLoading">
+  <img src="assets/img/no-inactive-bundle.png" alt="">
+  <h3>Bundles not available</h3>
+</div> 
+
+  </div>
+
+</div>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+
+    <div class="tabbar">
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/home.png" alt="">
+        <img class="active" src="assets/img/icons/home-active.png" alt="">
+        <ion-label>Home</ion-label>
+      </ion-button>
+      <ion-button class="selected" (click)="gotoTab2()">
+        <img class="normal" src="assets/img/icons/bundle.png" alt="">
+        <img class="active" src="assets/img/icons/bundle-active.png" alt="">
+        <ion-label>Bundle</ion-label>
+      </ion-button>
+      <ion-button (click)="gotoTab4()">
+        <img class="normal" src="assets/img/icons/payment.png" alt="">
+        <img class="active" src="assets/img/icons/payment-active.png" alt="">
+        <ion-label>Payment</ion-label>
+      </ion-button>
+      <ion-button (click)="gotoTab5()">
+        <img class="normal" src="assets/img/icons/more.png" alt="">
+        <img class="active" src="assets/img/icons/more-active.png" alt="">
+        <ion-label>More</ion-label>
+      </ion-button>
+    </div>
+
+  </ion-toolbar>
+</ion-footer>

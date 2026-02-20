@@ -1,0 +1,140 @@
+
+ion-header{
+    ion-toolbar{
+        // --background:transparent;
+        border-radius: 24px 24px 0 0;
+        clip-path: inherit;
+        ion-title{
+            font-size: 32px;
+            white-space: normal;
+            padding-inline: 30px;
+            padding-top: 15px;
+            &.ios{
+                text-align: left;
+                height: auto;
+            }
+        }
+        [slot="end"]{
+            margin-inline-end: 15px;
+        }
+        ion-buttons{
+            ion-button{
+                --background: #fff;
+                --color:#000;
+                border-radius: 4px;
+                display: inline-block;
+                margin-inline-start:0;
+                margin-inline-end: 0;
+                --box-shadow:none;
+                width: 32px;
+                height: 32px;
+                position: relative;
+                overflow: hidden;
+        
+                &::part(native){
+                    padding-inline-start: 10px;
+                    padding-inline-end: 10px;
+                }
+        
+            }
+        }
+    }
+}
+
+
+ion-row{
+    ion-col{
+        padding-top: 6px; padding-bottom: 6px; display: flex; flex-direction: row; align-items: center;
+        .country{
+            width:30px; height: 18px; border-radius: 4px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 8px;
+            img{
+                width: 100%; height: 100%; object-fit: cover; 
+            }
+        }       
+        span{
+            font-size: 13px; display: inline-block; vertical-align: middle; line-height: 14px;
+            &:last-child{
+                width: 100%;
+            }
+        }
+    }
+}
+
+.spinner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .spinner-text {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+
+/******************** Skeleton */
+.skeleton{
+    padding:30px;
+    ion-item{
+        --padding-start:0px;
+        --inner-padding-end: 0px;
+        box-shadow: none;
+        margin: 0 0 0px;
+        width: 100%;
+        height: 35px;
+        ion-label{
+            white-space: normal;
+            color: #aaa;
+            h3{
+                font-size: 17px; color: #000;
+            }
+            p{
+                a{
+                    color: #000;
+                    ion-icon{
+                        color: #d8322b;
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+        [slot="start"]{
+            margin-inline-end:15px;
+            width: 25px;
+            height: 25px;
+            overflow: hidden;
+            border-radius: 50%;
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px) 
+and (min-device-height: 1024px) 
+and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+ 
+
+
+
+
+}
