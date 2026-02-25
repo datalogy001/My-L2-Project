@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <img class="ftel-logo" src="assets/img/L2-logobranded.png" alt="">
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="gotoBack()"> <!--(click) ="closePopover()"-->
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar class="titlebar">
+    <ion-title>
+      <h3>{{ 'LANGUAGE_SETTINGS' | translate }}</h3>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <h4>{{ 'SELECT_LANGUAGE' | translate }}</h4>
+  <ion-radio-group [(ngModel)]="selectedLanguage"  (ionChange)="changeLanguage($event)"  *ngFor="let langItem of langugaeList">
+    <ion-radio value="{{langItem.value}}">
+      <span class="language">{{langItem.text}}</span> {{langItem.long_text}}
+    </ion-radio>
+  </ion-radio-group>
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button (click)="gotoHomeSearch()">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()" class="selected">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>      
+    </div>
+
+  </ion-toolbar>
+</ion-footer>

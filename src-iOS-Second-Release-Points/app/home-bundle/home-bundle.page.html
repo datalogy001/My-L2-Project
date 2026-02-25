@@ -1,0 +1,160 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <img class="tr-logo" src="assets/img/tr-logo-1.png" alt="">
+    </ion-title>
+    <span slot="end" class="bell">
+      <img src="assets/img/icons/bell-white.png" alt="">
+      <span class="notification">1</span>
+    </span>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div class="contentmiddle">
+
+    <ion-segment value="active" [(ngModel)]="selectedSegment">
+      <ion-segment-button value="active">
+        <ion-label>Active</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="inactive">
+        <ion-label>Inactive</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="segment-panel" [ngSwitch]="selectedSegment">
+      <div class="active" *ngSwitchCase="'active'">
+
+        <ion-card>
+          <ion-row>
+            <ion-col>
+              <span class="country"><img src="assets/flags/la.svg" alt="">
+                <img src="assets/flags/ad.svg" alt=""></span><span class="countryname">London</span>
+            </ion-col>
+            <ion-col class="right">
+              <span class="introductory">Standard</span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h5>£1.50</h5>
+            </ion-col>
+            <ion-col class="right data">
+              <p>1 GB • 7 Days</p>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <ion-card>
+          <ion-row>
+            <ion-col>
+              <span class="country"><img src="assets/flags/la.svg" alt="">
+                <img src="assets/flags/ad.svg" alt=""></span><span class="countryname">London</span>
+            </ion-col>
+            <ion-col class="right">
+              <span class="introductory">Standard</span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h5>£1.50</h5>
+            </ion-col>
+            <ion-col class="right data">
+              <p>1 GB • 7 Days</p>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <div class="addbundlebox active">
+          <div>Add an extra <br> bundle now</div>
+          <ion-button expand="block">View Bundles!</ion-button>
+        </div>
+
+      </div>
+
+      <div class="inactive" *ngSwitchCase="'inactive'">
+
+        <ion-card>
+          <ion-row>
+            <ion-col>
+              <span class="country"><img src="assets/flags/la.svg" alt="">
+                <img src="assets/flags/ad.svg" alt=""></span><span class="countryname">London</span>
+            </ion-col>
+            <ion-col class="right">
+              <a class="share"><img src="assets/img/icons/share.png" alt=""></a>
+              <span class="introductory">Standard</span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h5>£1.50</h5>
+            </ion-col>
+            <ion-col class="right data">
+              <p>1 GB • 7 Days</p>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <ion-card>
+          <ion-row>
+            <ion-col>
+              <span class="country"><img src="assets/flags/la.svg" alt="">
+                <img src="assets/flags/ad.svg" alt=""></span><span class="countryname">London</span>
+            </ion-col>
+            <ion-col class="right">
+              <a class="share"><img src="assets/img/icons/share.png" alt=""></a>
+              <span class="introductory">Standard</span>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h5>£1.50</h5>
+            </ion-col>
+            <ion-col class="right data">
+              <p>1 GB • 7 Days</p>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <div class="addbundlebox">
+          <div>To activate <br> your bundle</div>
+          <ion-button expand="block">Install eSim</ion-button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+
+    <div class="tabbar">
+      <ion-button class="selected">
+        <img class="normal" src="assets/img/icons/home.png" alt="">
+        <img class="active" src="assets/img/icons/home-active.png" alt="">
+        <ion-label>Home</ion-label>
+      </ion-button>
+      <ion-button >
+        <img class="normal" src="assets/img/icons/bundle.png" alt="">
+        <img class="active" src="assets/img/icons/bundle-active.png" alt="">
+        <ion-label>Bundle</ion-label>
+      </ion-button>
+      <ion-button >
+        <img class="normal" src="assets/img/icons/payment.png" alt="">
+        <img class="active" src="assets/img/icons/payment-active.png" alt="">
+        <ion-label>Payment</ion-label>
+      </ion-button>
+      <ion-button >
+        <img class="normal" src="assets/img/icons/more.png" alt="">
+        <img class="active" src="assets/img/icons/more-active.png" alt="">
+        <ion-label>More</ion-label>
+      </ion-button>
+    </div>
+
+  </ion-toolbar>
+</ion-footer>

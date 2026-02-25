@@ -1,0 +1,56 @@
+<ion-content [fullscreen]="true">
+
+  <div class="topbox">
+    
+  </div>
+
+  <div class="content-wrapper ion-padding" *ngIf="voucherResult.type == 'bundle_purchase'">
+
+    <h3 class="text-center">
+      {{ 'SUCCESS'  | translate}}  
+    </h3>
+    <p>
+      {{ 'PLAN_TOPPED_UP'  | translate}} 
+    </p>
+
+    <div class="planrow">
+      <div>
+        <img src="assets/img/icons/globe-yellow.png" alt="">
+        <ion-chip>{{voucherResult.country_name}}</ion-chip>
+      </div>
+      <div>
+        <img src="assets/img/icons/location-yellow.png" alt="">
+        <ion-chip>{{voucherResult.data_amount}}</ion-chip>
+      </div>
+      <div>
+        <img src="assets/img/icons/active-data.png" alt="">
+        <ion-chip>{{voucherResult.days}}</ion-chip>
+      </div>
+    </div>
+    <ion-button expand="block" class="plans" fill="outline" (click)="gotoPlans()">
+      <img src="assets/img/icons/location-white.png" alt=""> {{ 'GO_TO_ESIMS'  | translate}} 
+    </ion-button>
+
+  </div>
+
+  <div class="content-wrapper ion-padding" *ngIf="voucherResult.type == 'voucher_topup'">
+
+    <h3 class="text-center">
+      {{ 'SUCCESS'  | translate}}  
+    </h3>
+    <p>
+      {{ 'CREDIT_ADDED'  | translate}} 
+    </p>
+
+    <div class="planrow">
+      <div>
+        <img src="assets/img/icons/location-yellow.png" alt="">
+        <ion-chip> {{ voucherResult.topup_amount  | currency: voucherResult.currency }}</ion-chip>
+      </div>
+    </div>
+
+    <ion-button expand="block" class="plans" fill="outline"  (click)="gotoProfile()">
+      <img src="assets/img/icons/user.png" alt="">   {{ 'GO_TO_ACCOUNT'  | translate}} 
+    </ion-button>
+  </div>
+</ion-content>

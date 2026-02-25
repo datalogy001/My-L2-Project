@@ -1,0 +1,276 @@
+ion-header{
+  ion-toolbar{
+      height: 95px;
+      ion-title{
+          .ftel-logo{
+              width: 160px;
+              margin:7px 0px 0px;
+          }
+      }
+      [slot="end"]{
+          margin-inline-end: 5px; 
+      }      
+      
+      &.titlebar{
+          --min-height: 40px; 
+	  height: 70px;
+      }  
+  }
+}
+
+ion-content {
+  --background: #fff;
+}
+
+.container{
+  padding-top: 10px; height: 100%; overflow-y:auto;
+}
+
+ion-card{
+  --background:var(--input-bg);
+  --color:var(--theme-color-2);
+  margin-inline: 0;
+  box-shadow: none;
+  border-radius: 10px;
+  padding: 12px 15px;
+  margin:0px 0 12px;
+  border: 1px solid var(--border-color) !important;
+
+  h4{
+    margin: 0 0 5px; font-size: 18px;   font-weight: bold; text-transform: uppercase; color: var(--theme-color-2);
+    span{
+      color: var(--theme-color-3); 
+    }
+    span.crossprice{
+      margin-right: 6px; font-size: 16px; position: relative;
+      &::before{
+        position: absolute;
+        z-index: 1;
+        content: "";
+        left: 0;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 1px;
+        background-color: var(--theme-color-2);
+      }
+    }
+  }
+  h5{
+    margin: 0 0 5px; font-size: 15px; font-weight: 300; text-transform: uppercase; color: var(--theme-color-2);
+  }
+  h6{
+    margin: 8px 0 0px; font-size: 14px;  font-weight: 300; color: var(--theme-color-2);
+
+    img{
+      width: 20px; display: inline-block; vertical-align: middle; margin: 0 5px 0 15px;
+    }
+    .freedom-pay{
+     width:45px;
+    }
+  }
+  .data{
+    p{ margin: 12px 0 0; font-size: 12px; }
+  }
+  span{
+    display: inline-block; 
+  }
+}
+
+.country{
+  width: 51px;  height: 34px; overflow: hidden; display: inline-block; border-radius: 6px; vertical-align: middle; 
+  img{
+      width: 100%; height: 100%; object-fit: cover;
+  }
+}
+.couponapplied{
+  font-size: 12px; display: inline-block; margin:10px 0 0px;
+  border-radius: 3px; background-color:var(--theme-color-1); color: #fff; padding: 2px 5px; 
+}
+
+.d-flex{ display: flex; align-items:center;}
+
+ion-row {
+  ion-col {
+    padding: 0px 0;  
+  }
+}
+
+
+
+
+
+ion-radio-group{
+  display: block;
+  ion-radio{
+    --color: var(--theme-color-2);
+    --color-checked:var(--theme-color-2);
+    width: 100%;
+    position: relative;
+
+    &::part(label){
+      width: 100%; margin-inline: 0px 0px;
+    }
+    &::part(container){
+      position: absolute;
+      z-index: 111;
+      top: 20px;
+      right: 20px;
+    }
+
+    &::part(container){ 
+      background: var(--theme-gray); width: 24px; height: 24px; border-radius: 50%; 
+      border-color: var(--theme-gray);
+    } 
+
+    &::part(mark){ height: 53%; background: var(--theme-color-2);}
+
+    &.radio-checked{
+      &::part(container){
+        background: var(--theme-color-2); border-color: var(--theme-color-2);
+      }
+      &::part(mark){ background: #0d0d20;}
+    }
+  }
+}
+
+ion-button {
+  &.btn-add-newcard{
+    margin: 10px 0px 0px;
+  }
+}
+
+
+.topup{
+  padding: 4px 8px; display: inline-block; border-radius: 4px; background-color: #d8322b; color: #fff; 
+  font-size: 10px; clip-path: polygon(100% 10px, 100% 100%, 0% 100%, 0% 0%, calc(100% - 10px) 0%); margin-left: 10px;
+}
+
+
+/******************* No record */
+.no-record {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 100%;
+    text-align: center;
+    margin-top: 30%;
+
+    h3 {
+        color: var(--theme-color-2);
+        font-size: 24px;
+    }
+
+    p {
+        color: var(--theme-color-2);
+        font-size: 13px;
+    }
+
+    img {
+        width: 120px;
+        display: inline-block;
+    }
+}
+.card-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px 0 0;
+
+  &.total{
+    border-top: 1px solid rgba(17,32,66,0.2);
+    margin: 8px 0 0;
+  padding-top: 4px;
+  }
+
+  span{
+    display: inline-block; vertical-align: middle;
+        
+  }
+  img{
+    width: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;
+  }
+
+  .price{
+    color: var(--theme-color-2);
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .totalprice{
+    color: var(--theme-color-2);
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+.splittitle{
+  font-size: 14px;
+  margin: 10px 0 0px;
+  color: var(--theme-color-2);
+}
+
+.no-record{
+  margin-top: 25%;
+}
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+  ion-header ion-toolbar {height: 110px;}
+  ion-header ion-toolbar ion-title .ftel-logo{ width: 260px;}
+
+  ion-card{ padding: 15px 20px; margin: 0px 0 20px; }
+  ion-card h4{ margin: 0 0 10px; font-size: 32px; }
+  ion-card h5{ margin: 0 0 5px; font-size: 24px; }
+  ion-card h6{ font-size: 22px; }
+  .country{ width: 85px; height: 55px; }
+  .couponapplied{ font-size: 20px; }
+  
+  ion-card{
+    h4 span.crossprice{
+      font-size: 24px;
+    }
+  }
+  .splittitle{ font-size: 26px; }
+  .card-div{ 
+    margin: 8px 0 0; font-size: 24px;   
+  }
+  .card-div .price{
+    font-size: 28px;
+  }
+  .card-div.total{  margin: 12px 0 0; padding-top: 6px; }
+  .card-div .totalprice{
+    font-size: 30px;
+  }
+  .card-div img{
+  width: 28px;  margin-right: 10px;  margin-left: 10px;
+}
+
+  
+  .no-record h3{ font-size: 36px;}
+    .no-record {
+        p {
+            font-size: 20px;
+        }
+
+        img {
+            width: 200px;
+        }
+    } 
+
+
+}

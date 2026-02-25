@@ -1,0 +1,107 @@
+ion-header{
+    ion-toolbar{
+        height: 95px;
+        ion-title{
+            .ftel-logo{
+                width: 160px;
+                margin:7px 0px 0px;
+            }
+        }
+        [slot="end"]{
+            margin-inline-end: 5px; 
+        }      
+        
+        &.titlebar{
+            --min-height: 40px; height: 80px;
+        }  
+    }
+}
+  
+ion-content {
+  --background: #fff;
+}
+
+h4{
+    color: var(--theme-color-2); margin: 10px 0 20px; font-size: 20px; font-weight: 400;
+}
+  
+ion-radio-group{
+
+}
+
+ion-radio{
+  background-color: var(--input-bg);
+  padding: 13px 15px;
+  display: block;
+  border-radius: 10px;
+  margin: 0 0 20px;
+//   border: 1px solid var(--item-border);
+  color: var(--theme-color-2);
+  font-size: 15px;  
+
+  img{
+      width: 20px; display: inline-block;
+      vertical-align: middle; margin-right: 10px;
+  }
+
+  &::part(container){ 
+    background: var(--theme-gray); width: 24px; height: 24px; border-radius: 50%; 
+   border-color: var(--border-color);
+  } 
+
+  &::part(mark){ height: 53%; background: var(--theme-color-2);}
+
+  &.radio-checked{
+    color:var(--theme-color-2);
+
+    &::part(container){
+      background: var(--theme-color-3); border-color: var(--theme-color-3);
+    }
+    &::part(mark){ background: var(--theme-color-1);}
+  }
+
+}
+  
+ion-radio{
+    --color: var(--theme-color-2);
+    --color-checked:var(--theme-color-2);
+        border: 1px solid var(--border-color) !important;
+}
+  
+.language{
+    background-color: var(--theme-color-3); padding:3px 6px; border-radius: 4px; color: var(--color-white); font-weight:900;
+    font-size: 11px; display: inline-block; margin-right: 7px;
+}
+
+
+:host-context([dir="rtl"]) .language {
+   margin-inline-start: 0;
+  margin-inline-end: 7px;
+}
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+    ion-header ion-toolbar {height: 110px;}
+    ion-header ion-toolbar ion-title .ftel-logo{ width: 260px;}
+    ion-header ion-toolbar.titlebar { --min-height: 60px; height: 80px;  }
+  
+    h4{ font-size: 30px; margin: 0 0 20px; }
+    ion-radio{ padding: 20px 20px; margin: 0 0 25px; font-size: 22px; }
+    .language{ padding: 6px 10px; font-size: 16px; margin-right: 10px; }
+    ion-radio::part(container) { width: 30px;  height: 30px; }
+
+
+
+
+}

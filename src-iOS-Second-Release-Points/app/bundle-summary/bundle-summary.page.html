@@ -1,0 +1,123 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <!-- <img class="tr-logo" src="assets/img/tr-logo-1.png" alt=""> -->
+      Bundle summary <br>
+   <!--   <small>You can pay by card or via Apple pay</small> -->
+    </ion-title>
+    <ion-buttons slot="end" (click)="gotoBack()">
+      <ion-button><i class="far fa-times"></i></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="contentmiddle">
+    <div class="detailbox">
+
+      <ion-card>
+        <ion-row>
+          <ion-col>
+            <span class="country" *ngIf="types !='zone'">
+              <img *ngIf="bundleData.countries[0]['iso'] =='LATAM'" src="assets/flags/la.svg" alt="">
+              <img *ngIf="bundleData.countries[0]['iso'] =='Europe+'" src="assets/flags/eur.svg" alt="">
+              <img *ngIf="bundleData.countries[0]['iso'] =='North America'" src="assets/flags/northam.svg" alt="">
+              <img *ngIf="bundleData.countries[0]['iso'] =='Middle East'" src="assets/flags/middleast.svg" alt="">
+              <img *ngIf="bundleData.countries[0]['iso'] !='Middle East' && bundleData.countries[0]['iso'] !='North America' &&
+              bundleData.countries[0]['iso'] !='Europe+' && bundleData.countries[0]['iso'] !='LATAM' " 
+                src="assets/flags/{{bundleData.countries[0]['iso'] | lowercase}}.svg" alt="">
+            </span>
+            <span class="country" *ngIf="types =='zone'">
+              <img src="assets/img/{{bundleData.countries[0]['iso']}}.png" alt="">
+            </span>
+          </ion-col>
+          <ion-col class="right">
+            <!-- <span class="introductory">Standard</span> -->
+            <h5 class="price">{{ roundNumber(bundleData.price) | currency:currencyCode}}</h5>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="7">
+            <h5>{{bundleData.countries[0].name}}</h5>
+            <div class="left data">
+              <p>{{bundleData.dataAmount / 1000}} GB • {{bundleData.duration}} Days</p>
+            </div>
+          </ion-col>
+          <ion-col size="5" class="right network">
+            <img *ngFor="let imageName of networkImages" [src]="imageName" >
+            <img *ngIf="types !='zone'" src="assets/img/info.png" (click)="gotoNetworkLogos($event)"> 
+          </ion-col>
+        </ion-row>
+        <!-- <ion-row>
+          <ion-col class="left data">            
+          </ion-col>
+          <ion-col class="right network" >            
+          </ion-col>
+        </ion-row> -->
+        <div class="dataprogress">
+          <div class="range">
+            <ion-range [(ngModel)]="progressValueData" min="0" max="100" step="2">
+            </ion-range>
+          </div>
+        </div>
+        <h5>Where else can I use this bundle?</h5>
+            <p>{{ roamingEnabled }}</p>
+
+            <h5>Expiration Period</h5>
+            <p> {{bundleData.duration}} Days after activation </p>
+            <div class="timeprogress">
+                <ion-range [(ngModel)]="progressValue" min="30" max="0" step="2">
+                </ion-range>
+                <ion-row>
+                    <ion-col size="4">Expires in</ion-col>
+                    <ion-col size="8" class="right">{{bundleData.duration}} Days</ion-col>
+                </ion-row>
+            </div>
+
+            <h5>Activation</h5>
+            <p>
+              Your bundle will activate automatically once you connect to a network in a country covered by the bundle.
+            </p>
+
+
+
+</ion-card>
+    </div>
+  </div>
+
+  <div class="buy-now">
+    <ion-button expand="block" (click)="buyNow()">
+      Buy Now
+    </ion-button>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+
+    <div class="tabbar">
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/home.png" alt="">
+        <img class="active" src="assets/img/icons/home-active.png" alt="">
+        <ion-label>Home</ion-label>
+      </ion-button>
+      <ion-button class="selected" (click)="gotoTab2()">
+        <img class="normal" src="assets/img/icons/bundle.png" alt="">
+        <img class="active" src="assets/img/icons/bundle-active.png" alt="">
+        <ion-label>Bundle</ion-label>
+      </ion-button>
+      <ion-button (click)="gotoTab4()">
+        <img class="normal" src="assets/img/icons/payment.png" alt="">
+        <img class="active" src="assets/img/icons/payment-active.png" alt="">
+        <ion-label>Payment</ion-label>
+      </ion-button>
+      <ion-button (click)="gotoTab5()">
+        <img class="normal" src="assets/img/icons/more.png" alt="">
+        <img class="active" src="assets/img/icons/more-active.png" alt="">
+        <ion-label>More</ion-label>
+      </ion-button>
+    </div>
+
+  </ion-toolbar>
+</ion-footer>

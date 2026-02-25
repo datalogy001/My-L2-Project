@@ -1,0 +1,142 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <h3>Choose a card</h3>
+      <p>
+        Or add a new one
+      </p>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear"><!--(click)="gotoBack()"-->
+        <ion-icon name="arrow-back-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+ 
+  <div class="container">
+
+    <ion-radio-group value="cardselect">
+
+      <ion-radio [value]="">
+      <ion-card>        
+        <div class="innerrow">
+          <div class="left">
+            <img src="assets/img/visa.png" alt="">
+          </div>
+          <div class="right">
+            <!-- <ion-icon class="delete" name="trash-outline"></ion-icon> -->
+          </div>
+        </div>
+        <div class="innerrow rownumber">
+          <div class="left"><small>CARD NUMBER</small></div>
+          <div class="right"><small>CVV</small></div>
+        </div>
+        <div class="innerrow">
+          <div class="left star">
+            <span>****</span> &nbsp; <span>****</span> &nbsp; <span>***</span>
+          </div>
+          <div class="right star">
+            <span class="number">077</span>
+          </div>
+        </div>
+        <div class="innerrow">
+          <div class="left">
+            <ion-row>
+              <ion-col size="3"><small>VALID THRU</small></ion-col>
+              <ion-col size="3"><small>06</small><small>/</small><small>30</small>
+              </ion-col>
+            </ion-row>
+          </div>
+          <div class="right">
+          </div>
+        </div>
+        <div class="innerrow rowholder">
+          <div class="left">
+            <span class="holdername">CARDHOLDER NAME HERE</span>
+          </div>
+          <div class="right">
+            <img src="assets/img/chip.png" class="cardchip" alt="">
+          </div>
+        </div>
+      </ion-card>
+      </ion-radio>
+
+      <ion-radio [value]="">
+        <ion-card>
+          <div class="innerrow">
+            <div class="left">
+              <img src="assets/img/visa.png"  alt="">
+            </div>
+            <div class="right">
+              <!-- <ion-icon class="delete" name="trash-outline"></ion-icon> -->
+            </div>
+          </div>
+          <div class="innerrow rownumber">
+            <div class="left"><small>CARD NUMBER</small></div>
+            <div class="right"><small>CVV</small></div>
+          </div>
+          <div class="innerrow">
+            <div class="left star">
+              <span>****</span> &nbsp; <span>****</span> &nbsp; <span>***</span>
+            </div>
+            <div class="right star">
+              <span class="number">077</span>
+            </div>
+          </div>
+          <div class="innerrow">
+            <div class="left">
+              <ion-row>
+                <ion-col size="3"><small>VALID THRU</small></ion-col>
+                <ion-col size="3"><small>06</small><small>/</small><small>30</small>
+                </ion-col>
+              </ion-row>
+            </div>
+            <div class="right">
+            </div>
+          </div>
+          <div class="innerrow rowholder">
+            <div class="left">
+              <span class="holdername">CARDHOLDER NAME HERE</span>
+            </div>
+            <div class="right">
+              <img src="assets/img/chip.png" class="cardchip" alt="">
+            </div>
+          </div>
+        </ion-card>
+      </ion-radio>
+
+    </ion-radio-group>
+
+  </div>
+
+  <ion-button class="btn-green btn-add-newcard" expand="block" routerLink="/add-payment-card"><!--(click)="gotoNewCard()"-->
+    Add new card
+  </ion-button>
+
+</ion-content>
+
+
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button>
+        <img class="normal" src="assets/img/icons/home.png" alt="">
+        <img class="active" src="assets/img/icons/home-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button class="middle" (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()">
+        <img class="normal" src="assets/img/icons/filter.png" alt="">
+        <img class="active" src="assets/img/icons/filter-yellow.png" alt="">
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

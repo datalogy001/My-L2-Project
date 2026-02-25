@@ -1,0 +1,317 @@
+ion-header {
+    ion-toolbar {
+        --background:var(--theme-content-bg);
+      // --min-height: 60px;
+      // height: 80px;
+      --min-height: 150px;
+      height: 120px;
+
+      border-radius: 0;
+
+      ion-title{
+        color: #000;
+        color: #fff;
+        padding-inline:10px;
+      }
+      [slot="end"]{
+        margin-inline-end: 0px;
+      }
+      ion-buttons{
+        ion-button{
+          margin: 0; font-size: 22px;
+        }
+      }
+    }
+}
+ion-content {
+    --background:var(--theme-content-bg);
+    color: #fff;
+}
+.content{
+    min-height: calc(100% - 90px);
+}
+ion-button{
+    &.btn-share{
+      --background: var(--theme-color-1);
+    --background-activated: var(--theme-color-1);
+    --color: #fff;
+    --padding-start: 10px;
+    --padding-end: 10px;
+    margin: 0;
+    --box-shadow: none;
+    height: 46px;
+    --border-radius: 8px; 
+    font-weight: 300;
+    font-size: 17px;
+    }    
+}
+
+.amountrow{
+    margin: 0 0 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: var(--theme-color-2);
+    padding: 0 10px;
+
+    .price{
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--theme-color-2);
+    }
+}
+.remaining{
+  border-top: 1px solid var(--theme-color-3);
+  background-color: var(--theme-color-3);
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: #fff;
+  margin: 15px 0 -32px;
+  .price{
+    color: #fff;
+    font-size: 22px;
+  }
+}
+.splitpaymentbox{
+  padding: 15px 10px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--theme-color-2);
+}
+
+h5{
+    margin: 30px 0 20px; color: #666; color: #fff;
+}
+.select-method{
+    margin: 50px 0 20px;
+    color: var(--theme-color-2);
+}
+p{
+    color: #fff; font-size: 15px;
+}
+
+.swiperdiv{
+    margin: 20px -5px 0;
+}
+
+ion-card {
+    --background: var(--card-bg);
+  --color: var(--theme-color-2);
+    margin-inline: 0;
+    box-shadow: none;
+    border-radius: 16px;
+    padding: 20px;
+    margin: 0 0px 10px;
+ border: 1px solid var(--border-color-check) !important;
+  
+    h5 {
+      margin: 10px 0; font-size: 15px;
+    }
+  
+    p {
+      margin: 10px 0; line-height: 16px;
+  
+      ion-icon {
+        display: inline-block; vertical-align: middle;
+      }
+    }
+  
+    .innerrow{
+        display: flex; flex-direction: row; justify-content: space-between; 
+  
+      .left{ 
+        flex: 1 0 0 ;
+        img{ width: 55px; }
+      }
+      .right{ 
+        // width: 45px; 
+        text-align: left; 
+      }
+    }
+    .star {
+      span {
+        display: inline-block;  vertical-align: middle; font-size: 30px; letter-spacing: 2px;  line-height: 32px;
+      }
+      span.number {
+        font-size: 20px;  margin-top: -5px;
+      }
+    }
+    small { 
+      font-size: 8px; font-family: 'Inter'; font-weight: 700;
+    } 
+    .holdername{
+      font-size: 14px; font-family: 'Inter'; font-weight: 400;
+    }
+    .cardchip {
+      width: 36px; display: inline-block; vertical-align: middle; margin-top: -15px;
+    }
+    .history {
+      img {
+        display: inline-block; width: 25px; vertical-align: middle;
+      }
+    }
+    .delete {
+      font-size: 30px;  
+      color: #4FAF3B;
+      position: absolute;
+      z-index: 11;
+      right: -10px;
+      top: -14px;
+      cursor: pointer;
+      img{
+        width: 26px;
+      }
+    }  
+    ion-row{
+      ion-col{
+        padding: 0 2px;
+      }
+    }      
+}
+.rownumber{ margin-top: 10px; }
+.rowholder{ margin-top: 13px; }
+
+ion-card .innerrow .right ion-radio-group ion-radio{ float: right;}
+
+swiper-container{ 
+  &::part(bullet-active){
+      background: var(--theme-color-2);
+  }
+  &::part(bullet){
+      background: #fff;
+  }
+}
+
+.cardoption{
+    margin-top: 20px;
+    ion-radio{
+        background-color: var(--input-bg);
+        padding: 15px 15px;
+        display: block;
+        border-radius: 10px;
+        margin: 0 0 15px;
+        color: var(--theme-color-2);
+        font-size: 15px;
+        border: 1px solid var(--border-color-check) !important;
+  
+        img{
+            width: 25px; display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+            &.gpay{ width: 30px;}
+        } 
+        &.radio-checked{
+          color: #fff;
+        }       
+    }
+  }
+  ion-radio{
+      --color: var(--theme-color-2);
+      --color-checked:var(--theme-color-2);
+  
+      &::part(container){ 
+          background: var(--theme-gray); width: 24px; height: 24px; border-radius: 50%; 
+          border-color: var(--border-color-check);
+      } 
+  
+      &::part(mark){ height: 53%; background: var(--theme-color-2);}
+  
+      &.radio-checked{
+        color: var(--theme-color-2) !important;
+          &::part(container){
+            background: var(--theme-color-3); border-color: var(--theme-color-3);
+          }
+          &::part(mark){ background: var(--theme-color-1);}
+          &::part(label){
+            color: var(--theme-color-2);
+          }
+      }
+  }
+
+.card-slider{
+
+    ion-radio{
+      background-color: transparent;
+    padding: inherit;
+    margin: inherit;
+    border: none;
+    padding: 0 0;
+    }
+}
+
+ion-button{
+    &.btn-payment{
+        margin:15px 0px 15px;
+    }    
+}
+
+ion-row{
+    &.top-row{
+        margin: -10px 0 0;        
+    }
+    ion-col{
+        padding: 0 3px;
+        p{
+            margin:0 0 5px;
+        }
+    }
+}
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+  ion-header  ion-toolbar { --min-height: 120px; height: 120px; }
+  ion-button.btn-share{ height: 60px;  font-size: 24px; }
+ 
+  ion-header ion-toolbar ion-buttons ion-button{ font-size: 33px;}
+
+  p{ font-size: 22px;}
+
+  .cardoption ion-radio { padding: 20px 20px; font-size: 22px; }
+    .cardoption ion-radio img{ width: 32px; margin-right: 15px; }
+    ion-radio::part(container) { width: 30px; height: 30px; }
+
+    .swiperdiv{ margin: 40px -5px 0; }
+
+    ion-card{ padding: 25px; margin: 0 0 0px; }
+    ion-card .innerrow{ padding: 3px 0; }
+    ion-card .innerrow .left img{ width: 100px; }
+    ion-card .innerrow .right{  width: 90px; }
+    ion-card .cardchip{ width: 60px; }
+    ion-card small{ font-size: 14px; }
+    ion-card .star span{ font-size: 48px; letter-spacing: 6px; line-height: 54px; }
+    ion-card .star span.number{  font-size: 32px;  margin-top: -1px; }
+    ion-card .holdername{ font-size: 24px; }
+
+    .splitpaymentbox{
+      padding: 20px 10px 10px;
+    }
+    .amountrow{ 
+      margin: 0 0 15px; font-size: 22px; padding: 0 15px;
+      .price{
+        font-size: 26px;
+      }
+    }
+    .remaining{
+      margin: 20px 0 -40px; padding: 10px 15px;
+      .price {
+        font-size: 28px;
+      }
+    }
+    .select-method{
+      margin: 60px 0 20px;
+    }
+    
+
+}

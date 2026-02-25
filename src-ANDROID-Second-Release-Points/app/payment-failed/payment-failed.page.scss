@@ -1,0 +1,46 @@
+ion-content{
+    --background:rgba(17,32,66,0.5);
+
+     &::after{
+        position: fixed; z-index: -1; left: 0; right: 0; top:0; bottom: 0; content: "";
+        background: url("../../assets/img/payment-fail.png") no-repeat center center / cover;
+    }
+}
+h3{
+    color: #fff; 
+    font-size: 32px;
+    line-height: 40px;
+}
+p{
+    color: #fff; padding: 0 20px; margin: 15px 0 30px; line-height: 18px;
+}
+.topspace{
+    display: block; height: 47%;
+}
+ion-button{
+    &.button-outline {
+    --color: #fff;
+    --border-color: #fff;
+    }
+}
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2)
+{
+
+    .topspace{ height: 47%; }
+    h3{ font-size: 48px;  line-height: 58px; }
+    p{ margin: 15px 0 30px; line-height: 30px; }
+
+
+
+}

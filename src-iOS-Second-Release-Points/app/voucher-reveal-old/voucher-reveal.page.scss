@@ -1,0 +1,147 @@
+ion-header{
+    ion-toolbar{      
+        --background:transparent;
+
+        [slot="end"]{
+          margin-inline-end: 15px;
+        }
+        ion-buttons{
+            ion-button{              
+                display: inline-block;
+                margin-inline-start:0;
+                margin-inline-end: 0;
+                --box-shadow:none;
+                margin-top: -20px;
+                --color:#fff;
+        
+                &::part(native){
+                    padding-inline-start: 10px;
+                    padding-inline-end: 0px;
+                }
+            }
+        }
+    }
+}
+.topbox{
+    display: block; min-height: 48%;
+}
+
+ion-content{ 
+    --background: url("../../assets/img/refercode.png") no-repeat center center / cover;  
+}
+
+.content-wrapper{
+    position: relative;
+
+    &::before{
+        position: fixed; z-index: -1; left: 0; right: 0; top: 0px; bottom: 0; content: ""; background-color: rgba(54, 0, 45, 0.7);
+    }
+}
+h3{
+    color: #fff; 
+    font-size: 32px;
+    line-height: 40px;
+    margin: 0 0 25px;
+    text-align: center;
+}
+p{
+    color: #fff; 
+    font-family: 'Roboto';  
+    font-weight: 400; 
+    text-align: center;
+    margin: 0px 0 20px;
+    font-size: 16px;
+}
+.planrow{
+    margin: 0 0 30px;
+    padding: 5px 20px 0;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: flex-end;
+
+    img{
+        display: block;
+        margin: 0 auto 10px;
+        width: 34px;
+    }
+
+    ion-chip{
+        margin: 0 4px 0px;  
+        font-weight: 400; 
+        min-height: 32px;
+        --background:#fff; 
+        --color:var(--theme-color-1); 
+        border: 1px solid var(--theme-color-1); 
+        font-size: 13px;
+        text-align: center;
+        min-width: 92px;
+        justify-content: center;
+    }
+}
+
+
+  ion-button{
+    margin: 0px 0 15px;
+
+    &.plans{
+        --color:#fff;
+    }
+
+    img{
+        width: 22px; margin-right: 5px;
+    }
+}
+
+
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+    .topbox{
+        min-height: 50%;
+    }
+    h3 { 
+        font-size: 48px; 
+        line-height: 56px; 
+        margin: 0px 0 30px; 
+    }
+    p{
+        margin: 0px 0 30px; font-size: 24px;
+    }
+    ion-button{
+        margin: 0px 0 20px;
+        img{
+            width: 35px; margin-right: 10px;
+        }
+    }
+    .planrow{
+        margin: 0 0 40px;
+        img{
+            margin: 0 auto 20px;
+            width: 55px;
+        }
+        ion-chip{
+            margin: 0 10px 0px;
+            min-height: 40px;
+            font-size: 19px;
+            min-width: 140px;
+            border-radius: 42px;
+        }
+    }
+
+
+    
+
+}

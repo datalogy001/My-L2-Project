@@ -1,0 +1,232 @@
+ion-header {
+  ion-toolbar {
+    --background: #000;
+    --min-height: 90px;
+
+    &.ios {
+      --min-height: 90px;
+    }
+
+    ion-title {
+      padding-inline: 15px;
+      text-align: left;
+
+      .tr-logo {
+        width: 170px;
+        margin: 0px 0px 0px;
+      }
+
+      &.ios {
+        .tr-logo {
+          // margin: 25px 10px 10px;
+        }
+      }
+    }
+
+    [slot="end"] {
+      margin-inline-end: 25px;
+      margin-top: 10px;
+    }
+
+    ion-buttons {
+      ion-button {
+        // position: relative; height: auto; --padding-top:5px;
+        img {
+          width: 28px;
+        }
+
+        span {
+          position: absolute;
+          right: -5px;
+          top: -5px;
+          z-index: 1;
+          background-color: #d8322b;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          text-align: center;
+          color: #fff;
+          font-size: 12px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      ion-button {
+        border: 1px solid #d8322b;
+        --background: #d8322b;
+        --color: #fff;
+        border-radius: 4px;
+        border: 1px solid #fdf3f3;
+        display: inline-block;
+        clip-path: polygon(100% 10px, 100% 100%, 0% 100%, 0% 0%, calc(100% - 10px) 0%, );
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+        --box-shadow: none;
+        width: 32px;
+        height: 32px;
+        position: relative;
+        overflow: hidden;
+
+        &::part(native) {
+          padding-inline-start: 10px;
+          padding-inline-end: 10px;
+        }
+
+        &::after {
+          width: 22px;
+          height: 22px;
+          right: -14px;
+          top: -14px;
+          content: "";
+          background-color: #fdf3f3;
+          position: absolute;
+          z-index: 11;
+          transform: rotateZ(45deg);
+        }
+      }
+    }
+
+    .bell {
+      position: relative;
+
+      img {
+        width: 24px;
+        display: inline-block;
+      }
+
+      .notification {
+        position: absolute;
+        z-index: 11;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        text-align: center;
+        color: #fff;
+        font-size: 10px;
+        background-color: #d8322b;
+        top: -5px;
+        right: -10px;
+        line-height: 18px;
+      }
+    }
+  }
+}
+
+/***********/
+ion-content {
+  --background: #000;
+}
+
+.contentmiddle {
+  height: calc(100% - 0px);
+  background-color: #fff;
+  padding: 20px;
+  clip-path: polygon(100% 18px, 100% 100%, 0% 100%, 0% 0%, calc(100% - 18px) 0%);
+  border-radius: 6px 6px 0 0;
+  margin-top: 0px;
+}
+
+.ios {
+  .contentmiddle {
+    height: calc(100% - 0px);
+    margin-top: 0px;
+  }
+}
+
+ion-row {
+  ion-col {
+    padding: 0;
+
+    h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    &.right {
+      text-align: right;
+    }
+  }
+}
+
+.close {
+  ion-button {
+    --color: #000;
+    display: inline-block;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    --box-shadow: none;
+    width: 32px;
+    height: 20px;
+    display: inline-block;
+    margin: 0px -5px 0 0;
+    min-height: 20px;
+    font-size:20px;
+  }
+}
+
+.selected-currency {
+  margin: 20px 0 10px;
+  color: #d8322b;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+ion-item {
+  border-radius: 6px;
+  --inner-border-width: 0 0 0 0;
+  margin: 15px 0;
+  --background: #e6e7e7;
+  --padding-start: 12px;
+  --padding-inline-end: 12px;
+
+  .currency {
+    background-color: #d8322b;
+    padding: 5px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 12px;
+  }
+
+  [slot="start"] {
+    margin-inline-end: 15px;
+  }
+
+  [slot="end"] {
+    margin-inline-start: 15px;
+
+    ion-icon {
+      color: #d8322b;
+    }
+  }
+
+  ion-label {
+    font-size: 15px;
+  }
+}
+
+
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+ 
+
+
+
+
+}

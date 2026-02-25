@@ -1,0 +1,270 @@
+ion-header{
+  ion-toolbar{
+      height: 95px;
+      ion-title{
+          .ftel-logo{
+              width: 160px;
+              margin:7px 0px 0px;
+          }
+      }
+      [slot="end"]{
+          margin-inline-end: 5px; 
+      }      
+      
+      &.titlebar{
+          --min-height: 40px; 
+          height: 60px;       
+      }  
+  }
+}
+
+ion-content {
+  --background: #fff;
+}
+
+.list-md{ 
+  background: transparent;
+}
+ion-list{
+  margin:30px 0px 0; padding: 0;
+  ion-item{
+      --inner-border-width:0 0 0 0;
+      margin: 0 0 15px;
+      --background: var(--input-bg);
+      // border: 1px solid var(--theme-color-2);
+
+      &:last-child{
+        margin: 0 0 0px;
+      }
+      ion-input{
+          color: var(--theme-color-2); 
+      }
+      ion-icon{
+          color: var(--theme-color-2);
+          font-size: 20px;
+          cursor: pointer;
+      }
+  }
+}
+
+ion-row{
+  &.checkrow{
+      margin: 25px 0 0px;
+      ion-col{
+          // padding: 0; width: 100%;
+          border: 1px solid rgba(17,32,66,0.5); border-radius: 8px; 
+
+          ion-checkbox{
+              //  width: 100%;
+              padding:10px 10px;
+          } 
+      }
+  }
+}
+
+ion-checkbox{  
+  color: var(--theme-color-2); 
+  font-size: 15px;
+
+  --border-width:1px;
+  --border-color:var(--theme-color-2);
+  --checkbox-background:transparent;
+  --checkbox-background-checked:var(--theme-color-2);
+  --border-color-checked:var(--theme-color-2);
+
+  --checkmark-color:var(--theme-color-1);
+  --checkmark-width: 3;
+  --checkbox-background-checked: transparent;
+  --border-color-checked: transparent;
+
+  &::part(label){
+    margin-inline: 12px 0; white-space: normal;
+  }
+}
+
+
+ion-row{
+  margin: 0 -7px 10px;
+  ion-col{
+      padding: 0 7px;
+  }
+}
+
+.swiperdiv{
+  margin: 20px -5px 0;
+}
+  ion-card {
+      --background:var(--card-bg);
+  --color: rgba(17,32,66,0.5);
+      margin-inline: 0;
+      box-shadow: none;
+      border-radius: 16px;
+      padding: 20px;
+      margin: 0 5px 30px;
+    
+      h5 {
+        margin: 10px 0; font-size: 15px;
+      }
+    
+      p {
+        margin: 10px 0; line-height: 16px;
+    
+        ion-icon {
+          display: inline-block; vertical-align: middle;
+        }
+      }
+    
+      .innerrow{
+          display: flex; flex-direction: row; justify-content: space-between; 
+    
+        .left{ 
+          flex: 1 0 0 ;
+          img{ width: 65px; }
+        }
+        .right{ 
+          width: 45px; text-align: left; 
+        }
+      }
+      .star {
+        span {
+          display: inline-block;  vertical-align: middle; font-size: 30px; letter-spacing: 2px;  line-height: 38px;
+        }
+        span.number {
+          font-size: 20px;  margin-top: -3px;
+        }
+      }
+      small { 
+        font-size: 8px; font-family: 'Inter'; font-weight: 700;
+      } 
+      .holdername{
+        font-size: 14px; font-family: 'Inter'; font-weight: 400;
+      }
+      .cardchip {
+        width: 40px; display: inline-block; vertical-align: middle;
+      }
+      .history {
+        img {
+          display: inline-block; width: 25px; vertical-align: middle;
+        }
+      }
+      .delete {
+        font-size: 17px;  color: #d8322b;
+      }
+      
+  }
+
+  swiper-container{ 
+    &::part(bullet-active){
+        background: var(--theme-color-2);
+    }
+    &::part(bullet){
+        background: var(--theme-color-2);
+    }
+}
+  
+ion-radio-group{
+
+}
+
+.cardoption{
+  margin-top: 30px;
+  ion-radio{
+      background-color: var(--input-bg);
+      padding: 15px 15px;
+      display: block;
+      border-radius: 10px;
+      margin: 0 0 15px;
+      // border: 1px solid var(--item-border);
+      color: rgba(17,32,66,0.5);
+      font-size: 15px;
+
+      img{
+          width: 20px; display: inline-block;
+          vertical-align: middle;
+          margin-right: 10px;
+      }
+
+      
+  }
+}
+ion-radio{
+  --color: var(--theme-color-2);
+  --color-checked:var(--theme-color-2);
+
+  &::part(container){ 
+      background: var(--theme-gray); width: 24px; height: 24px; border-radius: 50%; 
+      border-color: var(--theme-gray);
+  } 
+
+  &::part(mark){ height: 53%; background: var(--theme-color-2);}
+
+  &.radio-checked{
+      &::part(container){
+        background: var(--theme-color-2); border-color: var(--theme-color-2);
+      }
+      &::part(mark){ background: var(--theme-color-1);}
+  }
+}
+
+
+ion-button{
+  &.add-card{
+      margin: 20px 0px 0px;
+  }
+}
+
+.btn-payment-method {
+  text-align: center;
+  margin: 0 20px 0px;
+  ion-button {
+    --background: var(--theme-color-2);
+    --background-activated: var(--theme-color-2);
+    --color: #fff;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    margin: 0;
+    font-size: 15px;
+    --box-shadow: none;
+  }
+}
+
+/*********************/
+.countryselectrow{
+  display: flex; flex-direction: row; align-content: center;
+  .countryselect{
+    width: 88px; background: var(--input-bg); border-radius: 10px; margin-right: 10px; color: #fff; display: flex; align-items: center; padding: 12px;
+
+    .countryimg{ width: 25px; margin-right: 5px; border-radius: 2px;}
+    .countrycode{ color: var(--theme-color-2); }
+  }
+  .phoneno{
+    flex: 1 0 0;
+  }
+}
+ 
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px)  
+and (-webkit-min-device-pixel-ratio: 2){
+
+  ion-header ion-toolbar ion-title .ftel-logo{ width: 260px; }
+  ion-header ion-toolbar{ height: 110px;   }
+  ion-checkbox { font-size: 23px;}
+  ion-row.checkrow ion-col ion-checkbox { padding: 24px 20px; }
+  ion-list ion-item{ --min-height: 80px; }  
+  
+  .countryselectrow .countryselect{ width: 150px;}
+  .countryselectrow .countryselect .countryimg {  width: 45px;  margin-right: 10px;  }
+  .countryselectrow .countryselect .countrycode { font-size: 30px; }
+
+
+}

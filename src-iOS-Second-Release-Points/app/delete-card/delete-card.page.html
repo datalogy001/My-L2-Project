@@ -1,0 +1,16 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <p [innerHTML] ="'DELETE_CARD_PROMPT' | translate">
+  </p>
+
+  <div class="btn-div">
+    <ion-button class="btn-green" (click)="closePopover(0)">
+      {{ 'NO_GO_BACK' | translate }}
+    </ion-button>
+    <ion-button fill="outline" (click)="closePopover(1)">
+      {{ 'DELETE_CARD_BUTTON' | translate }}
+    </ion-button>
+    
+  </div>
+
+</ion-content>

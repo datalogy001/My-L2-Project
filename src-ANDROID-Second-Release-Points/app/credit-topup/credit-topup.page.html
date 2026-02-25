@@ -1,0 +1,161 @@
+<ion-content [fullscreen]="true">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <h3>{{ 'Top_up' | translate }}</h3>
+        <p>{{ 'Choose_how_much_credit' | translate }}</p>
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="gotoBack()">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+    <div class="contentbox">
+
+      <!-- RADIO OPTIONS -->
+      <ion-radio-group [(ngModel)]="selectedAmount" (ionChange)="onRadioSelect($event)">
+        <ion-radio *ngFor="let amt of topupAMTList" [value]="amt.value">
+
+          <!-- LYD -->
+          <ng-container *ngIf="currencyCode === 'LYD'; else otherCurrencyRadio">
+            <ng-container *ngIf="lang === 'ar'; else lydEnRadio">
+              {{ amt.text }} د.ل
+            </ng-container>
+            <ng-template #lydEnRadio>
+              LYD&nbsp;{{ amt.text }}
+            </ng-template>
+          </ng-container>
+
+          <!-- Other currencies -->
+          <ng-template #otherCurrencyRadio>
+            {{ amt.text | currency:currencyCode }}
+          </ng-template>
+
+        </ion-radio>
+      </ion-radio-group>
+
+       <!-- OR Divider -->
+  <div class="orbox">
+    <span>{{ 'OR' | translate }}</span>
+  </div>
+  
+
+      <!-- ============================= -->
+      <!-- LYD CUSTOM RANGE SECTION -->
+      <!-- ============================= -->
+      <ng-container *ngIf="currencyCode === 'LYD'; else otherCurrencies">
+
+        <div class="lyd-range-box">
+
+          <div class="range-header">
+            <h4>{{ 'Choose_amount' | translate }}</h4>
+
+            <div class="selected-amount">
+              <ng-container *ngIf="lang === 'ar'; else enAmount">
+                {{ customAmount || 0 }} د.ل
+              </ng-container>
+              <ng-template #enAmount>
+                LYD {{ customAmount || 0 }}
+              </ng-template>
+            </div>
+          </div>
+
+          <!-- Range Slider -->
+          <ion-range
+            class="custom-range"
+            min="20"
+            max="1000"
+            step="10"
+            [(ngModel)]="customAmount"
+            (ionChange)="onLydAmountChange($event)">
+          </ion-range>
+
+          <!-- Min / Max labels -->
+          <div class="range-limits">
+            <span>20</span>
+            <span>1000</span>
+          </div>
+
+          <!-- Manual Input -->
+          <ion-item class="custom-input-item">
+            <ion-input
+              type="number"
+              min="20"
+              max="1000"
+              [(ngModel)]="customAmount"
+              placeholder="20 - 1000"
+              (ionBlur)="validateLydAmount()">
+            </ion-input>
+          </ion-item>
+
+        </div>
+
+      </ng-container>
+
+
+      <!-- ============================= -->
+      <!-- OTHER CURRENCIES DROPDOWN -->
+      <!-- ============================= -->
+      <ng-template #otherCurrencies>
+        <ion-list>
+          <ion-item>
+            <ion-select
+              [okText]="'OK_BUTTON' | translate"
+              [cancelText]="'CANCEL_BUTTON' | translate"
+              label="{{ 'Choose_amount' | translate }}"
+              [(ngModel)]="customAmount"
+              (ionChange)="onChooseRadio()"
+            >
+              <ion-select-option *ngFor="let amt of topupAMTNewList" [value]="amt.value">
+                {{ amt.text | currency:currencyCode }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ng-template>
+
+    </div>
+
+    <!-- SUBMIT BUTTON -->
+    <ion-button expand="block" class="btn-green btn-payment" (click)="submit()">
+      {{ 'TOP_UP_CREDIT' | translate }}
+    </ion-button>
+
+  </div>
+
+</ion-content>
+
+
+<!-- FOOTER -->
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+
+      <ion-button routerLink="/home-search">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button routerLink="/profile" class="selected">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>
+
+    </div>
+  </ion-toolbar>
+</ion-footer>

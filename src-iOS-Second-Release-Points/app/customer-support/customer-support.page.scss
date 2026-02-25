@@ -1,0 +1,115 @@
+ion-header{
+    ion-toolbar{
+        height: 145px;
+        --min-height: 145px;
+        ion-title{
+            .ftel-logo{
+                width: 160px;
+                margin:7px 0px 0px;
+            }
+        }
+        [slot="end"]{
+            margin-inline-end: 5px; 
+        }      
+        
+        &.titlebar{
+            --min-height: 40px; 
+            height: 70px; 
+        }  
+    }
+}
+
+ion-content {
+  --background: #fff;
+}
+
+.list-md{ 
+    background: transparent;
+}
+ion-list{
+    margin:0px 0px 0; padding: 0 0;
+    ion-item{
+        --inner-border-width:0 0 0 0;
+        margin: 0 0 12px;
+        --background:var(--input-bg);
+        border: 1px solid var(--border-color-check) !important;
+        &:last-child{
+          
+        }
+        ion-input{
+            color: var(--theme-color-2); 
+        }
+        ion-textarea{
+            color: var(--theme-color-2); min-height: 150px;
+        }
+        ion-icon{
+            color: var(--theme-color-2);
+            font-size: 20px;
+            cursor: pointer;
+        }
+        &.textarea{
+            --background:var(--input-bg);
+            // border: 1px solid var(--theme-color-2);
+        }
+    }
+}
+
+
+ion-checkbox{
+    font-weight: 100; 
+    color: var(--theme-color-2); 
+    font-size: 15px;
+  
+    --border-width:1px;
+    --border-color:var(--theme-color-2);
+    --checkbox-background:transparent;
+    --checkbox-background-checked:var(--theme-color-2);
+    --border-color-checked:var(--theme-color-2);
+  
+    --checkmark-color:var(--theme-color-2);
+    --checkmark-width: 4;
+    --checkbox-background-checked: transparent;
+    --border-color-checked: transparent;
+  
+    &::part(label){
+      margin-inline: 8px 0; white-space: normal;
+    }
+    &::part(container){
+        width: 22px; height: 22px;
+    }
+
+}
+ion-button{
+    &.ben-send{
+        margin: 0px 0 0;
+    }
+}
+
+
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+    ion-header ion-toolbar {height: 110px;}
+    ion-header ion-toolbar.titlebar ion-title h3 {  line-height: 56px; }
+    ion-header ion-toolbar ion-title .ftel-logo{ width: 260px;}
+ 
+    ion-header ion-toolbar.titlebar{ --min-height:40px; height:120px; }
+    ion-list ion-item ion-textarea{  min-height: 220px; font-size: 23px; }
+
+
+
+
+}

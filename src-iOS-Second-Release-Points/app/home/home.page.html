@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Market Products</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="productList">
+  <ion-list> 
+    <ion-item *ngFor = 'let item of productList'>
+      <ion-label>{{item.title}}</ion-label>
+    </ion-item>
+  </ion-list>
+  </div>
+  <div *ngIf="!productList">
+   Product not found
+  </div>
+
+
+</ion-content>

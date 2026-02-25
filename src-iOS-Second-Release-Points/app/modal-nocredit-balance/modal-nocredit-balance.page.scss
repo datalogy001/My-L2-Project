@@ -1,0 +1,70 @@
+.nocredit{
+    text-align: center; margin: 0 0 15px;
+    img{
+        width: 75px;
+        margin: 5px auto 0px;
+    }    
+}
+h2{
+    color: var(--theme-color-2); font-size: 46px; margin: 0 0 10px; font-weight: 700;  text-align: center;
+}
+p{
+    color: var(--theme-color-2); margin: 0 0 5px; text-align: center; font-size: 13px; font-weight: 300;
+    strong{
+        font-weight: 500;
+    }
+}
+
+ion-button{  
+    display: inline-block; 
+--background: var( --button-primary-bg);
+--background-activated: var(--button-primary-bg);
+--background-hover: var(--button-primary-bg);
+    --color:#fff;
+    font-size: 15px;
+    font-weight: 600;
+    --border-radius: 6px;
+    height: 48px;
+    margin: 0 0;
+    width: 50%;
+
+    &.close{
+        --background:transparent;
+        --color:color: var(--theme-color-1);;
+        font-size: 18px;
+        font-weight: 600;
+        width: auto;
+        height: auto;
+        margin-top: -5px;
+        margin-right: -5px;
+        margin-bottom: -10px;
+
+        &::part(native){
+            padding: 0 0;
+        }
+    }
+}
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+    
+    .closeerror img {
+        width: 100px;
+        margin: 5px auto 20px;
+    }
+    h2{ font-size: 66px;
+        margin: 0 0 10px;
+    }
+    p {margin: 0 0 10px; 
+    font-size: 18px;
+    }
+    
+}

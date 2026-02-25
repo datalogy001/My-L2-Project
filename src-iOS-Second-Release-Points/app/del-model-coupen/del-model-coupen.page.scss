@@ -1,0 +1,82 @@
+.user-img{
+    margin: 0 0 6px;
+    text-align: center;
+
+    img{
+        display: inline-block;
+        width: 40px;
+    }
+}
+p{
+      color: var(--theme-color-2); 
+    text-align: center; 
+    margin: 10px 0 15px; 
+    font-size: 14px;
+}
+
+.btn-div {
+    display: flex;
+    justify-content: center;
+    gap: 10px; 
+}
+
+.btn-div ion-button {
+   // flex: 1;
+    max-width: 200px; 
+    --border-radius: 8px;
+    height: 48px;
+    font-size: 17px;
+    font-weight: 500;
+    min-width: 100px;
+}
+
+.btn-delete {
+    --background: var( --button-primary-bg);
+--background-activated: var(--button-primary-bg);
+--background-hover: var(--button-primary-bg);
+    --color: #fff;
+}
+
+.btn-back {
+   --background: var( --button-primary-bg);
+--background-activated: var(--button-primary-bg);
+--background-hover: var(--button-primary-bg);
+    --color: #fff;
+}
+
+ion-button.button-outline {
+  --color: #fff;
+  --border-color: #fff;
+}
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+    .user-img{
+        margin: 0 0 10px;    
+        img{
+            width: 60px;
+        }
+    }
+    p{ 
+        margin: 15px 0 15px; 
+        font-size: 22px;  
+    }
+    .btn-div ion-button {
+        max-width: 350px;
+        height: 60px;
+        font-size: 24px;
+        min-width: 150px;
+    }
+
+
+}

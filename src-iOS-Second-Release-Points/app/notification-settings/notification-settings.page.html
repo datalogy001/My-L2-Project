@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <img class="ftel-logo" src="assets/img/L2-logobranded.png" alt="">
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="gotoBack()">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar class="titlebar">
+    <ion-title>
+      <h3>{{ 'NOTIFICATION_SETTINGS_TITLE' | translate }}</h3>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h4>{{ 'EMAIL' | translate }}</h4>
+  <ion-list>
+    <ion-item lines="none">
+      <ion-label>{{ 'PROMOTIONS' | translate }}</ion-label>
+      <ion-toggle slot="end" [(ngModel)]="emailSettings.status" (ionChange)="toggleChanged()"></ion-toggle>
+    </ion-item>
+  </ion-list>
+
+  <h4>{{ 'APP' | translate }}</h4>
+  <ion-list>
+    <ion-item lines="none">
+      <ion-label>{{ 'PROMOTIONS' | translate }}</ion-label>
+      <ion-toggle slot="end" [(ngModel)]="promoSettings.status" (ionChange)="togglePromoChanged()"></ion-toggle>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>{{ 'SERVICE' | translate }}</ion-label>
+      <ion-toggle slot="end" [(ngModel)]="serviceSettings.status" (ionChange)="toggleServiceChanged()"></ion-toggle>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>{{ 'PAYMENT' | translate }}</ion-label>
+      <ion-toggle slot="end" [(ngModel)]="paymentSettings.status" (ionChange)="togglePaymentChanged()"></ion-toggle>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button (click)="gotoHomeSearch()">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()" class="selected">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>      
+    </div>
+  </ion-toolbar>
+</ion-footer>

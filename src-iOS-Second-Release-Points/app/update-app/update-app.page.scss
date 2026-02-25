@@ -1,0 +1,65 @@
+.updateapp{
+    text-align: center;
+    img{
+        width: 80px;
+        margin: 5px auto 0px;
+    }    
+}
+h5{
+    text-align: center; 
+    color:#fff; 
+    font-size: 15px; 
+    margin: 10px 0 0;
+    font-weight: 500;
+}
+p {
+    font-size: 14px;
+    margin:2px 0px 0;
+    color: #fff;
+    text-align: center; 
+    font-weight: 300;   
+}
+.updatenow{
+    text-align: center;
+    margin: 10px 0 0;
+    ion-button{
+        margin: 0 0;
+        --background:var(--theme-color-1);
+        --background-activated:var(--theme-color-1);
+        --background-hover:var(--theme-color-1);
+        --color:#fff;
+        font-weight: 300;
+        font-size: 14px;
+        height: 44px;
+        --border-radius: 6px;
+        min-width: 160px;
+    }
+}
+
+
+
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+    .updateapp img{ width: 120px; margin: 10px auto 10px; }
+    p{ font-size: 21px;  margin: 0px 0px 0; }
+    .updatenow { margin: 15px 0 0; }
+    .updatenow ion-button{ font-size: 21px; height: 60px; min-width: 220px; }
+
+
+
+
+}

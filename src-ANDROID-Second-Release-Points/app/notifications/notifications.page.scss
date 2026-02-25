@@ -1,0 +1,119 @@
+ion-header{
+    ion-toolbar{
+        height: 95px;
+        ion-title{
+            .ftel-logo{
+                width: 160px;
+                margin:7px 0px 0px;
+            }
+        }
+        [slot="end"]{
+            margin-inline-end: 5px; 
+        }      
+        
+        &.titlebar{
+            --min-height: 40px; height: 70px;
+        }  
+    }
+}
+
+ion-content {
+  --background: #fff;
+}
+
+ion-row{    
+    ion-col{
+        padding: 0;
+    }
+    &.note-item{
+        margin: 0 0 30px;
+        padding-bottom: 10px;
+    }
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+}
+h4{
+    color: var(--theme-color-1); 
+    font-size: 18px; 
+    margin: 0 0 5px;     
+    font-weight:600;
+}
+p{
+    margin: 0px 0 5px; 
+    color: var(--theme-color-2); 
+    font-size: 14px;
+}
+.date{
+    color: var(--theme-color-2); 
+    font-size: 12px;
+    display: inline-block; 
+    font-family: 'Inter';
+    font-weight: 400;
+}
+.delete{
+    a{
+        display: inline-block; font-size: 16px; color: #d8322b;
+    }
+}
+
+
+
+  
+/******************* No record */
+.no-record {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 100%;
+    text-align: center;
+
+    h3 {
+        color: var(--theme-color-2); 
+        font-size: 24px;
+    }
+
+    p {
+        color: var(--theme-color-2); 
+        font-size: 13px;
+        margin: 15px 0;
+    }
+
+    img {
+        width: 120px;
+        display: inline-block;
+    }
+}
+
+
+
+
+
+  /**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+    ion-header ion-toolbar {height: 110px;}
+    ion-header ion-toolbar ion-title .ftel-logo{ width: 260px;}
+    ion-header ion-toolbar.titlebar{ --min-height: 60px; height: 80px; }
+
+    h4{ font-size: 28px;  margin: 0 0 10px; }
+    p{ margin: 0px 0 10px; font-size: 22px; }
+    .date{ font-size: 18px; margin: 7px 0 0; }
+    .no-record {
+        p {
+            font-size: 20px;
+        }
+
+        img {
+            width: 200px;
+        }
+    }
+
+}

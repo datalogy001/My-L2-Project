@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Verification Code</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click) ="closePopover(false)">
+        <i class="far fa-times"></i>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-padding">
+    <!-- <ion-item>
+      <ion-input></ion-input>
+    </ion-item> -->
+    <ion-item class="otp-input">
+      <input type="password" maxlength="1"  />
+      <input type="password" maxlength="1"  />
+      <input type="password" maxlength="1"  />
+      <input type="password" maxlength="1"  />
+      <!-- <input type="text" maxlength="1" (input)="onInput($event)" (paste)="onPaste($event)" />
+      <input type="text" maxlength="1" (input)="onInput($event)" (paste)="onPaste($event)" />
+      <input type="text" maxlength="1" (input)="onInput($event)" (paste)="onPaste($event)" /> -->
+    </ion-item>
+    <ion-row>
+      <ion-col class="left"> <small>00.16 remaining</small></ion-col>
+      <ion-col class="right"> <a >Retry</a></ion-col>
+    </ion-row>    
+    <div class="btn-verify">
+      <ion-button expand="block" (click) ="closePopover(true)">
+        Verify
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

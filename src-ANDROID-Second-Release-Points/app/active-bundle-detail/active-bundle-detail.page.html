@@ -1,0 +1,191 @@
+<!--<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <img class="tr-logo" src="assets/img/tr-logo-1.png" alt="">
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="gotoBack()">
+        <i class="far fa-times"></i>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>-->
+
+<!-- <ion-content> -->
+<!-- <span class="plus"><ion-icon name="add-outline"></ion-icon></span> -->
+
+<!--<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <img class="tr-logo" src="assets/img/tr-logo-1.png" alt="">
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="gotoBack()">
+        <i class="far fa-times"></i>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>-->
+
+<ion-content style="--background: url('assets/countryBanners/{{countryBanner}}') no-repeat center top / 250% ">
+  <!--<ion-content  style="--background: url('assets/img/paris1.png') no-repeat center top / 140%">-->
+  <!-- <span class="plus"><ion-icon name="add-outline"></ion-icon></span> -->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+
+  <div class="topcontent">
+    <div class="leftcontent">
+      <span class="country">
+        <img *ngIf="bundleDatas.short_name_country =='LATAM' || bundleDatas.short_name_country =='latam'"
+          src="assets/flags/la.svg" alt="">
+        <img *ngIf="bundleDatas.short_name_country =='Europe+' || bundleDatas.short_name_country =='europe+'"
+          src="assets/flags/eur.svg" alt="">
+
+        <img
+          *ngIf="bundleDatas.short_name_country =='North America' || bundleDatas.short_name_country =='north america'"
+          src="assets/flags/northam.svg" alt="">
+
+        <img *ngIf="bundleDatas.short_name_country =='Middle East' || bundleDatas.short_name_country =='middle east'"
+          src="assets/flags/middleast.svg" alt="">
+
+        <img *ngIf="bundleDatas.short_name_country !='Middle East' &&  bundleDatas.short_name_country !='middle east'
+      && bundleDatas.short_name_country !='north america' && bundleDatas.short_name_country !='North America' &&
+      bundleDatas.short_name_country !='Europe+' && bundleDatas.short_name_country !='europe+'
+      && bundleDatas.short_name_country !='LATAM' && bundleDatas.short_name_country !='latam'"
+          src="assets/flags/{{bundleDatas.short_name_country | lowercase}}.svg" alt="">
+      </span>
+      <span class="countryname">{{bundleDatas.country}}</span>
+      <!--<div class="network">
+              <img *ngFor="let imageName of networkImages" [src]="imageName" >
+            </div> -->
+    </div>
+    <div class="right-section">
+      <div class="tr-logo-redwhite">
+        <img src="assets/img/tr-logo-redwhite.png" alt="">
+      </div>
+      <ion-button (click)="gotoBack()" fill="clear"><i class="far fa-times"></i></ion-button>
+    </div>
+  </div>
+
+  <div class="contentmiddle">
+
+    <div class="rangebox">
+      <div class="progress">
+        <div class="barOverflow">
+          <div class="bar"></div>
+        </div>
+        <div class="status">
+          <span class="value">{{remainDataamount}}</span><br>
+          <p>of {{initDataAmount }} used</p>
+        </div>
+      </div>
+    </div>
+
+
+    <ion-row>
+      <ion-col>
+        <p class="title">VALIDITY</p>
+        <div class="detail">{{bundleDatas.days}}</div>
+      </ion-col>
+      <ion-col *ngIf="bundleDatas.speed.length>0">
+        <p class="title">SPEED</p>
+        <div class="detail">{{bundleDatas.speed}}</div>
+      </ion-col>
+      <ion-col>
+        <p class="title">SERVICES</p>
+        <div class="detail">Data</div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="startTimefromBundle ==true && isBundleExpired ==false">
+      <ion-col>
+        <p class="title">ACTIVATION DATE</p>
+        <div class="detail">{{bundlesExpiredDetails.startTime}}</div>
+      </ion-col>
+      <ion-col>
+        <p class="title">EXPIRY DATE</p>
+        <div class="detail">{{bundlesExpiredDetails.endTime}}</div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="isBundleExpired ==true && startTimefromBundle ==false">
+      <ion-col>
+        <p class="title">ACTIVATION DATE</p>
+        <div class="detail">{{bundlesExpiredDetails.startTime}}</div>
+      </ion-col>
+      <ion-col>
+        <p class="title">EXPIRY DATE (STATUS)</p>
+        <div class="detail">Expired</div>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row *ngIf="startTimefromBundle == false && isBundleExpired ==false">
+      <ion-col>
+        <p class="title">PURCHASE DATE</p>
+        <div class="detail">{{bundlesExpiredDetails.startTime}}</div>
+      </ion-col>
+      <ion-col>
+        <p class="title">EXPIRY DATE (STATUS)</p>
+        <div class="detail">Inactive</div>
+      </ion-col>
+    </ion-row>
+
+
+    <div class="que-bundle-box" *ngIf="isButton && topupArray.length>0" >
+      <div class="que-title"> Bundles </div>
+      <ion-row *ngFor="let topups of topupArray ; let i = index">
+        <ion-col class="d-flex" size="8">
+          <span class="country">
+            <img *ngIf="topups.shortname !='Middle East' &&  topups.shortname !='middle east'
+      && topups.shortname !='north america' && topups.shortname !='North America' &&
+      topups.shortname !='Europe+' && topups.shortname !='europe+'
+      && topups.shortname !='LATAM' && topups.shortname !='latam'"
+          src="assets/flags/{{topups.shortname | lowercase}}.svg" alt=""></span><span class="countryname">{{topups.country}} <br> <span class="data">{{topups.dataAmount}} •{{topups.days}}</span> </span>
+        </ion-col>
+        <ion-col size="4" class="right">
+          <span class="topup {{topups.status}}">{{topups.status}}</span>
+        </ion-col>
+      </ion-row>
+    </div>
+
+  </div>
+
+  <div class="btn-dataplan" *ngIf="isButton" >
+    <ion-button (click)="gotoToup()">
+      Top Up Bundle
+    </ion-button>
+  </div>
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+
+    <div class="tabbar">
+      <ion-button class="selected" (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/home.png" alt="">
+        <img class="active" src="assets/img/icons/home-active.png" alt="">
+        <ion-label>Home</ion-label>
+      </ion-button>
+      <ion-button (click)="gotoTab2()">
+        <img class="normal" src="assets/img/icons/bundle.png" alt="">
+        <img class="active" src="assets/img/icons/bundle-active.png" alt="">
+        <ion-label>Bundle</ion-label>
+      </ion-button>
+      <ion-button (click)="gotoTab4()">
+        <img class="normal" src="assets/img/icons/payment.png" alt="">
+        <img class="active" src="assets/img/icons/payment-active.png" alt="">
+        <ion-label>Payment</ion-label>
+      </ion-button>
+      <ion-button (click)="gotoTab5()">
+        <img class="normal" src="assets/img/icons/more.png" alt="">
+        <img class="active" src="assets/img/icons/more-active.png" alt="">
+        <ion-label>More</ion-label>
+      </ion-button>
+    </div>
+
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,28 @@
+<ion-content [fullscreen]="true">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <h3 [innerHTML]="'INSTALL_ESIM_USING_QR_CODE' | translate">
+        </h3>
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="gotoBack()">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+
+  </ion-header>
+  <div class="ion-padding">
+    <div class="segment-panel">
+      <div>
+        <div class="qrcode qr-code-container" (touchstart)="onTouchStart($event)"
+        (touchend)="onTouchEnd($event)"
+        (touchmove)="onTouchMove($event)">
+          <img [src]="qrCodeImage" alt="{{ 'ESIM_QR_CODE_ALT' | translate }}">
+        </div>
+      </div>
+    </div>
+    </div>
+</ion-content>

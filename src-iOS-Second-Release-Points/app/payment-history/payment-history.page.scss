@@ -1,0 +1,171 @@
+ion-header{
+    ion-toolbar{
+        --background:#000;
+        &.ios{
+            --min-height:70px;
+        }
+        ion-title{
+            padding-inline: 10px; text-align: left;
+            .tr-logo{
+                width: 170px;
+                margin: 15px 10px 5px;
+            }
+            &.ios{
+                .tr-logo{
+                    // margin: 25px 10px 10px;
+                }
+            }
+        }
+        [slot="end"]{
+            margin-inline-end: 25px; margin-top: 10px;
+        }
+        ion-buttons{
+            ion-button{
+                // position: relative; height: auto; --padding-top:5px;
+                img{
+                    width: 28px;
+                }
+                span{
+                    position: absolute; right: -5px; top: -5px; z-index: 1;
+                    background-color: #d8322b; width: 20px; height: 20px; border-radius: 50%; text-align: center; 
+                    color: #fff; font-size: 12px; 
+                    display: flex; justify-content: center; align-items: center;
+                }
+            }
+            ion-button{
+                --background: #d8322b;
+                --color:#fff;
+                border-radius: 4px;
+                border: 1px solid #fdf3f3;
+                display: inline-block;
+                margin-inline-start:0;
+                margin-inline-end: 0;
+                --box-shadow:none;
+                width: 32px;
+                height: 32px;
+                position: relative;
+                overflow: hidden;
+        
+                &::part(native){
+                    padding-inline-start: 10px;
+                    padding-inline-end: 10px;
+                }
+        
+               
+            }
+        }
+        .bell{
+            position: relative;
+            img{ width: 24px; display: inline-block;}
+            .notification{
+                position: absolute; z-index: 11; width: 18px; height: 18px; border-radius: 50%; text-align: center;
+                color: #fff; font-size: 11px; background-color: #d8322b; top: -5px; right: -10px; line-height: 18px;
+            }
+        }
+    }
+}
+
+.paymenthistory{
+    height: calc(100% - 30px);
+    overflow-y: auto;
+}
+ion-row{
+    ion-col{
+        padding: 0;
+        h3{ margin: 0; font-size: 20px;}
+        &.right{ text-align: right;}
+    }
+}
+.close{
+    ion-button{
+        --color:#000;
+        display: inline-block;
+        margin-inline-start:0;
+        margin-inline-end: 0;
+        --box-shadow:none;
+        width: 32px;
+        height: 32px;
+        display: inline-block;
+        margin: 0px -5px 0 0;
+        min-height: inherit;
+    }
+}
+/**************/
+ion-card{
+    --background:#e6e7e7;
+    --color:#222;
+    border: 1px solid #d1d3d4;
+    margin-inline: 0;
+    box-shadow: none;
+    border-radius: 6px;
+    padding: 15px;
+    margin:10px 0 15px;
+    min-height: 100px;
+  
+
+    h5{
+        font-family: "camptonbold"; margin:0 0 0; line-height: 26px;
+    }
+    p{
+        margin: 5px 0;       
+    }
+    .data{
+      p{ margin: 15px 0 0; font-size: 12px; }
+      img{
+        width: 18px;  display: inline-block;  vertical-align: middle;  margin-right: 5px;
+      }
+    }
+  }
+  .card-content-ios{
+      padding-top:0;
+  }
+  .country{
+    width: 36px;  height: 24px; overflow: hidden; display: inline-block; border-radius: 4px; vertical-align: middle; margin-right: 8px;
+    img{
+        width: 100%; height: 100%; object-fit: cover;
+    }
+  }
+
+
+  
+/******************* No record */
+.no-record{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 100%;
+    h3{
+        color: #777;
+        font-size: 24px;
+    }
+    img{
+      width: 200px; display: inline-block; opacity: 0.6;
+    }
+  }
+
+
+
+
+
+
+
+
+
+  /**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+ 
+
+
+
+
+}

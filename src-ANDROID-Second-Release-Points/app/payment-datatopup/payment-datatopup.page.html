@@ -1,0 +1,302 @@
+<ion-content [fullscreen]="true">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <h3>{{ 'PAYMENT_TITLE' | translate }}</h3>
+        <p>
+          {{ 'CHOOSE_PAYMENT_METHOD' | translate }}
+        </p>
+      </ion-title>
+      <ion-chip slot="end" [ngClass]="getWalletClass()"> <!-- LYD -->
+          <span *ngIf="currencyCode === 'LYD'">
+            <ng-container *ngIf="lang === 'ar'; else lydEn">
+              {{ walletBalance | number:'1.0-0' }} د.ل
+            </ng-container>
+
+            <ng-template #lydEn>
+              LYD&nbsp;{{ walletBalance| number:'1.0-0' }}
+            </ng-template>
+          </span>
+
+          <!-- Other currencies -->
+          <span *ngIf="currencyCode !== 'LYD'">
+            {{ walletBalance | currency:currencyCode }}
+          </span></ion-chip>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="gotoBack()">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+
+    <ion-row class="top-row">
+      <ion-col size="7">
+       <h2 *ngIf="checkoutObj?.isUnlimited && lang!='en'">
+          {{ checkoutObj?.bundleData?.duration }} {{ checkoutObj?.bundleData?.duration > 1 ? 'أيام' : 'يوم' }}
+        </h2>
+
+        <h2 *ngIf="checkoutObj?.isUnlimited && lang=='en'">
+          {{ checkoutObj?.bundleData?.duration }} {{ checkoutObj?.bundleData?.duration > 1 ? 'Days' : 'Day' }}
+        </h2>
+
+        <h2 *ngIf="!checkoutObj.isUnlimited">{{ 'DATA_PLAN' | translate:{ size: checkoutObj.bundleData.dataAmount / 1000 } }}</h2>
+      </ion-col>
+      <ion-col size="5"  *ngIf="coupencodeRes?.is_couped_applied == 0">
+        <p class="price"> 
+         <span *ngIf="checkoutObj.currency === 'LYD'">
+      <ng-container *ngIf="lang === 'ar'; else lydenNoCross">
+        {{ checkoutObj.extraAmount | number:'1.0-0' }} د.ل
+      </ng-container>
+      <ng-template #lydenNoCross>
+        LYD&nbsp;{{ checkoutObj.extraAmount | number:'1.0-0' }}
+      </ng-template>
+    </span>
+    <span *ngIf="checkoutObj.currency !== 'LYD'">
+      {{ checkoutObj.extraAmount | currency:checkoutObj.currency }}
+    </span></p>
+      </ion-col>
+
+      <ion-col size="5"  *ngIf="coupencodeRes?.is_couped_applied == 1">
+        <p class="price cross">
+           <span *ngIf="checkoutObj.currency === 'LYD'">
+      <ng-container *ngIf="lang === 'ar'; else lydenNoCross">
+        {{ checkoutObj.extraAmount | number:'1.0-0' }} د.ل
+      </ng-container>
+      <ng-template #lydenNoCross>
+        LYD&nbsp;{{ checkoutObj.extraAmount | number:'1.0-0' }}
+      </ng-template>
+    </span>
+    <span *ngIf="checkoutObj.currency !== 'LYD'">
+      {{ checkoutObj.extraAmount | currency:checkoutObj.currency }}
+    </span>
+
+        </p>
+        <p class="price "><span *ngIf="coupencodeRes.currency === 'LYD'">
+      <ng-container *ngIf="lang === 'ar'; else lydenNoCross">
+        {{coupencodeRes.original_amount | number:'1.0-0' }} د.ل
+      </ng-container>
+      <ng-template #lydenNoCross>
+        LYD&nbsp;{{ coupencodeRes.original_amount | number:'1.0-0' }}
+      </ng-template>
+    </span>
+    <span *ngIf="coupencodeRes.currency !== 'LYD'">
+      {{ coupencodeRes.original_amount | currency:coupencodeRes.currency }}
+    </span></p>
+        
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <p class="countryname">
+          <span class="country" *ngIf="types != 'zone'">
+            <img *ngIf="checkoutObj.bundleData.countries[0]['iso'] == 'LATAM'" src="assets/flags/la.svg" alt="">
+            <img *ngIf="checkoutObj.bundleData.countries[0]['iso'] == 'Europe+'" src="assets/flags/eur.svg" alt="">
+            <img *ngIf="checkoutObj.bundleData.countries[0]['iso'] === 'Europe'" src="assets/flags/eur.svg" alt="">
+            <img *ngIf="checkoutObj.bundleData.countries[0]['iso'] === 'Europe Lite'" src="assets/flags/eur.svg" alt="">
+            <img *ngIf="checkoutObj.bundleData.countries[0]['iso'] == 'North America'" src="assets/flags/northam.svg"
+              alt="">
+            <img *ngIf="checkoutObj.bundleData.countries[0]['iso'] == 'Middle East'" src="assets/flags/middleast.svg"
+              alt="">
+            <img
+              *ngIf="checkoutObj.bundleData.countries[0]['iso'] !== 'Europe' && checkoutObj.bundleData.countries[0]['iso'] != 'Middle East' && checkoutObj.bundleData.countries[0]['iso'] != 'North America' &&
+              checkoutObj.bundleData.countries[0]['iso'] != 'Europe+' && checkoutObj.bundleData.countries[0]['iso'] != 'LATAM'"
+              src="assets/flags/{{ checkoutObj.bundleData.countries[0]['iso'] | lowercase }}.svg" alt="">
+          </span>
+          <span class="country" *ngIf="types == 'zone'">
+            <img src="assets/img/{{ checkoutObj.bundleData.countries[0]['iso'] }}.png" alt="">
+          </span>
+          {{ bundleName }} / {{ 'VALID_FOR_DAYS' | translate: { days: checkoutObj.bundleData.duration } }}
+        </p>
+      </ion-col>
+    </ion-row>
+
+    <div class="buynewplan">
+      <div>
+        <span>{{ 'IMPORTANT_TEXT' | translate }}</span> {{ 'ESIM_ICCID' | translate }} {{ checkoutObj.iccid }}
+      </div>
+    </div>
+
+    <h5 class="text-center dataheading" *ngIf="checkoutObj.isUnlimited ==false">
+      {{ 'HOW_MUCH_DATA' | translate }}
+    </h5>
+    <p class="text-center datatext" *ngIf="checkoutObj.isUnlimited ==false">
+      {{ browsing_amt }} {{'GB' | translate }} {{ 'GIVES_YOU_INTERNET_USE' | translate }}
+    </p>
+
+    <!-- English-->
+    <ion-row class="dataneed" *ngIf="checkoutObj.isUnlimited ==false">
+      <ion-col>
+        <div><img src="assets/img/icons/browsing.png"><small> {{ browsing_data }} {{ 'HOURS_BROWSING' | translate
+            }}</small></div>
+      </ion-col>
+      <ion-col class="text-center">
+        <div><img src="assets/img/icons/music.png"><small> {{ browsing_music }} {{ 'HOURS_MUSIC' | translate }}</small>
+        </div>
+      </ion-col>
+      <ion-col class="text-right">
+        <div><img src="assets/img/icons/video.png"><small> {{ browsing_video }} {{ 'HOURS_VIDEO' | translate }}</small>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <div class="cardoption">
+
+      <!-- Apple Pay and Credit/Debit Card radio groups -->
+      <ion-radio-group [(ngModel)]="selectedPaymentType" (ionChange)="onPaymentTypeChange($event)">
+        <ion-radio [value]="'google-pay'">
+          <img class="gpay" src="assets/img/googlepay-new.png" alt="">{{ 'Google Pay' }}
+        </ion-radio>
+        <ion-radio [value]="'wallet-pay'">
+          <img src="assets/img/app-credit-dark.png" alt="">{{ 'App_credit' | translate}}
+        </ion-radio>
+        <ion-radio [value]="'credit-debit'">
+          <img src="assets/img/credit-card-dark.png" alt="">{{ 'CREDIT_DEBIT' | translate }}
+        </ion-radio>
+
+           <!-- this is new row for t-lync -->
+        <ion-radio  [value]="'tlync'">
+          <img src="assets/img/tlynclogoblack.png" alt="">{{ 't-lync' | translate }}
+        </ion-radio>
+        <!-- this is new row for t-lync  end -->
+         
+      </ion-radio-group>
+
+      <div class="card-slider" *ngIf="selectedPaymentType === 'credit-debit' && cardList.length > 0">
+        <swiper-container (slidechange)="swiperSlideChanged($event)" [freeMode]="true" [loop]="false"
+          [pagination]="true">
+          <swiper-slide>
+            <ion-card *ngFor="let cardItem of cardList; let i = index" (click)="cartOpt(i, cardItem)">
+              <div class="innerrow">
+                <div class="left">
+                  <img *ngIf="cardItem.brand == 'Visa'" src="assets/img/visa.png" alt="">
+                  <img *ngIf="cardItem.brand == 'MasterCard'" src="assets/img/mastercard.png" alt="">
+                </div>
+                <div class="right">
+                  <ion-radio-group [ngClass]="selectedCards[i] ? 'selectedRadioCard' : ''"
+                    [(ngModel)]="selectedCards[i]">
+                    <ion-radio [value]="true"></ion-radio>
+                  </ion-radio-group>
+                </div>
+              </div>
+              <div class="innerrow rownumber">
+                <div class="left"><small>{{ 'CARD_NUMBER' | translate }}</small></div>
+              </div>
+              <div class="innerrow">
+                <div class="left star">
+                  <span>****</span> &nbsp; <span>****</span> &nbsp; <span>****</span>
+                </div>
+                <div class="right star">
+                  <span class="number">{{cardItem.last_four }}</span>
+                </div>
+              </div>
+              <div class="innerrow">
+                <div class="left">
+                  <ion-row>
+                    <ion-col size="3"><small>{{ 'VALID_THRU' | translate }}</small></ion-col>
+                    <ion-col size="3"><small>**</small><small>/</small><small>**</small></ion-col>
+                  </ion-row>
+                </div>
+                <div class="right">
+                </div>
+              </div>
+              <div class="innerrow rowholder">
+                <div class="left">
+                  <span class="holdername">{{ cardItem.first_name }}</span>
+                </div>
+                <div class="right">
+                  <img src="assets/img/chip.png" class="cardchip" alt="">
+                </div>
+              </div>
+            </ion-card>
+          </swiper-slide>
+        </swiper-container>
+      </div>
+    </div>
+
+    <h5 class="coupontitle"> {{ 'HAVE_COUPON_QUESTION' | translate}}</h5>
+    <div class="couponrow">      
+      <ion-item lines="none">
+        <ion-input type="text" [(ngModel)]="coupon_code" 
+                   [placeholder]="'ENTER_COUPON_CODE' | translate"
+                   [readonly]="coupencodeRes?.is_couped_applied === 1">
+        </ion-input>
+      
+        <ion-button *ngIf="coupencodeRes?.is_couped_applied === 1" slot="end" fill="clear" (click)="removeCoupon()">
+          <ion-icon name="trash-bin-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+      
+      <ion-button class="apply" (click)="applyCoupon()" 
+                  [disabled]="coupencodeRes?.is_couped_applied === 1">
+        {{ 'APPLY_BUTTON' | translate }}
+      </ion-button>
+    </div>
+       <!-- Cashback Section Start -->
+       <div *ngIf="cashBackRes?.is_cashback_applicable == 1 && selectedPaymentType != 'wallet-pay'">
+  <h5 class="cashbacktitle">
+    {{ 'CASHBACK.TITLE' | translate }} 
+    <img src="assets/img/cashback.png" alt="{{ 'CASHBACK.IMG_ALT' | translate }}">
+  </h5>
+
+     <p *ngIf="cashBackRes?.amount_type === 'fixed'">
+  <strong>{{ 'CASHBACK.QUALIFY' | translate }}</strong><br>
+  {{ 'CASHBACK.FIXED' | translate: { 
+        amount: (cashBackRes?.currency === 'LYD' 
+                  ? (lang === 'ar' ? (cashBackRes?.amount | number:'1.0-0') + ' د.ل' 
+                                   : 'LYD ' + (cashBackRes?.amount | number:'1.0-0')) 
+                  : (cashBackRes?.amount | currency: cashBackRes?.currency)) 
+      } 
+  }}
+</p>
+
+ 
+<p *ngIf="cashBackRes?.amount_type !== 'fixed'">
+  <strong>{{ 'CASHBACK.QUALIFY' | translate }}</strong><br>
+  {{ 'CASHBACK.PERCENTAGE' | translate: { 
+        percentage: cashBackRes?.percentage, 
+        amount: (cashBackRes?.currency === 'LYD' 
+                  ? (lang === 'ar' ? (cashBackRes?.amount | number:'1.0-0') + ' د.ل' 
+                                   : 'LYD ' + (cashBackRes?.amount | number:'1.0-0')) 
+                  : (cashBackRes?.amount | currency: cashBackRes?.currency)) 
+      } 
+  }}
+</p>
+</div>
+<!-- Cashback Section End -->
+    <ion-button expand="block" class="btn-green btn-payment" (click)="proceedForPayment()">
+      {{ 'PAY_NOW' | translate }}
+    </ion-button>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button (click)="gotoHomeSearch()" class="selected">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

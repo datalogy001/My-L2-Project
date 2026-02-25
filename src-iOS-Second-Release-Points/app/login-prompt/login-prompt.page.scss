@@ -1,0 +1,102 @@
+ion-header{
+  ion-toolbar{      
+      --min-height:150px;
+      height: 120px;
+      &.ios{ --min-height:150px;}
+      ion-title{
+        text-align: left;  
+        p{
+          font-size: 17px; line-height: 24px;
+        }         
+        &.ios{ 
+          padding-inline:25px; margin-top:10px; line-height: 26px;
+        }
+      }
+      [slot="end"]{
+        margin-inline-end: 15px;
+      }
+      ion-buttons{
+          ion-button{              
+              display: inline-block;
+              margin-inline-start:0;
+              margin-inline-end: 0;
+              margin-top: -20px;
+              min-height: auto;
+              height: auto;
+      
+              &::part(native){
+                  padding-inline-start: 10px;
+                  padding-inline-end: 0px;
+              }
+              &.ios{ margin-top:-5px; }
+          }
+      }
+  }
+}
+
+ion-content{
+  --background:#fff;
+}
+
+ion-button{  
+  &.btn-signin{
+    --padding-start:20px;
+    --padding-end:20px;
+    margin: 0 0px 0px;
+  } 
+}
+
+ion-button{  
+  &.btn-signup{
+    --padding-start:20px;
+    --padding-end:20px;
+    margin: 25px 0px 0px;
+  } 
+}
+
+.orbox{
+  margin: 25px 0px 25px; border-bottom: 1px solid var(--theme-color-2); position: relative; font-family: 'Inter'; 
+  span{
+      position: absolute; z-index: 11; left: 50%; transform: translateX(-50%); padding: 10px 15px;
+      top: -18px; background: #fff; font-size: 15px; white-space: nowrap; color: var(--theme-color-2); text-transform: uppercase;
+  }
+}
+.ftel-logo{
+  margin: 10% auto 15%;
+  text-align: center;
+  img{
+      width: 190px;
+  }
+}
+
+.topspace{
+  display: block; min-height: 60%;
+}
+
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px)  
+and (-webkit-min-device-pixel-ratio: 2){
+
+  ion-header ion-toolbar{ height: auto;  }
+  
+  .ftel-logo{ margin: 28% auto 0; }
+  .ftel-logo img{ width: 350px;  }
+  ion-button.btn-signin{  margin: 0 0px 0px; }
+  .orbox{ margin: 40px 0px 40px;}
+  .orbox span{ padding: 20px 15px; top: -30px; font-size: 21px;}
+
+  .redeemvoucher{ margin: 30px 0 0px;}
+  .redeemvoucher a{ font-size: 21px; }
+
+}

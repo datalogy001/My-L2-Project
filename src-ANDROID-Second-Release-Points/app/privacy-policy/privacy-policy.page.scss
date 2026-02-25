@@ -1,0 +1,163 @@
+ion-header {
+  ion-toolbar {
+    // --background:transparent;
+    --min-height: 40px;
+
+    &.ios {
+      //--min-height: 40px;
+    }
+
+    ion-title {
+      font-size: 25px;
+      white-space: normal;
+      padding-inline-start: 25px;
+      //padding-top: 20px;
+      text-align: left;
+      height: auto;
+      font-weight: normal;
+      padding-inline: 20px;
+      padding-top: 10px;
+
+      &.ios {
+        //text-align: left;
+        //height: auto;
+        //font-weight: normal;
+        //padding-inline: 20px;
+        //padding-top: 10px;
+      }
+    }
+
+    [slot="end"] {
+      margin-inline-end: 10px;
+
+      &.ios {
+        //margin-inline-end: 10px;
+      }
+    }
+
+    ion-buttons {
+      ion-button {
+        // border: 1px solid #d8322b;
+        --background: #fff;
+        --color: #0d0d20;
+        border-radius: 4px;
+        display: inline-block;
+        clip-path: polygon(100% 10px, 100% 100%, 0% 100%, 0% 0%, calc(100% - 10px) 0%, );
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+        --box-shadow: none;
+        width: 32px;
+        height: 32px;
+        position: relative;
+        overflow: hidden;
+        margin-top: 15px;
+
+        &.ios {
+          margin-top: 0px;
+        }
+
+        &::part(native) {
+          padding-inline-start: 10px;
+          padding-inline-end: 10px;
+        }
+
+        &::after {
+          // width: 22px;
+          // height: 22px;
+          // right: -14px;
+          // top: -14px;
+          // content: "";
+          // background-color: #d8322b;
+          // position: absolute;
+          // z-index: 11;
+          // transform: rotateZ(45deg);
+        }
+      }
+    }
+  }
+}
+ion-content{
+    
+}
+.page-padding{
+    padding:0 20px 20px;
+}
+
+h3 {
+    font-size: 20px;
+    color: #333;
+    margin: 10px 0;
+}
+p {
+    font-size: 14px;
+    margin:0 0 10px;
+    color: #555;
+    line-height: 20px;
+    p{
+        margin:0 0 10px;  
+    }
+}
+.icon {
+    width: 13px;
+    display: inline-block;
+    vertical-align: middle;
+    opacity: 0.6;
+    margin-right: 5px;
+}
+.date {
+    color: #333;
+}
+
+
+.btn-view-bundle {
+    ion-button {
+        --background: #000000;
+        --background-activated: #000;
+        --color: #fff;
+        --padding-start: 20px;
+        --padding-end: 20px;
+        --box-shadow:none;
+    }
+}
+
+ion-footer{
+    ion-toolbar{
+        ion-button {
+            --background: #000;
+            --background-activated: #000;
+            --color: #fff;
+            --padding-start: 20px;
+            --padding-end: 20px;
+            --box-shadow:none;
+        }
+    }
+}
+
+ion-footer.footer-toolbar-padding ion-toolbar:last-of-type{
+    padding-bottom: 6px;
+}
+
+
+
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px) 
+and (min-device-height: 1024px) 
+and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+ 
+
+
+
+
+}

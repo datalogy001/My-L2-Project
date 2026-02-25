@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <h3>{{ 'VERIFY_EMAIL_TITLE' | translate }}</h3>
+      <p>{{ 'ENTER_CODE_SENT' | translate }}</p>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="closePopover(false)">
+        <ion-icon name="arrow-back-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <p class="text">
+    {{ 'VERIFICATION_CODE_SENT' | translate }}
+  </p>
+
+  <ion-item class="otp-input">
+    <ion-input type="tel" placeholder="*" [(ngModel)]="num1" #otp1 maxLength="1"
+      (paste)="onPaste($event, otp1, otp2, otp3, otp4)" (keyup)="otpChange($event, otp2, '', 'otp1')"></ion-input>
+    <ion-input type="tel" placeholder="*" [(ngModel)]="num2" #otp2 maxLength="1"
+      (keyup)="otpChange($event, otp3, otp1, 'otp2')"></ion-input>
+    <ion-input type="tel" placeholder="*" [(ngModel)]="num3" #otp3 maxLength="1"
+      (keyup)="otpChange($event, otp4, otp2, 'otp3')"></ion-input>
+    <ion-input type="tel" placeholder="*" [(ngModel)]="num4" #otp4 maxLength="1"
+      (keyup)="otpChange($event, '', otp3, 'otp4')"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" class="btn-green btn-continue" (click)="closePopover(true)">
+    {{ 'CONTINUE' | translate }}
+  </ion-button>
+
+  <div class="orbox">
+    <span>{{ 'OR_TEXT' | translate }}</span>
+  </div>
+
+  <ion-button expand="block" class="btn-secondary btn-resend" (click)="retryCode()">
+    {{ 'RESEND_CODE' | translate }}
+  </ion-button>
+</ion-content>
+

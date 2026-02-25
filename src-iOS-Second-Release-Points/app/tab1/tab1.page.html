@@ -1,0 +1,285 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <h3>
+       {{'INTERNET_PLANS_PAGE_TITLE' | translate }}
+      </h3>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" *ngIf="isLogin && notiCount == 0" (click)="gotoNoti()">
+        <img src="assets/img/icons/bell-dark.png" alt="">
+      </ion-button>
+
+      <ion-button fill="clear" *ngIf="isLogin && notiCount > 0" (click)="gotoNoti()">
+        <img src="assets/img/icons/bell-dark.png" alt="">
+        <span>{{notiCount}}</span>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar class="segment">
+    <ion-segment value="active" [(ngModel)]="selectedSegment">
+      <ion-segment-button value="active">
+        <ion-label>
+          <img class="normal" src="assets/img/icons/active.png"><img class="active"
+            src="assets/img/icons/active-dark.png"> {{ 'ACTIVE_SEGMENT_LABEL' | translate }}
+        </ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="inactive">
+        <ion-label>
+          <img class="normal" src="assets/img/icons/inactive.png"><img class="active"
+            src="assets/img/icons/inactive-dark.png"> {{ 'INACTIVE_SEGMENT_LABEL' | translate }}
+        </ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher> 
+
+  <div class="segment-panel" [ngSwitch]="selectedSegment">
+
+    <div class="active" *ngSwitchCase="'active'">
+      <div class="no-record" *ngIf="!isDataAvailActive">
+        <img src="assets/img/noactive-bundle.png" alt="">
+        <!-- <h3>{{ 'ACTIVE.NO_RECORD_TITLE' | translate }}</h3> -->
+        <p>{{ 'ACTIVE.NO_RECORD_DESCRIPTION' | translate }}</p>
+      </div>
+
+      <div *ngIf="isDataAvailActive">
+        <ion-card *ngFor="let activeItem of bundleActiveList ; let i = index"
+          (click)="gotoDetails(activeItem,'active')">
+          <ion-row class="d-flex">
+            <ion-col size="7">
+              <span class="countryname" *ngIf="activeItem.type=='country'">{{convertintoCountryLang(activeItem.short_name_country)}}</span>
+              <span class="countryname" *ngIf="activeItem.type!='country'">{{convertintoZoneLang(activeItem.short_name_country)}}</span><br>
+
+              <span class="days" *ngIf="activeItem.isUnlimited ==true">{{ activeItem.days}}</span>
+              <span class="days" *ngIf="activeItem.isUnlimited !=true">{{ activeItem.dataamount}} {{'GB' | translate }}</span><br>
+
+              <span class="voucher" *ngIf="activeItem.is_through_voucher ==1">{{'Voucher_Top_up' | translate}}</span>
+            </ion-col>
+            <ion-col size="5" class="right">
+              <span class="country"> <img
+                  *ngIf="activeItem.short_name_country =='LATAM' || activeItem.short_name_country =='latam'"
+                  src="assets/flags/la.svg" alt="">
+                 <img *ngIf="activeItem.short_name_country =='Europe+' || activeItem.short_name_country =='europe+'"
+                  src="assets/flags/eur.svg" alt="">
+             
+                  <img *ngIf="activeItem.short_name_country =='Europe Lite' || activeItem.short_name_country =='europe lite'"
+                  src="assets/flags/eur.svg" alt="">
+
+                  <img *ngIf="activeItem.short_name_country =='Europe' || activeItem.short_name_country =='europe'"
+                  src="assets/flags/eur.svg" alt="">
+
+
+                <img
+                  *ngIf="activeItem.short_name_country =='north america' || activeItem.short_name_country =='North America'"
+                  src="assets/flags/northam.svg" alt="">
+
+                <img
+                  *ngIf="activeItem.short_name_country =='middle east' || activeItem.short_name_country =='Middle East'"
+                  src="assets/flags/middleast.svg" alt="">
+
+               <img
+                  *ngIf="activeItem.short_name_country !='Europe' && activeItem.short_name_country !='europe' && activeItem.short_name_country !='Europe Lite' && activeItem.short_name_country !='europe lite' && activeItem.short_name_country !='middle east' && activeItem.short_name_country !='Middle East'
+               &&
+              activeItem.short_name_country !='Europe+'   && activeItem.short_name_country !='North America' 
+              && activeItem.short_name_country !='north america'  &&
+              activeItem.short_name_country !='europe+' && activeItem.short_name_country !='LATAM' && activeItem.short_name_country !='latam' "
+                  src="assets/flags/{{activeItem.short_name_country | lowercase}}.svg" alt=""></span>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
+
+      <!-- new code -->
+      <div class="topup" *ngIf="bundleTopupAgain.length >0">
+        <h4>{{ 'top_up_again' | translate }}</h4>
+
+        <ion-card *ngFor="let topupItem of bundleTopupAgain ; let i = index">
+          <ion-row class="d-flex" (click)="gotoDetails(topupItem,'topup')">
+            <ion-col size="7">
+              <span class="countryname" *ngIf="topupItem.type=='country'">{{convertintoCountryLang(topupItem.short_name_country)}}</span>
+              <span class="countryname" *ngIf="topupItem.type!='country'">{{convertintoZoneLang(topupItem.short_name_country)}}</span><br>
+
+              <span class="days" *ngIf="topupItem.isUnlimited ==true">{{ topupItem.days}}</span>
+              <span class="days" *ngIf="topupItem.isUnlimited !=true">{{ topupItem.dataamount}} {{'GB' | translate }}</span> <br>
+
+              <span class="voucher" *ngIf="topupItem.is_through_voucher ==1">{{'Voucher_Top_up' | translate}}</span>
+            </ion-col>
+            <ion-col size="5" class="right">
+              <span class="country"> <img
+                *ngIf="topupItem.short_name_country =='LATAM' || topupItem.short_name_country =='latam'"
+                src="assets/flags/la.svg" alt="">
+              <img *ngIf="topupItem.short_name_country =='Europe+' || topupItem.short_name_country =='europe+'"
+                src="assets/flags/eur.svg" alt="">
+
+                <img *ngIf="topupItem.short_name_country =='Europe' || topupItem.short_name_country =='europe'"
+                src="assets/flags/eur.svg" alt="">
+
+                <img *ngIf="topupItem.short_name_country =='Europe Lite' || topupItem.short_name_country =='europe lite'"
+                src="assets/flags/eur.svg" alt="">
+
+
+              <img
+                *ngIf="topupItem.short_name_country =='north america' || topupItem.short_name_country =='North America'"
+                src="assets/flags/northam.svg" alt="">
+
+              <img
+                *ngIf="topupItem.short_name_country =='middle east' || topupItem.short_name_country =='Middle East'"
+                src="assets/flags/middleast.svg" alt="">
+
+              <img
+                *ngIf="topupItem.short_name_country !='Europe' && topupItem.short_name_country !='europe' && topupItem.short_name_country !='middle east' && topupItem.short_name_country !='Middle East'
+             && topupItem.short_name_country !='Europe Lite' && topupItem.short_name_country !='europe lite' &&
+             topupItem.short_name_country !='Europe+'   && topupItem.short_name_country !='North America' 
+            && topupItem.short_name_country !='north america'  &&
+            topupItem.short_name_country !='europe+' && topupItem.short_name_country !='LATAM' && topupItem.short_name_country !='latam' "
+                src="assets/flags/{{topupItem.short_name_country | lowercase}}.svg" alt=""></span>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+        
+      </div>
+      <!-- new code end -->
+      
+
+    </div>
+
+    <div class="inactive" *ngSwitchCase="'inactive'">
+      <div class="no-record" *ngIf="!isDataAvailInActive">
+        <img src="assets/img/noactive-bundle.png" alt="">
+        <!-- <h3>{{ 'INACTIVE.NO_RECORD_TITLE' | translate }}</h3> -->
+        <p>{{ 'INACTIVE.NO_RECORD_DESCRIPTION' | translate }}</p>
+      </div>
+      <div *ngIf="isDataAvailInActive">
+        <ion-card *ngFor="let inActiveItem of bundleInactiveList ; let i = index">
+          <ion-row class="d-flex">
+            <ion-col size="7" (click)="gotoDetails(inActiveItem,'inactive')">
+              <span class="countryname" *ngIf="inActiveItem.type=='country'">{{convertintoCountryLang(inActiveItem.short_name_country)}}</span>
+              <span class="countryname" *ngIf="inActiveItem.type!='country'">{{convertintoZoneLang(inActiveItem.short_name_country)}}</span><br>
+              <span class="days" *ngIf="inActiveItem.isUnlimited ==true">{{ inActiveItem.days}}</span>
+              <span class="days" *ngIf="inActiveItem.isUnlimited !=true">{{ inActiveItem.dataamount}} {{'GB' | translate }}</span> <br>
+              <span class="voucher" *ngIf="inActiveItem.is_through_voucher ==1">{{'Voucher_Top_up' | translate}}</span>
+            </ion-col>
+            <ion-col size="5" class="right">
+              <span class="share" (click)="gotoShare(inActiveItem)"><img src="assets/img/icons/download-black.png"></span>
+              <span class="share" (click)="gotoInstallESIM(inActiveItem)"><img
+                  src="assets/img/icons/barcode-icon.png"></span>
+
+              <span (click)="gotoDetails(inActiveItem,'inactive')" class="country"><img
+                  *ngIf="inActiveItem.short_name_country =='LATAM' || inActiveItem.short_name_country =='latam' "
+                  src="assets/flags/la.svg" alt="">
+                <img *ngIf="inActiveItem.short_name_country =='Europe+' || inActiveItem.short_name_country =='europe+'"
+                  src="assets/flags/eur.svg" alt="">
+                  <img *ngIf="inActiveItem.short_name_country =='Europe' || inActiveItem.short_name_country =='europe'"
+                  src="assets/flags/eur.svg" alt="">
+           
+                     <img *ngIf="inActiveItem.short_name_country =='Europe Lite' || inActiveItem.short_name_country =='europe lite'"
+                  src="assets/flags/eur.svg" alt="">
+
+                <img
+                  *ngIf="inActiveItem.short_name_country =='North America' || inActiveItem.short_name_country =='north america'"
+                  src="assets/flags/northam.svg" alt="">
+
+                <img
+                  *ngIf="inActiveItem.short_name_country =='Middle East' || inActiveItem.short_name_country =='middle east'"
+                  src="assets/flags/middleast.svg" alt="">
+
+                <img *ngIf="inActiveItem.short_name_country !='Europe' && inActiveItem.short_name_country !='europe' && inActiveItem.short_name_country !='Europe Lite' && inActiveItem.short_name_country !='europe lite' && inActiveItem.short_name_country !='Middle East' &&  inActiveItem.short_name_country !='middle east' 
+              && inActiveItem.short_name_country !='north america' && inActiveItem.short_name_country !='North America' &&
+              inActiveItem.short_name_country !='Europe+' && inActiveItem.short_name_country !='europe+' 
+              && inActiveItem.short_name_country !='LATAM' &&  inActiveItem.short_name_country !='latam' "
+                  src="assets/flags/{{inActiveItem.short_name_country | lowercase}}.svg" alt=""></span>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
+
+      <div class="expired"  *ngIf="bundleExpiredList.length>0" >
+        <h4>{{ 'Expired' | translate }}</h4>
+
+        <ion-card *ngFor="let expiredItem of bundleExpiredList ; let i = index">
+          <ion-row class="d-flex" (click)="gotoDetails(expiredItem,'expired')">
+            <ion-col size="7">
+              <span class="countryname" *ngIf="expiredItem.type=='country'">{{convertintoCountryLang(expiredItem.short_name_country)}}</span>
+              <span class="countryname" *ngIf="expiredItem.type!='country'">{{convertintoZoneLang(expiredItem.short_name_country)}}</span><br>
+              <span class="days" *ngIf="expiredItem.isUnlimited ==true">{{ expiredItem.days}}</span>
+              <span class="days" *ngIf="expiredItem.isUnlimited !=true">{{ expiredItem.dataamount}} {{'GB' | translate }}</span> <br>
+              <span class="voucher" *ngIf="expiredItem.is_through_voucher ==1">{{'Voucher_Top_up' | translate}}</span>
+            </ion-col>
+            <ion-col size="5" class="right">
+              <span class="country"> <img
+                *ngIf="expiredItem.short_name_country =='LATAM' || expiredItem.short_name_country =='latam'"
+                src="assets/flags/la.svg" alt="">
+              <img *ngIf="expiredItem.short_name_country =='Europe+' || expiredItem.short_name_country =='europe+'"
+                src="assets/flags/eur.svg" alt="">
+
+                <img *ngIf="expiredItem.short_name_country =='Europe' || expiredItem.short_name_country =='europe'"
+                src="assets/flags/eur.svg" alt="">
+
+                 <img *ngIf="expiredItem.short_name_country =='Europe Lite' || expiredItem.short_name_country =='europe lite'"
+                src="assets/flags/eur.svg" alt="">
+
+
+              <img
+                *ngIf="expiredItem.short_name_country =='north america' || expiredItem.short_name_country =='North America'"
+                src="assets/flags/northam.svg" alt="">
+
+              <img
+                *ngIf="expiredItem.short_name_country =='middle east' || expiredItem.short_name_country =='Middle East'"
+                src="assets/flags/middleast.svg" alt="">
+
+              <img
+                *ngIf="expiredItem.short_name_country !='Europe' && expiredItem.short_name_country !='europe' && expiredItem.short_name_country !='Europe Lite' && expiredItem.short_name_country !='europe lite' && expiredItem.short_name_country !='middle east' && expiredItem.short_name_country !='Middle East'
+             &&
+             expiredItem.short_name_country !='Europe+'   && expiredItem.short_name_country !='North America' 
+            && expiredItem.short_name_country !='north america'  &&
+            expiredItem.short_name_country !='europe+' && expiredItem.short_name_country !='LATAM' && expiredItem.short_name_country !='latam' "
+                src="assets/flags/{{expiredItem.short_name_country | lowercase}}.svg" alt=""></span>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+       
+      </div>
+
+      <div class="viewbundle" *ngIf="!isDataAvailInActive">
+        <h4>{{ 'VIEW_BUNDLES_TITLE' | translate }}</h4>
+        <ion-button (click)="gotoTab2()" expand="block" class="btn-green">{{ 'BROWSE_ALL_PLANS_BUTTON' | translate }}</ion-button>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button (click)="gotoHomeSearch()">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button class="middle selected">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>   
+    </div>
+  </ion-toolbar>
+</ion-footer>

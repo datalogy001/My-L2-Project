@@ -1,0 +1,81 @@
+<ion-content [fullscreen]="true">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <h3> Top_up</h3>
+        <p> Choose_how_much_credit</p>
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <div class="ion-padding">
+
+    <div class="contentbox">
+      
+      <ion-radio-group>
+        <ion-radio>
+          5 GBP
+        </ion-radio>
+      </ion-radio-group>
+
+      <ion-radio-group>
+        <ion-radio>
+          10 GBP
+        </ion-radio>
+      </ion-radio-group>
+
+      <ion-radio-group>
+        <ion-radio>
+          20 GBP
+        </ion-radio>
+      </ion-radio-group>
+
+      <ion-list>
+        <ion-item>
+          <ion-select label="Choose_amount" placeholder="">
+            <ion-select-option >amount</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      
+    </div> 
+
+    <ion-button expand="block" class="btn-green btn-payment" >
+      TOP_UP_CREDIT
+    </ion-button>
+
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button routerLink="/home-search">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button >
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button routerLink="/marketplace">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button routerLink="/profile"  class="selected">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

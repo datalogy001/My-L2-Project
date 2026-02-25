@@ -1,0 +1,109 @@
+<ion-content [fullscreen]="true">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        <img class="ftel-logo" src="assets/img/L2-logobranded.png" alt="">
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-buttons slot="end">
+          <ion-button fill="clear" (click)="gotoBack()">
+            <ion-icon name="arrow-back-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar class="titlebar">
+      <ion-title>
+        <h3>{{ 'PAYMENT_SETTINGS' | translate }}</h3>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+    <!--<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher> -->
+
+    <h4>{{ 'SAVED_CARDS' | translate }}</h4>
+
+    <div class="no-record" *ngIf="!isDataAvail">
+      <img src="assets/img/atm-card.png" alt="">
+      <h3>{{ 'NO_SAVED_CARDS' | translate }}</h3>
+    </div>
+
+    <div *ngIf="isDataAvail">
+      <ion-card *ngFor="let cardItem of cardList; let i = index">
+        <div class="innerrow">
+          <div class="left">
+            <img *ngIf="cardItem.brand == 'Visa'" src="assets/img/visa.png" alt="">
+            <img *ngIf="cardItem.brand == 'MasterCard'" src="assets/img/mastercard.png" alt="">
+          </div>
+          <div   class="right" style="text-align: right; position: relative;">
+            <span (click)="presentConfirmAlert(cardItem.id,i)"  class="delete" ><img src="assets/img/cross-dark.png" alt=""></span>
+          </div>
+        </div>
+        <div class="innerrow rownumber">
+          <div class="left"><small>{{ 'CARD_NUMBER' | translate }}</small></div>
+        </div>
+        <div class="innerrow">
+          <div class="left star">
+            <span>****</span> &nbsp; <span>****</span> &nbsp; <span>****</span>
+          </div>
+          <div class="right star">
+            <span class="number">{{ getLastFourDigits(cardItem.last_four) }}</span>
+          </div>
+        </div>
+        <div class="innerrow">
+          <div class="left">
+            <ion-row>
+              <ion-col size="3"><small>{{ 'VALID_THRU' | translate }}</small></ion-col>
+              <ion-col size="3"><small>**</small><small>/</small><small>**</small></ion-col>
+            </ion-row>
+          </div>
+          <div class="right"></div>
+        </div>
+        <div class="innerrow rowholder">
+          <div class="left">
+            <span class="holdername">{{ cardItem.card_holder_name }}</span>
+          </div>
+          <div class="right">
+            <img src="assets/img/chip.png" class="cardchip" alt="">
+          </div>
+        </div>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="button-bar">
+    <ion-button class="btn-green btn-add-newcard" expand="block" (click)="gotoNewCard()">
+      {{ 'ADD_NEW_CARD' | translate }}
+    </ion-button>
+  </ion-toolbar>
+
+  <ion-toolbar>
+  <div class="tabmenu">
+      <ion-button (click)="gotoHomeSearch()">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()" class="selected">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>      
+    </div>
+
+  </ion-toolbar>
+</ion-footer>

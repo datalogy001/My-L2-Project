@@ -1,0 +1,86 @@
+<ion-content [fullscreen]="true">
+
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>
+                <h3>{{ 'ADD_CARD_TITLE' | translate }}</h3>
+                <p>{{ 'ENTER_PAYMENT_DETAILS' | translate }}</p>
+            </ion-title>
+            <ion-buttons slot="end">
+                <ion-button fill="clear" (click)="gotoBack()">
+                    <ion-icon name="arrow-back-circle-outline"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-header>
+
+    <div class="ion-padding">
+
+        <div class="datascroll">
+            <ion-list>
+
+                <ion-item lines="none">
+                    <ion-input type="text" autocapitalize="on" [(ngModel)]="creditCardObj.cardHolder"
+                        placeholder="{{ 'CARD_HOLDER_NAME_PLACEHOLDER' | translate }}"></ion-input>
+                </ion-item>
+                
+                <ion-item lines="none">
+                    <div id="card-number-element" style="width: 100%;"> </div>
+                </ion-item>
+
+                <ion-item lines="none">
+                    <div id="card-expiry-element" style="width: 100%;"> </div>
+                </ion-item>
+
+                <ion-item lines="none">
+                    <div id="card-cvc-element" style="width: 100%;"> </div>
+                </ion-item>
+
+                <ion-row class="checkrow" *ngIf="tempDetails.fromPayment == true">
+                    <ion-col>
+                        <ion-checkbox labelPlacement="end" [(ngModel)]="creditCardObj.isTermsSelected">
+                            {{ 'SAVE_CARD_DETAILS_QUESTION' | translate }}
+                        </ion-checkbox>
+                    </ion-col>
+                </ion-row>
+
+            </ion-list>
+
+            <ion-button expand="block" class="btn-green add-card" (click)="gotoSubmit()">
+                {{ 'ADD_CARD_BUTTON' | translate }}
+            </ion-button>
+
+        </div>
+
+    </div>
+
+</ion-content>
+
+
+
+<ion-footer>
+    <ion-toolbar>
+        <div class="tabmenu">
+            <ion-button (click)="gotoHomeSearch()">
+              <img class="normal" src="assets/img/icons/location.png" alt="">
+              <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+            </ion-button>
+      
+            <ion-button (click)="gotoTab1()">
+              <img class="normal" src="assets/img/icons/scan.png" alt="">
+              <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+            </ion-button>
+      
+            <ion-button (click)="gotoMarketPlace()">
+              <img class="normal" src="assets/img/icons/shop.png" alt="">
+              <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+            </ion-button>
+      
+            <ion-button (click)="gotoTab5()" class="selected">
+              <img class="normal" src="assets/img/icons/user.png" alt="">
+              <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+            </ion-button>      
+          </div>
+      
+    </ion-toolbar>
+</ion-footer>

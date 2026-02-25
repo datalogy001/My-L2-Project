@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <img class="tr-logo" src="assets/img/tr-logo-1.png" alt="">
+    </ion-title>
+    <span slot="end" class="bell" *ngIf="notiCount == 0" (click)="gotoNoti()">
+      <img src="assets/img/icons/bell-white.png" alt="">
+    </span>
+    <span slot="end" class="bell" *ngIf="notiCount> 0" (click)="gotoNoti()">
+      <img src="assets/img/icons/bell-white.png" alt="">
+      <span class="notification">{{notiCount}}</span>
+    </span>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="contentmiddle">
+    <ion-row>
+      <ion-col size="9">
+        <h3>Payment History</h3>
+      </ion-col>
+      <ion-col size="3" class="right close">
+        <ion-button fill="clear" (click)="gotoBack()">
+          <i class="far fa-times"></i>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <div class="no-record" *ngIf="isData == false && paymentList.length == 0">
+      <img src="assets/img/nopaymenthistory.png" alt="">
+      <h3>No Payment history</h3>
+    </div>
+
+    <div *ngIf="isData == false && paymentList.length>0" class="paymenthistory">
+      <ion-card *ngFor="let paymentItem of paymentList ; let i = index">
+        <ion-row>
+          <ion-col>
+            <h5><span class="country"><img *ngIf="paymentItem.short_name_country =='LATAM'" src="assets/flags/la.svg"
+                  alt="">
+                <img *ngIf="paymentItem.short_name_country =='LATAM'" src="assets/flags/la.svg" alt="">
+                <img *ngIf="paymentItem.short_name_country =='Europe+' || paymentItem.short_name_country =='europe+'"
+                  src="assets/flags/eur.svg" alt="">
+
+                <img
+                  *ngIf="paymentItem.short_name_country =='North America' || paymentItem.short_name_country =='north america'"
+                  src="assets/flags/northam.svg" alt="">
+
+                <img
+                  *ngIf="paymentItem.short_name_country =='Middle East' || paymentItem.short_name_country =='middle east'"
+                  src="assets/flags/middleast.svg" alt="">
+
+                <img *ngIf="paymentItem.short_name_country !='Middle East' &&  paymentItem.short_name_country !='middle east' 
+                  && paymentItem.short_name_country !='north america' && paymentItem.short_name_country !='North America' &&
+                  paymentItem.short_name_country !='Europe+' && paymentItem.short_name_country !='europe+' 
+                  && paymentItem.short_name_country !='LATAM' "
+                  src="assets/flags/{{paymentItem.short_name_country | lowercase}}.svg" alt="">
+              </span> {{getCountryName(paymentItem.bundle_name)}}</h5>
+          </ion-col>
+          <ion-col class="right">
+            <h5>-{{ paymentItem.amount | currency:paymentItem.currency_symbol}} </h5>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="left data">
+            <p>{{datefilter(paymentItem.date) }} </p>
+          </ion-col>
+          <ion-col class="right data">
+            <p *ngIf="paymentItem.payment_method == 'Visa' || paymentItem.payment_method == 'MasterCard' "><img
+                src="assets/img/credit-card.png" alt="">{{paymentItem.payment_method}} </p>
+            <p *ngIf="paymentItem.payment_method == 'Google Pay'"><img src="assets/img/googlepay.png"
+                alt="">{{paymentItem.payment_method}} </p>
+            <p *ngIf="paymentItem.payment_method == 'Apple Pay'"><img src="assets/img/applepay.png"
+                alt="">{{paymentItem.payment_method}} </p>
+            <p *ngIf="paymentItem.payment_method == 'Paypal'"><img src="assets/img/paypal1.png"
+                alt="">{{paymentItem.payment_method}} </p>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+
+    </div>
+
+    <div *ngIf="isData">
+      <ion-card>
+        <ion-row>
+          <ion-col><ion-skeleton-text class="country" [animated]="true"></ion-skeleton-text></ion-col>
+          <ion-col><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></ion-col>
+          <ion-col><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></ion-col>
+        </ion-row>
+      </ion-card>
+
+      <ion-card>
+        <ion-row>
+          <ion-col><ion-skeleton-text class="country" [animated]="true"></ion-skeleton-text></ion-col>
+          <ion-col><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></ion-col>
+          <ion-col><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></ion-col>
+        </ion-row>
+      </ion-card>
+
+      <ion-card>
+        <ion-row>
+          <ion-col><ion-skeleton-text class="country" [animated]="true"></ion-skeleton-text></ion-col>
+          <ion-col><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></ion-col>
+          <ion-col><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></ion-col>
+        </ion-row>
+      </ion-card>
+
+      <ion-card>
+        <ion-row>
+          <ion-col><ion-skeleton-text class="country" [animated]="true"></ion-skeleton-text></ion-col>
+          <ion-col><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></ion-col>
+          <ion-col><ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text></ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+
+  </div>
+
+</ion-content>

@@ -1,0 +1,26 @@
+<ion-content [fullscreen]="true">
+
+  <div class="topbox">
+    <img src="assets/img/onboard1.png">
+  </div>
+  <div class="container">
+    <h3 class="text-center">
+      {{ 'ONBOARD_GET_CONNECTED' | translate }}
+    </h3>
+    <p class="text-center" [innerHTML]="'ONBOARD_FREEDOM_ROAMING' | translate">
+    </p>
+    <!-- <p class="text-center dots">
+      <span class="active"></span><span></span>
+    </p> -->
+    <ion-button expand="block" class="btn-green btn-deal" (click)="goNext()">
+      {{ 'ONBOARD_SOUNDS_GOOD' | translate }}
+    </ion-button>
+    <div class="link text-center" (click)="gotoPage()">
+      <a>{{ 'ONBOARD_DEVICE_COMPATIBLE' | translate }}</a>
+    </div>
+  </div>
+
+
+
+  
+</ion-content>

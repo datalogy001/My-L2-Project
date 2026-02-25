@@ -1,0 +1,11 @@
+<ion-content>
+  <ion-datetime locale="{{localLang}}" displayFormat="YYYY-MM-DD" [(ngModel)]="selectedDate" [preferWheel]="true"
+    presentation="date"></ion-datetime>
+
+
+  <div class="brnrow">
+    <ion-button class="close" (click)="close()" fill="outline">{{ 'CLOSE_BUTTON' | translate }}</ion-button>
+    <ion-button class="done btn-green" (click)="dismiss()"> {{ 'DONE_BUTTON' | translate }}</ion-button>
+
+  </div>
+</ion-content>

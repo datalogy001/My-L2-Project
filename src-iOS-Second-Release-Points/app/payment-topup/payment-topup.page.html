@@ -1,0 +1,146 @@
+<ion-content [fullscreen]="true">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <h3>{{ 'PAYMENT_TITLE' | translate }} </h3>
+        <p>{{ 'CHOOSE_HOW_TO_PAY_DESCRIPTION' | translate }}</p>
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="gotoBack()">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+
+    <ion-row class="top-row">
+      <ion-col>
+        <h2>{{ 'Top_up' | translate }}</h2>
+      </ion-col>
+      <ion-col class="ion-text-right">
+        <h3> 
+          
+           <!-- LYD -->
+          <span *ngIf="checkoutObj.currency === 'LYD'">
+            <ng-container *ngIf="lang === 'ar'; else lydEn">
+              {{ checkoutObj.amount | number:'1.0-0' }} د.ل
+            </ng-container>
+
+            <ng-template #lydEn>
+              LYD&nbsp;{{ checkoutObj.amount | number:'1.0-0' }}
+            </ng-template>
+          </span>
+
+          <!-- Other currencies -->
+          <span *ngIf="checkoutObj.currency !== 'LYD'">
+            {{ checkoutObj.amount | currency:checkoutObj.currency }}
+          </span>
+         </h3>
+      </ion-col>
+    </ion-row>
+
+    <div class="cardoption">
+      <!-- Google Pay and Credit/Debit Card radio groups -->
+      <ion-radio-group [(ngModel)]="selectedPaymentType" (ionChange)="onPaymentTypeChange($event)">
+        <ion-radio [value]="'apple-pay'">
+          <img src="assets/img/applepay-dark.png" alt="">{{ 'Apple Pay' }}
+        </ion-radio>
+
+        <ion-radio [value]="'credit-debit'">
+          <img src="assets/img/credit-card-dark.png" alt="">{{ 'CREDIT_DEBIT' | translate }}
+        </ion-radio>
+
+           <!-- this is new row for t-lync -->
+        <ion-radio  [value]="'tlync'">
+          <img src="assets/img/tlynclogoblack.png" alt="">{{ 't-lync' | translate }}
+        </ion-radio>
+        <!-- this is new row for t-lync  end -->
+         
+      </ion-radio-group>
+    </div>
+
+    <div class="card-slider" *ngIf="selectedPaymentType === 'credit-debit' && cardList.length > 0">
+      <swiper-container (slidechange)="swiperSlideChanged($event)" [freeMode]="true" [loop]="false"
+        [pagination]="true">
+        <swiper-slide>
+          <ion-card *ngFor="let cardItem of cardList; let i = index" (click)="cartOpt(i, cardItem)">
+            <div class="innerrow">
+              <div class="left">
+                <img src="assets/img/visa.png" alt="">
+              </div>
+              <div class="right">
+                <ion-radio-group [ngClass]="selectedCards[i] ? 'selectedRadioCard' : ''" [(ngModel)]="selectedCards[i]">
+                  <ion-radio [value]="true"></ion-radio>
+                </ion-radio-group>
+              </div>
+            </div>
+            <div class="innerrow rownumber">
+              <div class="left"><small>{{ 'CARD_NUMBER' | translate }}</small></div>
+            </div>
+            <div class="innerrow">
+              <div class="left star">
+                <span>****</span> &nbsp; <span>****</span> &nbsp; <span>****</span>
+              </div>
+              <div class="right star">
+                <span class="number">{{ cardItem.last_four }}</span>
+              </div>
+            </div>
+            <div class="innerrow">
+              <div class="left">
+                <ion-row>
+                  <ion-col size="3"><small>{{ 'VALID_THRU' | translate }}</small></ion-col>
+                  <ion-col size="3"><small>**</small><small>/</small><small>**</small></ion-col>
+                </ion-row>
+              </div>
+              <div class="right">
+              </div>
+            </div>
+            <div class="innerrow rowholder">
+              <div class="left">
+                <span class="holdername">{{ cardItem.first_name }}</span>
+              </div>
+              <div class="right">
+                <img src="assets/img/chip.png" class="cardchip" alt="">
+              </div>
+            </div>
+          </ion-card>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+
+    <ion-button  (click)="proceedForPayment()" expand="block" class="btn-green btn-payment">
+      {{ 'PAY_NOW' | translate }}  
+    </ion-button>
+
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button class="selected" routerLink="/home-search">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gototab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button routerLink="/profile"><!-- (click)="gototab5()" -->
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

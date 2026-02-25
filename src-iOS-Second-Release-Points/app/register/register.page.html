@@ -1,0 +1,83 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>register</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-header >
+  <ion-toolbar>
+    <h2>Sign up</h2>  
+    <h5>Choose Your Destination</h5> 
+    <div>
+      <ion-radio-group value="strawberries">
+        <ion-radio value="grapes">PERUGIA</ion-radio>
+        <ion-radio value="strawberries">FLORENCE</ion-radio>
+      </ion-radio-group>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="topcorner"><img src="assets/img/corner-blue.svg" alt=""></div><!-- this is for design corner top-->
+  
+  <ion-list>
+
+    <ion-item lines="none">
+      <ion-select label="Choose session" placeholder="">
+        <ion-select-option value="2023">FALL-2023</ion-select-option>
+        <ion-select-option value="2024">FALL-2024</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="none">
+      <span slot="start"><img src="assets/img/icon/user.png" alt=""></span>
+      <ion-input type="text"  placeholder="First name"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <span slot="start"><img src="assets/img/icon/user.png" alt=""></span>
+      <ion-input type="text"  placeholder="Last name"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <span slot="start"><img src="assets/img/icon/mail.png" alt=""></span>
+      <ion-input type="email" placeholder="Email"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <span slot="start"><img src="assets/img/icon/mail.png" alt=""></span>
+      <ion-input type="email" placeholder="Confirm email"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <span slot="start"><img src="assets/img/icon/password.png" alt=""></span>
+      <ion-input type="password"  placeholder="Password"></ion-input>
+      <span slot="end"><img src="assets/img/icon/hide.png" alt=""></span>
+    </ion-item>
+
+    <ion-item lines="none">
+      <span slot="start"><img src="assets/img/icon/password.png" alt=""></span>
+      <ion-input type="password"  placeholder="Confirm password"></ion-input>
+      <span slot="end"><img src="assets/img/icon/hide.png" alt=""></span>
+    </ion-item>
+
+    <ion-item lines="none">
+      <span slot="start"><img src="assets/img/icon/phone.png" alt=""></span>
+      <ion-input type="phone"  placeholder="Phone number"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <div class="terms">
+    <ion-checkbox></ion-checkbox> 
+    <p>
+      By creating your account you agree to our <a (click)="gotoTerms()">Terms and Conditions</a> & <a >Privacy Policy</a>
+    </p>
+  </div>
+
+  <div class="signup">
+    <ion-button shape="round">Sign up</ion-button>
+  </div>
+
+</ion-content>

@@ -1,0 +1,274 @@
+ion-header{
+    ion-toolbar{
+        ion-buttons{
+            margin-top: -20px;
+        }
+    }
+}
+
+ion-content {
+  --background: #fff;
+}
+
+p{
+    color: var(--theme-color-2);
+}
+
+.cardoption{
+    margin-top: 30px;  
+
+    ion-radio{
+        background-color: var(--input-bg);
+        padding: 15px 15px;
+        display: block;
+        border-radius: 10px;
+        margin: 0 0 15px;
+        // border: 1px solid var(--item-border);
+        color: var(--theme-color-2);
+        font-size: 15px;
+        border: 1px solid var(--border-color) !important;
+
+        img{
+            width: 25px; display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+            &.gpay{ width: 30px;}
+        } 
+        &.radio-checked{
+          color: var(--theme-color-2);
+        }       
+    }
+}
+
+ion-radio{
+    background-color: var(--input-bg);
+    padding: 15px 15px;
+    display: block;
+    border-radius: 10px;
+    margin: 0 0 15px;
+    // border: 1px solid var(--item-border);
+    color: var(--theme-gray);
+    font-size: 15px;
+
+    img{
+        width: 25px; display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+        &.gpay{ width: 30px;}
+    }        
+
+    &::part(container){ 
+        background: var(--theme-gray); width: 24px; height: 24px; border-radius: 50%; 
+         border: 1px solid var(--border-color) !important;
+    } 
+
+    &::part(mark){ height: 53%; background: var(--theme-color-2);}
+
+    &.radio-checked{
+      color: var(--theme-color-2);
+        &::part(container){
+          background: var(--theme-color-3); border-color: var(--theme-color-3);
+        }
+        &::part(mark){ background: var(--theme-color-3);}
+    }
+}
+
+ion-button{
+    &.btn-payment{
+        margin:15px 0px 15px;
+    }    
+}
+
+
+ion-row{
+    &.top-row{
+               
+    }
+    ion-col{
+        padding: 0 3px;
+
+        h2{
+            color: var(--theme-color-2);
+            font-weight: 800;
+            font-size: 32px; 
+            margin: 0 0 0;
+        }
+        h3{ 
+            color: var(--theme-color-2);
+            font-weight: 700;
+            font-size: 25px;
+            line-height: 28px; 
+            margin: 10px 0 0;
+        }
+    }
+}
+
+.card-slider{
+
+  ion-radio{
+    background-color: transparent;
+    padding: inherit;
+    margin: inherit;
+    border: none;
+    padding: 0 0;
+    }
+  }
+  ion-button{
+    &.btn-payment{
+        margin:15px 0px 15px;
+    }    
+}
+
+ion-row{
+    &.top-row{
+        margin: -10px 0 0;        
+    }
+    ion-col{
+        padding: 0 3px;
+        p{
+            margin:0 0 5px;
+        }
+    }
+}
+
+ion-card {
+    --background:var(--card-bg);
+    --color: var(--theme-color-2);
+    margin-inline: 0;
+    box-shadow: none;
+    border-radius: 16px;
+    padding: 20px;
+    margin: 0 0px 10px;
+     border: 1px solid var(--border-color) !important;
+  
+    h5 {
+      margin: 10px 0; font-size: 15px;
+    }
+  
+    p {
+      margin: 10px 0; line-height: 16px;
+  
+      ion-icon {
+        display: inline-block; vertical-align: middle;
+      }
+    }
+  
+    .innerrow{
+        display: flex; flex-direction: row; justify-content: space-between; 
+  
+      .left{ 
+        flex: 1 0 0 ;
+        img{ width: 55px; }
+      }
+      .right{ 
+        // width: 45px;
+         text-align: left; 
+      }
+    }
+    .star {
+      span {
+        display: inline-block;  vertical-align: middle; font-size: 30px; letter-spacing: 2px;  line-height: 32px;
+      }
+      span.number {
+        font-size: 20px;  margin-top: -5px;
+      }
+    }
+    small { 
+      font-size: 8px; font-family: 'Inter'; font-weight: 700;
+    } 
+    .holdername{
+      font-size: 14px; font-family: 'Inter'; font-weight: 400;
+    }
+    .cardchip {
+      width: 36px; display: inline-block; vertical-align: middle; margin-top: -15px;
+    }
+    .history {
+      img {
+        display: inline-block; width: 25px; vertical-align: middle;
+      }
+    }
+    .delete {
+      font-size: 30px;  
+      color: #4FAF3B;
+      position: absolute;
+      z-index: 11;
+      right: -10px;
+      top: -14px;
+      cursor: pointer;
+      img{
+        width: 26px;
+      }
+    }  
+    ion-row{
+      ion-col{
+        padding: 0 2px;
+      }
+    }      
+}
+.rownumber{ margin-top: 10px; }
+.rowholder{ margin-top: 13px; }
+
+ion-card .innerrow .right ion-radio-group ion-radio{ float: right;}
+
+swiper-container{ 
+    &::part(bullet-active){
+        background: var(--theme-color-2);
+    }
+    &::part(bullet){
+        background: #fff;
+    }
+}
+
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+    ion-row{
+        ion-col{    
+            h2{
+                font-size: 46px; 
+            }
+            h3{ 
+                font-size: 38px;
+                line-height: 30px; 
+            }
+        }
+    }
+    .cardoption ion-radio { padding: 20px 20px; font-size: 22px; }
+    .cardoption ion-radio img{ width: 32px; margin-right: 15px; }
+    ion-radio::part(container) { width: 30px; height: 30px; }
+    .text-compatible { font-size: 21px; line-height: 26px;}
+    ion-checkbox{ font-size: 21px;}
+    .checkrow ion-checkbox { padding: 0px 0px 10px; }
+
+    .cardoption ion-radio { padding: 20px 20px; font-size: 22px; }
+    .cardoption ion-radio img{ width: 32px; margin-right: 15px; }
+    ion-radio::part(container) { width: 30px; height: 30px; }
+    .text-compatible { font-size: 21px; line-height: 26px;}
+    ion-checkbox{ font-size: 21px;}
+    .checkrow ion-checkbox { padding: 0px 0px 10px; }
+
+    ion-card{ padding: 25px; margin: 0 0 0px; }
+    ion-card .innerrow{ padding: 3px 0; }
+    ion-card .innerrow .left img{ width: 100px; }
+    ion-card .innerrow .right{  width: 90px; }
+    ion-card .cardchip{ width: 60px; }
+    ion-card small{ font-size: 14px; }
+    ion-card .star span{ font-size: 48px; letter-spacing: 6px; line-height: 54px; }
+    ion-card .star span.number{  font-size: 32px;  margin-top: -1px; }
+    ion-card .holdername{ font-size: 24px; }
+
+
+
+}

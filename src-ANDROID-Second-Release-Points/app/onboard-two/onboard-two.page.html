@@ -1,0 +1,24 @@
+<ion-content [fullscreen]="true">
+
+  <div class="topbox">
+    <img src="assets/img/onboard1.png">
+  </div>
+  <div class="container">
+    <h3 class="text-center">
+      {{ 'ONBOARD_KEEP_UP_TO_DATE' | translate }}
+    </h3>
+    <p class="text-center" [innerHTML]="'ONBOARD_CHOOSE_PLAN' | translate">
+    </p>
+    <!-- <p class="text-center dots">
+      <span></span><span class="active"></span>
+    </p> -->
+    <ion-button expand="block" class="btn-green btn-deal" (click)="gotoSettings()">
+      {{ 'ONBOARD_ALLOW_NOTIFICATIONS' | translate }}
+    </ion-button>
+    <div class="link text-center" (click)="gotoHomeSearch()">
+      <a>{{ 'ONBOARD_SKIP_FOR_NOW' | translate }}</a>
+    </div>
+  </div>
+
+
+</ion-content>

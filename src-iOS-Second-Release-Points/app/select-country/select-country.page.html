@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Select<br> Currency</ion-title>
+    <ion-buttons slot="end" (click)="dismissModal()">
+      <ion-button>
+        <i class="far fa-times"></i>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-padding">
+
+    
+    <ion-list>
+      <ion-radio-group [(ngModel)]="selectedInput">
+        <ion-item lines="none" *ngFor="let currencyItem of currencyList">
+          <span slot="start">
+            <img src="{{currencyItem.value}}" alt="">
+          </span>
+          <ion-label>{{currencyItem.text}}</ion-label>
+          <span slot="end">
+            <ion-radio [value]="currencyItem.text"  (click)="optionFocus(currencyItem.text)" ></ion-radio>
+          </span>
+        </ion-item>
+
+      </ion-radio-group>
+    </ion-list>
+
+
+    
+  </div>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button>
+        <img class="normal" src="assets/img/icons/home.png" alt="">
+        <img class="active" src="assets/img/icons/home-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button class="middle" (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()">
+        <img class="normal" src="assets/img/icons/filter.png" alt="">
+        <img class="active" src="assets/img/icons/filter-yellow.png" alt="">
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

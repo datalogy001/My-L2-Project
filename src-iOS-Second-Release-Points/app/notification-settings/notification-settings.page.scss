@@ -1,0 +1,101 @@
+ion-header{
+  ion-toolbar{
+      height: 95px;
+      ion-title{
+          .ftel-logo{
+              width: 160px;
+              margin:7px 0px 0px;
+          }
+      }
+      [slot="end"]{
+          margin-inline-end: 5px; 
+      }      
+      
+      &.titlebar{
+          --min-height: 40px; 
+          height: 90px;     
+      }  
+  }
+}
+
+ion-content {
+  --background: #fff;
+}
+
+.list-md{ 
+  background: transparent;
+}
+ion-list{
+  margin:0px 0px 20px; padding: 0 0;
+  ion-item{
+      --inner-border-width:0 0 0 0;
+      margin: 0 0 10px;
+      --background: transparent;
+      --padding-start: 0;
+      --inner-padding-end: 0;
+      &:last-child{
+        
+      }
+      ion-label{
+          color: var(--theme-color-2); font-size: 17px;
+      }
+  }
+}
+
+h4{
+    color: var(--theme-color-2); font-size: 18px; font-weight:700; margin: 0 0 10px;
+}
+.toggle{
+    border-radius:24px; padding: 0 2px; background:var(--theme-color-1);
+}
+ion-toggle{
+    --handle-background: var(--theme-color-3);
+  --track-background-checked: var(--theme-color-3);
+  --handle-background-checked: #fff;
+    padding: 0 8px;
+    --handle-height: 23px;
+    --handle-width: 23px;
+    &::part(track){
+        width: calc(100% - 8px); padding: 0 4px;
+    }
+    --track-background:rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.1);
+    width: 52px;
+    height: 30px;
+    padding: 0;
+    --border-radius:24px;
+}
+
+
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+    ion-header ion-toolbar {height: 140px;}
+    ion-header ion-toolbar ion-title .ftel-logo{ width: 260px;}
+    ion-header ion-toolbar.titlebar { --min-height: 60px; height: 80px;  }
+ 
+    h4{ font-size: 30px; margin: 0 0 15px; }
+    ion-list ion-item ion-label{ font-size: 25px; }
+    ion-toggle { width: 78px; height: 38px; --handle-height: 28px; --handle-width: 28px; }
+
+
+}
+
+/**************************************************************/
+/***** small devices ****/
+@media only screen and (max-width : 380px) {
+
+    ion-header ion-toolbar ion-title h3 {  font-size: 27px; }
+
+}

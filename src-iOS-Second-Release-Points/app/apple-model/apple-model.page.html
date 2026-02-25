@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>{{ 'Add_apple' | translate }} </ion-title>
+        <ion-buttons slot="end" (click)="gotoBack()">
+            <ion-button fill="clear"><i class="far fa-times"></i></ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <p>
+       {{'Enter_details_facebook' | translate }}
+    </p>
+    <ion-list>
+        <ion-item>
+            <ion-input autocapitalize="on" type="text" [(ngModel)]="appleObj.first_name"
+                placeholder="{{ 'CREATE_ACCOUNT_FIRST_NAME_PLACEHOLDER' | translate }}"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input type="text" [(ngModel)]="appleObj.email"
+                placeholder="{{ 'CREATE_ACCOUNT_EMAIL_PLACEHOLDER' | translate }}"></ion-input>
+        </ion-item>
+    </ion-list>
+
+    <div class="btn-view-bundle">
+        <ion-button class="btn-green" expand="block" (click)="submit()">
+            {{ 'CONTINUE' | translate }}
+        </ion-button>
+    </div>
+
+</ion-content>

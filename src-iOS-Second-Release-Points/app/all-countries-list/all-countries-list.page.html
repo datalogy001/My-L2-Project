@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-title>Countries<br> in Bundle</ion-title> -->
+    <ion-buttons slot="end" (click)="dismissModal()">
+      <ion-button >
+        <i class="far fa-times"></i>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="">
+  <div class="page-padding" >
+    <ion-row>
+      <ion-col size="6" *ngFor="let bundleItem of uniqueObjects" >
+        <span class="country">
+          <img *ngIf="bundleItem.countries[0]['iso'] =='LATAM'" src="assets/flags/la.svg" alt="">
+              <img *ngIf="bundleItem.countries[0]['iso'] !='LATAM'"
+                src="assets/flags/{{bundleItem.countries[0]['iso'] | lowercase}}.svg" alt=""></span>
+        <span> {{bundleItem.countries[0].name}} </span>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>
+
+
+
+  

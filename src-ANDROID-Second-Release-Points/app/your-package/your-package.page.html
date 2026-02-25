@@ -1,0 +1,132 @@
+<ion-content [fullscreen]="true">
+
+  <div class="topbox" [ngStyle]="{'background': getBackgroundUrl()}">
+    <div class="topinner">
+
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>
+            <p>{{ 'YOUR_PACKAGE' | translate }}</p>
+          </ion-title>
+          <ion-buttons slot="end">
+            <ion-button fill="clear" (click)="gotoBack()">
+              <ion-icon name="arrow-back-circle-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <h3>{{ bundleName }}</h3>
+
+      <ion-row class="d-flex">
+        <ion-col size="3">
+          <span class="country">
+            <img *ngIf="bundleDatas.short_name_country =='LATAM' || bundleDatas.short_name_country =='latam'" src="assets/flags/la.svg" alt="">
+            <img *ngIf="bundleDatas.short_name_country =='Europe+' || bundleDatas.short_name_country =='europe+'" src="assets/flags/eur.svg" alt="">
+            <img *ngIf="bundleDatas.short_name_country =='Europe' || bundleDatas.short_name_country =='europe'" src="assets/flags/eur.svg" alt="">
+            <img *ngIf="bundleDatas.short_name_country =='North America' || bundleDatas.short_name_country =='north america'" src="assets/flags/northam.svg" alt="">
+            <img *ngIf="bundleDatas.short_name_country =='Middle East' || bundleDatas.short_name_country =='middle east'" src="assets/flags/middleast.svg" alt="">
+            <img *ngIf="bundleDatas.short_name_country != 'Europe' && bundleDatas.short_name_country != 'europe' && bundleDatas.short_name_country != 'Middle East' && bundleDatas.short_name_country != 'middle east' && bundleDatas.short_name_country != 'north america' && bundleDatas.short_name_country != 'North America' && bundleDatas.short_name_country != 'Europe+' && bundleDatas.short_name_country != 'europe+' && bundleDatas.short_name_country != 'LATAM' && bundleDatas.short_name_country != 'latam'" src="assets/flags/{{bundleDatas.short_name_country | lowercase}}.svg" alt="">
+          </span>
+        </ion-col>
+        <ion-col size="9" class="text-left" *ngIf="bundleDatas.isUnlimited == true">
+          <h3>{{ dataDaysField }}</h3>
+          <h5>{{ 'UNLIMITED_DAILY_PASS' | translate }}</h5>
+        </ion-col>
+
+        <ion-col size="9" class="text-left" *ngIf="bundleDatas.isUnlimited != true">
+          <h3>{{ dataamountField }}</h3>
+          <h5>{{ 'VALUE_DATA_PLAN' | translate }}</h5>
+        </ion-col>
+      </ion-row>
+
+    </div>
+  </div>
+
+ <div class="container" *ngIf="IsDatabalanceLoaded ==true" >
+    <div class="container-wrapper">
+
+      <h4 class="bundle-status inactive" *ngIf="bundleDatas.profile_status == 'Topup'">
+        <img src="assets/img/icons/outof-data.png" alt=""> {{ 'out_of_data' | translate }}
+      </h4>
+
+      <h4 class="bundle-status active" *ngIf="bundleDatas.profile_status != 'Topup'">
+        <img src="assets/img/icons/active-bundle.png" alt=""> {{ 'ACTIVE_SEGMENT_LABEL' | translate }}
+      </h4>
+
+      <div class="active-inactive">
+        <svg class="progress blue noselect" data-progress="65" x="0px" y="0px" viewBox="0 0 80 80">
+          <!-- this is for gradient color -->
+          <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" />
+              <stop offset="100%" />
+            </linearGradient>
+          </defs>
+          <!-- this is for gradient color end -->
+          <path class="track" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" stroke="#e6e6e6" fill="none" />
+          <path class="fill" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" stroke="url(#grad1)" fill="none" />
+          <text class="value" x="50%" y="53%" text-anchor="middle">0</text>
+          <text class="days-left" x="50%" y="62%" text-anchor="middle">{{ timeUnit === 'days' ? ('DAYS_LEFT' | translate) : (timeUnit === 'hours' ? 'HOURS_LEFT' : 'DAY_LEFT') | translate }}</text>
+
+        </svg>
+      </div>
+
+
+      <ion-button *ngIf="bundleDatas.profile_status == 'Topup'" expand="block" class="btn-green btn-plan"
+        (click)="gotoToup()">
+        {{ 'TOP_UP' | translate }}
+      </ion-button>
+
+      <ion-button *ngIf="bundleDatas.profile_status != 'Topup'" expand="block" class="btn-green btn-plan"
+        (click)="gotoToup()">
+        {{ 'EXTEND_YOUR_PLAN' | translate }}
+      </ion-button>
+
+
+      <!-- new code -->
+      <p class="plan-expire" *ngIf="bundleDatas.profile_status == 'Topup' && isDepleted ==true">{{'plan_expires' |
+        translate}} {{expiredates}}</p>
+      <!-- new code end -->
+
+      <div class="plans" *ngIf="queuedArray.length > 0">
+        <p>
+          <img src="assets/img/icons/que-plan.png" alt=""> {{ 'QUEUED_PLANS' | translate }}
+        </p>
+        <h5 *ngFor="let topups of queuedArray; let i = index">
+          <span *ngIf="topups.dataAmount != 'UL'">{{ topups.dataAmount }} {{ 'VALUE_DATA_PLAN' | translate }}</span>
+          <span *ngIf="topups.dataAmount == 'UL'">{{ topups.days }} {{ 'UNLIMITED_DAILY_PASS' | translate }}</span>
+        </h5>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabmenu">
+      <ion-button routerLink="/home-search">
+        <img class="normal" src="assets/img/icons/location.png" alt="">
+        <img class="active" src="assets/img/icons/location-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button class="selected" (click)="gotoTab1()">
+        <img class="normal" src="assets/img/icons/scan.png" alt="">
+        <img class="active" src="assets/img/icons/scan-yellow.png" alt="">
+      </ion-button>
+
+          <ion-button (click)="gotoMarketPlace()">
+        <img class="normal" src="assets/img/icons/shop.png" alt="">
+        <img class="active" src="assets/img/icons/shop-yellow.png" alt="">
+      </ion-button>
+
+      <ion-button (click)="gotoTab5()">
+        <img class="normal" src="assets/img/icons/user.png" alt="">
+        <img class="active" src="assets/img/icons/user-yellow.png" alt="">
+      </ion-button>
+    </div>
+
+
+  </ion-toolbar>
+</ion-footer>
