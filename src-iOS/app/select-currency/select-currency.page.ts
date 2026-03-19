@@ -27,11 +27,17 @@ export class SelectCurrencyPage implements OnInit {
   countryParam: any = { 'to_currency': '' };
 
   currencyList: any = [
-    { 'text': 'USD', 'value1': 'USD', 'value2': this.translate.instant("USD") },
-    { 'text': 'GBP', 'value1': 'GBP', 'value2':  this.translate.instant("GBP") },
-    { 'text': 'EUR', 'value1': 'EURO', 'value2':  this.translate.instant("EURO") },
-    { 'text': 'LYD', 'value1': 'LYD', 'value2':  this.translate.instant("LYD") }
-  ];
+  { 'text': 'USD', 'value1': 'USD', 'value2': this.translate.instant("USD") },
+  { 'text': 'GBP', 'value1': 'GBP', 'value2': this.translate.instant("GBP") },
+  { 'text': 'EUR', 'value1': 'EURO', 'value2': this.translate.instant("EURO") },
+  { 'text': 'LYD', 'value1': 'LYD', 'value2': this.translate.instant("LYD") },
+  { 'text': 'SAR', 'value1': 'SAR', 'value2': this.translate.instant("SAR") },
+  { 'text': 'AED', 'value1': 'AED', 'value2': this.translate.instant("AED") },
+  { 'text': 'TND', 'value1': 'TND', 'value2': this.translate.instant("TND") },
+  { 'text': 'KWD', 'value1': 'KWD', 'value2': this.translate.instant("KWD") },
+  { 'text': 'EGP', 'value1': 'EGP', 'value2': this.translate.instant("EGP") },
+  { 'text': 'MAD', 'value1': 'MAD', 'value2': this.translate.instant("MAD") }
+];
 
   ngOnInit() {}
 
@@ -43,11 +49,11 @@ export class SelectCurrencyPage implements OnInit {
     await this.loadingScreen.presentLoading();
     window.localStorage.setItem("L2TraveleSIM_Saved_Currency", "Yes");
     window.localStorage.setItem("L2TraveleSIM_currency", this.currencyType);
-    this.getWalletBalance();
+      this.getWalletBalance();
     this.updateCountriesAfterChanged(this.currencyType);
   }
 
-    getWalletBalance() {
+     getWalletBalance() {
     this.service.updatedWalletBalance().then((res: any) => {
       if (res.code == 200) {
         if (res.data) {

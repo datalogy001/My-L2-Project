@@ -168,7 +168,7 @@ ion-card{
   }
 
   &.create-apn{
-    background-color: rgba(17,32,66,0.5); text-align: center; padding: 20px 25px 25px; color: #fff; margin: 20px 0 20px;
+     background-color: var(--theme-color-3); text-align: center; padding: 20px 25px 25px; color: #fff; margin: 20px 0 20px;
 
     h4{ margin: 0 0 10px; color: #fff;}
     p{ margin: 0 0 0; color: #fff;}

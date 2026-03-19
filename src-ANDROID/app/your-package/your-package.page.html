@@ -36,9 +36,11 @@
 
         <ion-col size="9" class="text-left" *ngIf="bundleDatas.isUnlimited != true">
           <h3>{{ dataamountField }}</h3>
-          <h5>{{ 'VALUE_DATA_PLAN' | translate }}</h5>
+          <h5>{{ 'VALUE_DATA_PLAN' | translate }}</h5>          
         </ion-col>
       </ion-row>
+
+      <p *ngIf="IsDatabalanceLoaded ==true && bundleDatas.profile_status != 'Topup'" class="exp-date">{{'DATA_VALID_UNTIL' | translate}} {{bundleExpireDate}}</p>
 
     </div>
   </div>
@@ -72,6 +74,20 @@
         </svg>
       </div>
 
+   <p class="dataexpiry" *ngIf="IsDatabalanceLoaded == true && bundleDatas.profile_status != 'Topup'">
+  <span *ngIf="expRemainDays < 0">
+    {{ 'EXPIRED' | translate }}
+  </span>
+  <span *ngIf="expRemainDays === 0">
+    {{ 'EXPIRES_TODAY' | translate }}
+  </span>
+  <span *ngIf="expRemainDays === 1">
+    {{ 'EXPIRES_IN_ONE' | translate }}
+  </span>
+  <span *ngIf="expRemainDays > 1">
+    {{ 'EXPIRES_IN' | translate:{ days: expRemainDays } }}
+  </span>
+</p>
 
       <ion-button *ngIf="bundleDatas.profile_status == 'Topup'" expand="block" class="btn-green btn-plan"
         (click)="gotoToup()">

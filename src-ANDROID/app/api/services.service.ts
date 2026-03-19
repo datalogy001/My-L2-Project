@@ -7,9 +7,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ServicesService {
-  
-  restAPI: string = "https://l2travelesim.com/api/v3/"; // V3 with LIVE Domain
-  stripePubliserKey: string = 'pk_live_51SYiOcFl6yW1DvK0ICubSTmzJM5mUx9wSXtpgS8LJcezyDnTdDFlFViC8NNpDmIXCx83WLvyUDixXLkVeFZA11Uo00MUa40yMR';     
+
+// V3 with Live Domain
+  restAPI: string = "https://l2travelesim.com/api/v3/"; 
+  stripePubliserKey: string = 'pk_live_51SYiOcFl6yW1DvK0ICubSTmzJM5mUx9wSXtpgS8LJcezyDnTdDFlFViC8NNpDmIXCx83WLvyUDixXLkVeFZA11Uo00MUa40yMR';   
+
+
   whiteLabelId: any = "282";
   clientToken:any = 'HpTRffxL96HqB3GrDN5lRfKnnH4QnfYn9dZoURNGaTjWY5f2v'; 
   

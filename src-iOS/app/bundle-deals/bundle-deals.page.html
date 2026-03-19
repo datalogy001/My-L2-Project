@@ -147,7 +147,7 @@
         </ion-card>
   
         <div *ngIf="isDataPlan && restArray.length > 0">
-           <h4 class="" *ngIf="isDataPlan && restArray.length > 0">{{ 'UNLIMITED_DAILY_PASS' | translate }}</h4>
+           <h4 class="unlimitedColor" *ngIf="isDataPlan && restArray.length > 0">{{ 'UNLIMITED_DAILY_PASS' | translate }}</h4>
           
           <ion-card class="value-data" *ngFor="let bundleItem of restArray" (click)="gotoSummary(bundleItem, true)">
             <ion-row>

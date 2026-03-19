@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
-import { ModalRefercodePage } from '../modal-refercode/modal-refercode.page';
-import { IonActionSheet, IonButton } from '@ionic/angular/standalone';
 import { Router, NavigationExtras } from '@angular/router';
 import { ServicesService } from '../api/services.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,126 +14,209 @@ import { PasswordErrorPage } from '../password-error/password-error.page';
 })
 export class CreditTopupPage implements OnInit {
 
-  currencyCode: any = 'USD'; // Default currency
-  selectedAmount: any;
-  customAmount: any;
+  currencyCode: any = 'USD';
+  selectedAmount: any = null;
+  customAmount: any = null;
+  lang: any;
 
-  topupAMTList: any = [
-    { text: '5', value: 5 },
-    { text: '10', value: 10 },
-    { text: '20', value: 20 }
-  ];
+  topupAMTList: any[] = [];
+  topupAMTNewList: any[] = [];
 
+  // RADIO AMOUNTS
+  topupAmounts: any = {
 
-  
+    // Old currencies
+    USD: [5, 10, 20],
+    EUR: [5, 10, 20],
+    GBP: [5, 10, 20],
+    LYD: [5, 10, 20],
 
+    // New currencies
+    SAR: [20, 40, 80],
+    AED: [20, 40, 80],
+    TND: [15, 30, 55],
+    MAD: [45, 90, 170],
+    EGP: [225, 450, 900],
+    KWD: [5, 10, 20]
 
-topupAMTNewList: any[] = [];
+  };
 
+  // DROPDOWN CONFIG
+  currencyConfig: any = {
 
-  topupAMTObj: any = {  'status': '', 'amount': '', 'currency': '', 'paymentId': '', 'PayerID': '', 'token': '', 'payment_method':'','payment_intent':''};
+    // Old currencies logic
+    USD: { min: 1, max: 50, step: 1 },
+    EUR: { min: 1, max: 50, step: 1 },
+    GBP: { min: 1, max: 50, step: 1 },
 
-  constructor(private cdr: ChangeDetectorRef, private loadingScreen: LoadingScreenAppPage, private modalCtrl: ModalController, private translate: TranslateService, private service: ServicesService, private Router: Router, private modalController: ModalController, private navCtrl: NavController) { }
+    // LYD old logic
+    LYD: { min: 20, max: 1000, step: 10 },
 
-    lang: any;
+    // New currencies
+    SAR: { min: 5, max: 180, step: 5 },
+    AED: { min: 5, max: 175, step: 5 },
+    TND: { min: 5, max: 135, step: 5 },
+    MAD: { min: 10, max: 430, step: 10 },
+    EGP: { min: 45, max: 2250, step: 45 },
+    KWD: { min: 1, max: 50, step: 1 }
+
+  };
+
+  topupAMTObj: any = {
+    status: '',
+    amount: '',
+    currency: '',
+    paymentId: '',
+    PayerID: '',
+    token: '',
+    payment_method: '',
+    payment_intent: ''
+  };
+
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private loadingScreen: LoadingScreenAppPage,
+    private modalCtrl: ModalController,
+    private translate: TranslateService,
+    private service: ServicesService,
+    private Router: Router,
+    private modalController: ModalController,
+    private navCtrl: NavController
+  ) {}
 
   ngOnInit() {
-    
-     this.lang = window.localStorage.getItem("L2TraveleSIM_language") || 'en';
-    //Current currency 
-    if (window.localStorage.getItem("L2TraveleSIM_currency") == null) {
-      this.currencyCode = 'USD';
-    } else {
-      this.currencyCode = window.localStorage.getItem("L2TraveleSIM_currency");
-    }
+
+    this.lang = window.localStorage.getItem("L2TraveleSIM_language") || 'en';
+
+    const storedCurrency = window.localStorage.getItem("L2TraveleSIM_currency");
+
+    this.currencyCode = storedCurrency ? storedCurrency : 'USD';
 
     this.topupAMTObj.currency = this.currencyCode;
 
-    
-      this.generateTopupAmountList(this.currencyCode);
+    this.generateTopupAmountList(this.currencyCode);
 
   }
 
+  // -----------------------------
+  // Generate Amount List
+  // -----------------------------
+  generateTopupAmountList(currency: string) {
 
-  
-generateTopupAmountList(currency: string) {
+    this.topupAMTList = [];
+    this.topupAMTNewList = [];
 
-  const startValue = currency === 'LYD' ? 5 : 1;
-  const endValue = 50;
+    // RADIO BUTTONS
+    if (this.topupAmounts[currency]) {
 
-  this.topupAMTNewList = Array.from(
-    { length: endValue - startValue + 1 },
-    (_, i) => {
-      const value = startValue + i;
-      return {
-        text: value.toString(),
-        value: value
-      };
-    }
-  );
-}
+      this.topupAMTList = this.topupAmounts[currency].map((amt: number) => {
 
+        return {
+          text: amt.toString(),
+          value: amt
+        };
 
-
-  // Placeholder text dynamically updated based on selected currency
-  getPlaceholder(): string {
-    let placeholderText = '';
-    this.translate.get('CHOOSE_ANOTHER_AMOUNT', { currencyCode: this.currencyCode })
-      .subscribe((translation: string) => {
-        placeholderText = translation;
       });
-    return placeholderText;
+
+    }
+
+    // DROPDOWN OPTIONS
+    const config = this.currencyConfig[currency];
+
+    if (config) {
+
+      for (let i = config.min; i <= config.max; i += config.step) {
+
+        this.topupAMTNewList.push({
+          text: i.toString(),
+          value: i
+        });
+
+      }
+
+    }
+
   }
 
-  onRadioSelect(value: any) {
-    this.selectedAmount = value.detail.value;
-    this.customAmount = "";
+  // -----------------------------
+  // Radio selected
+  // -----------------------------
+  onRadioSelect(event: any) {
+
+    this.selectedAmount = event.detail.value;
+    this.customAmount = null;
+
   }
 
-  onChooseRadio() {
-    const value = Number(this.customAmount); // Convert input to number
+  // -----------------------------
+  // Dropdown selected
+  // -----------------------------
+  onDropdownSelect() {
+
     this.selectedAmount = null;
-    if (isNaN(value) || value < 1 || value > 50) {
-      this.customAmount = ''; // Clear input if invalid
-    }
+
   }
 
-   // Error Modal
-   async errorMSGModal(buttonText: any, msg: any) {
-    const modal = await this.modalController.create({
-      component: PasswordErrorPage,
-      componentProps: { 'value': msg , 'value1': buttonText}
-    });
-
-    modal.onDidDismiss();
-    return await modal.present();
-  }
-
-
-
+  // -----------------------------
+  // Submit
+  // -----------------------------
   submit() {
-    if (!this.selectedAmount && !this.customAmount) {
-      this.errorMSGModal(this.translate.instant('VALIDATION_MSG_BUTTON'), this.translate.instant('SELECT_VALID_AMOUNT'));
+
+    const amount = this.selectedAmount ?? this.customAmount;
+
+    if (!amount) {
+
+      this.errorMSGModal(
+        this.translate.instant('VALIDATION_MSG_BUTTON'),
+        this.translate.instant('SELECT_VALID_AMOUNT')
+      );
+
       return;
+
     }
-    this.topupAMTObj.amount = this.selectedAmount || this.customAmount;
+
+    this.topupAMTObj.amount = amount;
+
     const navigationExtras: NavigationExtras = {
       state: {
         topupAMTData: this.topupAMTObj,
       }
     };
+
     this.Router.navigate(['/payment-topup'], navigationExtras);
+
   }
 
+  // -----------------------------
+  // Error Modal
+  // -----------------------------
+  async errorMSGModal(buttonText: any, msg: any) {
 
+    const modal = await this.modalController.create({
+
+      component: PasswordErrorPage,
+
+      componentProps: {
+        value: msg,
+        value1: buttonText
+      }
+
+    });
+
+    await modal.present();
+
+  }
+
+  // -----------------------------
+  // Navigation
+  // -----------------------------
   gotoBack() {
     this.navCtrl.pop();
   }
 
-  gotoMarketPlace()
-	  {
-	    this.navCtrl.navigateRoot('marketplace');
-	  }
+  gotoMarketPlace() {
+    this.navCtrl.navigateRoot('marketplace');
+  }
 
   gotoTab1() {
     this.navCtrl.navigateRoot('tab1');
