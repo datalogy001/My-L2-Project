@@ -44,6 +44,35 @@ ion-header {
   }
 }
 
+ion-col.exp-datecol{
+  padding-top: 0;
+}
+.exp-date{
+  margin: 0px 23px 15px;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.6);
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.datavalid{
+  margin: 0px 23px 15px;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.6);
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.dataexpiry{
+  text-align: center;
+  margin: 5px 0 15px;
+  color: var(--theme-color-2);
+  font-size: 16px;
+  font-weight: 500;
+}
+
 ion-content {
   --background: #fff;
 }

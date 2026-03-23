@@ -41,6 +41,8 @@ export class YourPackagePage implements OnInit {
     tmpcurrDate: any = '';
     tmpendDate: any = '';
     currDate: any = '';
+    expRemainDays:any; 
+
     transformCaps(items: any) {
         return 'GB';
     }
@@ -128,6 +130,7 @@ export class YourPackagePage implements OnInit {
     if (this.bundleDatas.profile_status != 'Topup') {
           this.getCurrentPackage(this.bundleDatas.iccid);
       } else { 
+        console.log("I m here");
           this.getCurrentPackageTOPUP(this.bundleDatas.iccid);
       }
    }
@@ -527,6 +530,8 @@ export class YourPackagePage implements OnInit {
     isDepleted:any= false;
    
     checkBundleState(assignmenrtArr: any) {
+
+        console.log("Hiiiii");
         this.loadingScreen.dismissLoading();
         this.IsDatabalanceLoaded =true;
         this.topupArray = this.bundleDatas.topups;
@@ -534,7 +539,22 @@ export class YourPackagePage implements OnInit {
             for (let j = 0; j < assignmenrtArr.length; j++) {
                 if (this.topupArray[i]['assignmentReference'] + '-0' == assignmenrtArr[j]['assignmentReference']) {
                     if (assignmenrtArr[j]['bundleState'] == 'depleted') {
-                        this.bundleDatas.isUnlimited = assignmenrtArr[j]['unlimited'];
+                        console.log(assignmenrtArr[j]['bundleState']['endTime']);
+                 // Example: inside your function where you get bundleExpireDate
+const endDate = moment.utc(assignmenrtArr[j]['endTime']);
+this.bundleExpireDate = endDate.format('DD-MM-YYYY');
+
+console.log("End date" + endDate);
+// Calculate remaining days (difference between expiry date and today)
+const today = moment.utc();
+console.log("today date" + today);
+
+this.expRemainDays = Math.floor(endDate.diff(today, 'days', true));
+
+console.log("expRemainDays date" + this.expRemainDays);
+
+
+      this.bundleDatas.isUnlimited = assignmenrtArr[j]['unlimited'];
                         if(this.bundleDatas.isUnlimited == true)
                             this.dataDaysField = this.topupArray[i]['days'];
                         else
@@ -557,6 +577,8 @@ export class YourPackagePage implements OnInit {
             }
         }
     }
+
+    bundleExpireDate:any; 
     checkWithTopups(assignmenrtArr: any) {
         this.topupArray = this.bundleDatas.topups;
         this.loadingScreen.dismissLoading();
@@ -567,12 +589,27 @@ export class YourPackagePage implements OnInit {
             for (let j = 0; j < assignmenrtArr.length; j++) {
                 if (this.topupArray[i]['assignmentReference'] + '-0' == assignmenrtArr[j]['assignmentReference']) {
                     foundMatch = true;
+
+                    console.log(JSON.stringify(assignmenrtArr[j]['bundleState']));
                     // No use data amount and start and end time
                     if (assignmenrtArr[j]['bundleState'] == 'queued') {
                         this.topupArray[i]['status'] = 'Queued';
 
                     }
                     else if (assignmenrtArr[j]['bundleState'] == 'depleted') {
+                        console.log(assignmenrtArr[j]['bundleState']['endTime']);
+                      // Example: inside your function where you get bundleExpireDate
+const endDate = moment.utc(assignmenrtArr[j]['endTime']);
+this.bundleExpireDate = endDate.format('DD-MM-YYYY');
+
+// Calculate remaining days (difference between expiry date and today)
+
+console.log("End date" + endDate);
+const today = moment.utc();
+console.log("today date" + today);
+
+this.expRemainDays =Math.floor(endDate.diff(today, 'days', true));
+console.log("expRemainDays date" + this.expRemainDays);
                         this.bundleDatas.isUnlimited = assignmenrtArr[j]['unlimited'];
                         if(this.bundleDatas.isUnlimited == true)
                             this.dataDaysField = this.topupArray[i]['days'];
@@ -633,15 +670,27 @@ export class YourPackagePage implements OnInit {
                     } else if (assignmenrtArr[j]['bundleState'] == 'active' || assignmenrtArr[j]['bundleState'] == 'Active') {
                         this.topupArray[i]['status'] = 'Active';
                         //For Active Bundle status 
+                        // Example: inside your function where you get bundleExpireDate
+const endDate = moment.utc(assignmenrtArr[j]['endTime']);
+this.bundleExpireDate = endDate.format('DD-MM-YYYY');
 
-                        
+console.log("End date" + endDate);
+
+// Calculate remaining days (difference between expiry date and today)
+const today = moment.utc();
+console.log("today date" + today);
+
+this.expRemainDays = Math.floor(endDate.diff(today, 'days', true));
+
+console.log("expRemainDays date" + this.expRemainDays);
+
                         this.bundleDatas.isUnlimited = assignmenrtArr[j]['unlimited'];
 
                         if(this.bundleDatas.isUnlimited == true)
                             this.dataDaysField = this.topupArray[i]['days'];
                         else
                             this.dataamountField = this.topupArray[i]['dataAmount'];
-                        console.log("I m Here" + this.dataamountField);
+
                         this.bundleDatas.short_name_country = this.topupArray[i]['shortname'];
                         this.bundleDatas.country = this.topupArray[i]['country'];
                         this.countryBanner = this.bundleDatas.short_name_country + '.jpg';
@@ -723,6 +772,8 @@ export class YourPackagePage implements OnInit {
 		    this.navController.navigateRoot('marketplace');
 		  }
 
+
+          
     gotoBack() {
         this.bundleDatas=[];
         this.navController.pop();
@@ -745,7 +796,7 @@ export class YourPackagePage implements OnInit {
     }
     //End of common footers
 
-  gotoToup() {
+    gotoToup() {
         //Checking for Platinum and Diamond bundles 
         if (this.bundleDatas.is_bundle_topup_available == 1) {
             let navigationExtras: NavigationExtras = {

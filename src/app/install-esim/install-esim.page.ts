@@ -10,6 +10,7 @@ import { InAppBrowser, InAppBrowserEvent, InAppBrowserObject, InAppBrowserOption
 import { QrCodeService } from '../api/qr-code.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { WebIntent } from '@ionic-native/web-intent/ngx';
 
 @Component({
   selector: 'app-install-esim',
@@ -20,12 +21,12 @@ export class InstallEsimPage implements OnInit {
 
   qrCodeImage: any = null;
   inputText:any;
-  selectedSegment: string = 'qrcode';
+  selectedSegment: string = 'install';
   tempDetails: any = [];
   sharingData: any = [];
   iccid: any;
   userDetails:any=[];
-  constructor(private socialSharing: SocialSharing,private loadingScreen: LoadingScreenAppPage,private translate: TranslateService,private qrCodeService: QrCodeService,private iab: InAppBrowser,private clipboard: Clipboard, private Router: Router, private navController: NavController, private modalCtrl: ModalController) { }
+  constructor(private webIntent: WebIntent,private socialSharing: SocialSharing,private loadingScreen: LoadingScreenAppPage,private translate: TranslateService,private qrCodeService: QrCodeService,private iab: InAppBrowser,private clipboard: Clipboard, private Router: Router, private navController: NavController, private modalCtrl: ModalController) { }
 
  ngOnInit() {
     this.tempDetails = this.Router.getCurrentNavigation()?.extras.state;
@@ -50,7 +51,38 @@ export class InstallEsimPage implements OnInit {
   }
 
   txt:any;
-  
+
+    /* ===============================
+   DIRECT INSTALL - ANDROID ONLY
+=================================== */
+
+directInstallOption()
+{
+  const smdpAddress = this.sharingData.smdpAddress;   // Example: 'rsp.truphone.com'
+  const activationCode = this.sharingData.matchingId; // Example: 'JQ-209U6H-6I82J5'
+
+  // Build LPA string
+  const lpaString = `LPA:1$${smdpAddress}$${activationCode}`;
+
+  // Create eSIM provisioning URL
+  const esimUrl =
+    "https://esimsetup.android.com/esim_qrcode_provisioning?carddata=" +
+    encodeURIComponent(lpaString);
+
+  const options = {
+    action: this.webIntent.ACTION_VIEW,
+    url: esimUrl
+  };
+
+  this.webIntent.startActivity(options)
+    .then(() => {
+   console.log("eSIM URL:" +  JSON.stringify(esimUrl));
+    })
+    .catch(err => {
+      console.log("Error launching intent:" + JSON.stringify(err));
+    });
+}
+
   async sharewithall() {
 
     await this.loadingScreen.presentLoading();

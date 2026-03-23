@@ -1,4 +1,3 @@
-
 import { Component, ViewChild, OnInit, Input } from '@angular/core';
 import { NavController, ToastController, LoadingController, ModalController } from "@ionic/angular";
 import { Platform } from '@ionic/angular';
@@ -37,8 +36,10 @@ export class VerificationPage implements OnInit {
     private platform: Platform
   ) {}
 
-  timer: number = 30; // Initial timer value in seconds
+ isDisabled: boolean = true;
+  timer: number = 30;
   interval: any;
+
   num1: any = '';
   num2: any = '';
   num3: any = '';
@@ -46,7 +47,7 @@ export class VerificationPage implements OnInit {
   tempOTP: any = '';
   tempParam: any = [];
   otp: any = '';
-  isDisabled: any = false;
+
   verifyObj: any = { 'name': '', 'email': '' };
   tempData: any = [];
 
@@ -60,9 +61,28 @@ export class VerificationPage implements OnInit {
     this.verifyObj.name = this.tempData.value2;
     this.verifyObj.email = this.tempData.value1;
 
+    this.startTimer();
+
     this.otpInputChanged.pipe(debounceTime(300)).subscribe(() => {
       this.validate();
     });
+  }
+
+  // ================= TIMER =================
+  startTimer() {
+    this.isDisabled = true;
+    this.timer = 30;
+
+    if (this.interval) clearInterval(this.interval);
+
+    this.interval = setInterval(() => {
+      this.timer--;
+
+      if (this.timer <= 0) {
+        clearInterval(this.interval);
+        this.isDisabled = false;
+      }
+    }, 1000);
   }
 
   onPaste(event: ClipboardEvent, currentInput: any, ...nextInputs: any[]): void {
@@ -242,6 +262,10 @@ resolveCurrency(countryCode: string): string {
 
   //Retry code 
   async retryCode() {
+ if (this.isDisabled) return;
+
+    this.startTimer();
+
     this.num1 = '';
     this.num2 = '';
     this.num3 = '';
@@ -249,17 +273,21 @@ resolveCurrency(countryCode: string): string {
     this.otp = '';
     this.tempOTP = '';
     //Call API to get New code 
-    await this.loadingScreen.presentLoading();
+    //await this.loadingScreen.presentLoading();
     this.service.verifyAccount(this.verifyObj).then((res: any) => {
-      this.loadingScreen.dismissLoading();
+     // this.loadingScreen.dismissLoading();
       if (res.code == 200) {
+
+        // ✅ FIX: prevent overlap issue
+        if (this.isVerifying) return;
+
         this.successMSGModal(this.translate.instant('VERIFY_EMAIL_RESEND_MESSAGE_TITLE'), this.translate.instant('VERIFY_EMAIL_RESEND_MESSAGE_BODY'), "2000");
         this.otp = res.data.OTP;
       } else {
         this.errorMSGModal(this.translate.instant("Ok"), res.message);
       }
     }).catch(err => {
-      this.loadingScreen.dismissLoading();
+    //  this.loadingScreen.dismissLoading();
       this.errorMSGModal(this.translate.instant('VERIFY_EMAIL_TRY_AGAIN'), this.translate.instant('VERIFY_EMAIL_ERROR_MESSAGE'));
     });
   }
@@ -273,23 +301,36 @@ resolveCurrency(countryCode: string): string {
 
   //Error Modal
   async errorMSGModal(buttonText: any, msg: any) {
+    await this.modalCtrl.dismiss().catch(() => {}); // ✅ FIX
+
     const modal = await this.modalCtrl.create({
       component: PasswordErrorPage,
       componentProps: { 'value': msg, 'value1': buttonText }
     });
 
-    modal.onDidDismiss();
     return await modal.present();
   }
 
   //Success Modal
   async successMSGModal(buttonText: any, msg: any, times: any) {
+    await this.modalCtrl.dismiss().catch(() => {}); // ✅ FIX
+
     const modal = await this.modalCtrl.create({
       component: SuccessModelPage,
       componentProps: { 'value': msg, 'value1': buttonText, 'value2': times }
     });
 
-    modal.onDidDismiss();
-    return await modal.present();
+    await modal.present();
+
+    // ✅ FIX: force auto dismiss
+    if (times) {
+      setTimeout(async () => {
+        try {
+          await modal.dismiss();
+        } catch (e) {}
+      }, parseInt(times));
+    }
+
+    return modal;
   }
 }
