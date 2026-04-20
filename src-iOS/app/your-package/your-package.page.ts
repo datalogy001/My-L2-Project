@@ -544,7 +544,7 @@ this.bundleExpireDate = endDate.format('DD-MM-YYYY');
 
 // Calculate remaining days (difference between expiry date and today)
 const today = moment.utc();
-this.expRemainDays = Math.ceil(endDate.diff(today, 'days', true));
+this.expRemainDays = Math.floor(endDate.diff(today, 'days', true));
 
       this.bundleDatas.isUnlimited = assignmenrtArr[j]['unlimited'];
                         if(this.bundleDatas.isUnlimited == true)
@@ -596,7 +596,7 @@ this.bundleExpireDate = endDate.format('DD-MM-YYYY');
 
 // Calculate remaining days (difference between expiry date and today)
 const today = moment.utc();
-this.expRemainDays = Math.ceil(endDate.diff(today, 'days', true));
+this.expRemainDays = Math.floor(endDate.diff(today, 'days', true));
                         this.bundleDatas.isUnlimited = assignmenrtArr[j]['unlimited'];
                         if(this.bundleDatas.isUnlimited == true)
                             this.dataDaysField = this.topupArray[i]['days'];
@@ -663,7 +663,7 @@ this.bundleExpireDate = endDate.format('DD-MM-YYYY');
 
 // Calculate remaining days (difference between expiry date and today)
 const today = moment.utc();
-this.expRemainDays = Math.ceil(endDate.diff(today, 'days', true));
+this.expRemainDays = Math.floor(endDate.diff(today, 'days', true));
                         this.bundleDatas.isUnlimited = assignmenrtArr[j]['unlimited'];
 
                         if(this.bundleDatas.isUnlimited == true)

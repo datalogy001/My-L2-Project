@@ -549,7 +549,7 @@ console.log("End date" + endDate);
 const today = moment.utc();
 console.log("today date" + today);
 
-this.expRemainDays = Math.ceil(endDate.diff(today, 'days', true));
+this.expRemainDays = Math.floor(endDate.diff(today, 'days', true));
 
 console.log("expRemainDays date" + this.expRemainDays);
 
@@ -608,7 +608,7 @@ console.log("End date" + endDate);
 const today = moment.utc();
 console.log("today date" + today);
 
-this.expRemainDays =Math.ceil(endDate.diff(today, 'days', true));
+this.expRemainDays =Math.floor(endDate.diff(today, 'days', true));
 console.log("expRemainDays date" + this.expRemainDays);
                         this.bundleDatas.isUnlimited = assignmenrtArr[j]['unlimited'];
                         if(this.bundleDatas.isUnlimited == true)
@@ -680,7 +680,7 @@ console.log("End date" + endDate);
 const today = moment.utc();
 console.log("today date" + today);
 
-this.expRemainDays = Math.ceil(endDate.diff(today, 'days', true));
+this.expRemainDays = Math.floor(endDate.diff(today, 'days', true));
 
 console.log("expRemainDays date" + this.expRemainDays);
 

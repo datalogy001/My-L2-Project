@@ -330,7 +330,7 @@ export class AddCardFpayTopupWalletPage implements OnInit {
 
   async gotoFirstStep(cardId: any) {
     // Step 1-> Get Client secret key from Server side 
-    this.service.createPaymentIntent(this.paymentIntentObj, this.token).then((res: any) => {
+    this.service.createCardTopupPaymentIntent(this.paymentIntentObj, this.token).then((res: any) => {
    
       if (res.code == 200) {
         this.clientSecret = res.data[0].client_secret;

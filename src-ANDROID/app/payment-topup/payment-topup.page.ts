@@ -355,7 +355,8 @@ async actualStripePaymentGooglrPay(client_secret: string, token: string) {
           this.paymentIntentObj.amount = this.checkoutObj.amount;
           this.paymentIntentObj.plan = "TOP-UP";
           this.managingAppLogs("From App Step 1 Credit-Topup: Google Pay Intent Started",this.currencyCode,  this.paymentIntentObj.amount, this.paymentIntentObj.plan);
-          this.service.createPaymentIntent(this.paymentIntentObj, this.accessToken).then((res: any) => {
+          
+          this.service.creategooglePayTopupPaymentIntent(this.paymentIntentObj, this.accessToken).then((res: any) => {
             if (res.code == 200) {
               this.clientSecret = res.data[0].client_secret;
               this.loadingScreen.dismissLoading();
@@ -390,8 +391,9 @@ async actualStripePaymentGooglrPay(client_secret: string, token: string) {
           this.paymentIntentObj.currency = this.currencyCode;
           this.paymentIntentObj.amount = this.checkoutObj.amount;
           this.paymentIntentObj.plan = "TOP-UP";
-          this.managingAppLogs("From App Step 1 Credit-Topup Card Intent Started",this.currencyCode,  this.paymentIntentObj.amount, this.paymentIntentObj.plan);
-          this.service.createPaymentIntent(this.paymentIntentObj, this.accessToken).then((res: any) => {
+             this.managingAppLogs("From App Step 1 Credit-Topup Card Intent Started",this.currencyCode,  this.paymentIntentObj.amount, this.paymentIntentObj.plan);
+       
+          this.service.createCardTopupPaymentIntent(this.paymentIntentObj, this.accessToken).then((res: any) => {
   
             if (res.code == 200) {
               // this.presentToast("Initialize Payment Intent", "Success");
@@ -587,6 +589,8 @@ async actualStripePaymentGooglrPay(client_secret: string, token: string) {
       this.creditDebitType = '';
       this.isCardSelected = false;
     } else if (this.selectedPaymentType == 'credit-debit') {
+      this.isCardSelected = false;
+    }else{
       this.isCardSelected = false;
     }
  

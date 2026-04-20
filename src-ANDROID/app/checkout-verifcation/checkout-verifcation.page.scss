@@ -1,0 +1,154 @@
+ion-header{
+    ion-toolbar{
+        // --background:transparent;
+        border-radius: 24px 24px 0 0;
+        clip-path: inherit;
+        &.ios{
+            --min-height:50px;
+        }
+        ion-title{
+            font-size: 20px;
+            white-space: normal;
+            padding-inline: 30px;
+            padding-top: 20px;
+            &.ios{
+                text-align: left;
+                height: auto;
+                font-weight: normal;
+                padding-inline: 20px;
+            }
+        }
+        [slot="end"]{
+            margin-inline-end: 25px;
+            
+            &.ios{
+                margin-inline-end: 20px;
+            }
+        }
+        ion-buttons{
+            ion-button{
+                // border: 1px solid #d8322b;
+                --background: #fff;
+                --color:var(--theme-footer-bg);
+                border-radius: 4px;
+                display: inline-block;
+                // clip-path: polygon(100% 10px, 100% 100%, 0% 100%, 0% 0%, calc(100% - 10px) 0%, );
+                margin-inline-start:0;
+                margin-inline-end: 0;
+                --box-shadow:none;
+                width: 32px;
+                height: 32px;
+                position: relative;
+                overflow: hidden;
+                margin-top: 15px;
+
+                &.ios{
+                    margin-top: 10px;
+                }
+        
+                &::part(native){
+                    padding-inline-start: 10px;
+                    padding-inline-end: 10px;
+                }
+        
+                &::after{
+                    // width: 22px;
+                    // height: 22px;
+                    // right: -14px;
+                    // top: -14px;
+                    // content: "";
+                    // background-color: #d8322b;
+                    // position: absolute;
+                    // z-index: 11;
+                    // transform: rotateZ(45deg);
+                }
+            }
+        }
+    }
+}
+
+ion-content{
+    
+}
+.page-padding{
+    padding:0px 30px 15px;
+}
+ion-row{
+    margin: 0 7px;
+    ion-col{
+        &.right{ text-align: right;}
+        a{ font-size: 13px; color: #d8322b;}
+    }
+}
+.btn-verify {
+    text-align: center;
+    margin: 15px 0 0;
+
+    ion-button {
+        --background: #000;
+        --background-activated: #000;
+        --color: #fff;
+        --padding-start: 20px;
+        --padding-end: 20px;
+        margin:0;
+        --box-shadow:none;
+    }
+}
+ion-item{
+    // border: 1px solid #ccc; 
+    // border-radius: 6px;
+    --inner-border-width:0 0 0 0;
+    margin: 10px 0px 0px;
+    // --background:#e6e7e7;
+    --padding-start:0;
+    --inner-padding-end:0;
+    ion-input{
+        color: #777;
+    }
+}
+.sc-ion-input-md-h:not(.legacy-input) {
+    min-height: 44px;
+  }
+
+  /* Custom styles for OTP input */
+.otp-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    input {
+        width: calc(25% - 20px);
+        text-align: center;
+        font-size: 24px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        margin: 1px 10px;
+        padding: 10px;
+        // &:first-child{ margin-left: 0;}
+        // &:last-child{ margin-right: 0;}
+    }
+}
+  
+.otp-input input:focus {
+    border-color: #d8322b;
+}
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (min-device-height: 1024px) 
+// and (max-device-width: 1024px) 
+// and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+ 
+
+
+
+
+}

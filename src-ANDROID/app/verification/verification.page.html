@@ -1,6 +1,8 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
+<ion-content [fullscreen]="true">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
       <h3>{{ 'VERIFY_EMAIL_TITLE' | translate }}</h3>
       <p>{{ 'ENTER_CODE_SENT' | translate }}</p>
     </ion-title>
@@ -9,10 +11,10 @@
         <ion-icon name="arrow-back-circle-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="ion-padding">
   <p class="text">
     {{ 'VERIFICATION_CODE_SENT' | translate }}
   </p>
@@ -36,8 +38,25 @@
     <span>{{ 'OR_TEXT' | translate }}</span>
   </div>
 
-  <ion-button expand="block" class="button-outline btn-resend" (click)="retryCode()">
+<ion-button 
+  expand="block" 
+  class="button-outline btn-resend" 
+  [disabled]="isDisabled"
+  (click)="retryCode()">
+
+  <span *ngIf="isDisabled" class="resend-text disabled">
+    {{ 'RESEND_CODE' | translate }} {{ 'IN_TEXT' | translate }}
+    
+    <span class="timer fade-text">
+      {{ timer }}s
+    </span>
+  </span>
+
+  <span *ngIf="!isDisabled" class="resend-text enabled">
     {{ 'RESEND_CODE' | translate }}
-  </ion-button>
+  </span>
+
+</ion-button>
+</div>
 </ion-content>
 

@@ -1,0 +1,26 @@
+
+ion-header{
+    ion-toolbar{
+        ion-title{
+            color: var(--theme-color-1);
+            h3{ color: var(--theme-color-1);}
+        }
+    }
+}
+ion-content{
+    --background:#fff;
+}
+
+.brnrow{
+    text-align: center;
+    ion-button{
+        display: inline-block; width: 45%; width: 43%; margin: 0 5px;
+        &.button-outline {
+            --color: var(--theme-color-1);
+            --border-color: var(--theme-color-1);
+            --background:#fff;
+            }
+    }
+}
+
+

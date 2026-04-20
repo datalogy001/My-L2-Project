@@ -919,6 +919,7 @@
   "ESIM_ENABLE_STEP2": "2. Select the newly added eSIM profile.",
   "ESIM_ENABLE_STEP3": "3. Enable Mobile Data.",
   "ESIM_ENABLE_STEP4": "4. Enable Data Roaming.",
-  "ESIM_ENABLE_STEP5": "5. If the network does not connect immediately, restart your device."
+  "ESIM_ENABLE_STEP5": "5. If the network does not connect immediately, restart your device.",
+  "IN_TEXT": "in"
 
 }

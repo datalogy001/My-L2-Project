@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title></ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closePopover()">
+        <i class="far fa-times"></i>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">  
+
+  <h4>{{ 'CHANGE_LANGUAGE_QUESTION' | translate }}</h4>
+  <ion-radio-group [(ngModel)]="selectedLanguage" *ngFor="let langItem of langugaeList">
+    <ion-radio value="{{langItem.value}}">
+      <span class="language">{{langItem.text}}</span> {{langItem.long_text}}
+    </ion-radio>
+  </ion-radio-group>
+  <div class="buttonrow">
+    <ion-button class="btn-no" (click)="submit('no')">{{ 'NO' | translate }}</ion-button>
+    <ion-button class="btn-green btn-yes" (click)="submit('yes')">{{ 'YES' | translate }}</ion-button>
+  </div>
+
+</ion-content>

@@ -31,7 +31,7 @@ export class AddCardFpayPage implements OnInit {
   private cardCvc: StripeCardCvcElement | null = null;
   accessToken:any;
   clientSecret: any = '';
-  paymentIntentObj: any = { 'amount': '', 'currency': '', 'plan': '' };
+  createIntentCardPayObj: any = { 'amount': '', 'currency': '', 'plan': '', 'order_data' : '' };
   cardIntentObj: any = { 'card_id': '', 'intent_id': '' };
   selectedCards: boolean[] = [];
   stripe_key: any = this.service.stripePubliserKey;
@@ -91,13 +91,14 @@ export class AddCardFpayPage implements OnInit {
       this.stripeCardObj.currency = this.tempDetails.stripeCardData.currency;
       this.stripeCardObj.iccid = this.tempDetails.stripeCardData.bundle.iccid;
       // Step 1-> Get Client secret key from Server side 
-      this.paymentIntentObj.currency = this.stripeCardObj.currency;
+      this.createIntentCardPayObj.currency = this.stripeCardObj.currency;
       if(this.stripeCardObj.is_split_payment ==false)
-      this.paymentIntentObj.amount = this.stripeCardObj.is_couped_applied ==0? this.stripeCardObj.bundle.extraAmount: this.stripeCardObj.original_amount; 
+      this.createIntentCardPayObj.amount = this.stripeCardObj.is_couped_applied ==0? this.stripeCardObj.bundle.extraAmount: this.stripeCardObj.original_amount; 
       else
-        this.paymentIntentObj.amount = this.stripeCardObj.amt_from_other_payment; 
-      this.paymentIntentObj.plan = this.stripeCardObj.bundle.bundleData.name;
-      console.log(this.paymentIntentObj.amount);
+        this.createIntentCardPayObj.amount = this.stripeCardObj.amt_from_other_payment; 
+      this.createIntentCardPayObj.plan = this.stripeCardObj.bundle.bundleData.name;
+      this.createIntentCardPayObj.order_data = this.stripeCardObj;
+      console.log(this.createIntentCardPayObj.amount);
     }else{
       this.creditCardObj.isTermsSelected =true;
     }
@@ -285,11 +286,11 @@ export class AddCardFpayPage implements OnInit {
     const { token, error } = await this.stripe.createToken(this.creditCardObj.cardNumber);
 
     if (error) {
-    this.managingAppLogs("From App Step 1 : Card Payment- Add Card- Create Token Error: "+ JSON.stringify(error),this.paymentIntentObj.currency,  this.paymentIntentObj.amount, this.paymentIntentObj.plan);
+    this.managingAppLogs("From App Step 1 : Card Payment- Add Card- Create Token Error: "+ JSON.stringify(error),this.createIntentCardPayObj.currency,  this.createIntentCardPayObj.amount, this.createIntentCardPayObj.plan);
       this.errorMSGModal( this.translate.instant('OK_BUTTON'),error.message);
     } else {
       //  Calling service to insert it into DB 
-      this.managingAppLogs("From App Step 1: Card Payment- Add Card- Create Token Success: "+ JSON.stringify(token),this.paymentIntentObj.currency,  this.paymentIntentObj.amount, this.paymentIntentObj.plan);
+      this.managingAppLogs("From App Step 1: Card Payment- Add Card- Create Token Success: "+ JSON.stringify(token),this.createIntentCardPayObj.currency,  this.createIntentCardPayObj.amount, this.createIntentCardPayObj.plan);
       this.paramForDB.last4 = token.card?.last4;
       this.paramForDB.expireMonth = token.card?.exp_month;
       this.paramForDB.expireYear = token.card?.exp_year;
@@ -388,7 +389,7 @@ export class AddCardFpayPage implements OnInit {
 
   async gotoFirstStep(cardId: any) {
     // Step 1-> Get Client secret key from Server side 
-    this.service.createPaymentIntent(this.paymentIntentObj, this.token).then((res: any) => {
+    this.service.createCardPaymentIntent(this.createIntentCardPayObj, this.token).then((res: any) => {
    
       if (res.code == 200) {
         this.clientSecret = res.data[0].client_secret;
@@ -411,7 +412,9 @@ export class AddCardFpayPage implements OnInit {
 
   //Step 2 : Send Intent and card Id to server 
   async callPaymentIntentFromApp(paymentObj: any) {
-    this.managingAppLogs("From App Step 2: Add Card- Payment Intent Started",this.paymentIntentObj.currency,  this.paymentIntentObj.amount, this.paymentIntentObj.plan);
+    this.managingAppLogs("From App Step 2: Add Card- Payment Intent Started",this.createIntentCardPayObj.currency,  this.createIntentCardPayObj.amount, this.createIntentCardPayObj.plan);
+    
+    
     this.service.paymentCardIntent(paymentObj, this.token).then((res: any) => {
       if (res.code == 200) {
        // this.successMSGModal("Your payment intent has been successfully created and is ready for processing.","Payment Intent Created", "1500");
@@ -439,10 +442,10 @@ export class AddCardFpayPage implements OnInit {
 
     if (confirmError) {
       this.loadingScreen.dismissLoading();
-      this.managingAppLogs("From App Step 3: Add Card Confirmation Payment Failed:" + JSON.stringify(confirmError),this.paymentIntentObj.currency,  this.paymentIntentObj.amount, this.paymentIntentObj.plan);
+      this.managingAppLogs("From App Step 3: Add Card Confirmation Payment Failed:" + JSON.stringify(confirmError),this.createIntentCardPayObj.currency,  this.createIntentCardPayObj.amount, this.createIntentCardPayObj.plan);
       this.errorMSGModal( this.translate.instant('ERROR_TRY_AGAIN'),  this.translate.instant('PAYMENT_CONFIRMATION_FAILED'));
     } else if (paymentIntent && paymentIntent.status == 'succeeded') {
-     this.managingAppLogs("From App Step 3: Add Card Confirmation Payment Success:" + JSON.stringify(paymentIntent),this.paymentIntentObj.currency,  this.paymentIntentObj.amount, this.paymentIntentObj.plan);
+     this.managingAppLogs("From App Step 3: Add Card Confirmation Payment Success:" + JSON.stringify(paymentIntent),this.createIntentCardPayObj.currency,  this.createIntentCardPayObj.amount, this.createIntentCardPayObj.plan);
       this.stripeCardObj.payment_intent = paymentIntent;
       this.stripeCardObj.isTermsSelected = this.creditCardObj.isTermsSelected;
       // For Card selected Credit/debit card 

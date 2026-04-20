@@ -453,7 +453,7 @@ private validatePaymentCurrency(): boolean {
       this.paymentIntentApplePayObj.plan = "Credit TOP-UP";
 
       // NEW CREATE INTENT API STARTED
-      this.service.createIntentFromBackend(this.paymentIntentApplePayObj, this.accessToken).then((res: any) => {
+      this.service.createApplePayIntentTopUp(this.paymentIntentApplePayObj, this.accessToken).then((res: any) => {
         if (res.code == 200) {
 
           this.loadingScreen.dismissLoading();
@@ -551,7 +551,7 @@ private validatePaymentCurrency(): boolean {
           this.paymentIntentObj.amount = this.checkoutObj.amount;
           this.paymentIntentObj.plan = "TOP-UP";
           this.managingAppLogs("From App Step 1 Credit-Topup Card Intent Started",this.currencyCode,  this.paymentIntentObj.amount, this.paymentIntentObj.plan);
-          this.service.createPaymentIntent(this.paymentIntentObj, this.accessToken).then((res: any) => {
+          this.service.createCardTopupPaymentIntent(this.paymentIntentObj, this.accessToken).then((res: any) => {
   
             if (res.code == 200) {
               // this.presentToast("Initialize Payment Intent", "Success");

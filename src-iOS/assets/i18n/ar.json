@@ -959,6 +959,7 @@
 "EXPIRED": "منتهي الصلاحية",
 "EXPIRES_TODAY": "ينتهي اليوم",
 "EXPIRES_IN_ONE": "ينتهي خلال يوم واحد",
-"EXPIRES_IN": "ينتهي خلال {{days}} أيام"
+"EXPIRES_IN": "ينتهي خلال {{days}} أيام",
+  "IN_TEXT": "خلال"
 
 }

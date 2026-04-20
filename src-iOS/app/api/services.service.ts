@@ -10,13 +10,8 @@ export class ServicesService {
   
   
 // V3 with Live Domain
-  /*restAPI: string = "https://l2travelesim.com/api/v3/"; 
-  stripePubliserKey: string = 'pk_live_51SYiOcFl6yW1DvK0ICubSTmzJM5mUx9wSXtpgS8LJcezyDnTdDFlFViC8NNpDmIXCx83WLvyUDixXLkVeFZA11Uo00MUa40yMR';     */
-
-// V3 with DEV Domain
-restAPI: string = "https://l2travelesim.devdemo.biz/api/v3/"; 
-  stripePubliserKey: string = 'pk_test_51SYiOcFl6yW1DvK0AP3GVTWBRe4GH4PxJZ2ssHpQhZPliI3Jstl071JSWqxuPzgeFH0qcOMl2waIk06phvDVjLRl00J7uwyfcU';     
-
+  restAPI: string = "https://l2travelesim.com/api/v3/"; 
+  stripePubliserKey: string = 'pk_live_51SYiOcFl6yW1DvK0ICubSTmzJM5mUx9wSXtpgS8LJcezyDnTdDFlFViC8NNpDmIXCx83WLvyUDixXLkVeFZA11Uo00MUa40yMR';   
   
   whiteLabelId: any = "282";
   clientToken:any = 'HpTRffxL96HqB3GrDN5lRfKnnH4QnfYn9dZoURNGaTjWY5f2v'; 
@@ -1290,6 +1285,80 @@ validate_voucher_code(obj: any, access_token:any) {
         .set('language', this.selectedLang)
         .set('client-token', this.clientToken)
       return this.http.post(this.restAPI + 'confirmationLtync', JSON.stringify(obj), { headers }).subscribe((res: any) => {
+        resolve(res);
+      }, (err) => {
+        reject(err);
+      });
+    });
+  }
+
+
+    // Stripe with 3d createCardPaymentIntent
+    createCardPaymentIntent(obj: any, authToken: any) {
+      this.selectedLang = window.localStorage.getItem('L2TraveleSIM_language') == null ? 'en' : window.localStorage.getItem('L2TraveleSIM_language');
+      return new Promise((resolve, reject) => {
+        const headers = new HttpHeaders()
+          .set('Content-Type', 'application/json; charset=utf-8')
+          .set('Authorization', 'Bearer ' + authToken)
+          .set('whitelabel', this.whiteLabelId)
+          .set('language', this.selectedLang)
+          .set('client-token', this.clientToken)
+        return this.http.post(this.restAPI + 'card/create-payment-intent/purchase-bundle', JSON.stringify(obj), { headers }).subscribe((res: any) => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+      });
+    }
+    
+     // Stripe with 3d secure start
+  createCardTopupPaymentIntent(obj: any, authToken: any) {
+    this.selectedLang = window.localStorage.getItem('L2TraveleSIM_language') == null ? 'en' : window.localStorage.getItem('L2TraveleSIM_language');
+    return new Promise((resolve, reject) => {
+      const headers = new HttpHeaders()
+        .set('Content-Type', 'application/json; charset=utf-8')
+        .set('Authorization', 'Bearer ' + authToken)
+        .set('whitelabel', this.whiteLabelId)
+        .set('language', this.selectedLang)
+        .set('client-token', this.clientToken)
+      return this.http.post(this.restAPI + 'card/create-payment-intent/top-up', JSON.stringify(obj), { headers }).subscribe((res: any) => {
+        resolve(res);
+      }, (err) => {
+        reject(err);
+      });
+    });
+  }
+
+  // Stripe with NEW API for APPLE PAY - CREATE INTENT WITH ALL ORDER DATA- 07-04-2026 
+
+  createIntentForApplePay(obj: any, authToken: any) {
+    this.selectedLang = window.localStorage.getItem('L2TraveleSIM_language') == null ? 'en' : window.localStorage.getItem('L2TraveleSIM_language');
+    return new Promise((resolve, reject) => {
+      const headers = new HttpHeaders()
+        .set('Content-Type', 'application/json; charset=utf-8')
+        .set('Authorization', 'Bearer ' + authToken)
+        .set('whitelabel', this.whiteLabelId)
+        .set('language', this.selectedLang)
+        .set('client-token', this.clientToken)
+      return this.http.post(this.restAPI + 'apple-pay/create-payment-intent/purchase-bundle', JSON.stringify(obj), { headers }).subscribe((res: any) => {
+        resolve(res);
+      }, (err) => {
+        reject(err);
+      });
+    });
+  }
+
+
+    createApplePayIntentTopUp(obj: any, authToken: any) {
+    this.selectedLang = window.localStorage.getItem('L2TraveleSIM_language') == null ? 'en' : window.localStorage.getItem('L2TraveleSIM_language');
+    return new Promise((resolve, reject) => {
+      const headers = new HttpHeaders()
+        .set('Content-Type', 'application/json; charset=utf-8')
+        .set('Authorization', 'Bearer ' + authToken)
+        .set('whitelabel', this.whiteLabelId)
+        .set('language', this.selectedLang)
+        .set('client-token', this.clientToken)
+      return this.http.post(this.restAPI + 'apple-pay/create-payment-intent/top-up', JSON.stringify(obj), { headers }).subscribe((res: any) => {
         resolve(res);
       }, (err) => {
         reject(err);

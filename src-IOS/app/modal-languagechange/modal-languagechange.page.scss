@@ -1,0 +1,126 @@
+ion-header {
+    ion-toolbar {
+      --min-height: 40px;
+      height: 40px;
+    }
+}
+
+h4{
+    color: var(--theme-color-1); margin: 5px 0 25px; font-size: 16px; font-weight: 400; text-align: center;
+}
+  
+ion-radio-group{
+
+}
+ion-radio{
+    // background-color: var(--item-bg);
+    background-color: #fff;
+    padding: 13px 15px;
+    display: block;
+    border-radius: 10px;
+    margin: 0 0 15px;
+    border: 1px solid var(--item-border);
+    color: var(--theme-gray);
+    font-size: 15px;
+  
+    img{
+        width: 20px; display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+  
+    &::part(container){ 
+      background: var(--theme-gray); width: 24px; height: 24px; border-radius: 50%; 
+      border-color: var(--theme-gray);
+    } 
+  
+    &::part(mark){ height: 53%; background: var(--theme-color-2);}
+  
+    &.radio-checked{
+        color:var(--theme-color-1);
+        .language{
+            // background-color: var(--theme-color-1);
+        }
+        &::part(container){
+            background: var(--theme-color-2); border-color: var(--theme-color-2);
+        }
+        &::part(mark){ background: var(--theme-color-1);}
+    }
+  
+}
+  
+ion-radio{
+      --color: var(--theme-color-2);
+      --color-checked:var(--theme-color-2);
+}
+  
+  .language{
+      background-color:var(--theme-gray); padding:3px 6px; border-radius: 4px; color: var(--theme-color-1); font-weight:900;
+      font-size: 11px; display: inline-block; margin-right: 7px;
+}
+
+.buttonrow{
+    margin: 20px 0 0px; 
+    text-align: center;  
+
+    ion-button{
+        display: inline-block;
+        margin: 0 5px;
+        font-size: 16px;
+        height: 50px;
+        --padding-start: 10px;
+        --padding-end: 10px;
+        min-width: 100px;
+
+        &.btn-yes{
+
+        }
+        &.btn-no{
+            --background: var(--theme-color-1);
+            --background-activated: var(--theme-color-1);
+            --color: #fff;
+        }
+    }
+
+}
+
+
+
+
+
+
+/**************************************************************/
+/***** iPad 11, iPad Pro, iPad mini ****/
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px) 
+and (min-device-height: 1024px) 
+and (max-device-height: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+
+
+    ion-header  ion-toolbar { --min-height: 55px;  height: 55px;  }
+    ion-button.btn-share{ height: 60px;  font-size: 24px; }
+  
+    h4{ font-size: 24px; margin: 0 0 30px; }
+    ion-radio{ padding: 20px 20px; margin: 0 0 20px; font-size: 22px; }
+    .language{ padding: 6px 10px; font-size: 16px; margin-right: 10px; }
+    ion-radio::part(container) { width: 30px;  height: 30px; }
+
+    .buttonrow{
+        margin: 20px 0 0px;  
+    
+        ion-button{
+            margin: 0 10px;
+            font-size: 24px;
+            height: 70px;
+            --padding-start: 15px;
+            --padding-end: 15px;
+            min-width: 150px;   
+           
+        }
+    
+    }
+
+
+}

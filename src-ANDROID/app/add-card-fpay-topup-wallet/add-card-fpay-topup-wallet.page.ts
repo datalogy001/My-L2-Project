@@ -330,7 +330,7 @@ export class AddCardFpayTopupWalletPage implements OnInit {
 
   async gotoFirstStep(cardId: any) {
     // Step 1-> Get Client secret key from Server side 
-    this.service.createPaymentIntent(this.paymentIntentObj, this.token).then((res: any) => {
+    this.service.createCardTopupPaymentIntent(this.paymentIntentObj, this.token).then((res: any) => {
    
       if (res.code == 200) {
         this.clientSecret = res.data[0].client_secret;
@@ -353,7 +353,8 @@ export class AddCardFpayTopupWalletPage implements OnInit {
 
   //Step 2 : Send Intent and card Id to server 
   async callPaymentIntentFromApp(paymentObj: any) {
-    this.managingAppLogs("From App Step 2 Credit Topup: Add Card- Payment Intent Started",this.paymentIntentObj.currency,  this.paymentIntentObj.amount, this.paymentIntentObj.plan);
+     this.managingAppLogs("From App Step 2 Credit Topup: Add Card- Payment Intent Started",this.paymentIntentObj.currency,  this.paymentIntentObj.amount, this.paymentIntentObj.plan);
+   
     this.service.paymentCardIntent(paymentObj, this.token).then((res: any) => {
       if (res.code == 200) {
        // this.successMSGModal("Your payment intent has been successfully created and is ready for processing.","Payment Intent Created", "1500");
@@ -382,12 +383,14 @@ export class AddCardFpayTopupWalletPage implements OnInit {
     if (confirmError) {
       this.loadingScreen.dismissLoading();
       this.managingAppLogs("From App Step 3 Credit Top-up: Add Card Confirmation Payment Failed:" + JSON.stringify(confirmError),this.paymentIntentObj.currency,  this.paymentIntentObj.amount, this.paymentIntentObj.plan);
+      
       this.errorMSGModal( this.translate.instant('ERROR_TRY_AGAIN'),  this.translate.instant('PAYMENT_CONFIRMATION_FAILED'));
     } else if (paymentIntent && paymentIntent.status == 'succeeded') {
      
       this.stripeCardObj.payment_intent = paymentIntent;
       this.stripeCardObj.isTermsSelected = this.creditCardObj.isTermsSelected;
       this.managingAppLogs("From App Step 3 Credit Top-up: Add Card Confirmation Payment Success:" + JSON.stringify(paymentIntent),this.paymentIntentObj.currency,  this.paymentIntentObj.amount, this.paymentIntentObj.plan);
+      
       // For Card selected Credit/debit card 
       this.loadingScreen.dismissLoading();
       const modalFirstOpt = await this.modalController.create({

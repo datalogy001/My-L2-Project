@@ -980,6 +980,7 @@
   "EXPIRED": "Expired",
   "EXPIRES_TODAY": "Expires today",
   "EXPIRES_IN_ONE": "Expires in 1 Day",
-  "EXPIRES_IN": "Expires in {{days}} Days"
+  "EXPIRES_IN": "Expires in {{days}} Days",
+"IN_TEXT": "in"
 
 }

@@ -21,9 +21,14 @@ ion-header{
     }
 }
 
-ion-content{
-  --background:#fff;
+ion-content {
+  --background: #fff;
 }
+
+.ion-padding{
+  --padding-top:10px;
+}
+
 
 /* Custom styles for OTP input */
 .otp-input {
@@ -104,13 +109,124 @@ ion-button{
     }
 }
   
+/* Base text */
+.resend-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.3s ease;
+}
+
+/* Disabled subtle pulse */
+.resend-text.disabled {
+  opacity: 0.8;
+  animation: pulse 1.5s infinite;
+}
+
+/* Enabled state (slight pop-in) */
+.resend-text.enabled {
+  animation: fadeScale 0.3s ease;
+}
+
+/* Timer animation */
+.timer {
+  display: inline-block;
+  min-width: 28px;
+  text-align: left;
+}
+
+/* Fade + slide for number */
+.fade-text {
+  animation: fadeSlide 0.4s ease;
+}
+
+/* 🔹 Animations */
+
+/* Number change animation */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle pulse while waiting */
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+/* When button becomes enabled */
+@keyframes fadeScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
 
+/* Better spacing */
+.btn-resend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+/* Space between text and loader */
+.btn-text {
+  margin-right: 10px;
+}
 
+/* Loader */
+.btn-loader {
+  position: relative;
+  width: 26px;
+  height: 26px;
+}
 
+/* SVG */
+.btn-loader svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
 
+/* Background circle */
+.btn-loader .bg {
+  fill: none;
+  stroke: #e0e0e0;
+  stroke-width: 3.2;
+}
 
+/* Progress circle */
+.btn-loader .progress {
+  fill: none;
+  stroke: var(--ion-color-primary);
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  transition: stroke-dasharray 1s linear;
+}
+
+/* ✅ Darker text inside circle */
+.timer-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  letter-spacing: 0.2px;
+  font-weight: 600;
+  color: #333; /* darker than before */
+}
 /**************************************************************/
 /***** iPad 11, iPad Pro, iPad mini ****/
 @media only screen 

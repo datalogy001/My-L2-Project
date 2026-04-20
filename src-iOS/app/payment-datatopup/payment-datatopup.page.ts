@@ -58,7 +58,7 @@ export class PaymentDatatopupPage implements OnInit {
   paymentMethod: any = [];
   isDataAvail: any = true;
   clientSecret: any = '';
-  paymentIntentObj: any = { 'amount': '', 'currency': '', 'plan': '' };
+
   cardIntentObj: any = { 'card_id': '', 'intent_id': '' };
   types: any = '';
   dataBrowsing: any = [];
@@ -71,7 +71,9 @@ export class PaymentDatatopupPage implements OnInit {
 
   creditDebitType: any = '';
   googlePayType: any = '';
-paymentIntentApplePayObj: any = { 'amount': '', 'currency': '', 'plan': '' };
+  createIntentApplePayObj: any = { 'amount': '', 'currency': '', 'plan': '', 'order_data' : '' };
+  createIntentCardPayObj: any = { 'amount': '', 'currency': '', 'plan': '', 'order_data' : '' };
+
 
  private browserInstance: any;  // To store the reference to the browser
   private backButtonSubscription: any;  // To store the back button subscription
@@ -428,13 +430,14 @@ paymentIntentApplePayObj: any = { 'amount': '', 'currency': '', 'plan': '' };
                 );
 
             // Calling Intent API for Apple pay - NEW code started 
-            await this.loadingScreen.presentLoading();
-            this.paymentIntentApplePayObj.amount = parseFloat(this.appleAmt);
-            this.paymentIntentApplePayObj.currency = this.stripeCardObj.currency,
-            this.paymentIntentApplePayObj.plan = this.stripeCardObj.bundle.bundleData.name;
+              await this.loadingScreen.presentLoading();
+             this.createIntentApplePayObj.amount = parseFloat(this.appleAmt);
+            this.createIntentApplePayObj.currency = this.stripeCardObj.currency,
+            this.createIntentApplePayObj.plan = this.stripeCardObj.bundle.bundleData.name;
+            this.createIntentApplePayObj.order_data = this.stripeCardObj;
 
-          // NEW CREATE INTENT API STARTED
-          this.service.createIntentFromBackend(this.paymentIntentApplePayObj, this.accessToken).then((res: any) => {
+            // NEW CREATE INTENT API STARTED
+            this.service.createIntentForApplePay(this.createIntentApplePayObj, this.accessToken).then((res: any) => {
             if (res.code == 200) {
              
               this.loadingScreen.dismissLoading();
@@ -519,15 +522,17 @@ paymentIntentApplePayObj: any = { 'amount': '', 'currency': '', 'plan': '' };
             this.stripeCardObj.customer_id = data.splitDatas.customer_id;
             this.stripeCardObj.card_source = data.splitDatas.card_source;
 
-            await this.loadingScreen.presentLoading();
-            this.stripeCardObj.isTermsSelected = true;
-            // Step 1-> Get Client secret key from Server side 
-            this.paymentIntentObj.currency = this.currencyCode;
-            this.paymentIntentObj.amount = this.stripeCardObj.amt_from_other_payment;
-            console.log("stripe=>" + this.paymentIntentObj.amount);
-            this.paymentIntentObj.plan = this.stripeCardObj.bundle.bundleData.name;
-            this.managingAppLogs("From App Step 1 eSIM Top-up: Card Payment- Split Payment Intent Started", this.currencyCode, this.paymentIntentObj.amount, this.paymentIntentObj.plan);
-            this.service.createPaymentIntent(this.paymentIntentObj, this.accessToken).then((res: any) => {
+             await this.loadingScreen.presentLoading();
+              this.stripeCardObj.isTermsSelected = true;
+                 // Step 1-> Get Client secret key from Server side 
+            this.createIntentCardPayObj.amount = this.stripeCardObj.amt_from_other_payment;
+            this.createIntentCardPayObj.currency = this.stripeCardObj.currency,
+            this.createIntentCardPayObj.plan = this.stripeCardObj.bundle.bundleData.name;
+            this.createIntentCardPayObj.order_data = this.stripeCardObj;
+
+   this.managingAppLogs("From App Step 1 Normal eSIM Purchase: Card Payment- Split Payment Intent Started",this.currencyCode,  this.createIntentCardPayObj.amount, this.createIntentCardPayObj.plan);
+              this.service.createCardPaymentIntent(this.createIntentCardPayObj, this.accessToken).then((res: any) => {
+  
 
               if (res.code == 200) {
                 // this.presentToast("Initialize Payment Intent", "Success");
@@ -752,14 +757,15 @@ private validatePaymentCurrency(): boolean {
             this.stripeCardObj.bundle.bundleData.name
           );
 
-            // Calling Intent API for Apple pay - NEW code started 
-            await this.loadingScreen.presentLoading();
-            this.paymentIntentApplePayObj.amount = parseFloat(this.appleAmt);
-            this.paymentIntentApplePayObj.currency = this.stripeCardObj.currency,
-            this.paymentIntentApplePayObj.plan = this.stripeCardObj.bundle.bundleData.name;
+          // Calling Intent API for Apple pay - NEW code started 
+      await this.loadingScreen.presentLoading();
+            this.createIntentApplePayObj.amount = parseFloat(this.appleAmt);
+            this.createIntentApplePayObj.currency = this.stripeCardObj.currency,
+            this.createIntentApplePayObj.plan = this.stripeCardObj.bundle.bundleData.name;
+            this.createIntentApplePayObj.order_data = this.stripeCardObj;
 
-          // NEW CREATE INTENT API STARTED
-          this.service.createIntentFromBackend(this.paymentIntentApplePayObj, this.accessToken).then((res: any) => {
+      // NEW CREATE INTENT API STARTED
+      this.service.createIntentForApplePay(this.createIntentApplePayObj, this.accessToken).then((res: any) => {
             if (res.code == 200) {
              
               this.loadingScreen.dismissLoading();
@@ -838,14 +844,17 @@ private validatePaymentCurrency(): boolean {
       else {
         if (this.isCardSelected == true) {
 
-          await this.loadingScreen.presentLoading();
-          this.stripeCardObj.isTermsSelected = true;
-          // Step 1-> Get Client secret key from Server side 
-          this.paymentIntentObj.currency = this.currencyCode;
-          this.paymentIntentObj.amount = this.stripeCardObj.is_couped_applied == 0 ? this.stripeCardObj.bundle.extraAmount : this.stripeCardObj.original_amount;
-          this.paymentIntentObj.plan = this.stripeCardObj.bundle.bundleData.name;
-          this.managingAppLogs("From App Step 1 eSIM Top-up: Card Intent Started", this.currencyCode, this.paymentIntentObj.amount, this.paymentIntentObj.plan);
-          this.service.createPaymentIntent(this.paymentIntentObj, this.accessToken).then((res: any) => {
+           await this.loadingScreen.presentLoading();
+              this.stripeCardObj.isTermsSelected = true;
+        // Step 1-> Get Client secret key from Server side 
+            this.createIntentCardPayObj.currency = this.currencyCode;
+            console.log("this.stripeCardObj.is_couped_applied=>" + this.stripeCardObj.is_couped_applied);
+            this.createIntentCardPayObj.amount = this.stripeCardObj.is_couped_applied == 0 ? this.stripeCardObj.bundle.extraAmount : this.stripeCardObj.original_amount;
+            console.log("stripe=>" + this.createIntentCardPayObj.amount);
+            this.createIntentCardPayObj.plan = this.stripeCardObj.bundle.bundleData.name;
+             this.createIntentCardPayObj.order_data = this.stripeCardObj;
+
+          this.service.createCardPaymentIntent(this.createIntentCardPayObj, this.accessToken).then((res: any) => {
 
             if (res.code == 200) {
               // this.presentToast("Initialize Payment Intent", "Success");
@@ -995,7 +1004,7 @@ private validatePaymentCurrency(): boolean {
 
   //Step 2 : Send Intent and card Id to server 
   async callPaymentIntentFromApp(paymentObj: any) {
-    this.managingAppLogs("From App Step 2 eSIM Top-up: Payment Intent Started", this.currencyCode, this.paymentIntentObj.amount, this.paymentIntentObj.plan);
+    this.managingAppLogs("From App Step 2 eSIM Top-up: Payment Intent Started", this.currencyCode, this.createIntentCardPayObj.amount, this.createIntentCardPayObj.plan);
 
     this.service.paymentCardIntent(paymentObj, this.accessToken).then((res: any) => {
       if (res.code == 200) {
@@ -1023,11 +1032,11 @@ private validatePaymentCurrency(): boolean {
 
     if (confirmError) {
       this.loadingScreen.dismissLoading();
-      this.managingAppLogs("From App Step 3 eSIM Top-up: Card Confirmation Payment Failed:" + JSON.stringify(confirmError), this.currencyCode, this.paymentIntentObj.amount, this.paymentIntentObj.plan);
+      this.managingAppLogs("From App Step 3 eSIM Top-up: Card Confirmation Payment Failed:" + JSON.stringify(confirmError), this.currencyCode, this.createIntentCardPayObj.amount, this.createIntentCardPayObj.plan);
       this.errorMSGModal(this.translate.instant('ERROR_TRY_AGAIN'), this.translate.instant('PAYMENT_CONFIRMATION_FAILED'));
     } else if (paymentIntent && paymentIntent.status == 'succeeded') {
       this.stripeCardObj.payment_intent = paymentIntent;
-      this.managingAppLogs("From App Step 3 eSIM Top-up: Card Confirmation Payment Success:" + JSON.stringify(paymentIntent), this.currencyCode, this.paymentIntentObj.amount, this.paymentIntentObj.plan);
+      this.managingAppLogs("From App Step 3 eSIM Top-up: Card Confirmation Payment Success:" + JSON.stringify(paymentIntent), this.currencyCode, this.createIntentCardPayObj.amount, this.createIntentCardPayObj.plan);
       // For Card selected Credit/debit card 
       this.loadingScreen.dismissLoading();
       const modalFirstOpt = await this.modalController.create({
